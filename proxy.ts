@@ -18,11 +18,11 @@ export function proxy(request: NextRequest) {
     locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // If no locale, redirect to default locale path
+  // If no locale, redirect to default locale
   if (!pathnameHasLocale) {
-    // Redirect / to /en/home
+    // Redirect / to /en (default locale)
     if (pathname === '/') {
-      return NextResponse.redirect(new URL('/en/home', request.url));
+      return NextResponse.redirect(new URL('/en', request.url));
     }
     // Redirect other paths like /about to /en/about
     return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
