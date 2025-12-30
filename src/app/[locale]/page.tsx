@@ -1,14 +1,11 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import { useTranslations } from "next-intl";
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function Home() {
-  const t = useTranslations();
-
-  return (
-    <div>
-      <h1>{t("title")}</h1>
-      <p>{t("welcome")}</p>
-    </div>
-  );
+export default async function LocaleRoot({ params }: PageProps) {
+  const { locale } = await params;
+  // Redirect /en or /ar to /en/home or /ar/home
+  redirect(`/${locale}/home`);
 }

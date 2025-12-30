@@ -41,9 +41,9 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale?: string };
+  params: Promise<{ locale?: string }>;
 }>) {
-  const { locale } = params;
+  const { locale } = await params;
   const messages = await loadMessages(locale);
   const resolvedLocale = i18n.locales.includes(locale as any)
     ? (locale as (typeof i18n.locales)[number])
