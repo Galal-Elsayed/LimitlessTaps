@@ -108,8 +108,23 @@ export default function Navbar() {
     const servicesGlowActive = servicesOpen || isServicesActive();
     const langGlowActive = langOpen;
 
+    // Shared nav link classes
+    const navLinkContainerClass = "group flex items-center justify-center py-2 cursor-pointer";
+    const navLinkWrapperClass = "relative";
+    const navLinkBaseClass = "block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300";
+    const getNavLinkOverlayClass = (isActive: boolean) => `
+        absolute inset-0 flex items-center justify-center
+        text-sm font-medium capitalize tracking-wide 
+        text-white
+        transition-all duration-300 ease-out
+        ${isActive
+            ? '[clip-path:inset(0_0_0_0)]'
+            : '[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]'
+        }
+    `;
+
     return (
-        <nav className={`sticky top-0 z-50 bg-black px-8 border-b border-white/10 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8  ${isRTL ? 'rtl' : 'ltr'}`}>
             <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
                 {/* Logo - links to home */}
                 <div
@@ -128,31 +143,21 @@ export default function Navbar() {
 
                 {/* Nav Links */}
                 <div className={`flex items-center gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    {/* Company Link */}
-                    <div
-                        className="group flex items-center justify-center py-2 cursor-pointer"
-                        onClick={() => router.push(navLinks[0].href)}
-                    >
-                        <div className="relative">
-                            <span className="block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300">
-                                {t('company')}
-                            </span>
-                            <span
-                                className={`
-                                    absolute inset-0 flex items-center justify-center
-                                    text-sm font-medium capitalize tracking-wide 
-                                    text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]
-                                    transition-all duration-300 ease-out
-                                    ${isActive(navLinks[0].href)
-                                        ? '[clip-path:inset(0_0_0_0)]'
-                                        : '[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]'
-                                    }
-                                `}
-                            >
-                                {t('company')}
-                            </span>
+                    {navLinks[0] && (
+                        <div
+                            className={navLinkContainerClass}
+                            onClick={() => router.push(navLinks[0].href)}
+                        >
+                            <div className={navLinkWrapperClass}>
+                                <span className={navLinkBaseClass}>
+                                    {t(navLinks[0].key)}
+                                </span>
+                                <span className={getNavLinkOverlayClass(isActive(navLinks[0].href))}>
+                                    {t(navLinks[0].key)}
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     {/* Services (Manual Dropdown for Hover Support) */}
                     <div
@@ -169,7 +174,7 @@ export default function Navbar() {
                                     {t('services')}
                                 </span>
                                 <span
-                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium capitalize tracking-wide text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] transition-all duration-300 ease-out"
+                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium capitalize tracking-wide text-white transition-all duration-300 ease-out"
                                     style={{
                                         clipPath: servicesGlowActive
                                             ? 'inset(0 0 0 0)'
@@ -201,83 +206,23 @@ export default function Navbar() {
                         />
                     </div>
 
-                    {/* Portfolio Link */}
-                    <div
-                        className="group flex items-center justify-center py-2 cursor-pointer"
-                        onClick={() => router.push(navLinks[1].href)}
-                    >
-                        <div className="relative">
-                            <span className="block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300">
-                                {t('portfolio')}
-                            </span>
-                            <span
-                                className={`
-                                    absolute inset-0 flex items-center justify-center
-                                    text-sm font-medium capitalize tracking-wide 
-                                    text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]
-                                    transition-all duration-300 ease-out
-                                    ${isActive(navLinks[1].href)
-                                        ? '[clip-path:inset(0_0_0_0)]'
-                                        : '[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]'
-                                    }
-                                `}
-                            >
-                                {t('portfolio')}
-                            </span>
+                    {/* Remaining Nav Links */}
+                    {navLinks.slice(1).map((link) => (
+                        <div
+                            key={link.key}
+                            className={navLinkContainerClass}
+                            onClick={() => router.push(link.href)}
+                        >
+                            <div className={navLinkWrapperClass}>
+                                <span className={navLinkBaseClass}>
+                                    {t(link.key)}
+                                </span>
+                                <span className={getNavLinkOverlayClass(isActive(link.href))}>
+                                    {t(link.key)}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Careers Link */}
-                    <div
-                        className="group flex items-center justify-center py-2 cursor-pointer"
-                        onClick={() => router.push(navLinks[2].href)}
-                    >
-                        <div className="relative">
-                            <span className="block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300">
-                                {t('careers')}
-                            </span>
-                            <span
-                                className={`
-                                    absolute inset-0 flex items-center justify-center
-                                    text-sm font-medium capitalize tracking-wide 
-                                    text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]
-                                    transition-all duration-300 ease-out
-                                    ${isActive(navLinks[2].href)
-                                        ? '[clip-path:inset(0_0_0_0)]'
-                                        : '[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]'
-                                    }
-                                `}
-                            >
-                                {t('careers')}
-                            </span>
-                        </div>
-                    </div>
-
-                    {/* Contact Link */}
-                    <div
-                        className="group flex items-center justify-center py-2 cursor-pointer"
-                        onClick={() => router.push(navLinks[3].href)}
-                    >
-                        <div className="relative">
-                            <span className="block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300">
-                                {t('contact')}
-                            </span>
-                            <span
-                                className={`
-                                    absolute inset-0 flex items-center justify-center
-                                    text-sm font-medium capitalize tracking-wide 
-                                    text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]
-                                    transition-all duration-300 ease-out
-                                    ${isActive(navLinks[3].href)
-                                        ? '[clip-path:inset(0_0_0_0)]'
-                                        : '[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]'
-                                    }
-                                `}
-                            >
-                                {t('contact')}
-                            </span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
 
                 {/* Right side: Language Switcher - Hover Based with NavDropdown UI */}
@@ -297,7 +242,7 @@ export default function Navbar() {
                                 className={`
                                     w-5 h-5 transition-all duration-300 ease-out
                                     ${langGlowActive
-                                        ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]'
+                                        ? 'text-white '
                                         : 'text-gray-400'
                                     }
                                 `}
@@ -312,7 +257,7 @@ export default function Navbar() {
                                     {t('language_selector')}
                                 </span>
                                 <span
-                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium tracking-wide text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] transition-all duration-300 ease-out"
+                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium tracking-wide text-white  transition-all duration-300 ease-out"
                                     style={{
                                         clipPath: langGlowActive
                                             ? 'inset(0 0 0 0)'
