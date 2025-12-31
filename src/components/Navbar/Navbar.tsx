@@ -132,7 +132,7 @@ export default function Navbar() {
                     onClick={() => router.push(`/${currentLocale}`)}
                 >
                     <Image
-                        src="/Logo/Main-Logo-Interactive.gif"
+                        src="/2.gif"
                         alt="Limitless Taps"
                         width={180}
                         height={80}
