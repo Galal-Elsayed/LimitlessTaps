@@ -7,7 +7,7 @@ export default function ContactPage() {
         <div className="min-h-screen bg-[#0a0a0a] text-white">
             <Navbar />
             <main className="flex flex-col items-center justify-center p-8">
-                <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+                <h1 className="text-4xl font-bold mb-4">Start A Project</h1>
                 <p className="text-gray-400">Get in touch with us soon.</p>
             </main>
         </div>

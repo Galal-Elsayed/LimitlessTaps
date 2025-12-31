@@ -52,11 +52,11 @@ export default function Navbar() {
 
     // Navigation links without locale prefix - next-intl's router handles this
     const navLinks = [
-        { key: 'company', href: '/company' },
+        { key: 'company', href: '/about-us' },
         { key: 'services', href: '/services', isDropdown: true },
-        { key: 'portfolio', href: '/portfolio' },
+        { key: 'portfolio', href: '/our-work' },
         { key: 'careers', href: '/careers' },
-        { key: 'contact', href: '/contact' },
+        { key: 'contact', href: '/contact', isButton: true },
     ];
 
     const serviceLinks = [
@@ -134,8 +134,36 @@ export default function Navbar() {
     const langGlowActive = langOpen;
 
     // Render a regular nav link with animated glow
-    const renderNavLink = (link: { key: string; href: string }) => {
+    const renderNavLink = (link: { key: string; href: string; isButton?: boolean }) => {
         const active = isActive(link.href);
+
+        if (link.isButton) {
+            return (
+                <div
+                    key={link.key}
+                    className="flex items-center justify-center cursor-pointer"
+                    onClick={() => router.push(link.href)}
+                >
+                    <div className={`
+                        px-4 py-1 rounded-lg 
+                        bg-white/10 hover:bg-white/20 
+                        border border-white/20 hover:border-white/40
+                        transition-all duration-300
+                        flex items-center justify-center
+                        backdrop-blur-sm
+                        shadow-[0_4px_0_0_rgba(255,255,255,0.2)]
+                        hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(255,255,255,0.2)]
+                        active:translate-y-[4px] active:shadow-none
+                        min-w-[140px]
+                    `}>
+                        <span className="text-sm font-bold uppercase tracking-widest text-white">
+                            {t(link.key)}
+                        </span>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div
                 key={link.key}
