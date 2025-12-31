@@ -4,58 +4,49 @@ import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar/Navbar";
 
 export default function HomePage() {
-  const t = useTranslations();
+  const t = useTranslations('home');
+  const tCommon = useTranslations('common');
+  const tFooter = useTranslations('footer');
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      {/* Navbar */}
-      <Navbar logo="LIMITLESS TAPS" />
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <Navbar />
 
-      {/* Main Content */}
-      <main style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto' }}>
+      <main className="p-8 max-w-[1400px] mx-auto">
         {/* Header */}
-        <header style={{ marginBottom: '2rem', color: 'white' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{t("title")}</h1>
-          <p style={{ fontSize: '1.2rem', color: '#aaa' }}>{t("welcome")}</p>
+        <header className="mb-8 text-white">
+          <h1 className="text-4xl mb-2">{t("title")}</h1>
+          <p className="text-xl text-gray-400">{t("welcome")}</p>
         </header>
 
-        {/* Home Content */}
-        <section style={{ marginBottom: '2rem', padding: '2rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', borderRadius: '12px' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{t("home.hero_title")}</h2>
-          <p style={{ marginBottom: '1rem' }}>{t("home.hero_subtitle")}</p>
-          <button style={{ padding: '0.75rem 1.5rem', background: 'white', color: '#667eea', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>
-            {t("home.cta_button")}
-          </button>
-        </section>
-
         {/* Features */}
-        <section style={{ marginBottom: '2rem' }}>
-          <h3 style={{ color: 'white', marginBottom: '1rem' }}>{t("home.features_title")}</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}>{t("home.feature_1")}</div>
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}>{t("home.feature_2")}</div>
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}>{t("home.feature_3")}</div>
+        <section className="mb-8">
+          <h3 className="text-white mb-4 text-xl">{t("features_title")}</h3>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="p-6 bg-white/5 rounded-lg text-white border border-white/10">{t("feature_1")}</div>
+            <div className="p-6 bg-white/5 rounded-lg text-white border border-white/10">{t("feature_2")}</div>
+            <div className="p-6 bg-white/5 rounded-lg text-white border border-white/10">{t("feature_3")}</div>
           </div>
         </section>
 
         {/* Common Actions */}
-        <section style={{ marginBottom: '2rem', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', background: 'rgba(255,255,255,0.02)' }}>
-          <strong style={{ color: 'white' }}>Common Actions:</strong>
-          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-            <button style={{ padding: '0.5rem 1rem', background: '#4caf50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{t("common.submit")}</button>
-            <button style={{ padding: '0.5rem 1rem', background: '#2196f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{t("common.save")}</button>
-            <button style={{ padding: '0.5rem 1rem', background: '#ff9800', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{t("common.edit")}</button>
-            <button style={{ padding: '0.5rem 1rem', background: '#e60000', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{t("common.delete")}</button>
-            <button style={{ padding: '0.5rem 1rem', background: '#666', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{t("common.cancel")}</button>
+        <section className="mb-8 p-6 border border-white/10 rounded-lg bg-white/[0.02]">
+          <strong className="text-white">Common Actions:</strong>
+          <div className="flex gap-2 mt-4 flex-wrap">
+            <button className="px-4 py-2 bg-green-600 text-white border-none rounded cursor-pointer">{tCommon("submit")}</button>
+            <button className="px-4 py-2 bg-blue-500 text-white border-none rounded cursor-pointer">{tCommon("save")}</button>
+            <button className="px-4 py-2 bg-orange-500 text-white border-none rounded cursor-pointer">{tCommon("edit")}</button>
+            <button className="px-4 py-2 bg-red-600 text-white border-none rounded cursor-pointer">{tCommon("delete")}</button>
+            <button className="px-4 py-2 bg-gray-600 text-white border-none rounded cursor-pointer">{tCommon("cancel")}</button>
           </div>
         </section>
 
         {/* Footer */}
-        <footer style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', color: '#888' }}>
-          <p>{t("footer.copyright")}</p>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-            <span style={{ cursor: 'pointer' }}>{t("footer.privacy")}</span>
-            <span style={{ cursor: 'pointer' }}>{t("footer.terms")}</span>
+        <footer className="border-t border-white/10 pt-6 text-gray-500">
+          <p>{tFooter("copyright")}</p>
+          <div className="flex gap-4 mt-2">
+            <span className="cursor-pointer hover:text-white transition-colors">{tFooter("privacy")}</span>
+            <span className="cursor-pointer hover:text-white transition-colors">{tFooter("terms")}</span>
           </div>
         </footer>
       </main>

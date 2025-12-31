@@ -29,10 +29,52 @@ async function loadMessages(locale: string | undefined) {
     : i18n.defaultLocale;
 
   try {
-    return (await import(`../../../messages/${resolvedLocale}.json`)).default;
+    // Load all message files and merge them
+    const common = (await import(`../../../messages/${resolvedLocale}/common.json`)).default;
+    const navigation = (await import(`../../../messages/${resolvedLocale}/navigation.json`)).default;
+    const home = (await import(`../../../messages/${resolvedLocale}/home.json`)).default;
+    const company = (await import(`../../../messages/${resolvedLocale}/company.json`)).default;
+    const services = (await import(`../../../messages/${resolvedLocale}/services.json`)).default;
+    const portfolio = (await import(`../../../messages/${resolvedLocale}/portfolio.json`)).default;
+    const careers = (await import(`../../../messages/${resolvedLocale}/careers.json`)).default;
+    const contact = (await import(`../../../messages/${resolvedLocale}/contact.json`)).default;
+    const footer = (await import(`../../../messages/${resolvedLocale}/footer.json`)).default;
+
+    return {
+      common,
+      navigation,
+      home,
+      company,
+      services,
+      portfolio,
+      careers,
+      contact,
+      footer,
+    };
   } catch (error) {
-    console.error(`Failed to load messages for locale: ${resolvedLocale}`);
-    return (await import("../../../messages/en.json")).default;
+    console.error(`Failed to load messages for locale: ${resolvedLocale}`, error);
+    // Fallback to English
+    const common = (await import(`../../../messages/en/common.json`)).default;
+    const navigation = (await import(`../../../messages/en/navigation.json`)).default;
+    const home = (await import(`../../../messages/en/home.json`)).default;
+    const company = (await import(`../../../messages/en/company.json`)).default;
+    const services = (await import(`../../../messages/en/services.json`)).default;
+    const portfolio = (await import(`../../../messages/en/portfolio.json`)).default;
+    const careers = (await import(`../../../messages/en/careers.json`)).default;
+    const contact = (await import(`../../../messages/en/contact.json`)).default;
+    const footer = (await import(`../../../messages/en/footer.json`)).default;
+
+    return {
+      common,
+      navigation,
+      home,
+      company,
+      services,
+      portfolio,
+      careers,
+      contact,
+      footer,
+    };
   }
 }
 
