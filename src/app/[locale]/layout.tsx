@@ -17,6 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Limitless Taps",
   description: "Your ultimate beverage solution",
+  icons: {
+    icon: "/Logo/black.png",
+    shortcut: "/Logo/black.png",
+    apple: "/Logo/black.png",
+  },
+  openGraph: {
+    images: ["/Logo/black.png"],
+  },
 };
 
 export function generateStaticParams() {
