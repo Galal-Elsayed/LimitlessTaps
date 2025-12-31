@@ -1,10 +1,8 @@
-'use client';
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
 
-export default function PortfolioPage() {
-    const t = useTranslations('portfolio');
+export default async function PortfolioPage() {
+    const t = await getTranslations('portfolio');
 
     return (
         <div className="min-h-screen bg-[#0a0a0a]">

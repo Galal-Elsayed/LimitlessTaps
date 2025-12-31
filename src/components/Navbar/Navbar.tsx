@@ -164,7 +164,7 @@ export default function Navbar() {
                             className="flex items-center gap-1 focus:outline-none py-2"
                         >
                             {/* Text Container for Overlay Effect */}
-                            <div className="relative">
+                            <div className="relative hover:cursor-pointer">
                                 <span className="block text-sm font-medium capitalize tracking-wide text-gray-500">
                                     {t('services')}
                                 </span>
@@ -196,6 +196,8 @@ export default function Navbar() {
                             items={serviceLinks}
                             isRTL={isRTL}
                             onClose={() => setServicesOpen(false)}
+                            align="center"
+                            className="w-screen max-w-sm"
                         />
                     </div>
 
@@ -286,7 +288,7 @@ export default function Navbar() {
                         onMouseLeave={handleLangMouseLeave}
                     >
                         <button
-                            className="flex items-center gap-1 focus:outline-none py-2"
+                            className="flex items-center gap-1 focus:outline-none py-2 hover:cursor-pointer"
                         >
                             <div className="relative">
                                 <span className="block text-sm font-semibold tracking-wide text-gray-400">
@@ -320,7 +322,8 @@ export default function Navbar() {
                             items={languageLinks}
                             isRTL={isRTL}
                             onClose={() => setLangOpen(false)}
-                            className="max-w-[140px]"
+                            align="center"
+                            className="w-36"
                         />
                     </div>
                 </div>

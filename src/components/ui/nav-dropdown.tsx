@@ -18,10 +18,25 @@ interface NavDropdownProps {
     isRTL: boolean;
     onClose: () => void;
     className?: string;
+    align?: 'center' | 'start' | 'end';
 }
 
-export function NavDropdown({ isOpen, items, isRTL, onClose, className = '' }: NavDropdownProps) {
+export function NavDropdown({ isOpen, items, isRTL, onClose, className = '', align = 'center' }: NavDropdownProps) {
     const router = useRouter();
+
+    // Positioning classes based on alignment
+    const positionClasses = {
+        center: 'left-1/2 -translate-x-1/2', // Always physically center relative to parent
+        start: isRTL ? 'right-0' : 'left-0',
+        end: isRTL ? 'left-0' : 'right-0',
+    };
+
+    // Fix: Simple centering or edge alignment
+    let alignmentClass = positionClasses.center;
+    if (align === 'start') alignmentClass = positionClasses.start;
+    if (align === 'end') alignmentClass = positionClasses.end;
+
+    // RTL override for language switcher specifically handles its own logic via 'align' prop now.
 
     return (
         <Transition
@@ -36,12 +51,12 @@ export function NavDropdown({ isOpen, items, isRTL, onClose, className = '' }: N
         >
             <div
                 className={`
-                    absolute left-1/2 -translate-x-1/2 z-50 pt-2 w-screen max-w-sm px-4
-                    ${isRTL ? 'right-0 translate-x-0' : ''}
+                    absolute z-50 pt-2 px-4
+                    ${alignmentClass}
                     ${className}
                 `}
                 onMouseEnter={() => { }} // Keep open on hover
-                onMouseLeave={onClose} // Close on leave (if handled by parent's delay, this might be redundant but safe)
+                onMouseLeave={onClose} // Close on leave
             >
                 {/* 
                   Dropdown Panel 

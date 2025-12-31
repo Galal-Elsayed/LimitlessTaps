@@ -1,10 +1,8 @@
-'use client';
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
 
-export default function CareersPage() {
-    const t = useTranslations('careers');
+export default async function CareersPage() {
+    const t = await getTranslations('careers');
 
     return (
         <div className="min-h-screen bg-[#0a0a0a]">
