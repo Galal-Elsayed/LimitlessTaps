@@ -111,10 +111,10 @@ export default function Navbar() {
     // Shared nav link classes
     const navLinkContainerClass = "group flex items-center justify-center py-2 cursor-pointer";
     const navLinkWrapperClass = "relative";
-    const navLinkBaseClass = "block text-sm font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300";
+    const navLinkBaseClass = "block text-md font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300";
     const getNavLinkOverlayClass = (isActive: boolean) => `
         absolute inset-0 flex items-center justify-center
-        text-sm font-medium capitalize tracking-wide 
+        text-md font-medium capitalize tracking-wide 
         text-white
         transition-all duration-300 ease-out
         ${isActive
@@ -132,7 +132,7 @@ export default function Navbar() {
                     onClick={() => router.push(`/${currentLocale}`)}
                 >
                     <Image
-                        src="/2.gif"
+                        src="/Logo/Main-Logo-Interactive.gif"
                         alt="Limitless Taps"
                         width={180}
                         height={80}
@@ -170,11 +170,11 @@ export default function Navbar() {
                         >
                             {/* Text Container for Overlay Effect */}
                             <div className="relative hover:cursor-pointer">
-                                <span className="block text-sm font-medium capitalize tracking-wide text-gray-500">
+                                <span className="block text-md font-medium capitalize tracking-wide text-gray-500">
                                     {t('services')}
                                 </span>
                                 <span
-                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium capitalize tracking-wide text-white transition-all duration-300 ease-out"
+                                    className="absolute inset-0 flex items-center justify-center text-md font-medium capitalize tracking-wide text-white transition-all duration-300 ease-out"
                                     style={{
                                         clipPath: servicesGlowActive
                                             ? 'inset(0 0 0 0)'
@@ -253,11 +253,11 @@ export default function Navbar() {
 
                             {/* Language Text with Glow Effect */}
                             <div className="relative">
-                                <span className="block text-sm font-medium tracking-wide text-gray-400 transition-colors duration-300">
+                                <span className="block text-md font-medium tracking-wide text-gray-400 transition-colors duration-300">
                                     {t('language_selector')}
                                 </span>
                                 <span
-                                    className="absolute inset-0 flex items-center justify-center text-sm font-medium tracking-wide text-white  transition-all duration-300 ease-out"
+                                    className="absolute inset-0 flex items-center justify-center text-md font-medium tracking-wide text-white  transition-all duration-300 ease-out"
                                     style={{
                                         clipPath: langGlowActive
                                             ? 'inset(0 0 0 0)'
