@@ -14,7 +14,7 @@ export default async function HomePage() {
         {/* Header */}
         <header className="mb-8 text-white">
           <video src="/Logo/Main-Logo-Interactive-LowQuality.webm" autoPlay loop muted className="mb-4 w-400 h-auto"></video>
-          
+
         </header>
 
 
