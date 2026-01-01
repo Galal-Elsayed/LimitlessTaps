@@ -2,7 +2,7 @@
 
 import { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export interface DropdownItem {
     key: string;
