@@ -253,7 +253,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 border-b border-white/10 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}>
+            <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}>
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
                     {/* Logo */}
                     <div

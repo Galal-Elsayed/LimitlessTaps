@@ -20,6 +20,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const careers = (await import(`../../messages/${locale}/careers.json`)).default;
   const contact = (await import(`../../messages/${locale}/contact.json`)).default;
   const footer = (await import(`../../messages/${locale}/footer.json`)).default;
+  const privacy = (await import(`../../messages/${locale}/privacy.json`)).default;
+  const terms = (await import(`../../messages/${locale}/terms.json`)).default;
 
   return {
     locale,
@@ -33,6 +35,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       careers,
       contact,
       footer,
+      privacy,
+      terms,
     },
   };
 });
