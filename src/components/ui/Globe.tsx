@@ -97,7 +97,7 @@ export function Globe({
                     pointerInteracting.current = null;
                     if (canvasRef.current) canvasRef.current.style.cursor = "grab";
                 }}
-                onMouseMove={(e) => {
+                onPointerMove={(e) => {
                     if (pointerInteracting.current !== null && pointerInteractionStart.current !== null) {
                         const delta = e.clientX - pointerInteracting.current;
                         pointerInteracting.current = e.clientX;
@@ -111,6 +111,7 @@ export function Globe({
                     contain: "layout paint size",
                     opacity: 1,
                     transition: "opacity 1s ease",
+                    touchAction: "none",
                 }}
             />
         </div>
