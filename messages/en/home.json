@@ -7,5 +7,16 @@
     "features_title": "Our Features",
     "feature_1": "Instant Tap Response",
     "feature_2": "Smart Tap Analytics",
-    "feature_3": "Easy Tap Integration"
+    "feature_3": "Easy Tap Integration",
+    "globe_label": "Global scale",
+    "globe_title": "The backbone for global commerce",
+    "globe_description": "Stripe makes moving money as easy and programmable as moving data. Our teams are based in offices around the world and we process hundreds of billions of dollars each year for ambitious businesses of all sizes.",
+    "stat_1_value": "500M+",
+    "stat_1_label": "API requests per day, peaking at 13,000 requests a second.",
+    "stat_2_value": "99.999%",
+    "stat_2_label": "historical uptime for Stripe services.",
+    "stat_3_value": "90%",
+    "stat_3_label": "of US adults have bought from businesses using Stripe.",
+    "stat_4_value": "135+",
+    "stat_4_label": "currencies and payment methods supported."
 }

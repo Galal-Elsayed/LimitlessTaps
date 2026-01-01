@@ -1,12 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from '@/i18n/routing';
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Fragment } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { NavDropdown } from '@/components/ui/nav-dropdown';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Transition } from '@headlessui/react';
 
 export default function Navbar() {
     const t = useTranslations('navigation');
@@ -26,6 +27,8 @@ export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
+    // With 'as-needed' locale prefix, English pages don't have /en in the URL
+    // Only Arabic pages will have /ar prefix
     const currentLocale = pathname.startsWith('/ar') ? 'ar' : 'en';
     const isRTL = currentLocale === 'ar';
 
@@ -47,51 +50,53 @@ export default function Navbar() {
         };
     }, [mobileMenuOpen]);
 
+    // Navigation links without locale prefix - next-intl's router handles this
     const navLinks = [
-        { key: 'company', href: `/${currentLocale}/company` },
-        { key: 'services', href: `/${currentLocale}/services`, isDropdown: true },
-        { key: 'portfolio', href: `/${currentLocale}/portfolio` },
-        { key: 'careers', href: `/${currentLocale}/careers` },
-        { key: 'contact', href: `/${currentLocale}/contact` },
+        { key: 'company', href: '/about-us' },
+        { key: 'services', href: '/services', isDropdown: true },
+        { key: 'portfolio', href: '/our-work' },
+        { key: 'careers', href: '/careers' },
+        { key: 'contact', href: '/contact', isButton: true },
     ];
 
     const serviceLinks = [
         {
             key: 'web_development',
-            href: `/${currentLocale}/services/web-development`,
+            href: '/services/web-development',
             title: tServices('web_development_title'),
             description: tServices('web_development_desc')
         },
         {
             key: 'mobile_application',
-            href: `/${currentLocale}/services/mobile-application`,
+            href: '/services/mobile-application',
             title: tServices('mobile_application_title'),
             description: tServices('mobile_application_desc')
         },
         {
             key: 'software_solution',
-            href: `/${currentLocale}/services/software-solution`,
+            href: '/services/software-solution',
             title: tServices('software_solution_title'),
             description: tServices('software_solution_desc')
         },
         {
             key: 'web_design',
-            href: `/${currentLocale}/services/web-design`,
+            href: '/services/web-design',
             title: tServices('web_design_title'),
             description: tServices('web_design_desc')
         },
     ];
 
+    // Language links for switching
     const languageLinks = [
         {
             key: 'en',
             title: 'English',
-            href: pathname.replace(/^\/(en|ar)/, '/en') || '/en',
+            locale: 'en' as const,
         },
         {
             key: 'ar',
             title: 'العربية',
-            href: pathname.replace(/^\/(en|ar)/, '/ar') || '/ar',
+            locale: 'ar' as const,
         },
     ];
 
@@ -100,7 +105,7 @@ export default function Navbar() {
     };
 
     const isServicesActive = () => {
-        return pathname.startsWith(`/${currentLocale}/services`);
+        return pathname.startsWith('/services');
     };
 
     const handleServicesMouseEnter = () => {
@@ -129,8 +134,36 @@ export default function Navbar() {
     const langGlowActive = langOpen;
 
     // Render a regular nav link with animated glow
-    const renderNavLink = (link: { key: string; href: string }) => {
+    const renderNavLink = (link: { key: string; href: string; isButton?: boolean }) => {
         const active = isActive(link.href);
+
+        if (link.isButton) {
+            return (
+                <div
+                    key={link.key}
+                    className="flex items-center justify-center cursor-pointer"
+                    onClick={() => router.push(link.href)}
+                >
+                    <div className={`
+                        px-4 py-1 rounded-lg 
+                        bg-white/10 hover:bg-white/20 
+                        border border-white/20 hover:border-white/40
+                        transition-all duration-300
+                        flex items-center justify-center
+                        backdrop-blur-sm
+                        shadow-[0_4px_0_0_rgba(255,255,255,0.2)]
+                        hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(255,255,255,0.2)]
+                        active:translate-y-[4px] active:shadow-none
+                        min-w-[140px]
+                    `}>
+                        <span className="text-sm font-bold uppercase tracking-widest text-white">
+                            {t(link.key)}
+                        </span>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div
                 key={link.key}
@@ -220,21 +253,34 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 border-b border-white/10 ${isRTL ? 'rtl' : 'ltr'}`}>
+            <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 border-b border-white/10 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}>
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
                     {/* Logo */}
                     <div
-                        className="cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50"
-                        onClick={() => router.push(`/${currentLocale}`)}
+                        className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen ? 'opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto' : 'opacity-100'}`}
+                        onClick={() => router.push('/')}
                     >
-                        <Image
-                            src="/Logo/Main-Logo-Interactive.gif"
-                            alt="Limitless Taps"
-                            width={180}
-                            height={80}
-                            className="object-contain"
-                            unoptimized
-                        />
+                        {/* Desktop Logo (GIF) */}
+                        <div className="hidden min-[900px]:block">
+                            <Image
+                                src="/Logo/Main-Logo-Interactive.gif"
+                                alt="Limitless Taps"
+                                width={180}
+                                height={80}
+                                className="object-contain"
+                                unoptimized
+                            />
+                        </div>
+                        {/* Mobile Logo (Static) */}
+                        <div className="block min-[900px]:hidden">
+                            <Image
+                                src="/Logo/Main-Logo-Static.png"
+                                alt="Limitless Taps"
+                                width={140}
+                                height={60}
+                                className="object-contain"
+                            />
+                        </div>
                     </div>
 
                     {/* Desktop Nav Links (Hidden on mobile/tablet) */}
@@ -301,14 +347,50 @@ export default function Navbar() {
                                 />
                             </button>
 
-                            <NavDropdown
-                                isOpen={langOpen}
-                                items={languageLinks}
-                                isRTL={isRTL}
-                                onClose={() => setLangOpen(false)}
-                                align="center"
-                                className="w-36"
-                            />
+                            {/* Language Dropdown */}
+                            <Transition
+                                show={langOpen}
+                                as={Fragment}
+                                enter="transition ease-out duration-200"
+                                enterFrom="opacity-0 translate-y-1"
+                                enterTo="opacity-100 translate-y-0"
+                                leave="transition ease-in duration-150"
+                                leaveFrom="opacity-100 translate-y-0"
+                                leaveTo="opacity-0 translate-y-1"
+                            >
+                                <div
+                                    className="absolute z-50 pt-2 px-4 left-1/2 -translate-x-1/2 w-36"
+                                    onMouseEnter={handleLangMouseEnter}
+                                    onMouseLeave={handleLangMouseLeave}
+                                >
+                                    <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10 bg-[#0a0a0a] relative">
+                                        <div
+                                            className="absolute inset-0 pointer-events-none opacity-20"
+                                            style={{
+                                                background: 'radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%)'
+                                            }}
+                                        />
+                                        <div className="relative bg-white/5 backdrop-blur-xl p-2">
+                                            <div className="flex flex-col gap-1">
+                                                {languageLinks.map((lang) => (
+                                                    <button
+                                                        key={lang.key}
+                                                        onClick={() => {
+                                                            router.replace(pathname, { locale: lang.locale });
+                                                            setLangOpen(false);
+                                                        }}
+                                                        className="group flex items-center justify-center rounded-lg p-3 hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+                                                    >
+                                                        <p className="block font-semibold text-sm text-gray-100 group-hover:text-white transition-colors">
+                                                            {lang.title}
+                                                        </p>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
                         </div>
                     </div>
 
@@ -319,7 +401,7 @@ export default function Navbar() {
                             className="text-white p-2 focus:outline-none hover:bg-white/10 rounded-full transition-colors"
                             aria-label="Toggle menu"
                         >
-                            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {mobileMenuOpen ? null : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
                 </div>
@@ -328,51 +410,81 @@ export default function Navbar() {
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, scaleY: 0 }}
-                        animate={{ opacity: 1, scaleY: 1 }}
-                        exit={{ opacity: 0, scaleY: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className={`fixed top-[70px] left-0 right-0 h-auto min-h-[40vh] z-40 bg-[rgba(10,10,10,0.96)] backdrop-blur-xl min-[900px]:hidden border-b border-white/10 origin-top shadow-2xl overflow-hidden`}
-                    >
-                        <div className={`relative w-full ${isRTL ? 'rtl' : 'ltr'}`}>
-                            {/* Symbol Image - Absolute Fixed Position (Does not move when menu stretches) */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2, duration: 0.4 }}
-                                className="absolute -top-6 right-0 h-[40vh] w-1/2 flex items-center justify-center p-2 sm:p-8 z-0 pointer-events-none"
-                            >
-                                <div className="absolute bg-transparent inset-0 z-1" />
-                                <Image
-                                    src="/Logo/limitless-no-bg.png"
-                                    alt="Limitless Taps Symbol"
-                                    fill
-                                    className="object-contain opacity-50 pr-4 sm:pr-8"
-                                    sizes="50vw"
-                                />
-                            </motion.div>
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="fixed inset-0 bg-black/60 z-40 min-[900px]:hidden backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className={`
+                                fixed top-0 bottom-0 right-0 
+                                w-[300px] z-50 
+                                bg-[#0a0a0a]/95 backdrop-blur-xl 
+                                min-[900px]:hidden 
+                                border-l border-white/10 
+                                shadow-2xl 
+                                overflow-y-auto flex flex-col
+                            `}
+                        >
+                            <div className="flex flex-col h-full relative">
+                                {/* Header Area with Logo and Close Button - Matching Main Navbar Height (70px) */}
+                                <div className="h-[70px] px-6 border-b border-white/10 flex justify-between items-center bg-[#0a0a0a]">
+                                    <div
+                                        className="cursor-pointer hover:opacity-80 transition-opacity duration-300"
+                                        onClick={() => {
+                                            router.push('/');
+                                            setMobileMenuOpen(false);
+                                        }}
+                                    >
+                                        <Image
+                                            src="/Logo/Main-Logo-Static.png"
+                                            alt="Limitless Taps"
+                                            width={140}
+                                            height={60}
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                    <button
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+                                    >
+                                        <X className="w-6 h-6" />
+                                    </button>
+                                </div>
 
-                            {/* Content - Relative Foreground */}
-                            <div className={`relative z-10 flex flex-col h-full p-6 no-scrollbar ${isRTL ? 'text-right items-end' : 'text-left items-start'}`}>
-                                <div className="flex flex-col gap-3 w-full sm:gap-5">
+                                {/* Content */}
+                                <div className={`flex flex-col p-6 gap-3 ${isRTL ? 'text-right' : 'text-left'} flex-1`}>
                                     {navLinks.map((link, index) => (
                                         <motion.div
                                             key={link.key}
-                                            initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
+                                            initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.05, duration: 0.3 }}
+                                            transition={{ delay: 0.1 + (index * 0.05), duration: 0.3 }}
                                             className="w-full"
                                         >
                                             {link.isDropdown ? (
-                                                <div className="flex flex-col gap-1">
+                                                <div className="flex flex-col gap-2">
                                                     <button
                                                         onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                                                        className={`flex items-center gap-2 text-lg sm:text-2xl font-semibold text-white tracking-wide hover:text-gray-300 transition-colors w-full ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
+                                                        className={`
+                                                            flex items-center justify-between w-full py-3 px-4 
+                                                            text-lg font-medium text-white tracking-wide 
+                                                            bg-transparent hover:bg-white/5 
+                                                            border border-transparent hover:border-white/5
+                                                            rounded-xl transition-all duration-300
+                                                        `}
                                                     >
                                                         <span>{t(link.key)}</span>
                                                         <ChevronDown
-                                                            className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                                                            className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`}
                                                         />
                                                     </button>
 
@@ -382,18 +494,26 @@ export default function Navbar() {
                                                                 initial={{ opacity: 0, height: 0 }}
                                                                 animate={{ opacity: 1, height: 'auto' }}
                                                                 exit={{ opacity: 0, height: 0 }}
-                                                                className={`overflow-hidden flex bg-[#0a0a0a] w-1/2 flex-col gap-2 mt-1 ${isRTL ? 'pr-3 border-r border-white/10' : 'pl-3 border-l border-white/10'}`}
+                                                                className="overflow-hidden flex flex-col gap-2 pl-2"
                                                             >
                                                                 {serviceLinks.map((service, idx) => (
                                                                     <motion.div
                                                                         key={service.key}
-                                                                        initial={{ opacity: 0, x: isRTL ? 10 : -10 }}
+                                                                        initial={{ opacity: 0, x: 10 }}
                                                                         animate={{ opacity: 1, x: 0 }}
                                                                         transition={{ delay: idx * 0.03 }}
-                                                                        onClick={() => router.push(service.href)}
-                                                                        className="py-1.5 px-3 w-full rounded-md border border-white/5 bg-white/5 cursor-pointer active:scale-95 transition-all hover:bg-white/10 text-start"
+                                                                        onClick={() => {
+                                                                            router.push(service.href);
+                                                                            setMobileMenuOpen(false);
+                                                                        }}
+                                                                        className={`
+                                                                            py-2.5 px-4 w-full rounded-lg 
+                                                                            bg-white/5 border border-white/5
+                                                                            text-sm text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/20
+                                                                            cursor-pointer transition-all duration-200
+                                                                        `}
                                                                     >
-                                                                        <div className="text-sm sm:text-base font-medium text-white/90">{service.title}</div>
+                                                                        {service.title}
                                                                     </motion.div>
                                                                 ))}
                                                             </motion.div>
@@ -402,8 +522,17 @@ export default function Navbar() {
                                                 </div>
                                             ) : (
                                                 <div
-                                                    onClick={() => router.push(link.href)}
-                                                    className="text-lg sm:text-2xl font-semibold text-white tracking-wide cursor-pointer hover:text-gray-300 transition-colors py-1 block"
+                                                    onClick={() => {
+                                                        router.push(link.href);
+                                                        setMobileMenuOpen(false);
+                                                    }}
+                                                    className={`
+                                                        block py-3 px-4 
+                                                        text-lg font-medium text-white tracking-wide 
+                                                        bg-transparent hover:bg-white/5 
+                                                        border border-transparent hover:border-white/5
+                                                        rounded-xl transition-all duration-300 cursor-pointer
+                                                    `}
                                                 >
                                                     {t(link.key)}
                                                 </div>
@@ -412,23 +541,20 @@ export default function Navbar() {
                                     ))}
                                 </div>
 
-                                {/* Language Switcher - Tightly following contents */}
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
-                                    className={`mt-4 w-full flex flex-col gap-2 ${isRTL ? 'items-end' : 'items-start'}`}
-                                >
-                                    <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em]">{t('language_selector')}</div>
-                                    <div className="flex items-center gap-2">
+                                {/* Language Switcher */}
+                                <div className="p-6 border-t border-white/10 bg-black/20">
+                                    <div className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? 'text-right' : 'text-left'}`}>
+                                        {t('language_selector')}
+                                    </div>
+                                    <div className="flex items-center gap-3">
                                         {languageLinks.map((lang) => (
                                             <button
                                                 key={lang.key}
-                                                onClick={() => router.push(lang.href)}
+                                                onClick={() => router.replace(pathname, { locale: lang.locale })}
                                                 className={`
-                                                    px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium transition-all duration-300 border
+                                                    flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300 border
                                                     ${currentLocale === lang.key
-                                                        ? 'bg-white text-black border-white shadow-sm'
+                                                        ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)]'
                                                         : 'text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5'
                                                     }
                                                 `}
@@ -437,10 +563,10 @@ export default function Navbar() {
                                             </button>
                                         ))}
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </>

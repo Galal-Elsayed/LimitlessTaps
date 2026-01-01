@@ -1,24 +1,28 @@
 import { getRequestConfig } from "next-intl/server";
-import { i18n } from "@/i18n.config";
+import { routing } from "./routing";
 
-export default getRequestConfig(async ({ locale }) => {
-  const resolvedLocale = i18n.locales.includes(locale as any)
-    ? (locale as (typeof i18n.locales)[number])
-    : i18n.defaultLocale;
+export default getRequestConfig(async ({ requestLocale }) => {
+  // This typically corresponds to the `[locale]` segment
+  let locale = await requestLocale;
+
+  // Ensure that a valid locale is used
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
+  }
 
   // Load all message files and merge them
-  const common = (await import(`../../messages/${resolvedLocale}/common.json`)).default;
-  const navigation = (await import(`../../messages/${resolvedLocale}/navigation.json`)).default;
-  const home = (await import(`../../messages/${resolvedLocale}/home.json`)).default;
-  const company = (await import(`../../messages/${resolvedLocale}/company.json`)).default;
-  const services = (await import(`../../messages/${resolvedLocale}/services.json`)).default;
-  const portfolio = (await import(`../../messages/${resolvedLocale}/portfolio.json`)).default;
-  const careers = (await import(`../../messages/${resolvedLocale}/careers.json`)).default;
-  const contact = (await import(`../../messages/${resolvedLocale}/contact.json`)).default;
-  const footer = (await import(`../../messages/${resolvedLocale}/footer.json`)).default;
+  const common = (await import(`../../messages/${locale}/common.json`)).default;
+  const navigation = (await import(`../../messages/${locale}/navigation.json`)).default;
+  const home = (await import(`../../messages/${locale}/home.json`)).default;
+  const company = (await import(`../../messages/${locale}/company.json`)).default;
+  const services = (await import(`../../messages/${locale}/services.json`)).default;
+  const portfolio = (await import(`../../messages/${locale}/portfolio.json`)).default;
+  const careers = (await import(`../../messages/${locale}/careers.json`)).default;
+  const contact = (await import(`../../messages/${locale}/contact.json`)).default;
+  const footer = (await import(`../../messages/${locale}/footer.json`)).default;
 
   return {
-    locale: resolvedLocale,
+    locale,
     messages: {
       common,
       navigation,
