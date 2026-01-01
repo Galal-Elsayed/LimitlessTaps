@@ -1,0 +1,95 @@
+'use client';
+
+import { useTranslations } from "next-intl";
+import { Globe } from "@/components/ui/Globe";
+import { motion } from "framer-motion";
+
+export function GlobeSection() {
+    const t = useTranslations('home');
+
+    return (
+        <section className="relative w-full bg-[#0a0a0a] overflow-hidden py-24 px-8">
+            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                {/* Left Side: Content */}
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="z-10"
+                >
+                    <span className="text-[#00d4ff] font-semibold tracking-wide uppercase text-sm mb-4 block">
+                        {t('globe_label')}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                        {t('globe_title')}
+                    </h2>
+                    <p className="text-lg text-gray-400 mb-12 max-w-xl leading-relaxed">
+                        {t('globe_description')}
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div className="text-2xl font-bold text-white mb-2">{t('stat_1_value')}</div>
+                            <div className="text-sm text-gray-500">{t('stat_1_label')}</div>
+                        </div>
+                        <div>
+                            <div className="text-2xl font-bold text-white mb-2">{t('stat_2_value')}</div>
+                            <div className="text-sm text-gray-500">{t('stat_2_label')}</div>
+                        </div>
+                        <div>
+                            <div className="text-2xl font-bold text-white mb-2">{t('stat_3_value')}</div>
+                            <div className="text-sm text-gray-500">{t('stat_3_label')}</div>
+                        </div>
+                        <div>
+                            <div className="text-2xl font-bold text-white mb-2">{t('stat_4_value')}</div>
+                            <div className="text-sm text-gray-500">{t('stat_4_label')}</div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Right Side: Globe Interaction */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                    className="relative flex items-center justify-center h-[500px] md:h-[600px] w-full"
+                >
+                    {/* Subtle Glow Background */}
+                    <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" />
+
+                    <Globe
+                        className="w-full h-full"
+                        config={{
+                            width: 600,
+                            height: 600,
+                            onRender: () => { },
+                            devicePixelRatio: 2,
+                            phi: 0,
+                            theta: 0.3,
+                            dark: 1,
+                            diffuse: 1.2,
+                            mapSamples: 16000,
+                            mapBrightness: 6,
+                            baseColor: [0.3, 0.3, 0.3],
+                            markerColor: [0.1, 0.8, 1],
+                            glowColor: [1, 1, 1],
+                            markers: [
+                                { location: [37.7595, -122.4367], size: 0.03 },
+                                { location: [40.7128, -74.006], size: 0.1 },
+                                { location: [51.5074, -0.1278], size: 0.05 },
+                                { location: [35.6895, 139.6917], size: 0.07 },
+                                { location: [25.2048, 55.2708], size: 0.05 },
+                            ],
+                        }}
+                    />
+                </motion.div>
+            </div>
+
+            {/* Ambient Background Elements */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[150px] -z-1" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/5 blur-[150px] -z-1" />
+        </section>
+    );
+}

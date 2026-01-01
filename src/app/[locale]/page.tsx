@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
+import { GlobeSection } from "@/components/GlobeSection/GlobeSection";
 
 export default async function HomePage() {
   const t = await getTranslations('home');
@@ -10,15 +11,18 @@ export default async function HomePage() {
     <div className="min-h-screen bg-[#0a0a0a]">
       <Navbar />
 
-      <main className="p-8 max-w-[1400px] mx-auto">
+      <main className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <header className="mb-8 text-white">
+        <header className="p-8 mb-8 text-white">
           <h1 className="text-4xl mb-2">{t("title")}</h1>
           <p className="text-xl text-gray-400">{t("welcome")}</p>
         </header>
 
+        {/* Globe Section */}
+        <GlobeSection />
+
         {/* Features */}
-        <section className="mb-8">
+        <section className="p-8 mb-8">
           <h3 className="text-white mb-4 text-xl">{t("features_title")}</h3>
           <div className="grid grid-cols-3 gap-4">
             <div className="p-6 bg-white/5 rounded-lg text-white border border-white/10">{t("feature_1")}</div>
