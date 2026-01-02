@@ -1,9 +1,9 @@
 {
   "title": "Privacy Policy | Limitless Taps",
-  "description": "Learn how Limitless Taps collects, uses, and protects your personal data.",
+  "description": "Learn how Limitless Taps collects, uses, and protects your data as a software development agency.",
   "hero": {
     "title": "Privacy Policy",
-    "subtitle": "We are committed to protecting your personal information and your right to privacy.",
+    "subtitle": "We are committed to protecting the privacy of our clients and website visitors.",
     "lastUpdated": "Last Updated",
     "lastUpdatedDate": "January 1, 2026"
   },
@@ -11,37 +11,37 @@
   "related": "Related",
   "needHelp": {
     "title": "Need Help?",
-    "description": "If you have questions about these terms, our legal team is here to help.",
+    "description": "If you have questions about our privacy practices, please contact us.",
     "contactSupport": "Contact Support"
   },
   "sections": {
     "collection": {
       "title": "Information Collection",
-      "intro": "We collect information that you provide directly to us when you create an account, update your profile, or communicate with us. This may include your name, email address, and payment information.",
-      "also": "We also automatically collect certain information when you use the Platform, including:",
-      "logInfo": "Log Information: We collect log files when you use our services, including your IP address and browser type.",
-      "usageInfo": "Usage Information: We monitor your activity on the Platform to improve our services."
+      "intro": "We collect information that you provide directly to us when you request a consultation, fill out a contact form, or engage our services. This may include your name, email address, phone number, company name, and project details.",
+      "also": "When you visit our website, we may automatically collect certain information, including:",
+      "logInfo": "Log Information: IP address, browser type, and pages visited.",
+      "usageInfo": "Analytics: Data on how you interact with our website to help us improve our user experience."
     },
     "usage": {
       "title": "How We Use Information",
       "intro": "We use the information we collect to:",
-      "provide": "Provide, maintain, and improve our Platform and services.",
-      "process": "Process your transactions and send you related information, including confirmations and invoices.",
-      "send": "Send you technical notices, updates, security alerts, and support and administrative messages.",
-      "respond": "Respond to your comments, questions, and requests."
+      "provide": "Provide our software development services and deliver project updates.",
+      "process": "Process payments and send invoices or contracts.",
+      "send": "Send you technical notices, updates about our services, and respond to your inquiries.",
+      "respond": "Communicate with you regarding your project or software solution requirements."
     },
     "sharing": {
       "title": "Information Sharing",
-      "content": "We do not share your personal information with third parties except as described in this policy or with your consent. We may share information with vendors, consultants, and other service providers who need access to such information to carry out work on our behalf."
+      "content": "We do not sell your personal information. We may share information with trusted third-party service providers who assist us in operating our website or conducting our business (e.g., hosting providers, payment processors), provided they agree to keep this information confidential."
     },
     "cookies": {
       "title": "Cookies & Tracking",
-      "intro": "We use cookies and similar tracking technologies to track the activity on our Platform and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.",
-      "instruction": "You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Platform."
+      "intro": "We use cookies to analyze website traffic and improve your browsing experience. These local files help us understand how potential clients interact with our site.",
+      "instruction": "You can choose to disable cookies through your browser settings, though this may affect some website functionality."
     },
     "security": {
       "title": "Data Security",
-      "content": "The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security."
+      "content": "We implement appropriate security measures to protect your personal and business information from unauthorized access, alteration, disclosure, or destruction. We treat all client project details with strict confidentiality."
     }
   }
 }

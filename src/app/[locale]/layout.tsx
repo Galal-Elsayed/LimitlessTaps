@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Cairo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { i18n } from "@/i18n.config";
@@ -12,6 +13,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["arabic", "latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +39,7 @@ export function generateStaticParams() {
 }
 
 async function loadMessages(locale: string | undefined) {
-  const resolvedLocale = i18n.locales.includes(locale as any)
+  const resolvedLocale = i18n.locales.includes(locale as (typeof i18n.locales)[number])
     ? (locale as (typeof i18n.locales)[number])
     : i18n.defaultLocale;
 
@@ -103,16 +110,18 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
   const messages = await loadMessages(locale);
-  const resolvedLocale = i18n.locales.includes(locale as any)
+  const resolvedLocale = i18n.locales.includes(locale as (typeof i18n.locales)[number])
     ? (locale as (typeof i18n.locales)[number])
     : i18n.defaultLocale;
   const isArabic = resolvedLocale === "ar";
 
   return (
-    <html lang={resolvedLocale} dir={isArabic ? "rtl" : "ltr"}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      lang={resolvedLocale}
+      dir={isArabic ? "rtl" : "ltr"}
+      className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable}`}
+    >
+      <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
           {children}
         </NextIntlClientProvider>

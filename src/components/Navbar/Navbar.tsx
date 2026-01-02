@@ -92,11 +92,13 @@ export default function Navbar() {
             key: 'en',
             title: 'English',
             locale: 'en' as const,
+            flag: 'https://flagcdn.com/w40/gb.png',
         },
         {
             key: 'ar',
             title: 'العربية',
             locale: 'ar' as const,
+            flag: 'https://flagcdn.com/w40/eg.png',
         },
     ];
 
@@ -173,7 +175,7 @@ export default function Navbar() {
                 {/* Wrapper for tight text fit */}
                 <div className="relative relative-inline-block">
                     {/* Base Text (Gray) */}
-                    <span className="block text-md font-medium capitalize tracking-wide text-gray-500 transition-colors duration-300">
+                    <span className="block text-lg font-medium capitalize tracking-wide text-gray-300 transition-colors duration-300">
                         {t(link.key)}
                     </span>
 
@@ -181,7 +183,7 @@ export default function Navbar() {
                     <span
                         className={`
                             absolute inset-0 flex items-center justify-center
-                            text-md font-medium capitalize tracking-wide 
+                            text-lg font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
                             ${active
@@ -208,13 +210,13 @@ export default function Navbar() {
         >
             <button className="flex items-center gap-1 focus:outline-none py-2 cursor-pointer">
                 <div className="relative relative-inline-block">
-                    <span className="block text-md font-medium capitalize tracking-wide text-gray-500">
+                    <span className="block text-lg font-medium capitalize tracking-wide text-gray-300">
                         {t('services')}
                     </span>
                     <span
                         className={`
                             absolute inset-0 flex items-center justify-center
-                            text-md font-medium capitalize tracking-wide 
+                            text-lg font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-300 ease-out
                         `}
@@ -234,7 +236,7 @@ export default function Navbar() {
                         w-4 h-4 transition-all duration-300 ease-out
                         ${servicesGlowActive
                             ? 'rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]'
-                            : 'text-gray-500'
+                            : 'text-gray-300'
                         }
                     `}
                 />
@@ -253,7 +255,10 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}>
+            <nav 
+                className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}
+                style={{ fontFamily: 'var(--font-cairo)' }}
+            >
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
                     {/* Logo */}
                     <div
@@ -305,7 +310,7 @@ export default function Navbar() {
                                     viewBox="0 0 640 640"
                                     className={`
                                         w-5 h-5 transition-all duration-300 ease-out
-                                        ${langGlowActive ? 'text-white' : 'text-gray-400'}
+                                        ${langGlowActive ? 'text-white' : 'text-gray-300'}
                                     `}
                                     style={{
                                         filter: langGlowActive ? 'drop-shadow(0 0 10px rgba(255,255,255,0.9))' : 'none',
@@ -316,7 +321,7 @@ export default function Navbar() {
                                 </svg>
 
                                 <div className="relative relative-inline-block">
-                                    <span className="block text-md font-medium tracking-wide text-gray-400 transition-colors duration-300">
+                                    <span className="block text-md font-medium tracking-wide text-gray-300 transition-colors duration-300">
                                         {t('language_selector')}
                                     </span>
                                     <span
@@ -339,7 +344,7 @@ export default function Navbar() {
                                 <ChevronDown
                                     className={`
                                         w-4 h-4 transition-all duration-300 ease-out
-                                        ${langGlowActive ? 'rotate-180 text-white' : 'text-gray-400'}
+                                        ${langGlowActive ? 'rotate-180 text-white' : 'text-gray-300'}
                                     `}
                                     style={{
                                         filter: langGlowActive ? 'drop-shadow(0 0 8px rgba(255,255,255,0.7))' : 'none',
@@ -379,11 +384,23 @@ export default function Navbar() {
                                                             router.replace(pathname, { locale: lang.locale });
                                                             setLangOpen(false);
                                                         }}
-                                                        className="group flex items-center justify-center rounded-lg p-3 hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+                                                        className="group flex items-center justify-center rounded-lg p-2 hover:bg-white/10 transition-colors duration-200 cursor-pointer w-full"
                                                     >
-                                                        <p className="block font-semibold text-sm text-gray-100 group-hover:text-white transition-colors">
-                                                            {lang.title}
-                                                        </p>
+                                                        <div className="flex items-center gap-2">
+                                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                            <img 
+                                                                src={lang.flag} 
+                                                                alt={lang.title}
+                                                                className="w-5 h-5 rounded-full object-cover" 
+                                                            />
+                                                            <p
+                                                                lang={lang.locale}
+                                                                dir={lang.locale === "ar" ? "rtl" : "ltr"}
+                                                                className="block font-semibold text-md text-gray-100 group-hover:text-white transition-colors"
+                                                            >
+                                                                {lang.title}
+                                                            </p>
+                                                        </div>
                                                     </button>
                                                 ))}
                                             </div>
@@ -433,6 +450,7 @@ export default function Navbar() {
                                 shadow-2xl 
                                 overflow-y-auto flex flex-col
                             `}
+                            style={{ fontFamily: 'var(--font-cairo)' }}
                         >
                             <div className="flex flex-col h-full relative">
                                 {/* Header Area with Logo and Close Button - Matching Main Navbar Height (70px) */}
@@ -559,7 +577,17 @@ export default function Navbar() {
                                                     }
                                                 `}
                                             >
-                                                {lang.title}
+                                                <div className="flex items-center justify-center gap-2">
+                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                    <img 
+                                                        src={lang.flag} 
+                                                        alt={lang.title}
+                                                        className="w-4 h-4 rounded-full object-cover" 
+                                                    />
+                                                    <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>
+                                                        {lang.title}
+                                                    </span>
+                                                </div>
                                             </button>
                                         ))}
                                     </div>

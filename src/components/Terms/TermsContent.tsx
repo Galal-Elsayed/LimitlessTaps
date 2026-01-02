@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
-import {Scale, ChevronRight, ShieldCheck, ArrowRight, HelpCircle } from "lucide-react";
+import { Scale, ChevronRight, ShieldCheck, ArrowRight, HelpCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Separator } from "@/components/ui/separator";
 
 export default function TermsContent() {
   const t = useTranslations('terms');
@@ -73,6 +74,7 @@ export default function TermsContent() {
         const element = document.getElementById(section.id);
         if (element) {
           const elementTop = element.offsetTop;
+          // If we've scrolled past this section's top, mark it as current
           if (scrollPosition >= elementTop) {
             currentSection = section.id;
           }
@@ -103,7 +105,7 @@ export default function TermsContent() {
         }
       `}</style>
       {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-[450px] bg-[#0a0a0a] overflow-hidden flex items-center justify-center print:hidden">
+      <section className="relative h-[45vh] min-h-112.5 bg-[#0a0a0a] overflow-hidden flex items-center justify-center print:hidden">
         
 
         <div className="relative z-10 container mx-auto px-6 text-center text-white">
@@ -113,14 +115,14 @@ export default function TermsContent() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="flex justify-center mb-6">
-              <div className="p-3 bg-[#0a0a0a] rounded-full backdrop-blur-sm">
-                <Scale className="w-8 h-8 text-blue-200" />
+              <div className="p-3 rounded-full backdrop-blur-sm bg-white/10">
+                <Scale className="w-8 h-8 text-white/80" />
               </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-b from-white to-blue-200">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
               {t('hero.title')}
             </h1>
-            <p className="text-lg md:text-xl text-blue-200 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
               {t('hero.subtitle')}
             </p>
             <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 text-white text-sm backdrop-blur-sm uppercase font-medium tracking-wide">
@@ -135,8 +137,8 @@ export default function TermsContent() {
           {/* Sidebar Navigation - Sticky */}
           <div className="lg:w-1/4 hidden lg:block print:hidden">
             <div className="sticky top-28">
-              <div className="bg-[#364652] rounded-2xl shadow-xl shadow-blue-900/5 p-6 border border-gray-700">
-                <h3 className="text-xs font-bold text-gray-300 uppercase tracking-wider mb-6">{t('tableOfContents')}</h3>
+              <div className="bg-[#12141a] opacity-80 rounded-2xl shadow-xl shadow-blue-900/5 p-6 border-s border-[#1f232d]">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-6">{t('tableOfContents')}</h3>
                 <nav className="space-y-1">
                   {termsSections.map((section) => (
                     <button
@@ -144,8 +146,8 @@ export default function TermsContent() {
                       onClick={() => scrollToSection(section.id)}
                       className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 group cursor-pointer ${
                         activeSection === section.id
-                          ? "bg-[#0a0a0a] text-white shadow-sm"
-                          : "text-gray-300 hover:bg-[#0a0a0a] hover:text-white"
+                          ? "bg-white text-[#0a0a0a] shadow-sm"
+                          : "text-gray-100 hover:bg-white hover:text-[#0a0a0a]"
                       }`}
                     >
                       <span className="flex items-center gap-3">
@@ -160,7 +162,7 @@ export default function TermsContent() {
                 </nav>
 
                 <div className="mt-8 pt-6 border-t border-gray-700">
-                  <h3 className="text-xs font-bold text-gray-300 uppercase tracking-wider mb-4">{t('related')}</h3>
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">{t('related')}</h3>
                   <Link
                     href="/privacy"
                     className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl text-gray-300 hover:bg-[#0a0a0a] hover:text-white transition-all duration-200 group"
@@ -203,22 +205,20 @@ export default function TermsContent() {
 
           {/* Main Content */}
           <div className="lg:w-3/4 print:w-full">
-            <div className="bg-[#364652] rounded-3xl shadow-xl shadow-blue-900/5 border border-gray-700 overflow-hidden print:shadow-none print:border-none print:rounded-none">
+            <div className="bg-[#12141a] opacity-80 rounded-3xl shadow-xl shadow-blue-900/5 border border-[#1f232d] overflow-hidden print:shadow-none print:border-none print:rounded-none">
               {/* Print Header */}
               <div className="hidden print:flex flex-col items-center mb-4 pt-4">
                 <h1 className="text-2xl font-bold text-white mt-2">Limitless Taps</h1>
                 <h2 className="text-lg text-gray-300 mt-1">{t('hero.title')}</h2>
               </div>
 
-              {/* Document Header */}
-              <div className="bg-[#0a0a0a] border-b border-gray-700 p-6 md:p-8 flex items-center gap-4 print:hidden">
-                <div>
-                  <h2 className="text-xl font-bold text-white">{t('legalAgreement')}</h2>
-                  <p className="text-sm text-gray-300">{t('hero.lastUpdated')}: {t('hero.lastUpdatedDate')}</p>
-                </div>
-              </div>
-
               <div className="p-8 md:p-12 space-y-16 print:p-0 print:space-y-4">
+                {/* Last Updated */}
+                <div className="flex items-center gap-2 text-sm text-[#0a0a0a] mb-8 bg-white w-fit px-4 py-2 rounded-full">
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                  {t('hero.lastUpdated')}: {t('hero.lastUpdatedDate')}
+                </div>
+
                 {termsSections.map((section, index) => (
                   <motion.div
                     key={section.id}
@@ -229,63 +229,20 @@ export default function TermsContent() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="scroll-mt-32 group"
                   >
-                    <div className="flex gap-6 print:block">
-                      {/* Icon Column */}
-                      <div className="hidden md:flex flex-col items-center print:hidden">
-                        <div
-                          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                            activeSection === section.id
-                              ? "bg-[#0a0a0a] text-white shadow-lg shadow-gray-900/30 scale-110"
-                              : "bg-[#0a0a0a] text-gray-400 group-hover:bg-[#0a0a0a] group-hover:text-white"
-                          }`}
-                        >
-                          {section.icon}
-                        </div>
-                        {index !== termsSections.length - 1 && (
-                          <div className="w-0.5 flex-1 bg-gray-700 my-4 group-hover:bg-gray-600 transition-colors" />
-                        )}
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                        {section.icon}
                       </div>
-
-                      {/* Content Column */}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-4 md:hidden print:hidden">
-                          <span className="w-10 h-10 rounded-lg bg-[#0a0a0a] flex items-center justify-center text-white">
-                            {section.icon}
-                          </span>
-                          <h2 className="text-2xl font-bold text-white">{section.title.split(". ")[1]}</h2>
-                        </div>
-
-                        <h2 className="hidden md:block text-2xl font-bold text-white mb-6 group-hover:text-gray-200 transition-colors print:block print:text-black print:mb-2">
-                          <span className="print:hidden">{section.title.split(". ")[1]}</span>
-                          <span className="hidden print:inline">{section.title}</span>
-                        </h2>
-
-                        <div className="prose prose-lg prose-blue max-w-none text-white leading-relaxed bg-[#0a0a0a] p-6 rounded-2xl border border-gray-700 hover:border-gray-600 hover:bg-[#0a0a0a]/80 transition-all duration-300 print:bg-transparent print:p-0 print:border-none">
-                          {section.content}
-                        </div>
-                      </div>
+                      <h2 className="text-2xl font-bold text-white">{section.title}</h2>
                     </div>
+
+                    <div className="max-w-none leading-relaxed text-white/90">
+                      {section.content}
+                    </div>
+
+                    {index !== termsSections.length - 1 && <Separator className="my-12 bg-white/60" />}
                   </motion.div>
                 ))}
-              </div>
-
-              {/* Document Footer */}
-              <div className="bg-[#0a0a0a] border-t border-gray-700 p-8 text-center print:hidden">
-                <p className="text-gray-300 mb-4">{t('footer.agreement')}</p>
-                <div className="flex justify-center gap-4">
-                  <button
-                    onClick={() => window.print()}
-                    className="px-4 py-2 md:px-6 md:py-2 bg-[#364652] border border-gray-600 rounded-lg text-white hover:bg-[#0a0a0a] hover:text-white transition-colors text-xs md:text-sm font-medium shadow-sm cursor-pointer"
-                  >
-                    {t('footer.printTerms')}
-                  </button>
-                  <Link
-                    href="/contact"
-                    className="px-4 py-2 md:px-6 md:py-2 bg-[#364652] text-white rounded-lg hover:bg-[#0a0a0a] transition-colors text-xs md:text-sm font-medium shadow-lg shadow-gray-900/20"
-                  >
-                    {t('footer.contactLegal')}
-                  </Link>
-                </div>
               </div>
             </div>
           </div>

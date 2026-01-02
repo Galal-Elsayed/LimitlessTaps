@@ -93,11 +93,11 @@ export function NavDropdown({ isOpen, items, isRTL, onClose, className = '', ali
                                     )}
 
                                     <div className="flex-auto">
-                                        <p className="block font-semibold text-sm text-gray-100 group-hover:text-white transition-colors">
+                                        <p className="block font-semibold text-md text-gray-100 group-hover:text-white transition-colors">
                                             {link.title}
                                         </p>
                                         {link.description && (
-                                            <p className="mt-1 text-xs text-gray-400 group-hover:text-gray-300">
+                                            <p className="mt-1 text-sm text-gray-400 group-hover:text-gray-300">
                                                 {link.description}
                                             </p>
                                         )}
