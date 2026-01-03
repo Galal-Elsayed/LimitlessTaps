@@ -1,0 +1,89 @@
+{
+    "meta": {
+        "title": "من نحن",
+        "description": "تعرف على المزيد عن ليمتلس تابس ورسالتنا."
+    },
+    "hero": {
+        "headline": "ليمتلس تابس شريكك لبناء التميز الرقمي",
+        "subtitle": "تعرف على فريق تطوير البرمجيات الحديث. قم بتبسيط مشاريعك ومنتجاتك وخرائط الطريق الرقمية.",
+        "cta_primary": "ابدأ مشروعًا",
+        "cta_secondary": "اعرف المزيد عنا"
+    },
+    "dashboard": {
+        "sidebar": {
+            "brand": "ليمتلس",
+            "sections": {
+                "dashboard": "لوحة التحكم",
+                "management": "الإدارة"
+            },
+            "nav": {
+                "overview": "نظرة عامة",
+                "analytics": "التحليلات",
+                "reports": "التقارير",
+                "notifications": "الإشعارات",
+                "customers": "العملاء",
+                "products": "المنتجات",
+                "settings": "الإعدادات"
+            },
+            "user": {
+                "name": "المستخدم",
+                "role": "مسؤول"
+            }
+        },
+        "header": {
+            "search_placeholder": "بحث..."
+        },
+        "metrics": {
+            "total_revenue": "إجمالي الإيرادات",
+            "active_users": "المستخدمون النشطون",
+            "deployments": "عمليات النشر",
+            "active_sessions": "الجلسات النشطة",
+            "page_views": "مشاهدات الصفحة",
+            "bounce_rate": "معدل الارتداد",
+            "avg_duration": "متوسط المدة"
+        },
+        "charts": {
+            "overview_title": "نظرة عامة",
+            "recent_activity": "النشاط الأخير",
+            "commits_message": "قمت بـ 265 عملية إيداع هذا الشهر.",
+            "traffic_sources": "مصادر الزيارات"
+        },
+        "reports": {
+            "title": "التقارير المُنشأة",
+            "export_all": "تصدير الكل",
+            "columns": {
+                "report_name": "اسم التقرير",
+                "date_created": "تاريخ الإنشاء",
+                "type": "النوع",
+                "status": "الحالة"
+            }
+        },
+        "customers": {
+            "search_placeholder": "البحث عن العملاء...",
+            "filter": "تصفية",
+            "columns": {
+                "customer": "العميل",
+                "status": "الحالة",
+                "last_order": "آخر طلب",
+                "total_spent": "المبلغ الإجمالي"
+            }
+        },
+        "products": {
+            "product_label": "المنتج"
+        },
+        "settings": {
+            "title": "إعدادات الملف الشخصي",
+            "subtitle": "إدارة ملفك الشخصي العام وتفضيلاتك.",
+            "save_button": "حفظ التغييرات",
+            "fields": {
+                "username": "اسم المستخدم",
+                "email": "البريد الإلكتروني",
+                "bio": "السيرة الذاتية"
+            },
+            "bio_default": "نبني مستقبل البرمجيات مع ليمتلس تابس."
+        },
+        "notifications": {
+            "system_notification": "إشعار النظام"
+        }
+    }
+}

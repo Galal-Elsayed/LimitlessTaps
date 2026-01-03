@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Company | Limitless Taps",
+    title: "About-Us | Limitless Taps",
     description: "Learn about Limitless Taps - Your ultimate digital solutions partner.",
     openGraph: {
-        title: "Company | Limitless Taps",
+        title: "About-us | Limitless Taps",
         description: "Learn about Limitless Taps - Your ultimate digital solutions partner.",
         images: ["/Logo/black.png"],
     },

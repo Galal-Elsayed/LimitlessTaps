@@ -1,0 +1,89 @@
+{
+    "meta": {
+        "title": "About Us",
+        "description": "Learn more about Limitless Taps and our mission."
+    },
+    "hero": {
+        "headline": "Limitless Taps is your partner for building digital excellence",
+        "subtitle": "Meet the team for modern software development. Streamline your projects, products, and digital roadmaps.",
+        "cta_primary": "Start a project",
+        "cta_secondary": "Learn more about us"
+    },
+    "dashboard": {
+        "sidebar": {
+            "brand": "LIMITLESS",
+            "sections": {
+                "dashboard": "Dashboard",
+                "management": "Management"
+            },
+            "nav": {
+                "overview": "Overview",
+                "analytics": "Analytics",
+                "reports": "Reports",
+                "notifications": "Notifications",
+                "customers": "Customers",
+                "products": "Products",
+                "settings": "Settings"
+            },
+            "user": {
+                "name": "User",
+                "role": "Admin"
+            }
+        },
+        "header": {
+            "search_placeholder": "Search..."
+        },
+        "metrics": {
+            "total_revenue": "Total Revenue",
+            "active_users": "Active Users",
+            "deployments": "Deployments",
+            "active_sessions": "Active Sessions",
+            "page_views": "Page Views",
+            "bounce_rate": "Bounce Rate",
+            "avg_duration": "Avg. Duration"
+        },
+        "charts": {
+            "overview_title": "Overview",
+            "recent_activity": "Recent Activity",
+            "commits_message": "You made 265 commits this month.",
+            "traffic_sources": "Traffic Sources"
+        },
+        "reports": {
+            "title": "Generated Reports",
+            "export_all": "Export All",
+            "columns": {
+                "report_name": "Report Name",
+                "date_created": "Date Created",
+                "type": "Type",
+                "status": "Status"
+            }
+        },
+        "customers": {
+            "search_placeholder": "Search customers...",
+            "filter": "Filter",
+            "columns": {
+                "customer": "Customer",
+                "status": "Status",
+                "last_order": "Last Order",
+                "total_spent": "Total Spent"
+            }
+        },
+        "products": {
+            "product_label": "Product"
+        },
+        "settings": {
+            "title": "Profile Settings",
+            "subtitle": "Manage your public profile and preferences.",
+            "save_button": "Save Changes",
+            "fields": {
+                "username": "Username",
+                "email": "Email Address",
+                "bio": "Bio"
+            },
+            "bio_default": "Building the future of software with Limitless Taps."
+        },
+        "notifications": {
+            "system_notification": "System notification"
+        }
+    }
+}

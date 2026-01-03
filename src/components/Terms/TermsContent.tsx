@@ -106,7 +106,7 @@ export default function TermsContent() {
       `}</style>
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-112.5 bg-[#0a0a0a] overflow-hidden flex items-center justify-center print:hidden">
-        
+
 
         <div className="relative z-10 container mx-auto px-6 text-center text-white">
           <motion.div
@@ -144,11 +144,10 @@ export default function TermsContent() {
                     <button
                       key={section.id}
                       onClick={() => scrollToSection(section.id)}
-                      className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 group cursor-pointer ${
-                        activeSection === section.id
-                          ? "bg-white text-[#0a0a0a] shadow-sm"
-                          : "text-gray-100 hover:bg-white hover:text-[#0a0a0a]"
-                      }`}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 group cursor-pointer ${activeSection === section.id
+                        ? "bg-white text-[#0a0a0a] shadow-sm"
+                        : "text-gray-100 hover:bg-white hover:text-[#0a0a0a]"
+                        }`}
                     >
                       <span className="flex items-center gap-3">
                         {section.icon}

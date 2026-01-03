@@ -14,7 +14,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const common = (await import(`../../messages/${locale}/common.json`)).default;
   const navigation = (await import(`../../messages/${locale}/navigation.json`)).default;
   const home = (await import(`../../messages/${locale}/home.json`)).default;
-  const company = (await import(`../../messages/${locale}/company.json`)).default;
   const services = (await import(`../../messages/${locale}/services.json`)).default;
   const portfolio = (await import(`../../messages/${locale}/portfolio.json`)).default;
   const careers = (await import(`../../messages/${locale}/careers.json`)).default;
@@ -22,6 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const footer = (await import(`../../messages/${locale}/footer.json`)).default;
   const privacy = (await import(`../../messages/${locale}/privacy.json`)).default;
   const terms = (await import(`../../messages/${locale}/terms.json`)).default;
+  const aboutUs = (await import(`../../messages/${locale}/about-us.json`)).default;
 
   return {
     locale,
@@ -29,7 +29,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
       common,
       navigation,
       home,
-      company,
       services,
       portfolio,
       careers,
@@ -37,6 +36,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       footer,
       privacy,
       terms,
+      aboutUs,
     },
   };
 });
+
