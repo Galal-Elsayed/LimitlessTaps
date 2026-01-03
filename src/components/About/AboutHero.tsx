@@ -493,7 +493,7 @@ export default function AboutHero() {
                     <motion.button
                         whileHover={{ scale: 1.03, backgroundColor: "#FFFFFF" }}
                         whileTap={{ scale: 0.97 }}
-                        className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[#E6E6E6] text-[#08090A] font-medium text-sm sm:text-base shadow-lg shadow-white/5 transition-colors"
+                        className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[#E6E6E6] text-[#08090A] font-medium text-sm sm:text-base shadow-lg shadow-white/5 transition-colors hover:cursor-pointer"
                     >
                         {t("hero.cta_primary")}
                     </motion.button>
