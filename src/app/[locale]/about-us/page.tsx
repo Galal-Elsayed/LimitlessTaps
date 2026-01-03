@@ -6,6 +6,7 @@ export default function AboutUsPage() {
         <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
             <Navbar />
             <AboutHero />
+
         </div>
     );
 }

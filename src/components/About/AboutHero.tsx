@@ -23,7 +23,7 @@ import {
     MoreHorizontal,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 // --- Background Effects ---
 const StarField = React.memo(() => {
@@ -220,7 +220,7 @@ const SidebarItem = ({ active, icon: Icon, label, onClick }: SidebarItemProps) =
         variants={stickerVariants}
         onClick={onClick}
         className={cn(
-            "w-full flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 group relative",
+            "w-full flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 group relative cursor-pointer",
             active ? "text-[#ffffff] bg-[#ffffff]/10" : "text-[#8a8f98] hover:text-[#ffffff] hover:bg-[#ffffff]/5"
         )}
     >
@@ -273,6 +273,8 @@ const NotificationItem = ({ title, time, type, delay, systemText }: { title: str
 
 export default function AboutHero() {
     const t = useTranslations("aboutUs");
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
     const [isLoaded, setIsLoaded] = useState(false);
     const { scrollY } = useScroll();
     const [isMobile, setIsMobile] = useState(false);
@@ -320,9 +322,9 @@ export default function AboutHero() {
 
     // Shift X
     // Huge Desktop (>1600): Aggressive shift for "overflow" look
-    const xPosHuge = useTransform(constrainedScroll, [0, 600], [-50, -180]);
+    const xPosHuge = useTransform(constrainedScroll, [0, 600], isRTL ? [200, 180] : [-50, -180]);
     // Laptop (800-1600): Gentle shift to keep it centered/fitted
-    const xPosLaptop = useTransform(constrainedScroll, [0, 600], [0, -40]);
+    const xPosLaptop = useTransform(constrainedScroll, [0, 600], isRTL ? [100, -50] : [0, -40]);
     // Mobile (<800): No shift
     const xPosMobile = useTransform(constrainedScroll, [0, 600], [0, 0]);
 

@@ -11,7 +11,7 @@
     },
     "dashboard": {
         "sidebar": {
-            "brand": "LIMITLESS",
+            "brand": "Make your custom dashboard with Limitless",
             "sections": {
                 "dashboard": "Dashboard",
                 "management": "Management"
