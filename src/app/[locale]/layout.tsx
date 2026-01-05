@@ -51,7 +51,7 @@ async function loadMessages(locale: string | undefined) {
     const common = (await import(`../../../messages/${resolvedLocale}/common.json`)).default;
     const navigation = (await import(`../../../messages/${resolvedLocale}/navigation.json`)).default;
     const home = (await import(`../../../messages/${resolvedLocale}/home.json`)).default;
-    const company = (await import(`../../../messages/${resolvedLocale}/company.json`)).default;
+    const aboutUs = (await import(`../../../messages/${resolvedLocale}/about-us.json`)).default;
     const services = (await import(`../../../messages/${resolvedLocale}/services.json`)).default;
     const portfolio = (await import(`../../../messages/${resolvedLocale}/portfolio.json`)).default;
     const careers = (await import(`../../../messages/${resolvedLocale}/careers.json`)).default;
@@ -64,7 +64,7 @@ async function loadMessages(locale: string | undefined) {
       common,
       navigation,
       home,
-      company,
+      aboutUs,
       services,
       portfolio,
       careers,
@@ -79,7 +79,7 @@ async function loadMessages(locale: string | undefined) {
     const common = (await import(`../../../messages/en/common.json`)).default;
     const navigation = (await import(`../../../messages/en/navigation.json`)).default;
     const home = (await import(`../../../messages/en/home.json`)).default;
-    const company = (await import(`../../../messages/en/company.json`)).default;
+    const aboutUs = (await import(`../../../messages/en/about-us.json`)).default;
     const services = (await import(`../../../messages/en/services.json`)).default;
     const portfolio = (await import(`../../../messages/en/portfolio.json`)).default;
     const careers = (await import(`../../../messages/en/careers.json`)).default;
@@ -92,7 +92,7 @@ async function loadMessages(locale: string | undefined) {
       common,
       navigation,
       home,
-      company,
+      aboutUs,
       services,
       portfolio,
       careers,
