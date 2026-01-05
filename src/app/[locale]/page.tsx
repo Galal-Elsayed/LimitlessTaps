@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+
+
 import { GlobeSection } from "@/components/GlobeSection/GlobeSection";
 
 export default async function HomePage() {
@@ -11,7 +11,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
-      <Navbar />
+      
 
       <main className="p-8 max-w-[1400px] mx-auto">
         {/* Header */}
@@ -25,7 +25,7 @@ export default async function HomePage() {
 
 
 
-        <Footer />
+        
       </main>
     </div>
   );

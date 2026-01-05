@@ -7,89 +7,112 @@ import { motion } from "framer-motion";
 export function GlobeSection() {
     const t = useTranslations('home');
 
+    const markers: { location: [number, number]; size: number }[] = [
+        { location: [37.7595, -122.4367], size: 0.1 }, // SF
+        { location: [40.7128, -74.006], size: 0.1 },  // NY
+        { location: [51.5074, -0.1278], size: 0.1 },  // London
+        { location: [25.2048, 55.2708], size: 0.1 },   // Dubai
+        { location: [35.6895, 139.6917], size: 0.1 },  // Tokyo
+        { location: [48.8566, 2.3522], size: 0.1 },    // Paris
+        { location: [-33.8688, 151.2093], size: 0.1 }, // Sydney
+        { location: [-23.5505, -46.6333], size: 0.1 }, // Sao Paulo
+    ];
+
+    const arcs = [
+        { start: [37.7595, -122.4367], end: [40.7128, -74.006] },
+        { start: [40.7128, -74.006], end: [51.5074, -0.1278] },
+        { start: [51.5074, -0.1278], end: [48.8566, 2.3522] },
+        { start: [48.8566, 2.3522], end: [25.2048, 55.2708] },
+        { start: [25.2048, 55.2708], end: [35.6895, 139.6917] },
+        { start: [35.6895, 139.6917], end: [37.7595, -122.4367] },
+        { start: [37.7595, -122.4367], end: [-33.8688, 151.2093] },
+        { start: [-33.8688, 151.2093], end: [35.6895, 139.6917] },
+        { start: [25.2048, 55.2708], end: [-23.5505, -46.6333] },
+        { start: [-23.5505, -46.6333], end: [40.7128, -74.006] },
+    ];
+
     return (
-        <section className="relative w-full bg-[#0a0a0a] overflow-hidden py-12 md:py-24 px-6 md:px-8">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                {/* Left Side: Content */}
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="z-10 text-center lg:text-left order-2 lg:order-1"
-                >
-                    <span className="text-[#00d4ff] font-semibold tracking-wide uppercase text-xs md:text-sm mb-3 md:mb-4 block">
-                        {t('globe_label')}
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                        {t('globe_title')}
-                    </h2>
-                    <p className="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        {t('globe_description')}
-                    </p>
+        <section className="relative h-fit w-full overflow-hidden py-20 md:py-32">
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] -z-1 translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[150px] -z-1 -translate-x-1/2 translate-y-1/2" />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 text-left max-w-md mx-auto lg:mx-0">
-                        <div>
-                            <div className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t('stat_1_value')}</div>
-                            <div className="text-xs md:text-sm text-gray-500">{t('stat_1_label')}</div>
-                        </div>
-                        <div>
-                            <div className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t('stat_2_value')}</div>
-                            <div className="text-xs md:text-sm text-gray-500">{t('stat_2_label')}</div>
-                        </div>
-                        <div>
-                            <div className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t('stat_3_value')}</div>
-                            <div className="text-xs md:text-sm text-gray-500">{t('stat_3_label')}</div>
-                        </div>
-                        <div>
-                            <div className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t('stat_4_value')}</div>
-                            <div className="text-xs md:text-sm text-gray-500">{t('stat_4_label')}</div>
-                        </div>
-                    </div>
-                </motion.div>
+            <div className="max-w-[1400px] h-full mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    {/* Left Side: Content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true }}
+                        className="z-10 lg:col-span-6 px-6 lg:px-0"
+                    >
+                        <span className="text-[#00d4ff] font-bold tracking-wider uppercase text-xs md:text-sm mb-4 block">
+                            {t('globe_label')}
+                        </span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+                            {t('globe_title')}
+                        </h2>
+                        <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-xl leading-relaxed">
+                            {t('globe_description')}
+                        </p>
 
-                {/* Right Side: Globe Interaction */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1 }}
-                    viewport={{ once: true }}
-                    className="relative flex items-center justify-center h-[300px] sm:h-[450px] md:h-[600px] w-full order-1 lg:order-2"
-                >
-                    {/* Subtle Glow Background */}
-                    <div className="absolute inset-0 bg-blue-500/10 blur-[80px] md:blur-[120px] rounded-full scale-75 md:scale-100" />
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-white/10">
+                            <div>
+                                <div className="text-2xl font-bold text-white mb-1">{t('stat_1_value')}</div>
+                                <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">{t('stat_1_label')}</div>
+                            </div>
+                            <div>
+                                <div className="text-2xl font-bold text-white mb-1">{t('stat_2_value')}</div>
+                                <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">{t('stat_2_label')}</div>
+                            </div>
+                            <div>
+                                <div className="text-2xl font-bold text-white mb-1">{t('stat_3_value')}</div>
+                                <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">{t('stat_3_label')}</div>
+                            </div>
+                            <div>
+                                <div className="text-2xl font-bold text-white mb-1">{t('stat_4_value')}</div>
+                                <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">{t('stat_4_label')}</div>
+                            </div>
+                        </div>
+                    </motion.div>
 
-                    <Globe
-                        className="w-full h-full"
-                        config={{
-                            width: 600,
-                            height: 600,
-                            onRender: () => { },
-                            devicePixelRatio: 2,
-                            phi: 0,
-                            theta: 0.3,
-                            dark: 1,
-                            diffuse: 1.2,
-                            mapSamples: 16000,
-                            mapBrightness: 6,
-                            baseColor: [0.3, 0.3, 0.3],
-                            markerColor: [0.1, 0.8, 1],
-                            glowColor: [1, 1, 1],
-                            markers: [
-                                { location: [37.7595, -122.4367], size: 0.03 },
-                                { location: [40.7128, -74.006], size: 0.1 },
-                                { location: [51.5074, -0.1278], size: 0.05 },
-                                { location: [35.6895, 139.6917], size: 0.07 },
-                                { location: [25.2048, 55.2708], size: 0.05 },
-                            ],
-                        }}
-                    />
-                </motion.div>
+                    {/* Right Side: Globe Interaction */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                        viewport={{ once: true }}
+                        className="relative lg:col-span-6 flex items-center justify-center lg:justify-end h-[400px] md:h-[600px] lg:h-[800px] w-full"
+                    >
+                        {/* Globe Container with specific positioning to mimic Stripe */}
+                        <div className="absolute top-1/2 left-1/2 lg:left-full -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] lg:w-[1500px] lg:h-[1500px] pointer-events-none">
+                            <div className="w-full h-full pointer-events-auto">
+                                <Globe
+                                    className="w-full h-full"
+                                    config={{
+                                        width: 1500,
+                                        height: 1500,
+                                        onRender: () => { },
+                                        devicePixelRatio: 2,
+                                        phi: 0,
+                                        theta: 0.3,
+                                        dark: 1,
+                                        diffuse: 1.2,
+                                        mapSamples: 16000,
+                                        mapBrightness: 6,
+                                        baseColor: [0.05, 0.15, 0.3], // Navy base color
+                                        markerColor: [0.1, 0.8, 1],
+                                        glowColor: [0.1, 0.2, 0.4],
+                                        markers: markers,
+                                        arcs: arcs,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
-
-            {/* Ambient Background Elements */}
-            <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-600/5 blur-[100px] md:blur-[150px] -z-1" />
-            <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-purple-600/5 blur-[100px] md:blur-[150px] -z-1" />
         </section>
     );
 }

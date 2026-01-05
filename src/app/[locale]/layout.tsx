@@ -4,6 +4,9 @@ import { Cairo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { i18n } from "@/i18n.config";
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar/Navbar";
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -123,7 +126,10 @@ export default async function RootLayout({
     >
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
+          <Toaster position="top-center" expand={false} richColors />
+          <Navbar />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

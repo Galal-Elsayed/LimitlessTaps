@@ -33,9 +33,9 @@ export function Globe({
     config?: any;
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const pointerInteracting = useRef<number | null>(null);
-    const pointerInteractionStart = useRef<number | null>(null);
-    const rotationRef = useRef(0);
+    const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
+    const phiRef = useRef(0);
+    const thetaRef = useRef(config.theta || 0);
 
     useEffect(() => {
         let phi = 0;
@@ -57,10 +57,11 @@ export function Globe({
             width: width * 2,
             height: width * 2,
             onRender: (state) => {
-                if (pointerInteracting.current === null) {
+                if (!pointerInteracting.current) {
                     phi += 0.002;
                 }
-                state.phi = phi + rotationRef.current;
+                state.phi = phi + phiRef.current;
+                state.theta = thetaRef.current;
                 config.onRender(state);
             },
         });
@@ -85,8 +86,7 @@ export function Globe({
             <canvas
                 ref={canvasRef}
                 onPointerDown={(e) => {
-                    pointerInteractionStart.current = e.clientX;
-                    pointerInteracting.current = e.clientX;
+                    pointerInteracting.current = { x: e.clientX, y: e.clientY };
                     if (canvasRef.current) canvasRef.current.style.cursor = "grabbing";
                 }}
                 onPointerUp={() => {
@@ -98,10 +98,12 @@ export function Globe({
                     if (canvasRef.current) canvasRef.current.style.cursor = "grab";
                 }}
                 onPointerMove={(e) => {
-                    if (pointerInteracting.current !== null && pointerInteractionStart.current !== null) {
-                        const delta = e.clientX - pointerInteracting.current;
-                        pointerInteracting.current = e.clientX;
-                        rotationRef.current += delta / 200;
+                    if (pointerInteracting.current !== null) {
+                        const deltaX = e.clientX - pointerInteracting.current.x;
+                        const deltaY = e.clientY - pointerInteracting.current.y;
+                        pointerInteracting.current = { x: e.clientX, y: e.clientY };
+                        phiRef.current += deltaX / 200;
+                        thetaRef.current = Math.max(-0.8, Math.min(0.8, thetaRef.current + deltaY / 200));
                     }
                 }}
                 style={{
