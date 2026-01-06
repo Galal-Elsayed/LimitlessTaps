@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 
 import { GlobeSection } from "@/components/GlobeSection/GlobeSection";
 
+import LottieDisplay from "@/components/shared/LottieDisplay";
+
 export default async function HomePage() {
   const t = await getTranslations('home');
   const tFooter = await getTranslations('footer');
@@ -20,10 +22,7 @@ export default async function HomePage() {
 
         </header>
 
-        
-
-
-
+        <LottieDisplay />
         
       </main>
     </div>

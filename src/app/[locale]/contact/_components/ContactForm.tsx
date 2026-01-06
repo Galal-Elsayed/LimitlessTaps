@@ -6,6 +6,7 @@ import { Infinity } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import animation1 from '../../../../../public/Lottie/Animation_2.json';
 import {
     Select,
     SelectContent,
@@ -13,6 +14,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import Lottie from 'lottie-react';
 
 export default function ContactForm() {
     const t = useTranslations('contact');
@@ -162,16 +164,27 @@ export default function ContactForm() {
                             group
                         `}
                     >
-                        <span className="text-sm font-bold uppercase tracking-widest text-white flex items-center gap-3">
+                        <span className="text-sm relative font-bold uppercase tracking-widest text-white flex items-center gap-3">
                             {isSubmitting ? (
                                 <>
-                                    
-                                    {t('form.sending')} <Infinity className="w-5 h-5 scale-120 animate-spin  group-hover:-rotate-180 transition-all duration-300 text-cyan-500" />
+                                    {t('form.sending')} 
+                                    <Lottie 
+                                        animationData={animation1} 
+                                        loop={true}
+                                        className="w-10 h-10 transition-all duration-300"
+                                    />
                                 </>
                             ) : (
                                 <>
                                     {t('form.submit')}
-                                    <Infinity className="w-5 h-5 group-hover:scale-120 group-hover:-rotate-180 transition-all duration-300 group-hover:text-cyan-500" />
+                                    <div className='h-15  absolute -end-15 ' >
+
+                                    <Lottie 
+                                        animationData={animation1} 
+                                        loop={true}
+                                       className='h-full'
+                                    />
+                                    </div>
                                 </>
                             )}
                         </span>
