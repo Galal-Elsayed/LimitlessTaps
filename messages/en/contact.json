@@ -1,4 +1,83 @@
 {
     "title": "Contact Us",
-    "description": "Get in touch with our team."
+    "description": "Get in touch with our team.",
+    "hero": {
+        "title": "Let's build the <br/> <gradient>, future together.</gradient>",
+        "subtitle": "Have a vision? We have the tools. Get in touch and let's start something extraordinary."
+    },
+    "form": {
+        "title": "Send us a Message",
+        "name": {
+            "label": "Full Name",
+            "hint": "Enter full name"
+        },
+        "email": {
+            "label": "Email Address",
+            "hint": "We'll reply here"
+        },
+        "subject": {
+            "label": "Subject",
+            "hint": "Choose a topic",
+            "placeholder": "INQUIRY",
+            "options": {
+                "general": "General Inquiry",
+                "project": "Project Proposal",
+                "support": "Technical Support",
+                "feedback": "Feedback"
+            }
+        },
+        "message": {
+            "label": "Message",
+            "hint": "Write details here"
+        },
+        "submit": "SEND MESSAGE",
+        "sending": "Sending...",
+        "success": "Message sent successfully! We'll get back to you soon.",
+        "error": "Failed to send message. Please try again later.",
+        "connectionError": "An error occurred. Please check your connection."
+    },
+    "grid": {
+        "whatsApp": {
+            "description": "Direct Chat"
+        },
+        "separator": "Contact Channels",
+        "inquiries": {
+            "title": "Inquiries"
+        },
+        "proposals": {
+            "title": "Project Proposals"
+        }
+    },
+    "faq": {
+        "badge": "FAQ",
+        "title": "Common Questions & Answers",
+        "description": "Find out all the essential details about our platform and how it can serve your needs.",
+        "sidebar": {
+            "title": "Need Help?",
+            "subtitle": "We're here to assist.",
+            "description": "Still have questions? Feel free to contact our friendly <supportTeam>support team</supportTeam> specialists."
+        },
+        "items": [
+            {
+                "question": "What services do you offer?",
+                "answer": "We provide a full range of software solutions, including custom web development, mobile app development (iOS & Android), cloud infrastructure, and AI-driven business automation."
+            },
+            {
+                "question": "How long does a typical project take?",
+                "answer": "Project timelines vary depending on complexity. A standard MVP (Minimum Viable Product) usually takes 6-12 weeks, while more complex enterprise solutions can take 4-6 months."
+            },
+            {
+                "question": "Do you provide ongoing support after launch?",
+                "answer": "Yes, we offer flexible maintenance and support plans to ensure your software remains secure, up-to-date, and performs optimally as your business grows."
+            },
+            {
+                "question": "How do you handle project pricing?",
+                "answer": "We offer both fixed-price contracts for well-defined projects and hourly/retainer models for agile development where requirements may evolve."
+            },
+            {
+                "question": "Can you work with our existing internal team?",
+                "answer": "Absolutely! We often collaborate with internal technical teams to provide specialized expertise or extra development capacity to meet tight deadlines."
+            }
+        ]
+    }
 }

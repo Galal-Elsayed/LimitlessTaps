@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import {
     Linkedin,
     Instagram,
     Mail,
     ExternalLink,
-    LifeBuoy,
     Facebook
 } from 'lucide-react';
 
@@ -64,6 +64,8 @@ const ContactCard = ({ icon, title, description, href, color, iconColor, delay, 
 );
 
 export default function ContactGrid() {
+    const t = useTranslations('contact');
+
     const mainCards = [
         {
             icon: <Linkedin />,
@@ -86,18 +88,11 @@ export default function ContactGrid() {
             color: "from-blue-500/50 to-blue-700/50",
             iconColor: "text-[#1877f2]",
         },
-        {
-            icon: <LifeBuoy />,
-            title: "Developer Support",
-            description: "support@limitlesstaps.com",
-            href: "mailto:support@limitlesstaps.com",
-            color: "from-cyan-500/50 to-blue-500/50",
-            iconColor: "text-[#00d4ff]",
-        },
+
         {
             icon: <WhatsAppSVG />,
             title: "WhatsApp",
-            description: "Direct Chat",
+            description: t('grid.whatsApp.description'),
             href: "https://wa.me/yournumber",
             color: "from-green-500/50 to-green-700/50",
             iconColor: "text-[#25d366]",
@@ -107,19 +102,19 @@ export default function ContactGrid() {
     const emailSection = [
         {
             icon: <Mail />,
-            title: "Inquiries",
-            description: "hello@limitlesstaps.com",
-            href: "mailto:hello@limitlesstaps.com",
-            color: "from-purple-500/50 to-indigo-500/50",
-            iconColor: "text-[#a855f7]",
+            title: t('grid.proposals.title'),
+            description: "info@limitlesstaps.com",
+            href: "mailto:info@limitlesstaps.com",
+            color: "from-orange-500/50 to-amber-500/50",
+            iconColor: "text-[#f59e0b]",
         },
         {
             icon: <Mail />,
-            title: "Project Proposals",
-            description: "sales@limitlesstaps.com",
-            href: "mailto:sales@limitlesstaps.com",
-            color: "from-orange-500/50 to-amber-500/50",
-            iconColor: "text-[#f59e0b]",
+            title: t('grid.inquiries.title'),
+            description: "support@limitlesstaps.com",
+            href: "mailto:support@limitlesstaps.com",
+            color: "from-purple-500/50 to-indigo-500/50",
+            iconColor: "text-[#a855f7]",
         }
     ];
 
@@ -148,7 +143,7 @@ export default function ContactGrid() {
             <div className="relative ">
                 <div className="absolute inset-x-0 top-1/2 h-px bg-white/10" />
                 <div className="relative flex justify-center">
-                    <span className="bg-[#0a0a0a] px-4 text-[10px] font-bold uppercase tracking-widest text-gray-500">Contact Channels</span>
+                    <span className="bg-[#0a0a0a] px-4 text-[10px] font-bold uppercase tracking-widest text-gray-500">{t('grid.separator')}</span>
                 </div>
             </div>
 
@@ -163,3 +158,4 @@ export default function ContactGrid() {
         </div>
     );
 }
+

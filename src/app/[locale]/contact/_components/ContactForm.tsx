@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Loader2, SendHorizontal } from 'lucide-react';
+import { Infinity } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import animation1 from '../../../../../public/Lottie/Animation_2.json';
 import {
     Select,
     SelectContent,
@@ -12,8 +14,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import Lottie from 'lottie-react';
 
 export default function ContactForm() {
+    const t = useTranslations('contact');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [message, setMessage] = useState("");
     const [subject, setSubject] = useState("");
@@ -39,15 +43,15 @@ export default function ContactForm() {
             });
 
             if (response.ok) {
-                toast.success("Message sent successfully! We'll get back to you soon.", {
+                toast.success(t('form.success'), {
                     duration: 4000,
                 });
                 router.push('/');
             } else {
-                toast.error("Failed to send message. Please try again later.");
+                toast.error(t('form.error'));
             }
         } catch (error) {
-            toast.error("An error occurred. Please check your connection.");
+            toast.error(t('form.connectionError'));
         } finally {
             setIsSubmitting(false);
         }
@@ -60,15 +64,15 @@ export default function ContactForm() {
             transition={{ duration: 0.6 }}
             className="w-full h-full p-8 rounded-[2rem] bg-[#101217]/5 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col text-white"
         >
-            <h2 className="text-3xl font-bold mb-8 text-white">Send us a Message</h2>
+            <h2 className="text-3xl font-bold mb-8 text-white">{t('form.title')}</h2>
 
             <form className="space-y-6 flex-1 flex flex-col" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Name Field */}
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                            <label htmlFor="name" className="text-sm font-bold text-gray-300">Full Name</label>
-                            <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">Enter full name</span>
+                            <label htmlFor="name" className="text-sm font-bold text-gray-300">{t('form.name.label')}</label>
+                            <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">{t('form.name.hint')}</span>
                         </div>
                         <input
                             type="text"
@@ -84,8 +88,8 @@ export default function ContactForm() {
                     {/* Email Field */}
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                            <label htmlFor="email" className="text-sm font-bold text-gray-300">Email Address</label>
-                            <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">We'll reply here</span>
+                            <label htmlFor="email" className="text-sm font-bold text-gray-300">{t('form.email.label')}</label>
+                            <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">{t('form.email.hint')}</span>
                         </div>
                         <input
                             type="email"
@@ -102,18 +106,18 @@ export default function ContactForm() {
                 {/* Subject Field */}
                 <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                        <label className="text-sm font-bold text-gray-300">Subject</label>
-                        <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">Choose a topic</span>
+                        <label className="text-sm font-bold text-gray-300">{t('form.subject.label')}</label>
+                        <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">{t('form.subject.hint')}</span>
                     </div>
                     <Select onValueChange={setSubject} required disabled={isSubmitting}>
                         <SelectTrigger className="w-full h-14 rounded-2xl border-white/10 bg-white/5 text-white focus:ring-white/20 uppercase font-bold tracking-tight">
-                            <SelectValue placeholder="INQUIRY" />
+                            <SelectValue placeholder={t('form.subject.placeholder')} />
                         </SelectTrigger>
                         <SelectContent className="bg-[#101217] border-white/10 text-white rounded-2xl">
-                            <SelectItem value="general">General Inquiry</SelectItem>
-                            <SelectItem value="project">Project Proposal</SelectItem>
-                            <SelectItem value="support">Technical Support</SelectItem>
-                            <SelectItem value="feedback">Feedback</SelectItem>
+                            <SelectItem value="general">{t('form.subject.options.general')}</SelectItem>
+                            <SelectItem value="project">{t('form.subject.options.project')}</SelectItem>
+                            <SelectItem value="support">{t('form.subject.options.support')}</SelectItem>
+                            <SelectItem value="feedback">{t('form.subject.options.feedback')}</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -121,8 +125,8 @@ export default function ContactForm() {
                 {/* Message Field */}
                 <div className="space-y-2 flex-1 flex flex-col">
                     <div className="flex justify-between items-center">
-                        <label htmlFor="message" className="text-sm font-bold text-gray-300">Message</label>
-                        <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">Write details here</span>
+                        <label htmlFor="message" className="text-sm font-bold text-gray-300">{t('form.message.label')}</label>
+                        <span className="text-[10px] bg-white/5 text-gray-500 px-3 py-1 rounded-full font-medium border border-white/5">{t('form.message.hint')}</span>
                     </div>
                     <div className="relative flex-1 flex flex-col">
                         <textarea
@@ -160,16 +164,27 @@ export default function ContactForm() {
                             group
                         `}
                     >
-                        <span className="text-sm font-bold uppercase tracking-widest text-white flex items-center gap-3">
+                        <span className="text-sm relative font-bold uppercase tracking-widest text-white flex items-center gap-3">
                             {isSubmitting ? (
                                 <>
-                                    <Loader2 className="w-5 h-5 animate-spin" />
-                                    Sending...
+                                    {t('form.sending')} 
+                                    <Lottie 
+                                        animationData={animation1} 
+                                        loop={true}
+                                        className="w-10 h-10 transition-all duration-300"
+                                    />
                                 </>
                             ) : (
                                 <>
-                                    SEND MESSAGE
-                                    <SendHorizontal className="w-5 h-5 group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:-rotate-30 transition-all duration-300" />
+                                    {t('form.submit')}
+                                    <div className='h-15  absolute -end-15 ' >
+
+                                    <Lottie 
+                                        animationData={animation1} 
+                                        loop={true}
+                                       className='h-full'
+                                    />
+                                    </div>
                                 </>
                             )}
                         </span>

@@ -10,7 +10,7 @@ import ContactGrid from "@/app/[locale]/contact/_components/ContactGrid";
 import FAQ from "@/app/[locale]/contact/_components/FAQ";
 
 export default function ContactPage() {
-    const t = useTranslations('home');
+    const t = useTranslations('contact');
 
     const markers: { location: [number, number]; size: number }[] = [
         { location: [37.7595, -122.4367], size: 0.1 },
@@ -67,19 +67,20 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                     {/* Left Side: Header & Info */}
                     <motion.div
+                        id="hero"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         className='col-span-1 lg:col-span-2'
                     >
-                        <h1 className="text-4xl flex  font-bold tracking-tight mb-3">
-                            Let&apos;s build the <br />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-[#00d4ff]">
-                                , future together.
-                            </span>
+                        <h1 className="text-4xl flex font-bold tracking-tight mb-3">
+                            {t.rich('hero.title', {
+                                br: () => <br />,
+                                gradient: (chunks) => <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-[#00d4ff]">{chunks}</span>
+                            })}
                         </h1>
-                        <p className="text-xl text-gray-400  ">
-                            Have a vision? We have the tools. Get in touch and let&apos;s start something extraordinary.
+                        <p className="text-xl text-gray-400">
+                            {t('hero.subtitle')}
                         </p>
                     </motion.div>
                     {/* Left Side: Contact Form */}
