@@ -20,8 +20,7 @@ export default async function HomePage() {
 
         </header>
 
-        {/* Globe Section */}
-        <GlobeSection />
+        
 
 
 
