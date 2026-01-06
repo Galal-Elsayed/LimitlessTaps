@@ -127,7 +127,10 @@ export default async function RootLayout({
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
           <Toaster position="top-center" expand={false} richColors />
-          <Navbar />
+          <div className="pt-18">
+            <Navbar />
+
+          </div>
           {children}
           <Footer />
         </NextIntlClientProvider>

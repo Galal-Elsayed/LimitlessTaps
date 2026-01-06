@@ -15,5 +15,7 @@ export default function PortfolioLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return <>{children}</>;
+    return <>
+
+        {children}</>;
 }

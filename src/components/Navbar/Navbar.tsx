@@ -255,8 +255,8 @@ export default function Navbar() {
 
     return (
         <>
-            <nav 
-                className={`sticky top-0 z-50 bg-[#0a0a0a] px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''}`}
+            <nav
+                className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''} bg-[#0a0a0a]`}
                 style={{ fontFamily: 'var(--font-cairo)' }}
             >
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
@@ -268,7 +268,7 @@ export default function Navbar() {
                         {/* Desktop Logo (GIF) */}
                         <div className="hidden min-[900px]:block">
                             <Image
-                                src="/Logo/Main-Logo-Interactive.gif"
+                                src="/Logo/Main-Logo-Opt.gif"
                                 alt="Limitless Taps"
                                 width={180}
                                 height={80}
@@ -388,10 +388,10 @@ export default function Navbar() {
                                                     >
                                                         <div className="flex items-center gap-2">
                                                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                            <img 
-                                                                src={lang.flag} 
+                                                            <img
+                                                                src={lang.flag}
                                                                 alt={lang.title}
-                                                                className="w-5 h-5 rounded-full object-cover" 
+                                                                className="w-5 h-5 rounded-full object-cover"
                                                             />
                                                             <p
                                                                 lang={lang.locale}
@@ -579,10 +579,10 @@ export default function Navbar() {
                                             >
                                                 <div className="flex items-center justify-center gap-2">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                    <img 
-                                                        src={lang.flag} 
+                                                    <img
+                                                        src={lang.flag}
                                                         alt={lang.title}
-                                                        className="w-4 h-4 rounded-full object-cover" 
+                                                        className="w-4 h-4 rounded-full object-cover"
                                                     />
                                                     <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>
                                                         {lang.title}

@@ -1,12 +1,17 @@
 import Navbar from "@/components/Navbar/Navbar";
 import AboutHero from '@/components/About/AboutHero';
+import AboutCards from "@/components/About/AboutCards";
+import AboutSlider from "@/components/About/AboutSlider";
+import AboutTap from "@/components/About/AboutTap";
 
-export default function AboutUsPage() {
+export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+        <main className="w-full bg-black min-h-screen">
             <Navbar />
             <AboutHero />
-
-        </div>
+            <AboutCards />
+            <AboutSlider />
+            <AboutTap />
+        </main>
     );
 }

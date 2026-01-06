@@ -38,6 +38,11 @@ label {
   font-family: inherit;
 }
 
+button,
+Link {
+  cursor: pointer;
+}
+
 
 /* List styling with colored bullets */
 

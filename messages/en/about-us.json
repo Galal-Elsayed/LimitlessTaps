@@ -9,6 +9,77 @@
         "cta_primary": "Start a project",
         "cta_secondary": "Learn more about us"
     },
+    "slider": {
+        "headline": "Expertise Across Every Ecosystem",
+        "column1": "We master the world's leading platforms. Whether launching on <strong>Shopify, Salla, or WooCommerce</strong>, or optimizing enterprise ERPs like <strong>Odoo</strong>, we leverage established ecosystems to deliver rapid, robust results.",
+        "column2": "When off-the-shelf isn't enough, we build bespoke. Our engineers craft high-performance custom applications using industry giants like <strong>Next.js, Spring Boot, and Oracle</strong>, ensuring your unique vision has no technical limits."
+    },
+    "tap": {
+        "header_left": "IT ALL",
+        "header_left_line2": "STARTS",
+        "header_center": "WITH",
+        "header_right": "ONE",
+        "header_right_line2": "TAP",
+        "cta": "Start a Project",
+        "form": {
+            "title": "Start a Project",
+            "email_label": "Email",
+            "email_value": "hello@limitlesstaps.com",
+            "message_label": "Message",
+            "typed_message": "I want to start a project,\nlet's set up a meeting",
+            "send_button": "Send Message"
+        },
+        "success": {
+            "title": "Sent!",
+            "subtitle": "We'll be in touch soon."
+        }
+    },
+    "cards": {
+        "section_title": "Our <gradient>Expertise</gradient>",
+        "section_subtitle": "We blend creativity with technical excellence to build digital products that define the future.",
+        "services": {
+            "custom": {
+                "title": "Custom Solutions",
+                "description": "Bespoke engineering for complex business challenges. We build scalable, high-performance software architectures.",
+                "cta": "Start Project",
+                "details_heading": "Tailored Engineering",
+                "details_content": "Limitless Taps delivers custom software that drives innovation. We move beyond templates to engineer systems that perfectly fit your operational needs.",
+                "features": [
+                    "Microservices & API Development",
+                    "Legacy System Modernization",
+                    "High-Load Handling (1M+ Users)"
+                ]
+            },
+            "mobile": {
+                "title": "Mobile Innovation",
+                "description": "Defining the mobile future with intuitive iOS and Android applications that captivate and convert.",
+                "cta": "Build App",
+                "details_heading": "Mobile-First Experiences",
+                "details_content": "Your users live on mobile. We build native-quality experiences using React Native and Flutter that feel fluid, responsive, and alive.",
+                "features": [
+                    "Consumer & Enterprise Apps",
+                    "Offline-First Architecture",
+                    "Advanced Animations & Gestures"
+                ]
+            },
+            "cloud": {
+                "title": "Enterprise Cloud",
+                "description": "Secure, global infrastructure solutions that ensure your business is always online and ready to scale.",
+                "cta": "Scale Now",
+                "details_heading": "Global Infrastructure",
+                "details_content": "We deploy robust cloud environments on AWS, Azure, and GCP. Security and scalability are baked in from day one.",
+                "features": [
+                    "Cloud Migration Strategy",
+                    "DevOps & CI/CD Pipelines",
+                    "SOC2 / GDPR Compliance"
+                ]
+            }
+        },
+        "modal": {
+            "close": "Close",
+            "inquire": "Inquire Now"
+        }
+    },
     "dashboard": {
         "sidebar": {
             "brand": "Make your custom dashboard with Limitless",
