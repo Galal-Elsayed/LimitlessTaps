@@ -238,7 +238,7 @@ export default function AboutTap() {
                     - translate-x-[17.5rem] (~280px or 70 units)
                     - Matches user-specified position (finger on button)
                 */}
-                <div className="relative w-[80vw] max-w-[400px] md:w-[500px] h-[80vw] max-h-[400px] md:h-[500px] translate-y-[2%] translate-x-[20%] md:translate-y-1 md:translate-x-[17.5rem] [mask-image:linear-gradient(to_top,transparent,black_40%)]">
+                <div className="relative w-[80vw] max-w-[400px] md:w-[500px] h-[80vw] max-h-[400px] md:h-[500px] translate-y-[22%] translate-x-[70%] md:translate-y-0 md:translate-x-[17.5rem] [mask-image:linear-gradient(to_top,transparent,black_40%)]">
                     <Image
                         src="/About/hand-tap.png"
                         alt="Hand Holding Phone"
