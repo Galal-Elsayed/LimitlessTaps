@@ -11,8 +11,8 @@
     },
     "slider": {
         "headline": "Expertise Across Every Ecosystem",
-        "column1": "We master the world's leading platforms. Whether launching on <strong>Shopify, Salla, or WooCommerce</strong>, or optimizing enterprise ERPs like <strong>Odoo</strong>, we leverage established ecosystems to deliver rapid, robust results.",
-        "column2": "When off-the-shelf isn't enough, we build bespoke. Our engineers craft high-performance custom applications using industry giants like <strong>Next.js, Spring Boot, and Oracle</strong>, ensuring your unique vision has no technical limits."
+        "column1": "We master the <strong>world's leading platforms</strong>. Whether launching on <strong>Shopify, Salla, or WooCommerce</strong>, or optimizing enterprise ERPs like <strong>Odoo</strong>, we leverage <strong>established ecosystems</strong> to deliver <strong>rapid, robust results</strong>.",
+        "column2": "When off-the-shelf isn't enough, we <strong>build bespoke</strong>. Our engineers craft <strong>high-performance custom applications</strong> using industry giants like <strong>Next.js, Spring Boot, and Oracle</strong>, ensuring your <strong>unique vision</strong> has <strong>no technical limits</strong>."
     },
     "tap": {
         "header_left": "IT ALL",

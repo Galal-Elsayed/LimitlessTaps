@@ -57,7 +57,7 @@ export default function AboutSlider() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                        className="text-neutral-500 text-lg md:text-xl font-medium leading-relaxed"
+                        className="text-neutral-500 text-lg md:text-xl font-medium leading-relaxed [&_strong]:text-white [&_strong]:font-semibold"
                     >
                         <p dangerouslySetInnerHTML={{ __html: t.raw("slider.column1") }} />
                     </motion.div>
@@ -68,7 +68,7 @@ export default function AboutSlider() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                        className="text-neutral-500 text-lg md:text-xl font-medium leading-relaxed"
+                        className="text-neutral-500 text-lg md:text-xl font-medium leading-relaxed [&_strong]:text-white [&_strong]:font-semibold"
                     >
                         <p dangerouslySetInnerHTML={{ __html: t.raw("slider.column2") }} />
                     </motion.div>

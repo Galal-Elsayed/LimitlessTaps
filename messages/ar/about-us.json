@@ -11,8 +11,8 @@
     },
     "slider": {
         "headline": "خبرة عبر كل الأنظمة",
-        "column1": "نتقن المنصات الرائدة عالميًا. سواء كنت تطلق على <strong>Shopify أو Salla أو WooCommerce</strong>، أو تحسّن أنظمة ERP المؤسسية مثل <strong>Odoo</strong>، نستفيد من الأنظمة الراسخة لتقديم نتائج سريعة ومتينة.",
-        "column2": "عندما لا تكفي الحلول الجاهزة، نبني حلولًا مخصصة. يصنع مهندسونا تطبيقات عالية الأداء باستخدام عمالقة الصناعة مثل <strong>Next.js وSpring Boot وOracle</strong>، لضمان أن رؤيتك الفريدة ليس لها حدود تقنية."
+        "column1": "نتقن <strong>المنصات الرائدة عالميًا</strong>. سواء كنت تطلق على <strong>Shopify أو Salla أو WooCommerce</strong>، أو تحسّن أنظمة ERP المؤسسية مثل <strong>Odoo</strong>، نستفيد من <strong>الأنظمة الراسخة</strong> لتقديم <strong>نتائج سريعة ومتينة</strong>.",
+        "column2": "عندما لا تكفي الحلول الجاهزة، <strong>نبني حلولًا مخصصة</strong>. يصنع مهندسونا <strong>تطبيقات عالية الأداء</strong> باستخدام عمالقة الصناعة مثل <strong>Next.js وSpring Boot وOracle</strong>، لضمان أن <strong>رؤيتك الفريدة</strong> ليس لها <strong>حدود تقنية</strong>."
     },
     "tap": {
         "header_left": "كل شيء",
