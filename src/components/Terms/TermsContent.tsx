@@ -91,7 +91,7 @@ export default function TermsContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(to_bottom,black,#0a0a0a,black)] print:bg-white">
+    <div className="min-h-screen bg-[#0a0a0a] print:bg-white">
       <style jsx global>{`
         @media print {
           @page {
@@ -105,9 +105,7 @@ export default function TermsContent() {
         }
       `}</style>
       {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-112.5 bg-black overflow-hidden flex items-center justify-center print:hidden">
-        {/* Smooth Radial Glow Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0a0a0a_0%,black_70%)] pointer-events-none" />
+      <section className="relative h-[40vh] min-h-100 bg-[#0a0a0a] overflow-hidden flex items-center justify-center print:hidden">
 
 
         <div className="relative z-10 container mx-auto px-6 text-center text-white">
@@ -134,7 +132,7 @@ export default function TermsContent() {
         </div>
       </section>
 
-      <div className="container mx-auto px-6 py-16 relative z-20 -mt-24 print:mt-0 print:pt-0 print:px-0">
+      <div className="container mx-auto px-6 py-16 relative z-20 -mt-20 print:mt-0 print:pt-0 print:px-0">
         <div className="flex flex-col lg:flex-row gap-12 print:block">
           {/* Sidebar Navigation - Sticky */}
           <div className="lg:w-1/4 hidden lg:block print:hidden">

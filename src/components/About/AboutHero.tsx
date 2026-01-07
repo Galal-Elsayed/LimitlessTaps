@@ -364,13 +364,13 @@ export default function AboutHero() {
     }), []);
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-black flex flex-col items-center">
+        <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-black to-black flex flex-col items-center">
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 {!isMobile && <StarField />}
                 <div className="absolute top-[13%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[99vw] h-[300px] sm:h-[400px] md:h-[500px] pointer-events-none z-0 opacity-60">
                     {/* Intense Center Glow Background */}
-                    <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[200px] sm:h-[300px] bg-[#8a8f98]/15 blur-[80px] sm:blur-[120px] rounded-full animate-pulse" />
+                    <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[200px] sm:h-[300px] bg-white/10 blur-[80px] sm:blur-[120px] rounded-full animate-pulse" />
 
                     <svg
                         viewBox="0 0 100 50"
@@ -821,7 +821,7 @@ export default function AboutHero() {
             </motion.div>
 
             {/* Smooth Footer Transition */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-48 bg-gradient-to-t from-[#08090A] to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-48 bg-gradient-to-t from-black to-transparent pointer-events-none" />
         </section>
     );
 }
