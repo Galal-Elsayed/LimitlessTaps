@@ -1,9 +1,5 @@
 import { getTranslations } from "next-intl/server";
-
-
-import { GlobeSection } from "@/components/GlobeSection/GlobeSection";
-
-import LottieDisplay from "@/components/shared/LottieDisplay";
+import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 
 export default async function HomePage() {
   const t = await getTranslations('home');
@@ -15,16 +11,13 @@ export default async function HomePage() {
     <div className="min-h-screen bg-[#0a0a0a]">
       
 
-      <main className="p-8 max-w-[1400px] mx-auto">
         {/* Header */}
         <header className="mb-8 text-white">
           <video src="/Logo/Main-Logo-Interactive-LowQuality.webm" autoPlay loop muted className="mb-4 w-400 h-auto"></video>
 
         </header>
-
-        <LottieDisplay />
-        
-      </main>
+        <Arc />
+      
     </div>
   );
 }

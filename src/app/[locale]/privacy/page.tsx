@@ -16,9 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function PrivacyPage() {
   return (
     <>
-      <Navbar />
       <PrivacyContent />
-      <Footer />
     </>
   );
 }
