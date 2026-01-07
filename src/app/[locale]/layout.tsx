@@ -7,6 +7,7 @@ import { i18n } from "@/i18n.config";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from 'sonner';
+import LiveblocksCTA from "@/components/ActionBlock/LiveblocksCTA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -132,6 +133,7 @@ export default async function RootLayout({
 
           </div>
           {children}
+          <LiveblocksCTA />
           <Footer />
         </NextIntlClientProvider>
       </body>
