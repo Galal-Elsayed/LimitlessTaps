@@ -8,6 +8,7 @@ import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from 'sonner';
 import LiveblocksCTA from "@/components/ActionBlock/LiveblocksCTA";
+import { Preloader } from "@/components/ui/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -127,10 +128,10 @@ export default async function RootLayout({
     >
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
+          <Preloader />
           <Toaster position="top-center" expand={false} richColors />
           <div className="pt-18">
             <Navbar />
-
           </div>
           {children}
           <LiveblocksCTA />

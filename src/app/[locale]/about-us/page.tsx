@@ -7,7 +7,6 @@ import AboutTap from "@/components/About/AboutTap";
 export default function AboutPage() {
     return (
         <main className="w-full bg-black min-h-screen">
-            <Navbar />
             <AboutHero />
             <AboutCards />
             <AboutSlider />

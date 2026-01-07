@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Send, ArrowUpRight, Check } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function AboutTap() {
     const t = useTranslations("aboutUs");
+    const locale = useLocale();
+    const isRTL = locale === "ar";
     const [screenState, setScreenState] = useState<"logo" | "form" | "sent">("logo");
     const [typedText, setTypedText] = useState("");
     const targetText = t("tap.form.typed_message");
@@ -58,7 +60,7 @@ export default function AboutTap() {
 
             {/* Header Text */}
             {/* Header Content - Split Layout */}
-            <div className="relative mt-12 md:absolute md:top-12 md:mt-0 left-0 right-0 z-20 px-4 md:px-12 w-full max-w-[1400px] mx-auto">
+            <div className={`relative mt-12 md:absolute md:top-12 md:mt-0 left-0 right-0 z-20 px-4 md:px-12 w-full max-w-[1400px] mx-auto ${isRTL ? 'md:px-20' : ''}`}>
                 <motion.div
                     initial={{ opacity: 0, y: -30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -66,8 +68,8 @@ export default function AboutTap() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="flex flex-col md:flex-row justify-between items-center text-white w-full gap-4 md:gap-0"
                 >
-                    {/* Left Part: "It all starts" */}
-                    <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 text-center md:text-start order-1 md:order-1">
+                    {/* Left Part: "It all starts" (Arabic: Right side visually) */}
+                    <h2 className={`text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 text-center order-1 md:order-1 ${isRTL ? 'md:text-center' : 'md:text-start'}`}>
                         {t("tap.header_left")} <br /> {t("tap.header_left_line2")}
                     </h2>
 
@@ -93,7 +95,7 @@ export default function AboutTap() {
                     </div>
 
                     {/* Right Part (Desktop only) */}
-                    <h2 className="hidden md:block text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 text-right md:text-right mt-4 md:mt-0 order-3">
+                    <h2 className={`hidden md:block text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 mt-4 md:mt-0 order-3 ${isRTL ? 'md:text-center' : 'md:text-right'}`}>
                         {t("tap.header_right")} <br /> {t("tap.header_right_line2")}
                     </h2>
 
