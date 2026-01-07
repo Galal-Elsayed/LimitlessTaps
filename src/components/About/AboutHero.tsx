@@ -364,7 +364,7 @@ export default function AboutHero() {
     }), []);
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-black flex flex-col items-center">
+        <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-black via-black to-black flex flex-col items-center">
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 {!isMobile && <StarField />}
@@ -821,7 +821,7 @@ export default function AboutHero() {
             </motion.div>
 
             {/* Smooth Footer Transition */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-48 bg-gradient-to-t from-[#08090A] to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-48 bg-gradient-to-t from-black to-transparent pointer-events-none" />
         </section>
     );
 }

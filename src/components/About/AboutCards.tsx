@@ -53,7 +53,9 @@ const CodeShape = () => {
                 </span>
 
                 {/* Hidden Neon Pulse Center */}
-                <div className="absolute w-1 h-8 bg-white/80 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" />
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-mono font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                    /
+                </span>
             </div>
         </div>
     )
@@ -223,7 +225,7 @@ export default function AboutCards() {
     } : { before: sectionTitle, gradient: '', after: '' };
 
     return (
-        <section className="w-full bg-gradient-to-b from-black via-black to-neutral-900 py-16 md:py-24 relative overflow-hidden">
+        <section className="w-full bg-gradient-to-b from-black via-black to-[#0a0a0a] py-16 md:py-24 relative overflow-hidden">
             <div className="mx-auto w-full max-w-7xl px-2 md:px-8">
 
                 <motion.div
@@ -256,7 +258,7 @@ export default function AboutCards() {
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
-                            transition={springTransition}
+                            transition={{ ...springTransition, delay: index * 0.2 }}
                             className="group relative flex h-[450px] md:h-[500px] w-3/4 md:w-full mx-auto flex-col overflow-hidden border border-white/10 bg-gradient-to-b from-white/10 via-neutral-900/50 to-black hover:border-white/20 hover:shadow-2xl hover:shadow-neutral-500/10 rounded-[2rem] cursor-pointer"
                         >
                             {/* Unique Reveal Effect per card */}

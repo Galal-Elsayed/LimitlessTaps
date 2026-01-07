@@ -29,7 +29,7 @@ export default function AboutSlider() {
     const t = useTranslations("aboutUs");
 
     return (
-        <section className="w-full py-16 md:py-24 bg-gradient-to-b from-neutral-900 via-black to-black flex flex-col items-center justify-center overflow-hidden">
+        <section className="w-full py-16 md:py-24 bg-gradient-to-b from-[#0a0a0a] via-black to-black flex flex-col items-center justify-center overflow-hidden">
 
             {/* Header Content - Two Columns */}
             <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24">
