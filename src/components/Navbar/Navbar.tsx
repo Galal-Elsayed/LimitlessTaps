@@ -54,7 +54,7 @@ export default function Navbar() {
     const navLinks = [
         { key: 'company', href: '/about-us' },
         { key: 'services', href: '/services', isDropdown: true },
-        { key: 'portfolio', href: '/our-work' },
+        { key: 'portfolio', href: '/work' },
         { key: 'careers', href: '/careers' },
         { key: 'contact', href: '/contact', isButton: true },
     ];
