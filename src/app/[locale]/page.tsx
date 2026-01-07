@@ -1,12 +1,6 @@
-import { getTranslations } from "next-intl/server";
 import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 
 export default async function HomePage() {
-  const t = await getTranslations('home');
-  const tFooter = await getTranslations('footer');
-  const tCommon = await getTranslations('common');
-
-
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       
