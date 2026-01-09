@@ -257,7 +257,6 @@ export default function Navbar() {
         <>
             <nav
                 className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? 'rtl' : 'ltr'} ${mobileMenuOpen ? 'max-[900px]:hidden' : ''} bg-[#0a0a0a]`}
-                style={{ fontFamily: 'var(--font-cairo)' }}
             >
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
                     {/* Logo */}
@@ -450,7 +449,6 @@ export default function Navbar() {
                                 shadow-2xl 
                                 overflow-y-auto flex flex-col
                             `}
-                            style={{ fontFamily: 'var(--font-cairo)' }}
                         >
                             <div className="flex flex-col h-full relative">
                                 {/* Header Area with Logo and Close Button - Matching Main Navbar Height (70px) */}

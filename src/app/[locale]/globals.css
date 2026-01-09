@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
-
+/* Fonts are loaded via next/font in layout.tsx */
 /* Global styles */
 * {
   box-sizing: border-box;
@@ -120,9 +120,9 @@ Link {
   --lt-elevation-glow: 0 0 0 1px rgb(38 38 38 / 100%), 0 0 28px rgb(59 130 246 / 10%);
 
   /* Font switching (default + Arabic override) */
-  --font-app: var(--font-geist-sans);
+  --font-app: var(--font-inter);
   --font-sans: var(--font-app);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --radius: 0.625rem;
   --black: #000000;

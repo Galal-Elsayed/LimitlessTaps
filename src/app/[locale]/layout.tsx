@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Cairo } from "next/font/google";
+import { Inter, Cairo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { i18n } from "@/i18n.config";
@@ -9,15 +8,11 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from 'sonner';
 import { Preloader } from "@/components/ui/Preloader";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -123,7 +118,7 @@ export default async function RootLayout({
     <html
       lang={resolvedLocale}
       dir={isArabic ? "rtl" : "ltr"}
-      className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable}`}
+      className={`${inter.variable} ${cairo.variable}`}
     >
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
