@@ -17,7 +17,7 @@ export const Preloader = () => {
         const timer = setTimeout(() => {
             setIsLoading(false);
             document.body.style.overflow = "auto";
-        }, 4000); // reduced duration
+        }, 3500); // reduced duration
 
         return () => {
             clearTimeout(timer);
@@ -43,7 +43,7 @@ export const Preloader = () => {
                     >
                          {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/Logo/Main-Logo-Glow.gif"
+                            src="/Logo/Main-Logo-Moving-Glow-Opt.gif"
                             alt="Limitless Taps"
                             className="w-full h-full object-contain"
                         />
