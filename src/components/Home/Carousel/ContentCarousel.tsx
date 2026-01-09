@@ -1,7 +1,10 @@
 "use client";
 
+
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { useLocale } from "next-intl";
+
 
 interface CarouselItem {
   type: "video" | "image";
@@ -20,6 +23,8 @@ interface ContentCarouselProps {
 
 export default function ContentCarousel({ items, textVariant = "default" }: ContentCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const locale = useLocale();
+  const isRTL = locale === "ar";
   const [activeIndex, setActiveIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [videoStates, setVideoStates] = useState(items.map(() => ({ isPlaying: false })));
@@ -349,13 +354,13 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
       </div>
 
       {/* Navigation Arrows */}
-      <div className="absolute -bottom-12 right-6 md:right-12 gap-3 z-20 flex">
+      <div className={`absolute -bottom-12 gap-3 z-20 flex ${isRTL ? 'left-6 md:left-12' : 'right-6 md:right-12'}`}>
         <button
             onClick={goToPrevious}
             className="w-10 h-10 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/10 flex items-center justify-center transition-all duration-300 group"
             aria-label="Previous"
         >
-            <svg width="8" height="12" viewBox="0 0 10 16" fill="none" className="opacity-70 group-hover:opacity-100 transition-opacity">
+            <svg width="8" height="12" viewBox="0 0 10 16" fill="none" className={`opacity-70 group-hover:opacity-100 transition-opacity ${isRTL ? 'rotate-180' : ''}`}>
                 <path d="M8 2L2 8L8 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </button>
@@ -367,7 +372,7 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
             className="w-10 h-10 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/10 flex items-center justify-center transition-all duration-300 group"
             aria-label="Next"
         >
-            <svg width="8" height="12" viewBox="0 0 10 16" fill="none" className="opacity-70 group-hover:opacity-100 transition-opacity">
+            <svg width="8" height="12" viewBox="0 0 10 16" fill="none" className={`opacity-70 group-hover:opacity-100 transition-opacity ${isRTL ? 'rotate-180' : ''}`}>
                 <path d="M2 2L8 8L2 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </button>
