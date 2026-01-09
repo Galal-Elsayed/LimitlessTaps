@@ -45,12 +45,12 @@ export default function ContactPage() {
                             width: 2000,
                             height: 2000,
                             onRender: () => { },
-                            devicePixelRatio: 2,
+                            devicePixelRatio: 1, // Reduced for performance
                             phi: 0,
                             theta: 0.3,
                             dark: 1,
                             diffuse: 1.2,
-                            mapSamples: 16000,
+                            mapSamples: 12000, // Reduced from 16000
                             mapBrightness: 6,
                             baseColor: [0.1, 0.1, 0.1], // Dark gray base to match #0a0a0a
                             markerColor: [0.1, 0.8, 1], // Brand Cyan

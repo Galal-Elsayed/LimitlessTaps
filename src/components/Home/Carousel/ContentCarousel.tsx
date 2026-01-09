@@ -253,20 +253,22 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
   };
 
   const goToPrevious = () => {
-    if (activeIndex > 0) {
-      scrollToIndex(activeIndex - 1);
+    const newIndex = activeIndex - 2;
+    if (newIndex >= 0) {
+      scrollToIndex(newIndex);
     } else {
-      // Loop to the last item
-      scrollToIndex(items.length - 1);
+      // Loop to the end, accounting for the 2-step offset
+      scrollToIndex((items.length + newIndex) % items.length);
     }
   };
 
   const goToNext = () => {
-    if (activeIndex < items.length - 1) {
-      scrollToIndex(activeIndex + 1);
+    const newIndex = activeIndex + 2;
+    if (newIndex < items.length) {
+      scrollToIndex(newIndex);
     } else {
-      // Loop to the first item
-      scrollToIndex(0);
+      // Loop to the beginning, accounting for the 2-step offset
+      scrollToIndex(newIndex % items.length);
     }
   };
 
@@ -353,8 +355,8 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
         ))}
       </div>
 
-      {/* Navigation Arrows */}
-      <div className={`absolute -bottom-12 gap-3 z-20 flex ${isRTL ? 'left-6 md:left-12' : 'right-6 md:right-12'}`}>
+      {/* Navigation Arrows - hidden on mobile */}
+      <div className={`absolute -bottom-12 gap-3 z-20 hidden md:flex ${isRTL ? 'left-6 md:left-12' : 'right-6 md:right-12'}`}>
         <button
             onClick={goToPrevious}
             className="w-10 h-10 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/10 flex items-center justify-center transition-all duration-300 group"
@@ -365,10 +367,7 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
             </svg>
         </button>
         <button
-            onClick={() => {
-              if (activeIndex === items.length - 1) scrollToIndex(0);
-              else goToNext();
-            }}
+            onClick={goToNext}
             className="w-10 h-10 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/10 flex items-center justify-center transition-all duration-300 group"
             aria-label="Next"
         >

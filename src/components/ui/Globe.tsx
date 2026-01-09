@@ -14,9 +14,9 @@ export function Globe({
         theta: 0,
         dark: 1,
         diffuse: 1.2,
-        mapSamples: 16000,
-        mapBrightness: 6,
-        baseColor: [0.3, 0.3, 0.3],
+        mapSamples: 10000,
+        mapBrightness: 4,
+        baseColor: [0.05, 0.05, 0.05],
         markerColor: [0.1, 0.8, 1],
         glowColor: [1, 1, 1],
         markers: [
@@ -54,8 +54,8 @@ export function Globe({
 
         globe = createGlobe(canvasRef.current, {
             ...config,
-            width: width * 2,
-            height: width * 2,
+            width: width * 1,
+            height: width * 1,
             onRender: (state) => {
                 if (!pointerInteracting.current) {
                     phi += 0.002;

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { toast } from 'sonner';
@@ -164,16 +165,16 @@ export default function ContactForm() {
                             group
                         `}
                     >
-                        <span className="text-sm relative font-bold uppercase tracking-widest text-white flex items-center gap-3">
+                        <span className="text-sm relative font-bold uppercase tracking-widest text-white flex items-center justify-center gap-3">
                             {isSubmitting ? (
                                 <>
                                     {t('form.sending')} 
-                                    <img src="/Home/infinity.apng" alt="Infinity" className='h-15 absolute -end-15' />
+                                    <Image src="/Home/infinity.apng" alt="Infinity" width={24} height={24} className='object-contain w-6 h-6' unoptimized />
                                 </>
                             ) : (
                                 <>
                                     {t('form.submit')}
-                                    <img src="/Home/infinity.apng" alt="Infinity" className='h-15 absolute -end-15' />
+                                    <Image src="/Home/infinity.apng" alt="Infinity" width={24} height={24} className='object-contain w-6 h-6' unoptimized />
                                 </>
                             )}
                         </span>

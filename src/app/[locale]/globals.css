@@ -226,6 +226,27 @@ html[lang="ar"] {
   box-shadow: var(--lt-elevation-glow);
 }
 
+/* Custom Dark Scrollbar */
+.dark-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: #09090b; 
+  border-radius: 5px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #52525b; 
+  border-radius: 5px;
+  border: 2px solid #09090b; 
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #71717a; 
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
