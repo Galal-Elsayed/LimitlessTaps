@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Infinity } from 'lucide-react';
+
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import animation1 from '../../../../../public/Lottie/Animation_2.json';
+
 import {
     Select,
     SelectContent,
@@ -168,23 +168,12 @@ export default function ContactForm() {
                             {isSubmitting ? (
                                 <>
                                     {t('form.sending')} 
-                                    <Lottie 
-                                        animationData={animation1} 
-                                        loop={true}
-                                        className="w-10 h-10 transition-all duration-300"
-                                    />
+                                    <img src="/Home/infinity.apng" alt="Infinity" className='h-15 absolute -end-15' />
                                 </>
                             ) : (
                                 <>
                                     {t('form.submit')}
-                                    <div className='h-15  absolute -end-15 ' >
-
-                                    <Lottie 
-                                        animationData={animation1} 
-                                        loop={true}
-                                       className='h-full'
-                                    />
-                                    </div>
+                                    <img src="/Home/infinity.apng" alt="Infinity" className='h-15 absolute -end-15' />
                                 </>
                             )}
                         </span>
