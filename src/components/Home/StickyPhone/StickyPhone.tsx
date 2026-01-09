@@ -22,7 +22,7 @@ const ScrollCarousel = () => {
             content: (
                 <div className="h-full w-full flex items-center justify-center text-white relative">
                     <Image
-                        src="/Home/ScrollCarousel/mopImg1.jpg"
+                        src="/Home/StickyPhone/mopImg1.jpg"
                         alt={t('sticky_title_1')}
                         width={1200}
                         height={800}
@@ -44,7 +44,7 @@ const ScrollCarousel = () => {
             content: (
                 <div className="h-full w-full flex items-center justify-center text-white relative">
                     <Image
-                        src="/Home/ScrollCarousel/mopImg2.jpg"
+                        src="/Home/StickyPhone/mopImg2.jpg"
                         alt={t('sticky_title_2')}
                         width={1200}
                         height={800}
@@ -66,7 +66,7 @@ const ScrollCarousel = () => {
             content: (
                 <div className="h-full w-full flex items-center justify-center text-white relative">
                     <Image
-                        src="/Home/ScrollCarousel/mopimg3.jpg"
+                        src="/Home/StickyPhone/mopimg3.jpg"
                         alt={t('sticky_title_3')}
                         width={1200}
                         height={800}
