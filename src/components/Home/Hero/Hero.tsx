@@ -14,14 +14,41 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a] pb-40">
+      
+      {/* Global Background Waves */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/Home/wave.png"
+          alt="Color Waves"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+      </div>
+      
+
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4">
         
+        {/* Badge */}
+        <div className="flex justify-center mb-8">
+          <Link 
+            href="/services" 
+            className="inline-flex items-center gap-4 rounded-xl border border-white/10 bg-zinc-900/50 px-4 py-3 text-sm font-medium text-white backdrop-blur-md transition-all hover:bg-white/5 hover:border-white/20 group"
+          >
+            <span className="flex h-3.5 w-3.5 items-center justify-center rounded-[1px] bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.8)] animate-pulse"></span>
+            <span className="font-[family-name:var(--font-jetbrains-mono)] tracking-wider uppercase text-xs sm:text-sm text-gray-300 group-hover:text-white transition-colors">
+              {t("hero_badge")}
+            </span>
+            <ArrowRight className={`h-4 w-4 text-gray-400 group-hover:text-white transition-all ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+          </Link>
+        </div>
+
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
             
             {/* Left Column: Content */}
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 pt-12">
+            <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 pt-12">
                 {/* Title */}
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}

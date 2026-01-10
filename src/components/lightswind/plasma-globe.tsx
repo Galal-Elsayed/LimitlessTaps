@@ -335,7 +335,7 @@ export default function PlasmaGlobe({
     return (
         <div
             ref={containerRef}
-            className="w-full h-full min-h-[300px] sm:min-h-[450px] lg:min-h-[550px] relative rounded-xl overflow-hidden bg-[#0a0a0a]"
+            className="w-full h-full min-h-[300px] sm:min-h-[450px] lg:min-h-[550px] relative rounded-xl overflow-hidden"
         />
     );
 }

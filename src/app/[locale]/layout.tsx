@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Cairo } from "next/font/google";
+import { Inter, Cairo, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { i18n } from "@/i18n.config";
@@ -13,6 +13,10 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -118,7 +122,7 @@ export default async function RootLayout({
     <html
       lang={resolvedLocale}
       dir={isArabic ? "rtl" : "ltr"}
-      className={`${inter.variable} ${cairo.variable}`}
+      className={`${inter.variable} ${cairo.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
