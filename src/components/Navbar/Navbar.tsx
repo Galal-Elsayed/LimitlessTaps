@@ -208,7 +208,10 @@ export default function Navbar() {
             onMouseEnter={handleServicesMouseEnter}
             onMouseLeave={handleServicesMouseLeave}
         >
-            <button className="flex items-center gap-1 focus:outline-none py-2 cursor-pointer">
+            <button
+                className="flex items-center gap-1 focus:outline-none py-2 cursor-pointer"
+                onClick={() => router.push('/services')}
+            >
                 <div className="relative relative-inline-block">
                     <span className="block text-lg font-medium capitalize tracking-wide text-gray-300">
                         {t('services')}

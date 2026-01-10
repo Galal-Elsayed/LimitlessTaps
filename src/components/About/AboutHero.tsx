@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
     LayoutDashboard,
     Users,
@@ -554,8 +555,8 @@ export default function AboutHero() {
                             >
                                 {/* Logo */}
                                 <motion.div variants={stickerVariants} custom={0.1} className="px-3 sm:px-6 mb-4 sm:mb-8 flex items-center gap-2 sm:gap-3">
-                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-lg flex items-center justify-center shrink-0">
-                                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-black rounded-sm" />
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 relative rounded-lg overflow-hidden border border-white/10">
+                                        <Image src="/Logo/social-white.jpg" alt="Logo" fill className="object-cover" />
                                     </div>
                                     <span className="text-xs sm:text-sm 2xl:text-base font-bold text-white hidden md:block tracking-wide">{t("dashboard.sidebar.brand")}</span>
                                 </motion.div>

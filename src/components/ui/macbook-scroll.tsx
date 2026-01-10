@@ -64,9 +64,9 @@ export const MacbookScroll = ({
     [0, 0.3],
     [0.6, isMobile ? 1 : 1.5],
   );
-  // Image scrolls down then stays fixed, then fades
-  const translate = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0, 800, 800, 1200]);
-  const screenOpacity = useTransform(scrollYProgress, [0, 0.65, 0.8], [1, 1, 0]);
+  // Simplified: Opens lid, stays in place, then scrolls out at the end
+  const translate = useTransform(scrollYProgress, [0, 0.3, 0.85, 1], [0, 800, 800, 1200]);
+  const screenOpacity = useTransform(scrollYProgress, [0, 0.6, 0.8], [1, 1, 0]);
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -74,7 +74,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
+      className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-30"
     >
 
       {/* Lid */}

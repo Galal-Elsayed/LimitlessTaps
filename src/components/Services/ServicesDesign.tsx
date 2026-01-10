@@ -1,0 +1,655 @@
+"use client";
+
+import { motion, LayoutGroup, useScroll, useTransform } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { cn } from "@/lib/utils";
+import { Monitor, Type, Palette, Layout, Globe, ChevronDown, Maximize2, BarChart3, PieChart, Activity, Box, Circle, Square, Zap, TrendingUp, Users, MousePointer2 } from "lucide-react";
+import Image from "next/image";
+
+// --- Configuration Types ---
+type FontOption = "sans" | "serif" | "mono";
+type ThemeOption = "white" | "green" | "purple" | "orange";
+type LayoutMode = "minimal" | "grid" | "split";
+type ButtonStyle = "pill" | "rect";
+type CardStyle = "glass" | "solid" | "bordered";
+type SizeOption = "sm" | "md" | "lg";
+
+const FONTS = {
+    sans: "font-sans",
+    serif: "font-serif",
+    mono: "font-mono",
+};
+
+const SIZES = {
+    sm: { title: "text-4xl md:text-6xl", body: "text-base md:text-lg", nav: "text-xs" },
+    md: { title: "text-5xl md:text-7xl", body: "text-lg md:text-xl", nav: "text-sm" },
+    lg: { title: "text-6xl md:text-8xl", body: "text-xl md:text-2xl", nav: "text-base" },
+};
+
+const THEMES = {
+    white: {
+        primary: "bg-white",
+        text: "text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50",
+        border: "border-white/20",
+        glow: "shadow-[0_0_50px_-12px_rgba(255,255,255,0.5)]",
+        textGlow: "drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]",
+        buttonText: "text-black",
+        card: "bg-white/5",
+        accent: "bg-white",
+        accentGradient: "from-white/40 to-transparent"
+    },
+    green: {
+        primary: "bg-emerald-500",
+        text: "text-emerald-500",
+        border: "border-emerald-500/20",
+        glow: "shadow-[0_0_50px_-12px_rgba(16,185,129,0.5)]",
+        textGlow: "drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]",
+        buttonText: "text-white",
+        card: "bg-emerald-500/10",
+        accent: "bg-emerald-500",
+        accentGradient: "from-emerald-500/40 to-transparent"
+    },
+    purple: {
+        primary: "bg-violet-500",
+        text: "text-violet-500",
+        border: "border-violet-500/20",
+        glow: "shadow-[0_0_50px_-12px_rgba(139,92,246,0.5)]",
+        textGlow: "drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]",
+        buttonText: "text-white",
+        card: "bg-violet-500/10",
+        accent: "bg-violet-500",
+        accentGradient: "from-violet-500/40 to-transparent"
+    },
+    orange: {
+        primary: "bg-orange-500",
+        text: "text-orange-500",
+        border: "border-orange-500/20",
+        glow: "shadow-[0_0_50px_-12px_rgba(249,115,22,0.5)]",
+        textGlow: "drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]",
+        buttonText: "text-white",
+        card: "bg-orange-500/10",
+        accent: "bg-orange-500",
+        accentGradient: "from-orange-500/40 to-transparent"
+    },
+};
+
+const NAV_LINKS = ["About Us", "Services", "Work", "Careers", "Contact"];
+
+// --- Mock Data for Dashboard ---
+const STATS = [
+    { label: "Total Users", value: "124,592", change: "+12.5%", icon: <Users size={16} />, data: [40, 30, 45, 50, 45, 60, 55, 70] },
+    { label: "Revenue", value: "$4.2M", change: "+8.2%", icon: <BarChart3 size={16} />, data: [60, 65, 60, 75, 70, 85, 80, 95] },
+    { label: "Active Sessions", value: "1,430", change: "+24%", icon: <Zap size={16} />, data: [20, 40, 30, 50, 45, 65, 60, 80] },
+];
+
+function ScrollRevealHeading() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "center center"]
+    });
+
+    // Make opacity persist once visible
+    const opacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
+
+    return (
+        <div ref={containerRef} className="relative z-10 mb-6">
+            <h2 className="text-4xl md:text-7xl uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50">
+                Customize Your Design
+            </h2>
+            <motion.h2
+                style={{ opacity }}
+                className="absolute inset-0 text-4xl md:text-7xl uppercase font-bold text-white"
+                aria-hidden="true"
+            >
+                Customize Your Design
+            </motion.h2>
+        </div>
+    );
+}
+
+export default function ServicesDesign() {
+    // State
+    const [selectedFont, setSelectedFont] = useState<FontOption>("sans");
+    const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("white");
+    const [selectedSize, setSelectedSize] = useState<SizeOption>("md");
+    const [layoutMode, setLayoutMode] = useState<LayoutMode>("split");
+    const [buttonStyle, setButtonStyle] = useState<ButtonStyle>("pill");
+    const [cardStyle, setCardStyle] = useState<CardStyle>("glass");
+    const [brandName, setBrandName] = useState("BRAND");
+
+    // Dynamic Classes
+    const theme = THEMES[selectedTheme];
+    const size = SIZES[selectedSize];
+    const cardClass = cn(
+        cardStyle === "glass" && "bg-white/5 backdrop-blur-md border-white/5",
+        cardStyle === "solid" && "bg-[#111]",
+        cardStyle === "bordered" && "bg-transparent border-white/20",
+        "border transition-colors duration-300 overflow-hidden relative"
+    );
+    // Radius Logic: 'pill' => full rounding, 'rect' => small rounding
+    const radiusClass = buttonStyle === "pill" ? "rounded-3xl" : "rounded-none";
+    const buttonRadius = buttonStyle === "pill" ? "rounded-full" : "rounded-sm";
+
+    // Brand Name Logic
+    const displayBrand = brandName || "BRAND";
+
+    return (
+        <section className="w-full min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center py-24 px-4 overflow-hidden relative">
+
+            {/* Header */}
+            <div className="text-center mb-12 max-w-5xl relative z-10">
+                <ScrollRevealHeading />
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto"
+                >
+                    Experience the power of a flexible design system. Customize typography, color palettes, and spatial dynamics in real-time.
+                </motion.p>
+            </div>
+
+            {/* Controls */}
+            <motion.div
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-wrap items-center justify-center gap-4 mb-12 p-3 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-50 shadow-2xl max-w-6xl"
+            >
+
+                {/* Layout Mode */}
+                <ControlGroup label="Layout" icon={<Layout size={14} />}>
+                    {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
+                        <ControlButton key={mode} isActive={layoutMode === mode} onClick={() => setLayoutMode(mode)} label={mode} />
+                    ))}
+                </ControlGroup>
+                <Divider />
+
+                {/* Typography */}
+                <ControlGroup label="Type" icon={<Type size={14} />}>
+                    {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
+                        <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
+                    ))}
+                </ControlGroup>
+                <Divider />
+
+                {/* Size */}
+                <ControlGroup label="Size" icon={<Maximize2 size={14} />}>
+                    {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
+                        <ControlButton key={s} isActive={selectedSize === s} onClick={() => setSelectedSize(s)} label={s === 'sm' ? 'S' : s === 'md' ? 'M' : 'L'} />
+                    ))}
+                </ControlGroup>
+                <Divider />
+
+                {/* Theme */}
+                <ControlGroup label="Theme" icon={<Palette size={14} />}>
+                    {(["white", "green", "purple", "orange"] as ThemeOption[]).map((t) => (
+                        <button
+                            key={t}
+                            onClick={() => setSelectedTheme(t)}
+                            className={cn(
+                                "w-6 h-6 rounded-full border border-white/10 transition-all",
+                                THEMES[t].primary,
+                                selectedTheme === t ? cn("ring-2 ring-white scale-110", THEMES[t].glow) : "opacity-50 hover:opacity-100"
+                            )}
+                        />
+                    ))}
+                </ControlGroup>
+                <Divider />
+
+
+
+                {/* Brand Name Input */}
+                <ControlGroup label="Brand" icon={<Type size={14} />}>
+                    <input
+                        type="text"
+                        value={brandName}
+                        onChange={(e) => setBrandName(e.target.value.toUpperCase().slice(0, 8))}
+                        className="bg-transparent border-b border-white/20 text-white font-bold text-center w-[8ch] focus:outline-none focus:border-white transition-colors placeholder-white/20"
+                        placeholder="BRAND"
+                        maxLength={8}
+                    />
+                </ControlGroup>
+                <Divider />
+
+                {/* Details - Clarified */}
+                <ControlGroup label="Controls" icon={<MousePointer2 size={14} />}>
+                    <div className="flex gap-2">
+                        <ControlDropdown
+                            label="Button"
+                            value={buttonStyle}
+                            options={[{ label: "Pill", value: "pill" }, { label: "Rect", value: "rect" }]}
+                            onChange={(val) => setButtonStyle(val as ButtonStyle)}
+                            icon={<Circle size={14} />}
+                        />
+                        <ControlDropdown
+                            label="Card"
+                            value={cardStyle}
+                            options={[{ label: "Glass", value: "glass" }, { label: "Solid", value: "solid" }, { label: "Bordered", value: "bordered" }]}
+                            onChange={(val) => setCardStyle(val as CardStyle)}
+                            icon={<Box size={14} />}
+                        />
+                    </div>
+                </ControlGroup>
+
+            </motion.div>
+
+            {/* Main Preview Container */}
+            <LayoutGroup>
+                <motion.div
+                    layout
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className={cn(
+                        "w-full max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl mx-auto flex flex-col min-h-[700px] transition-all duration-500",
+                        theme.border,
+                        theme.glow,
+                        // Apply radius to the CONTAINER too if desired, or keep it fixed. 
+                        // User said: "rect and pill drop down on the bar now do nothing make it effect that side"
+                        // I'll make the main container slightly responsive to it too, or at least the INNER cards.
+                        "rounded-3xl"
+                    )}
+                >
+                    {/* Background Grid */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+
+                    {/* Navbar */}
+                    <div className="w-full border-b border-white/5 bg-black/40 backdrop-blur-md p-5 flex items-center justify-between z-20 sticky top-0 h-20">
+                        <div className="relative w-32 h-8 opacity-90"><Image src="/Logo/Main-Logo-Static.png" alt="Logo" fill className="object-contain object-left" /></div>
+                        <div className="hidden md:flex items-center gap-8">
+                            {NAV_LINKS.map((item, i) => (
+                                <span key={item} className={cn("font-medium cursor-pointer transition-colors hover:text-white", size.nav, i === 1 ? cn("text-white", theme.textGlow) : "text-white/50")}>{item}</span>
+                            ))}
+                        </div>
+                        <div className={cn("flex items-center gap-2 text-white/60 border border-white/10 px-3 py-1.5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer", buttonRadius)}>
+                            <Globe size={14} /><span className="text-[10px] font-bold uppercase">En</span><ChevronDown size={10} />
+                        </div>
+                    </div>
+
+                    {/* Dynamic Content Layout */}
+                    <div className={cn("flex-1 p-8 md:p-12 relative z-10 w-full overflow-hidden", FONTS[selectedFont])}>
+
+                        {/* 1. Minimal Layout */}
+                        {layoutMode === "minimal" && (
+                            <div className="h-full flex flex-col items-center justify-center text-center gap-8 max-w-4xl mx-auto mt-20">
+                                <motion.div
+                                    layoutId="hero-text"
+                                    className="space-y-6"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                >
+                                    <motion.h1 layout className={cn("font-bold text-white tracking-tight leading-[0.9]", size.title, theme.textGlow)}>
+                                        {displayBrand} <span className={cn("inline-block", theme.text)}>System</span>
+                                    </motion.h1>
+                                    <motion.p layout className={cn("text-white/50 max-w-xl mx-auto", size.body)}>
+                                        Adaptable. Scalable. Beautiful.
+                                    </motion.p>
+                                </motion.div>
+                                <motion.div layoutId="hero-actions" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+                                    <ActionButton primary theme={theme} radius={buttonRadius}>{displayBrand} Start</ActionButton>
+                                </motion.div>
+                            </div>
+                        )}
+
+                        {/* 2. Grid Layout */}
+                        {layoutMode === "grid" && (
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full content-center max-w-6xl mx-auto">
+                                {/* Header Span */}
+                                <div className="md:col-span-8 flex flex-col justify-center text-left">
+                                    <motion.div layoutId="hero-text" className="mb-8" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                                        <motion.h1 layout className={cn("font-bold text-white mb-4", size.title, theme.textGlow)}>
+                                            {displayBrand} <span className={cn("inline-block", theme.text)}>Analytics</span>
+                                        </motion.h1>
+                                        <motion.p layout className={cn("text-white/50 max-w-md", size.body)}>
+                                            Real-time analytics for the modern {displayBrand} ecosystem.
+                                        </motion.p>
+                                    </motion.div>
+                                    <motion.div layoutId="hero-actions" className="flex gap-4">
+                                        <ActionButton primary theme={theme} radius={buttonRadius}>Dashboard</ActionButton>
+                                        <ActionButton theme={theme} radius={buttonRadius}>Reports</ActionButton>
+                                    </motion.div>
+                                </div>
+
+                                {/* Stats Grid */}
+                                <div className="md:col-span-4 grid grid-cols-1 gap-4">
+                                    {STATS.map((stat, i) => (
+                                        <motion.div
+                                            key={stat.label}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.1 }}
+                                            className={cn("p-5 flex items-center justify-between group cursor-pointer hover:border-white/20", cardClass, radiusClass)} // radiusClass applied
+                                        >
+                                            <div>
+                                                <p className="text-white/40 text-xs font-bold uppercase tracking-wider mb-1">{stat.label}</p>
+                                                <p className={cn("font-bold text-white", size.body)}>{stat.value}</p>
+                                            </div>
+                                            <div className={cn("p-2 rounded-full", theme.card, theme.text)}>{stat.icon}</div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+
+                                {/* Graph Area */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                    className={cn("md:col-span-12 h-64 p-8 relative overflow-hidden flex items-end gap-2", cardClass, radiusClass)}
+                                >
+                                    <div className="absolute top-6 left-6 text-white/40 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
+                                        <TrendingUp size={16} className={theme.text} />
+                                        {displayBrand} Growth
+                                    </div>
+                                    {[30, 45, 35, 60, 55, 75, 60, 80, 70, 90, 85, 100].map((h, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: `${h}%` }}
+                                            transition={{ delay: 0.4 + (i * 0.05), type: "spring" }}
+                                            className={cn("flex-1 rounded-t-sm opacity-80 hover:opacity-100 transition-opacity relative group", theme.accent)}
+                                        >
+                                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                                {h}%
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </motion.div>
+                            </div>
+                        )}
+
+                        {/* 3. Split Layout */}
+                        {layoutMode === "split" && (
+                            <div className="flex flex-col md:flex-row items-center gap-12 h-full max-w-6xl mx-auto">
+                                <div className="flex-1 text-left space-y-8">
+                                    <motion.div layoutId="hero-text" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
+                                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6", theme.card, theme.text)}>
+                                            <span className="relative flex h-2 w-2 mr-1">
+                                                <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-75", theme.accent)}></span>
+                                                <span className={cn("relative inline-flex rounded-full h-2 w-2", theme.accent)}></span>
+                                            </span>
+                                            {displayBrand} System
+                                        </div>
+                                        <motion.h1 layout className={cn("font-bold text-white mb-6 leading-tight", size.title, theme.textGlow)}>
+                                            {displayBrand} <br /><span className={cn("inline-block", theme.text)}>Experience</span>
+                                        </motion.h1>
+                                        <motion.p
+                                            className={cn("text-white/50 max-w-md", size.body)}
+                                        >
+                                            Control every pixel with {displayBrand}. Typography, color, and layout that adapts to your brand identity instantly.
+                                        </motion.p>
+                                    </motion.div>
+                                    <motion.div layoutId="hero-actions" className="flex flex-col sm:flex-row gap-4">
+                                        <ActionButton primary theme={theme} radius={buttonRadius}>Start {displayBrand}</ActionButton>
+                                        <ActionButton theme={theme} radius={buttonRadius}>View Components</ActionButton>
+                                    </motion.div>
+                                </div>
+
+                                <div className="flex-1 w-full relative">
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.8 }}
+                                        className="w-full aspect-[4/3] relative flex items-center justify-center overflow-visible"
+                                    >
+                                        {/* Simplified Spotlight - Static for performance */}
+                                        <div className={cn("absolute inset-0 rounded-full blur-[80px] opacity-10 pointer-events-none transition-colors duration-500", theme.accent)} />
+
+                                        {/* Main Hero Content - Floating */}
+                                        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4">
+
+                                            {/* Centerpiece Container */}
+                                            <div className="relative w-64 h-80 md:w-80 md:h-96">
+
+                                                {/* --- CENTER BIG CARD --- */}
+                                                <motion.div
+                                                    layout
+                                                    className={cn(
+                                                        "absolute inset-0 z-10 flex flex-col justify-between p-8 mt-12 shadow-2xl transition-all duration-300",
+                                                        cardClass,
+                                                        radiusClass
+                                                    )}
+                                                >
+                                                    {cardStyle === "glass" && (
+                                                        <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
+                                                    )}
+
+                                                    {(() => {
+                                                        const innerBg = cardStyle === "solid" ? "bg-white/10" : "bg-white/5";
+                                                        const innerBorder = cardStyle === "bordered" ? "border-white/20" : "border-white/10";
+                                                        const innerClass = cn(innerBg, "border", innerBorder, "backdrop-blur-sm transition-colors");
+
+                                                        return (
+                                                            <>
+                                                                <div className="flex justify-between items-start z-10 ">
+                                                                    <div className={cn("w-12 h-12 flex items-center justify-center shadow-lg transition-all", theme.accent, radiusClass === "rounded-3xl" ? "rounded-xl" : "rounded-sm")}>
+                                                                        <Box size={24} className="text-black" />
+                                                                    </div>
+                                                                    <div className={cn("px-4 py-2 text-xs font-bold text-black shadow-lg", theme.accent, buttonRadius)}>
+                                                                        Action
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="space-y-4 z-10 mt-auto">
+                                                                    <motion.h3 layout className={cn("text-4xl md:text-5xl font-black text-white leading-none tracking-tight mb-2", theme.textGlow)}>
+                                                                        SYSTEM <br /> CORE
+                                                                    </motion.h3>
+                                                                    <p className="text-white/50 text-xs font-medium max-w-[150px] leading-relaxed">
+                                                                        Architecture optimized for high-performance scaling.
+                                                                    </p>
+                                                                    <div className="flex gap-2 pt-2">
+                                                                        <div className={cn("w-24 h-1.5 rounded-full overflow-hidden bg-white/10", buttonRadius)}>
+                                                                            <div className={cn("h-full w-full", theme.accent)} />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        );
+                                                    })()}
+                                                </motion.div>
+
+                                                {/* --- CORNER CARDS --- */}
+
+                                                {/* Top Left: Zap */}
+                                                <motion.div
+                                                    layout
+                                                    className={cn(
+                                                        "absolute -left-4 top-4 w-14 h-14 flex items-center justify-center shadow-lg z-20 hover:scale-110 transition-transform cursor-pointer backdrop-blur-md",
+                                                        cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                                                        "border border-white/10",
+                                                        radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md"
+                                                    )}
+                                                >
+                                                    <Zap size={20} className={cn(theme.text)} />
+                                                </motion.div>
+
+
+                                                {/* Top Right: Growth */}
+                                                <motion.div
+                                                    layout
+                                                    className={cn(
+                                                        "absolute -right-6 -top-2 w-36 py-3 px-4 shadow-lg z-20 hover:translate-y-[-5px] transition-transform backdrop-blur-md",
+                                                        cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                                                        "border border-white/10",
+                                                        radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md"
+                                                    )}
+                                                >
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <span className="text-[9px] text-white/50 font-bold uppercase">Uptime</span>
+                                                        <Activity size={12} className={cn(theme.text)} />
+                                                    </div>
+                                                    <div className="text-lg font-bold text-white mb-1.5">99.9%</div>
+                                                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                                        <div className={cn("h-full w-[99%]", theme.accent)} />
+                                                    </div>
+                                                </motion.div>
+
+
+                                                {/* Bottom Left: Users */}
+                                                <motion.div
+                                                    layout
+                                                    className={cn(
+                                                        "absolute -left-4 bottom-14 py-2 px-3 shadow-lg z-20 flex items-center gap-3 hover:scale-105 transition-transform backdrop-blur-md",
+                                                        cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                                                        "border border-white/10",
+                                                        buttonRadius
+                                                    )}
+                                                >
+                                                    <div className="flex -space-x-2">
+                                                        {[1, 2, 3].map(i => (
+                                                            <div key={i} className={cn("w-6 h-6 border border-[#0a0a0a] bg-zinc-800", theme.accent, buttonRadius)} />
+                                                        ))}
+                                                    </div>
+                                                    <div className="text-[10px] font-bold text-white opacity-80">
+                                                        Active
+                                                    </div>
+                                                </motion.div>
+
+
+                                                {/* Bottom Right: Activity */}
+                                                <motion.div
+                                                    layout
+                                                    className={cn(
+                                                        "absolute -right-6 bottom-14 w-28 p-3 shadow-lg z-20 hover:rotate-1 transition-transform backdrop-blur-md",
+                                                        cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                                                        "border border-white/10",
+                                                        radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md"
+                                                    )}
+                                                >
+                                                    <div className="flex items-end gap-1 h-6">
+                                                        {[30, 60, 40, 80, 50, 70].map((h, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className={cn("w-full opacity-60", theme.accent)}
+                                                                style={{ height: `${h}%`, borderRadius: buttonStyle === 'pill' ? '1px' : '0px' }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </motion.div>
+
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        )}
+
+                    </div>
+                </motion.div>
+            </LayoutGroup>
+        </section>
+    );
+}
+
+// --- Sub-Components ---
+
+function ActionButton({ children, primary, theme, radius }: { children: React.ReactNode; primary?: boolean; theme: any; radius: string }) {
+    return (
+        <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={cn(
+                "px-8 py-4 font-bold tracking-wide transition-all shadow-lg hover:shadow-xl text-sm md:text-base",
+                radius,
+                primary
+                    ? cn(theme.primary, theme.glow, theme.buttonText)
+                    : "bg-white/5 hover:bg-white/10 border border-white/10 text-white"
+            )}
+        >
+            {children}
+        </motion.button>
+    );
+}
+
+function ControlGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon: React.ReactNode }) {
+    return (
+        <div className="flex items-center gap-3 px-2">
+            <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] flex items-center gap-1.5 hidden lg:flex">
+                {icon} {label}
+            </span>
+            <div className="flex items-center gap-1">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+function ControlButton({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) {
+    return (
+        <button
+            onClick={onClick}
+            className={cn(
+                "px-4 py-2 text-xs font-bold tracking-wider rounded-lg transition-all duration-300 uppercase",
+                isActive
+                    ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
+                    : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10"
+            )}
+        >
+            {label}
+        </button>
+    );
+}
+
+function Divider() {
+    return <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/10 to-transparent mx-2 hidden md:block" />;
+}
+
+function ControlDropdown({ label, value, options, onChange, icon }: {
+    label: string,
+    value: string,
+    options: { label: string, value: string }[],
+    onChange: (val: string) => void,
+    icon: React.ReactNode
+}) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="relative">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Close on blur delay
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[100px] justify-between"
+            >
+                <div className="flex items-center gap-2">
+                    <span className="text-white/60 group-hover:text-white transition-colors">{icon}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+                        {options.find(o => o.value === value)?.label || value}
+                    </span>
+                </div>
+                <ChevronDown size={12} className={cn("text-white/40 transition-transform duration-300", isOpen && "rotate-180")} />
+            </button>
+
+            {/* Dropdown Menu */}
+            <div className="absolute top-full left-0 mt-2 w-full min-w-[120px] z-50">
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 5 }}
+                        className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col"
+                    >
+                        {options.map((option) => (
+                            <button
+                                key={option.value}
+                                onClick={() => {
+                                    onChange(option.value);
+                                    setIsOpen(false);
+                                }}
+                                className={cn(
+                                    "px-4 py-2 text-left text-xs font-bold uppercase tracking-wider transition-colors hover:bg-white/10",
+                                    value === option.value ? "text-white bg-white/5" : "text-white/50"
+                                )}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
+                    </motion.div>
+                )}
+            </div>
+        </div>
+    );
+}

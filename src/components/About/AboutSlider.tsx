@@ -42,7 +42,7 @@ export default function AboutSlider() {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white tracking-tight mb-6">
+                        <h2 className="text-3xl uppercase sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
                             {t("slider.headline")}
                         </h2>
                     </motion.div>

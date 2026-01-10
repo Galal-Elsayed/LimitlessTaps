@@ -234,7 +234,7 @@ export default function AboutCards() {
                     viewport={{ once: true }}
                     className="mb-12 md:mb-16 text-center"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                    <h2 className="text-3xl md:text-6xl uppercase font-bold text-white mb-4 tracking-tight">
                         {titleParts.before}
                         {titleParts.gradient && (
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--white)] to-[var(--light-grey)]">
@@ -259,7 +259,7 @@ export default function AboutCards() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ ...springTransition, delay: index * 0.2 }}
-                            className="group relative flex h-[450px] md:h-[500px] w-3/4 md:w-full mx-auto flex-col overflow-hidden border border-white/10 bg-gradient-to-b from-white/10 via-neutral-900/50 to-black hover:border-white/20 hover:shadow-2xl hover:shadow-neutral-500/10 rounded-[2rem] cursor-pointer"
+                            className="group relative flex h-[450px] md:h-[500px] w-[65%] md:w-full mx-auto flex-col overflow-hidden border border-white/10 bg-gradient-to-b from-white/10 via-neutral-900/50 to-black hover:border-white/20 hover:shadow-2xl hover:shadow-neutral-500/10 rounded-[2rem] cursor-pointer"
                         >
                             {/* Unique Reveal Effect per card */}
                             <HoverEffect canvasProps={service.canvasProps} />
