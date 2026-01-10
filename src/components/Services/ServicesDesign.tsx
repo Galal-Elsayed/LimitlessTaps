@@ -160,7 +160,7 @@ export default function ServicesDesign() {
             >
 
                 {/* Layout Mode */}
-                <ControlGroup label="Layout" icon={<Layout size={14} />}>
+                <ControlGroup label="Choose Layout" icon={<Layout size={14} />}>
                     {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
                         <ControlButton key={mode} isActive={layoutMode === mode} onClick={() => setLayoutMode(mode)} label={mode} />
                     ))}
@@ -168,7 +168,7 @@ export default function ServicesDesign() {
                 <Divider />
 
                 {/* Typography */}
-                <ControlGroup label="Type" icon={<Type size={14} />}>
+                <ControlGroup label="Typography" icon={<Type size={14} />}>
                     {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
                         <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
                     ))}
@@ -176,7 +176,7 @@ export default function ServicesDesign() {
                 <Divider />
 
                 {/* Size */}
-                <ControlGroup label="Size" icon={<Maximize2 size={14} />}>
+                <ControlGroup label="Interface Scale" icon={<Maximize2 size={14} />}>
                     {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
                         <ControlButton key={s} isActive={selectedSize === s} onClick={() => setSelectedSize(s)} label={s === 'sm' ? 'S' : s === 'md' ? 'M' : 'L'} />
                     ))}
@@ -184,7 +184,7 @@ export default function ServicesDesign() {
                 <Divider />
 
                 {/* Theme */}
-                <ControlGroup label="Theme" icon={<Palette size={14} />}>
+                <ControlGroup label="Color Theme" icon={<Palette size={14} />}>
                     {(["white", "green", "purple", "orange"] as ThemeOption[]).map((t) => (
                         <button
                             key={t}
@@ -202,7 +202,7 @@ export default function ServicesDesign() {
 
 
                 {/* Brand Name Input */}
-                <ControlGroup label="Brand" icon={<Type size={14} />}>
+                <ControlGroup label="Brand Name" icon={<Type size={14} />}>
                     <input
                         type="text"
                         value={brandName}
@@ -215,7 +215,7 @@ export default function ServicesDesign() {
                 <Divider />
 
                 {/* Details - Clarified */}
-                <ControlGroup label="Controls" icon={<MousePointer2 size={14} />}>
+                <ControlGroup label="Element Style" icon={<MousePointer2 size={14} />}>
                     <div className="flex gap-2">
                         <ControlDropdown
                             label="Button"
@@ -567,9 +567,9 @@ function ActionButton({ children, primary, theme, radius }: { children: React.Re
 
 function ControlGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon: React.ReactNode }) {
     return (
-        <div className="flex items-center gap-3 px-2">
-            <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] flex items-center gap-1.5 hidden lg:flex">
-                {icon} {label}
+        <div className="flex flex-col md:flex-row items-center gap-2 px-2">
+            <span className="text-[10px] md:text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2 mb-1 md:mb-0">
+                {icon} <span className="text-white/70">{label}</span>
             </span>
             <div className="flex items-center gap-1">
                 {children}
@@ -583,10 +583,10 @@ function ControlButton({ label, isActive, onClick }: { label: string; isActive: 
         <button
             onClick={onClick}
             className={cn(
-                "px-4 py-2 text-xs font-bold tracking-wider rounded-lg transition-all duration-300 uppercase",
+                "px-5 py-2.5 text-xs font-bold tracking-wider rounded-xl transition-all duration-300 uppercase relative overflow-hidden",
                 isActive
-                    ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
-                    : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10"
+                    ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.4)] scale-105 z-10"
+                    : "text-white/60 hover:text-white hover:bg-white/10 border border-white/5 hover:border-white/20"
             )}
         >
             {label}
@@ -612,7 +612,7 @@ function ControlDropdown({ label, value, options, onChange, icon }: {
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Close on blur delay
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[100px] justify-between"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[110px] justify-between hover:border-white/30"
             >
                 <div className="flex items-center gap-2">
                     <span className="text-white/60 group-hover:text-white transition-colors">{icon}</span>
