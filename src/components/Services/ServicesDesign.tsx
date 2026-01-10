@@ -116,7 +116,7 @@ export default function ServicesDesign() {
     const [layoutMode, setLayoutMode] = useState<LayoutMode>("split");
     const [buttonStyle, setButtonStyle] = useState<ButtonStyle>("pill");
     const [cardStyle, setCardStyle] = useState<CardStyle>("glass");
-    const [brandName, setBrandName] = useState("BRAND");
+    const [brandName, setBrandName] = useState("");
 
     // Dynamic Classes
     const theme = THEMES[selectedTheme];
@@ -156,7 +156,7 @@ export default function ServicesDesign() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-wrap items-center justify-center gap-4 mb-12 p-3 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-50 shadow-2xl max-w-6xl"
+                className="flex flex-wrap items-center justify-center gap-4 mb-12 p-3 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-30 shadow-2xl max-w-6xl"
             >
 
                 {/* Layout Mode */}
@@ -223,6 +223,7 @@ export default function ServicesDesign() {
                             options={[{ label: "Pill", value: "pill" }, { label: "Rect", value: "rect" }]}
                             onChange={(val) => setButtonStyle(val as ButtonStyle)}
                             icon={<Circle size={14} />}
+                            radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
                         />
                         <ControlDropdown
                             label="Card"
@@ -230,6 +231,7 @@ export default function ServicesDesign() {
                             options={[{ label: "Glass", value: "glass" }, { label: "Solid", value: "solid" }, { label: "Bordered", value: "bordered" }]}
                             onChange={(val) => setCardStyle(val as CardStyle)}
                             icon={<Box size={14} />}
+                            radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
                         />
                     </div>
                 </ControlGroup>
@@ -289,8 +291,9 @@ export default function ServicesDesign() {
                                         Adaptable. Scalable. Beautiful.
                                     </motion.p>
                                 </motion.div>
+
                                 <motion.div layoutId="hero-actions" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-                                    <ActionButton primary theme={theme} radius={buttonRadius}>{displayBrand} Start</ActionButton>
+                                    <ActionButton primary theme={theme} radius={buttonRadius}>Start Now</ActionButton>
                                 </motion.div>
                             </div>
                         )}
@@ -383,7 +386,7 @@ export default function ServicesDesign() {
                                         </motion.p>
                                     </motion.div>
                                     <motion.div layoutId="hero-actions" className="flex flex-col sm:flex-row gap-4">
-                                        <ActionButton primary theme={theme} radius={buttonRadius}>Start {displayBrand}</ActionButton>
+                                        <ActionButton primary theme={theme} radius={buttonRadius}>Start Now </ActionButton>
                                         <ActionButton theme={theme} radius={buttonRadius}>View Components</ActionButton>
                                     </motion.div>
                                 </div>
@@ -541,7 +544,7 @@ export default function ServicesDesign() {
                     </div>
                 </motion.div>
             </LayoutGroup>
-        </section>
+        </section >
     );
 }
 
@@ -598,12 +601,13 @@ function Divider() {
     return <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/10 to-transparent mx-2 hidden md:block" />;
 }
 
-function ControlDropdown({ label, value, options, onChange, icon }: {
+function ControlDropdown({ label, value, options, onChange, icon, radius = "rounded-xl" }: {
     label: string,
     value: string,
     options: { label: string, value: string }[],
     onChange: (val: string) => void,
-    icon: React.ReactNode
+    icon: React.ReactNode,
+    radius?: string
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -612,7 +616,7 @@ function ControlDropdown({ label, value, options, onChange, icon }: {
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Close on blur delay
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[110px] justify-between hover:border-white/30"
+                className={cn("flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[110px] justify-between hover:border-white/30", radius)}
             >
                 <div className="flex items-center gap-2">
                     <span className="text-white/60 group-hover:text-white transition-colors">{icon}</span>
