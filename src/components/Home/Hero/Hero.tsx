@@ -16,7 +16,7 @@ export default function Hero() {
     <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a] pb-40">
       
       {/* Global Background Waves */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
         <Image
           src="/Home/wave.png"
           alt="Color Waves"
