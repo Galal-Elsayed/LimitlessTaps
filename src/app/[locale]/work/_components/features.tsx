@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { ArrowRight, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -43,11 +42,11 @@ const mobileProjects: Project[] = [
     details:
       "A seamless shopping experience with intuitive navigation, personalized recommendations, and secure checkout process.",
     tutorialLink: "#",
-    mainImage: "/placeholder-mobile-1.jpg",
+    mainImage: "/Home/StickyPhone/mopImg1.jpg",
     gallery: [
-      "/placeholder-mobile-1.jpg",
-      "/placeholder-mobile-2.jpg",
-      "/placeholder-mobile-3.jpg",
+      "/Home/StickyPhone/mopImg1.jpg",
+      "/Home/StickyPhone/mopImg2.jpg",
+      "/Home/StickyPhone/mopimg3.jpg",
     ],
     technologies: ["React Native", "TypeScript", "Redux", "Firebase"],
     client: "RetailCo",
@@ -62,11 +61,11 @@ const mobileProjects: Project[] = [
     details:
       "Track your fitness goals, monitor health metrics, and get personalized workout plans tailored to your lifestyle.",
     tutorialLink: "#",
-    mainImage: "/placeholder-mobile-4.jpg",
+    mainImage: "/Home/StickyPhone/mopImg2.jpg",
     gallery: [
-      "/placeholder-mobile-4.jpg",
-      "/placeholder-mobile-5.jpg",
-      "/placeholder-mobile-6.jpg",
+      "/Home/StickyPhone/mopImg2.jpg",
+      "/Home/StickyPhone/mopimg3.jpg",
+      "/Home/StickyPhone/mopImg1.jpg",
     ],
     technologies: ["Flutter", "Dart", "HealthKit", "Google Fit"],
     client: "FitLife Inc",
@@ -81,11 +80,11 @@ const mobileProjects: Project[] = [
     details:
       "Stay connected with friends and family through instant messaging, photo sharing, and real-time updates.",
     tutorialLink: "#",
-    mainImage: "/placeholder-mobile-7.jpg",
+    mainImage: "/Home/StickyPhone/mopimg3.jpg",
     gallery: [
-      "/placeholder-mobile-7.jpg",
-      "/placeholder-mobile-8.jpg",
-      "/placeholder-mobile-9.jpg",
+      "/Home/StickyPhone/mopimg3.jpg",
+      "/Home/StickyPhone/mopImg1.jpg",
+      "/Home/StickyPhone/mopImg2.jpg",
     ],
     technologies: ["Swift", "SwiftUI", "Firebase", "WebRTC"],
     client: "SocialHub",
@@ -104,11 +103,11 @@ const webProjects: Project[] = [
     details:
       "Streamline your team's workflow with powerful project management tools, real-time collaboration, and advanced analytics.",
     tutorialLink: "#",
-    mainImage: "/placeholder-web-1.jpg",
+    mainImage: "/Home/Carousel/imageCarousel1.jpg",
     gallery: [
-      "/placeholder-web-1.jpg",
-      "/placeholder-web-2.jpg",
-      "/placeholder-web-3.jpg",
+      "/Home/Carousel/imageCarousel1.jpg",
+      "/Home/Carousel/imageCarousel2.jpg",
+      "/Home/Carousel/imageCarousel3.jpg",
     ],
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
     client: "TechCorp",
@@ -123,11 +122,11 @@ const webProjects: Project[] = [
     details:
       "Engage students with interactive courses, live sessions, and personalized learning paths powered by AI.",
     tutorialLink: "#",
-    mainImage: "/placeholder-web-4.jpg",
+    mainImage: "/Home/Carousel/imageCarousel2.jpg",
     gallery: [
-      "/placeholder-web-4.jpg",
-      "/placeholder-web-5.jpg",
-      "/placeholder-web-6.jpg",
+      "/Home/Carousel/imageCarousel2.jpg",
+      "/Home/Carousel/imageCarousel3.jpg",
+      "/Home/Carousel/imageCarousel4.jpg",
     ],
     technologies: ["React", "Node.js", "MongoDB", "WebRTC"],
     client: "EduTech Solutions",
@@ -142,11 +141,11 @@ const webProjects: Project[] = [
     details:
       "Transform raw data into actionable insights with customizable dashboards, real-time analytics, and predictive modeling.",
     tutorialLink: "#",
-    mainImage: "/placeholder-web-7.jpg",
+    mainImage: "/Home/Carousel/imageCarousel3.jpg",
     gallery: [
-      "/placeholder-web-7.jpg",
-      "/placeholder-web-8.jpg",
-      "/placeholder-web-9.jpg",
+      "/Home/Carousel/imageCarousel3.jpg",
+      "/Home/Carousel/imageCarousel4.jpg",
+      "/Home/Carousel/imageCarousel1.jpg",
     ],
     technologies: ["Vue.js", "Python", "D3.js", "Apache Kafka"],
     client: "DataCorp",
@@ -386,10 +385,10 @@ const Features = () => {
     <div ref={sectionRef} className="min-h-screen flex items-center justify-center">
       <div className="max-w-(--breakpoint-lg) w-full py-10 px-6">
         <div ref={headerRef}>
-          <h2 className="text-4xl md:text-[2.75rem] md:leading-[1.2] font-semibold tracking-[-0.03em] sm:max-w-xl text-pretty sm:mx-auto sm:text-center">
+          <h2 className="text-4xl md:text-[2.75rem] md:leading-[1.2] font-semibold tracking-[-0.03em] sm:max-w-xl text-pretty sm:mx-auto sm:text-center text-white">
             Strengthen Your Strategy
           </h2>
-          <p className="mt-2 text-muted-foreground text-lg sm:text-xl sm:text-center">
+          <p className="mt-2 text-gray-400 text-lg sm:text-xl sm:text-center">
             Enhance your strategy with intelligent tools designed for success.
           </p>
         </div>
@@ -423,7 +422,7 @@ const Features = () => {
             >
               {/* Project Image - Clickable */}
               <div
-                className="project-image w-full aspect-4/3 bg-muted rounded-xl border border-border/50 basis-1/2 overflow-hidden cursor-pointer group relative"
+                className="project-image w-full aspect-4/3 bg-black/20 rounded-xl border border-border/50 basis-1/2 overflow-hidden cursor-pointer group relative"
                 onClick={() => openModal(project)}
               >
                 <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
@@ -447,12 +446,17 @@ const Features = () => {
                 <h4 className="my-3 text-3xl font-semibold tracking-[-0.02em]">
                   {project.title}
                 </h4>
-                <p className="text-muted-foreground">{project.details}</p>
-                <Button asChild size="lg" className="mt-6 rounded-full gap-3">
-                  <Link href={project.tutorialLink}>
-                    Learn More <ArrowRight />
-                  </Link>
-                </Button>
+                <p className="text-gray-400 mb-6">{project.details}</p>
+                {/* <Link
+                  href={project.tutorialLink}
+                  className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95"
+                >
+                  <div className="absolute inset-0 bg-linear-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="relative z-10 flex items-center gap-2 transition-transform duration-500 group-hover:-translate-x-1">
+                    Learn More <ArrowRight className="h-4 w-4" />
+                  </span>
+                  <div className="absolute inset-0 -z-10 -translate-x-full bg-linear-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
+                </Link> */}
               </div>
             </div>
           ))}
@@ -467,13 +471,13 @@ const Features = () => {
           onClick={closeModal}
         >
           <div
-            className="modal-content bg-background rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+            className="modal-content bg-[#0a0a0a] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative border border-white/10 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-colors"
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -499,8 +503,8 @@ const Features = () => {
                     onClick={() => handleImageChange(index)}
                     className={`shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImageIndex === index
-                        ? "border-primary"
-                        : "border-transparent hover:border-border"
+                        ? "border-blue-500"
+                        : "border-white/10 hover:border-white/30"
                     }`}
                   >
                     <Image
@@ -517,49 +521,49 @@ const Features = () => {
               {/* Project Info */}
               <div className="space-y-6">
                 <div>
-                  <span className="uppercase font-medium text-sm text-muted-foreground">
+                  <span className="uppercase font-medium text-sm text-gray-500">
                     {selectedProject.category}
                   </span>
-                  <h3 className="text-3xl font-semibold tracking-[-0.02em] mt-2">
+                  <h3 className="text-3xl font-semibold tracking-[-0.02em] mt-2 text-white">
                     {selectedProject.title}
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-y border-white/5 py-6">
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Client</p>
-                    <p className="font-medium">{selectedProject.client}</p>
+                    <p className="text-sm text-gray-500 mb-1">Client</p>
+                    <p className="font-medium text-white">{selectedProject.client}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Year</p>
-                    <p className="font-medium">{selectedProject.year}</p>
+                    <p className="text-sm text-gray-500 mb-1">Year</p>
+                    <p className="font-medium text-white">{selectedProject.year}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">
+                    <p className="text-sm text-gray-500 mb-1">
                       Category
                     </p>
-                    <p className="font-medium">{selectedProject.category}</p>
+                    <p className="font-medium text-white">{selectedProject.category}</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-sm text-gray-500 mb-2">
                     Description
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     {selectedProject.description}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-sm text-gray-500 mb-3">
                     Technologies
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-muted rounded-full text-sm font-medium"
+                        className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm font-medium text-gray-300"
                       >
                         {tech}
                       </span>
@@ -567,15 +571,18 @@ const Features = () => {
                   </div>
                 </div>
 
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full rounded-full gap-3 mt-6"
-                >
-                  <Link href={selectedProject.tutorialLink}>
-                    View Full Case Study <ArrowRight />
+                <div className="pt-4">
+                  <Link
+                    href={selectedProject.tutorialLink}
+                    className="group relative inline-flex h-14 w-full items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95"
+                  >
+                    <div className="absolute inset-0 bg-linear-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <span className="relative z-10 flex items-center gap-2">
+                      View Full Case Study <ArrowRight className="h-5 w-5" />
+                    </span>
+                    <div className="absolute inset-0 -z-10 -translate-x-full bg-linear-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
                   </Link>
-                </Button>
+                </div>
               </div>
             </div>
           </div>
