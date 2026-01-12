@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Circle, Smartphone, Wifi, Share2, MousePointer2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -130,7 +130,7 @@ function HeroGeometric({
             transition: {
                 duration: 1,
                 delay: 0.5 + i * 0.2,
-                ease: [0.25, 0.4, 0.25, 1],
+                ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
             },
         }),
     };

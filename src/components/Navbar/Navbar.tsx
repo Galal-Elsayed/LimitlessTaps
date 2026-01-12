@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { NavDropdown } from '@/components/ui/nav-dropdown';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { Transition } from '@headlessui/react';
 
 export default function Navbar() {

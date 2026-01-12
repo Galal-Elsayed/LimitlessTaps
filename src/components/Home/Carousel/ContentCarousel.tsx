@@ -127,17 +127,13 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
       current.load();
     }
 
-    // Preload next 2 videos
-    const nextIndex1 = (activeIndex + 1) % items.length;
-    const nextIndex2 = (activeIndex + 2) % items.length;
-
-    [nextIndex1, nextIndex2].forEach(idx => {
-      const nextVid = videoRefs.current[idx];
-      if (nextVid && nextVid.readyState === 0 && idx !== activeIndex) {
-        nextVid.preload = "auto";
-        nextVid.load();
-      }
-    });
+    // Preload only the next video to save bandwidth
+    const nextIndex = (activeIndex + 1) % items.length;
+    const nextVid = videoRefs.current[nextIndex];
+    if (nextVid && nextVid.readyState === 0 && nextIndex !== activeIndex) {
+      nextVid.preload = "auto";
+      nextVid.load();
+    }
 
     const markLoaded = () => {
       if (!videosLoadedRef.current.has(activeIndex)) {
@@ -253,21 +249,21 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
   };
 
   const goToPrevious = () => {
-    const newIndex = activeIndex - 2;
+    const newIndex = activeIndex - 1;
     if (newIndex >= 0) {
       scrollToIndex(newIndex);
     } else {
-      // Loop to the end, accounting for the 2-step offset
+      // Loop to the end
       scrollToIndex((items.length + newIndex) % items.length);
     }
   };
 
   const goToNext = () => {
-    const newIndex = activeIndex + 2;
+    const newIndex = activeIndex + 1;
     if (newIndex < items.length) {
       scrollToIndex(newIndex);
     } else {
-      // Loop to the beginning, accounting for the 2-step offset
+      // Loop to the beginning
       scrollToIndex(newIndex % items.length);
     }
   };
@@ -349,6 +345,8 @@ export default function ContentCarousel({ items, textVariant = "default" }: Cont
                     fill
                     className="object-cover"
                     loading="lazy"
+                    quality={75}
+                    sizes="(max-width: 768px) 60vw, 30vw"
                   />
                 )}
               </div>

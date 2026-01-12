@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';

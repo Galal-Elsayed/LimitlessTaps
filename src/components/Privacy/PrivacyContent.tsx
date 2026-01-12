@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Link } from "@/i18n/routing";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight, ShieldCheck, Scale, ArrowRight, HelpCircle, Database } from "lucide-react";

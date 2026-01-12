@@ -11,36 +11,32 @@ export default function Carousel2() {
     const carousel2Items = [
         {
             type: "video" as const,
-            src: "/Home/Carousel/video-carousel.mp4",
+            src: "/Home/Carousel/3d-web-sec.webm",
+            autoPlay:true,
+            muted:true,
+            loop:true,
             alt: "Display 1",
-            autoPlay: true,
-            loop: true,
-            muted: true,
+            className: "w-full h-auto object-cover",
             text: t("carousel2_item_1_text")
         },
         {
             type: "image" as const,
-            src: "/Home/Carousel/imageCarousel1.jpg",
+            src: "/Home/Carousel/Untitled.png",
             alt: "Display 2",
+            className: "w-full h-auto object-cover",
             text: t("carousel2_item_2_text")
         },
         {
             type: "image" as const,
-            src: "/Home/Carousel/imageCarousel2.jpg",
+            src: "/Home/Carousel/imageCarousel3.jpg",
             alt: "Display 3",
             text: t("carousel2_item_3_text")
         },
         {
             type: "image" as const,
-            src: "/Home/Carousel/imageCarousel3.jpg",
+            src: "/Home/Carousel/imageCarousel4.jpg",
             alt: "Display 4",
             text: t("carousel2_item_4_text")
-        },
-        {
-            type: "image" as const,
-            src: "/Home/Carousel/imageCarousel4.jpg",
-            alt: "Display 5",
-            text: t("carousel2_item_5_text")
         }
     ];
 
@@ -48,11 +44,11 @@ export default function Carousel2() {
         <section className="w-full bg-[#0a0a0a] pt-20 pb-20 overflow-hidden relative">
             {/* Image Carousel */}
             <div className="mb-20 md:mb-32">
-                <ContentCarousel items={carousel2Items} textVariant="linear" />
+                <ContentCarousel items={carousel2Items} textVariant="linear"/>
             </div>
 
             {/* Bottom Text Block - Two Columns */}
-            <div className="px-6 md:px-12 md:mt-20 max-w-7xl mx-auto">
+            <div className="px-6  md:px-12 md:mt-20 max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
                     <div>
                         <p className="text-[#86868b] md:text-2xl leading-relaxed tracking-wide font-semibold">

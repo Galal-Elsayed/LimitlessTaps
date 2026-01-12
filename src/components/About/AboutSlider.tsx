@@ -3,7 +3,7 @@
 import React from "react";
 import { SlidingLogoMarquee, SlidingLogoMarqueeItem } from "@/components/lightswind/sliding-logo-marquee";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 
 // Duplicate items to ensure infinite seamless scrolling

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, LayoutGroup, useScroll, useTransform } from "framer-motion";
+import { motion, LayoutGroup, useScroll, useTransform } from "motion/react";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Monitor, Type, Palette, Layout, Globe, ChevronDown, Maximize2, BarChart3, PieChart, Activity, Box, Circle, Square, Zap, TrendingUp, Users, MousePointer2 } from "lucide-react";

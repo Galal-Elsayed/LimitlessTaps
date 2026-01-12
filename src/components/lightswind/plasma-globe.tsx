@@ -254,14 +254,16 @@ export default function PlasmaGlobe({
 }: PlasmaGlobeProps) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
+    const isVisibleRef = useRef(true);
+    const rafIdRef = useRef(0);
 
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
 
         // create renderer with performance optimizations
-        const renderer = new Renderer({ 
-            alpha: true, 
+        const renderer = new Renderer({
+            alpha: true,
             antialias: false, // disable AA for performance (hardly visible on high DPI)
             powerPreference: "high-performance",
             depth: false, // no depth buffer needed
@@ -308,19 +310,34 @@ export default function PlasmaGlobe({
         };
         window.addEventListener("mousemove", onMouse);
 
-        let rafId = 0;
+        // Animation loop with visibility check
         const loop = (t: number) => {
-            rafId = requestAnimationFrame(loop);
+            if (!isVisibleRef.current) {
+                // Still request frame but don't render - allows quick resume
+                rafIdRef.current = requestAnimationFrame(loop);
+                return;
+            }
+            rafIdRef.current = requestAnimationFrame(loop);
             // uTime passed in seconds, multiplied by speed
             program.uniforms.uTime.value = (t * 0.001) * speed;
             program.uniforms.uMouse.value = [mouseRef.current.x, mouseRef.current.y];
             program.uniforms.uIntensity.value = intensity;
             renderer.render({ scene: mesh });
         };
-        rafId = requestAnimationFrame(loop);
+        rafIdRef.current = requestAnimationFrame(loop);
+
+        // Intersection Observer to pause when off-screen
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                isVisibleRef.current = entry.isIntersecting;
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(container);
 
         return () => {
-            cancelAnimationFrame(rafId);
+            cancelAnimationFrame(rafIdRef.current);
+            observer.disconnect();
             window.removeEventListener("resize", resize);
             window.removeEventListener("mousemove", onMouse);
             if (gl.canvas.parentNode === container) container.removeChild(gl.canvas);

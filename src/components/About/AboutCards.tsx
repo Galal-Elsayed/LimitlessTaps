@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useId, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import { ArrowUpRight, X, Code, Smartphone, Cloud, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";

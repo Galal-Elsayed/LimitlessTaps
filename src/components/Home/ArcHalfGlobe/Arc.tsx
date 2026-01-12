@@ -16,7 +16,9 @@ export function CTAArc() {
         width={1920}
         height={1080}
         className="w-full h-auto"
-        priority
+        loading="lazy"
+        quality={75}
+        sizes="100vw"
       />
     </div>
   );
@@ -29,7 +31,7 @@ export function CTATitle() {
       <h1 className="text-white font-bold leading-tight tracking-tight text-7xl md:text-6xl lg:text-8xl">
         {t("cta_title")}
       </h1>
-      <p className="text-white/70 text-lg md:text-3xl lg:text-5xl font-medium">
+      <p className="text-white/70 text-lg md:text-3xl lg:text-4xl font-medium">
         {t("cta_subtitle")}
       </p>
     </div>
@@ -52,11 +54,10 @@ export function CTAButtons() {
         <span className={`relative z-10 flex items-center gap-2 transition-transform duration-500 ${isRTL ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1'}`}>
           <Image
             src="/Home/infinity.apng"
-            alt="Limitless" 
+            alt="Limitless"
             width={24}
             height={24}
             className="h-6 w-6 object-contain transition-transform duration-700 ease-in-out group-hover:scale-110"
-            unoptimized
           />
           {t("cta_primary")}
         </span>

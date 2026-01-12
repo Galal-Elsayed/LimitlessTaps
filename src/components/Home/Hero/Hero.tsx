@@ -1,11 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import PlasmaGlobe from "@/components/lightswind/plasma-globe";
+
+// Dynamic import for heavy WebGL component - loads only on client
+const PlasmaGlobe = dynamic(
+  () => import("@/components/lightswind/plasma-globe"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[300px] sm:min-h-[450px] lg:min-h-[550px] rounded-xl bg-gradient-to-b from-blue-500/10 to-purple-500/10 animate-pulse" />
+    )
+  }
+);
 
 export default function Hero() {
   const t = useTranslations("home");
@@ -22,7 +33,8 @@ export default function Hero() {
           alt="Color Waves"
           fill
           className="object-cover opacity-30"
-          priority
+          loading="lazy"
+          quality={75}
         />
       </div>
       
@@ -85,11 +97,10 @@ export default function Hero() {
                     <span className={`relative z-10 flex items-center gap-2 transition-transform duration-500 ${isRTL ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1'}`}>
                       <Image
                         src="/Home/infinity.apng"
-                        alt="Limitless" 
+                        alt="Limitless"
                         width={24}
                         height={24}
                         className="h-6 w-6 object-contain transition-transform duration-700 ease-in-out group-hover:scale-110"
-                        unoptimized
                       />
                       {t("cta_primary")}
                     </span>

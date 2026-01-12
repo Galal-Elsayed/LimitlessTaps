@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -23,9 +23,13 @@ export const StickyScroll = ({
   });
   const cardLength = content.length;
 
+  // Memoize breakpoints calculation
+  const cardsBreakpoints = useMemo(
+    () => content.map((_, index) => (index + 0.5) / cardLength),
+    [content, cardLength]
+  );
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // For 3 items: breakpoints at 0.167, 0.5, 0.833 (center of each third)
-    const cardsBreakpoints = content.map((_, index) => (index + 0.5) / cardLength);
     const closestBreakpointIndex = cardsBreakpoints.reduce(
       (acc, breakpoint, index) => {
         const distance = Math.abs(latest - breakpoint);
@@ -38,6 +42,15 @@ export const StickyScroll = ({
     );
     setActiveCard(closestBreakpointIndex);
   });
+
+  // Only render active card + adjacent cards for smooth transitions
+  const visibleCards = useMemo(() => {
+    const visible = new Set<number>();
+    visible.add(activeCard);
+    if (activeCard > 0) visible.add(activeCard - 1);
+    if (activeCard < cardLength - 1) visible.add(activeCard + 1);
+    return visible;
+  }, [activeCard, cardLength]);
 
   return (
     <motion.div
@@ -81,21 +94,24 @@ export const StickyScroll = ({
         )}
       >
         {content.map((item, index) => (
-          <motion.div
-            key={item.title + index}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: activeCard === index ? 1 : 0,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="absolute inset-0 h-full w-full"
-          >
-            {item.content}
-          </motion.div>
+          // Only render content for visible cards to reduce DOM and image loads
+          visibleCards.has(index) && (
+            <motion.div
+              key={item.title + index}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: activeCard === index ? 1 : 0,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="absolute inset-0 h-full w-full"
+            >
+              {item.content}
+            </motion.div>
+          )
         ))}
       </div>
     </motion.div>

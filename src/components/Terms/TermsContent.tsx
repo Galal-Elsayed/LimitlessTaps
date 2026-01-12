@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Scale, ChevronRight, ShieldCheck, ArrowRight, HelpCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/separator";

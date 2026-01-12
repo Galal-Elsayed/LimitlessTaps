@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Globe } from "@/components/ui/Globe";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function GlobeSection() {
     const t = useTranslations('home');
