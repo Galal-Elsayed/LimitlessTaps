@@ -1,6 +1,7 @@
 
-import React from 'react';
+
 import Navbar from "@/components/Navbar/Navbar";
+import Features from './_components/features';
 
 export default function OurWorkPage() {
     return (
@@ -8,7 +9,7 @@ export default function OurWorkPage() {
             <Navbar />
             <main className="flex flex-col items-center justify-center p-8">
                 <h1 className="text-4xl font-bold mb-4">Work</h1>
-                <p className="text-gray-400">Work showcase coming soon.</p>
+                <Features/>
             </main>
         </div>
     );
