@@ -25,6 +25,7 @@ type Project = {
   client: string;
   year: string;
   description: string;
+  displayUrl?: string;
 };
 
 type TabConfig = {
@@ -38,15 +39,16 @@ const mobileProjects: Project[] = [
   {
     id: "mobile-1",
     category: "E-Commerce App",
-    title: "Shop Smart Mobile Experience",
+    title: "Shop & Ship Mobile",
     details:
       "A seamless shopping experience with intuitive navigation, personalized recommendations, and secure checkout process.",
     tutorialLink: "#",
-    mainImage: "/Home/StickyPhone/mopImg1.jpg",
+    mainImage: "/Work/mobile/shop&ship1.webp",
     gallery: [
-      "/Home/StickyPhone/mopImg1.jpg",
-      "/Home/StickyPhone/mopImg2.jpg",
-      "/Home/StickyPhone/mopimg3.jpg",
+      "/Work/mobile/shop&ship1.webp",
+      "/Work/mobile/shop&ship2.webp",
+      "/Work/mobile/shop&ship3.webp",
+      "/Work/mobile/shop&ship4.webp",
     ],
     technologies: ["React Native", "TypeScript", "Redux", "Firebase"],
     client: "RetailCo",
@@ -56,16 +58,17 @@ const mobileProjects: Project[] = [
   },
   {
     id: "mobile-2",
-    category: "Fitness Tracker",
-    title: "Health & Wellness Companion",
+    category: "Logistics",
+    title: "Blueworks",
     details:
       "Track your fitness goals, monitor health metrics, and get personalized workout plans tailored to your lifestyle.",
     tutorialLink: "#",
-    mainImage: "/Home/StickyPhone/mopImg2.jpg",
+    mainImage: "/Work/mobile/bluworks1.webp",
     gallery: [
-      "/Home/StickyPhone/mopImg2.jpg",
-      "/Home/StickyPhone/mopimg3.jpg",
-      "/Home/StickyPhone/mopImg1.jpg",
+      "/Work/mobile/bluworks1.webp",
+      "/Work/mobile/bluworks2.webp",
+      "/Work/mobile/bluworks3.webp",
+      "/Work/mobile/bluworks4.webp",
     ],
     technologies: ["Flutter", "Dart", "HealthKit", "Google Fit"],
     client: "FitLife Inc",
@@ -75,16 +78,15 @@ const mobileProjects: Project[] = [
   },
   {
     id: "mobile-3",
-    category: "Social Networking",
-    title: "Connect & Share Moments",
+    category: "Fintech",
+    title: "Tecfy",
     details:
       "Stay connected with friends and family through instant messaging, photo sharing, and real-time updates.",
     tutorialLink: "#",
-    mainImage: "/Home/StickyPhone/mopimg3.jpg",
+    mainImage: "/Work/mobile/Tecfy1.webp",
     gallery: [
-      "/Home/StickyPhone/mopimg3.jpg",
-      "/Home/StickyPhone/mopImg1.jpg",
-      "/Home/StickyPhone/mopImg2.jpg",
+      "/Work/mobile/Tecfy1.webp",
+      "/Work/mobile/Tecfy2.webp",
     ],
     technologies: ["Swift", "SwiftUI", "Firebase", "WebRTC"],
     client: "SocialHub",
@@ -92,66 +94,236 @@ const mobileProjects: Project[] = [
     description:
       "A modern social networking platform that emphasizes privacy and meaningful connections through innovative features.",
   },
+  {
+    id: "mobile-4",
+    category: "Lifestyle",
+    title: "Vibe Messenger",
+    details: "Universal communication platform for teams and personal connections.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["React Native", "Node.js", "Socket.io"],
+    client: "VibeTech",
+    year: "2024",
+    description: "A secure and fast messaging application designed for large-scale enterprise communication and social interaction.",
+  },
 ];
 
 // Mock data for web projects
 const webProjects: Project[] = [
   {
     id: "web-1",
-    category: "SaaS Platform",
-    title: "Enterprise Project Management",
+    category: "E-Commerce",
+    title: "KFrame Store",
     details:
-      "Streamline your team's workflow with powerful project management tools, real-time collaboration, and advanced analytics.",
+      "Modern e-commerce platform with seamless shopping experience and secure payment integration.",
     tutorialLink: "#",
-    mainImage: "/Home/Carousel/imageCarousel1.jpg",
+    mainImage: "/Work/web/kframe long.jpg",
     gallery: [
-      "/Home/Carousel/imageCarousel1.jpg",
-      "/Home/Carousel/imageCarousel2.jpg",
-      "/Home/Carousel/imageCarousel3.jpg",
+      "/Work/web/kframe1.png",
+      "/Work/web/kframe2.png",
+      "/Work/web/kframe3.png",
     ],
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
-    client: "TechCorp",
+    technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
+    client: "KFrame",
     year: "2024",
     description:
-      "A comprehensive project management solution designed for enterprise teams, featuring advanced reporting and seamless integrations.",
+      "A comprehensive e-commerce solution featuring advanced product filtering, real-time inventory management, and seamless checkout experience.",
+    displayUrl: "kframeagency.com",
   },
   {
     id: "web-2",
-    category: "E-Learning Platform",
-    title: "Interactive Learning Hub",
+    category: "E-Commerce",
+    title: "SOGC Store",
     details:
-      "Engage students with interactive courses, live sessions, and personalized learning paths powered by AI.",
+      "Premium online shopping destination with curated collections and personalized recommendations.",
     tutorialLink: "#",
-    mainImage: "/Home/Carousel/imageCarousel2.jpg",
+    mainImage: "/Work/web/sogc long.jpg",
     gallery: [
-      "/Home/Carousel/imageCarousel2.jpg",
-      "/Home/Carousel/imageCarousel3.jpg",
-      "/Home/Carousel/imageCarousel4.jpg",
+      "/Work/web/sogc1.png",
+      "/Work/web/sogc2.png",
+      "/Work/web/sogc3.png",
+      "/Work/web/sogc4.png",
     ],
-    technologies: ["React", "Node.js", "MongoDB", "WebRTC"],
-    client: "EduTech Solutions",
+    technologies: ["React", "Node.js", "MongoDB", "Redux"],
+    client: "SOGC",
     year: "2024",
     description:
-      "An innovative e-learning platform that combines cutting-edge technology with pedagogical best practices to deliver exceptional learning experiences.",
+      "An innovative e-commerce platform that delivers exceptional shopping experiences through AI-powered recommendations and intuitive design.",
+    displayUrl: "sogc-construction.com",
   },
   {
     id: "web-3",
-    category: "Analytics Dashboard",
-    title: "Data Insights Platform",
-    details:
-      "Transform raw data into actionable insights with customizable dashboards, real-time analytics, and predictive modeling.",
+    category: "E-Commerce",
+    title: "Power Store",
+    details: "High-performance e-commerce platform for sports and energy products.",
     tutorialLink: "#",
-    mainImage: "/Home/Carousel/imageCarousel3.jpg",
+    mainImage: "/Work/web/power long.jpg",
     gallery: [
-      "/Home/Carousel/imageCarousel3.jpg",
-      "/Home/Carousel/imageCarousel4.jpg",
-      "/Home/Carousel/imageCarousel1.jpg",
+      "/Work/web/power1.png",
+      "/Work/web/power2.png",
+      "/Work/web/power3.png",
     ],
-    technologies: ["Vue.js", "Python", "D3.js", "Apache Kafka"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Shopify"],
+    client: "Power Energy",
+    year: "2024",
+    description: "A robust and scalable e-commerce solution designed for high-traffic energy drink and fitness supplement sales.",
+    displayUrl: "power-energy.com",
+  },
+  {
+    id: "web-4",
+    category: "Dashboard",
+    title: "OmniAnalytics",
+    details: "Universal data visualization platform for enterprise metrics.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["Vue.js", "D3.js", "Firebase"],
     client: "DataCorp",
+    year: "2024",
+    description: "A centralized dashboard that aggregates data from multiple sources to provide real-time business intelligence.",
+    displayUrl: "omnianalytics.ai",
+  },
+];
+
+// Mock data for Costume Solutions projects
+const costumeSolutionsProjects: Project[] = [
+  {
+    id: "costume-1",
+    category: "Fashion Tech",
+    title: "TailorMade AI",
+    details: "AI-powered body measurement and suit customization platform for bespoke tailoring.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1594932224010-75b2a77afca0?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1594932224010-75b2a77afca0?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["React", "Python", "Computer Vision", "AWS"],
+    client: "Bespoke World",
+    year: "2024",
+    description: "A revolutionary platform that uses computer vision to take accurate body measurements from photos, allowing users to order perfectly fitted suits online.",
+  },
+  {
+    id: "costume-2",
+    category: "E-Commerce",
+    title: "FabricSync",
+    details: "B2B marketplace for connecting fashion designers with sustainable fabric manufacturers.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["Next.js", "Node.js", "GraphQL", "Stripe"],
+    client: "EcoFashion Global",
     year: "2023",
-    description:
-      "A powerful analytics platform that helps businesses make data-driven decisions through intuitive visualizations and advanced analytics.",
+    description: "FabricSync simplifies the sourcing process for independent designers, focusing on sustainable and ethically produced textiles with real-time inventory tracking.",
+  },
+  {
+    id: "costume-3",
+    category: "Costume Design",
+    title: "Virtual Fitting Room",
+    details: "AR-based fitting room for trying on virtual costumes in real-time.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["ARCore", "Unity", "React"],
+    client: "V-Style",
+    year: "2024",
+    description: "An innovative mobile application that allows users to try on digital assets and costumes using augmented reality.",
+  },
+  {
+    id: "costume-4",
+    category: "Supply Chain",
+    title: "ThreadTrack",
+    details: "Blockchain-based supply chain management for the textile industry.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["Ethereum", "Solidity", "Node.js"],
+    client: "TextileHub",
+    year: "2024",
+    description: "Ensuring transparency and traceability in the fashion supply chain using distributed ledger technology.",
+  },
+];
+
+// Mock data for CMS projects
+const CMSProjects: Project[] = [
+  {
+    id: "CMS-1",
+    category: "SaaS",
+    title: "Pulse CMS Dashboard",
+    details: "Next-gen customer relationship management with integrated real-time communication.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["React", "Go", "Socket.io", "PostgreSQL"],
+    client: "GrowthStream",
+    year: "2024",
+    description: "Pulse CMS centralizes user interactions, featuring a real-time dashboard that tracks customer health and provides AI-driven sentiment analysis.",
+  },
+  {
+    id: "CMS-2",
+    category: "Enterprise",
+    title: "OmniLink Support Hub",
+    details: "Unified support platform that connects email, social media, and chat in one interface.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1556761175-4b46a572b776?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1556761175-4b46a572b776?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["Vue.js", "NestJS", "Redis", "ElasticSearch"],
+    client: "GlobalConnect",
+    year: "2023",
+    description: "A large-scale support solution for multi-national corporations, enabling support agents to manage thousands of cross-channel tickets efficiently.",
+  },
+  {
+    id: "CMS-3",
+    category: "Publishing",
+    title: "NewsFlow CMS",
+    details: "High-traffic content management for digital news outlets.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["Next.js", "Supabase", "Vercel"],
+    client: "NewsWorld",
+    year: "2024",
+    description: "A headless CMS architecture designed for lightning-fast content delivery and seamless editorial workflows.",
+  },
+  {
+    id: "CMS-4",
+    category: "Education",
+    title: "EduLink Portal",
+    details: "Centralized learning management system for universities.",
+    tutorialLink: "#",
+    mainImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
+    ],
+    technologies: ["React", "Express", "PostgreSQL"],
+    client: "UniTech",
+    year: "2024",
+    description: "A comprehensive platform for course management, student engagement, and academic tracking.",
   },
 ];
 
@@ -159,6 +331,8 @@ const webProjects: Project[] = [
 const tabs: TabConfig[] = [
   { id: "mobile", label: "Mobile", projects: mobileProjects },
   { id: "web", label: "Web", projects: webProjects },
+  { id: "costume-solutions", label: "Costume Solutions", projects: costumeSolutionsProjects },
+  { id: "CMS", label: "CMS", projects: CMSProjects },
   // Add more tabs here as needed
   // { id: "desktop", label: "Desktop", projects: desktopProjects },
 ];
@@ -383,12 +557,14 @@ const Features = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen flex items-center justify-center">
-      <div className="max-w-(--breakpoint-lg) w-full py-10 px-6">
-        <div ref={headerRef}>
-          <h2 className="text-4xl md:text-[2.75rem] md:leading-[1.2] font-semibold tracking-[-0.03em] sm:max-w-xl text-pretty sm:mx-auto sm:text-center text-white">
-            Strengthen Your Strategy
+      <div className="max-w-7xl w-full py-10 px-6">
+        <div ref={headerRef} className="max-w-7xl">
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] leading-[0.95] text-white uppercase text-left">
+            <span className="block">Strengthen</span>
+            <span className="block">Your</span>
+            <span className="block mt-8">Strategy</span>
           </h2>
-          <p className="mt-2 text-gray-400 text-lg sm:text-xl sm:text-center">
+          <p className="mt-8 text-gray-400 text-xl sm:text-2xl max-w-2xl text-left">
             Enhance your strategy with intelligent tools designed for success.
           </p>
         </div>
@@ -414,49 +590,91 @@ const Features = () => {
         </div>
 
         {/* Projects Grid */}
-        <div ref={projectsRef} className="mt-8 md:mt-16 w-full mx-auto space-y-20">
+        <div ref={projectsRef} className="mt-8 md:mt-16 w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {activeProjects.map((project) => (
             <div
               key={project.id}
-              className="flex flex-col md:flex-row items-center gap-x-12 gap-y-6 md:even:flex-row-reverse"
+              className="project-card group cursor-pointer"
+              onClick={() => openModal(project)}
             >
-              {/* Project Image - Clickable */}
-              <div
-                className="project-image w-full aspect-4/3 bg-black/20 rounded-xl border border-border/50 basis-1/2 overflow-hidden cursor-pointer group relative"
-                onClick={() => openModal(project)}
-              >
-                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                  <span className="text-white font-semibold text-lg">
-                    View Project
+              {/* Device Frame */}
+              <div className="relative min-w-[250px] h-[450px] rounded-[2.5rem] overflow-hidden bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px]">
+                
+                {/* Frame Header (Conditional) */}
+                {project.id.includes('mobile') ? (
+                  /* iPhone Notch Frame */
+                  <>
+                    <div className="absolute top-0 left-0 right-0 h-10 z-20 flex justify-center items-start pt-1">
+                      <div className="w-25 h-7 bg-black rounded-[1.25rem] border border-x border-white/5 flex items-center justify-center gap-2 ">
+                        {/* Camera */}
+                        <div className="w-2 h-2 rounded-full bg-[#1a1a3a] ring-1 ring-white/10" />
+                        {/* Speaker */}
+                        <div className="w-12 h-1.5 bg-[#0a0a0a] rounded-full" />
+                      </div>
+                    </div>
+                    {/* Bottom Home Indicator */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-20" />
+                  </>
+                ) : (
+                  /* Browser Frame Header */
+                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#252525] border-b border-white/5 z-20 flex items-center px-4 gap-3">
+                    <div className="flex gap-1.5 shrink-0">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                    </div>
+                    {/* URL Bar */}
+                    <div className="flex-1 max-w-[280px] h-5 bg-black/30 rounded-md border border-white/5 flex items-center px-2 gap-2 overflow-hidden">
+                      <div className="w-2.5 h-2.5 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                        <div className="w-1 h-1 bg-white/40 rounded-full" />
+                      </div>
+                      <span className="text-[10px] text-white/40 font-medium truncate select-none">
+                        {project.displayUrl || "localhost:3000"}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Overlay with info */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-6">
+                  <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">
+                    {project.category}
                   </span>
+                  <h3 className="text-white text-xl font-bold mt-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-white/60 text-sm mt-2 line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    {project.details}
+                  </p>
                 </div>
-                <Image
-                  src={project.mainImage}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                
+                {/* Scrolling Page Content */}
+                <div className={`relative w-full h-full ${!project.id.includes('mobile') ? 'pt-8' : ''} overflow-hidden`}>
+                  <div className={`absolute inset-x-0 ${project.id.includes('mobile') ? 'top-0' : 'top-8'} transition-all ease-in-out
+                    ${project.id.includes('web') 
+                      ? "duration-[8000ms] group-hover:translate-y-[clamp(-1000%,calc(-100%+418px),0%)]" 
+                      : project.id.includes('mobile')
+                        ? "duration-1000 group-hover:translate-y-[calc(-100%+450px)]"
+                        : "duration-[3000ms] group-hover:translate-y-[-15%]"
+                    }`}
+                  >
+                    <Image
+                      src={project.mainImage}
+                      alt={project.title}
+                      width={800}
+                      height={2000}
+                      className={`w-full ${project.id.includes('mobile') ? 'h-[700px]' : 'h-auto'} object-cover object-top origin-top transition-transform duration-700 ${project.id.includes('web') ? 'group-hover:scale-100' : ''}`}
+                    />
+                  </div>
+                </div>
               </div>
 
-              {/* Project Details */}
-              <div className="project-content basis-1/2 shrink-0">
-                <span className="uppercase font-medium text-sm text-muted-foreground">
-                  {project.category}
-                </span>
-                <h4 className="my-3 text-3xl font-semibold tracking-[-0.02em]">
+              {/* Title below for accessibility */}
+              <div className="mt-4 px-2">
+                <h4 className="text-sm font-semibold text-white/90 group-hover:text-white transition-colors">
                   {project.title}
                 </h4>
-                <p className="text-gray-400 mb-6">{project.details}</p>
-                {/* <Link
-                  href={project.tutorialLink}
-                  className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95"
-                >
-                  <div className="absolute inset-0 bg-linear-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <span className="relative z-10 flex items-center gap-2 transition-transform duration-500 group-hover:-translate-x-1">
-                    Learn More <ArrowRight className="h-4 w-4" />
-                  </span>
-                  <div className="absolute inset-0 -z-10 -translate-x-full bg-linear-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
-                </Link> */}
+                <p className="text-xs text-gray-500 mt-0.5">{project.category}</p>
               </div>
             </div>
           ))}

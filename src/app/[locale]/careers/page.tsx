@@ -289,7 +289,7 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-white/10">
+      {/* <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-linear-to-b from-blue-600/5 to-transparent" />
         <div className="relative h-screen max-w-(--breakpoint-xl) mx-auto px-6 py-20 md:py-32">
           <div ref={heroRef} className="max-w-3xl mx-auto text-center space-y-6">
@@ -302,7 +302,7 @@ export default function CareersPage() {
               push boundaries and grow their careers.
             </p>
             <div className="flex flex-wrap gap-4 justify-center pt-4">
-              {/* Primary Button - White like home page */}
+              
               <button className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95">
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <span className="relative z-10 flex items-center gap-2">
@@ -310,7 +310,7 @@ export default function CareersPage() {
                 </span>
                 <div className="absolute inset-0 -z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
               </button>
-              {/* Secondary Button - Glass style like home page */}
+              
               <button className="group relative inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:pr-10 active:scale-95">
                 <span className="font-semibold">Learn About Our Culture</span>
                 <ArrowRight className="h-5 w-5 transition-all duration-300 group-hover:translate-x-1" />
@@ -318,10 +318,10 @@ export default function CareersPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Company Perks */}
-      <section ref={perksRef} className="py-20 border-b border-white/10">
+      {/* <section ref={perksRef} className="py-20 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -358,23 +358,24 @@ export default function CareersPage() {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Jobs Toggle Section */}
       <section className="py-16">
         <div className="max-w-(--breakpoint-xl) mx-auto px-6">
-          <div ref={toggleRef} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Open Positions
+          <div ref={toggleRef} className="max-w-7xl mb-12">
+            <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] leading-[0.95] text-white uppercase text-left">
+              <span className="block">Open</span>
+              <span className="block mt-8">Positions</span>
             </h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="mt-8 text-gray-400 text-xl sm:text-2xl max-w-2xl text-left">
               Explore our current job openings and find the perfect role for you.
             </p>
             
             {/* White button like home page */}
             <button
               onClick={handleToggle}
-              className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95 min-w-[200px]"
+              className="mt-8 group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95 min-w-[200px]"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <span className="relative z-10 flex items-center gap-2">
@@ -587,7 +588,7 @@ export default function CareersPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-white/10">
+      {/* <section className="py-20 border-t border-white/10">
         <div className="max-w-(--breakpoint-lg) mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Don't See the Right Role?
@@ -596,13 +597,13 @@ export default function CareersPage() {
             We&apos;re always interested in hearing from talented individuals. Send us
             your resume and let us know what you&apos;re passionate about.
           </p>
-          {/* Glass button */}
+          
           <button className="group relative inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:pr-10 active:scale-95">
             <span className="font-semibold">Get in Touch</span>
             <ArrowRight className="h-5 w-5 transition-all duration-300 group-hover:translate-x-1" />
           </button>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
