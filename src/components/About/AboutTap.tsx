@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 import { Send, ArrowUpRight, Check } from "lucide-react";
@@ -15,8 +15,14 @@ export default function AboutTap() {
     const [typedText, setTypedText] = useState("");
     const targetText = t("tap.form.typed_message");
 
-    // Cycle the animation loop
+    // Scroll detection
+    const sectionRef = useRef<HTMLElement>(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+    // Cycle the animation loop - only starts when section is in view
     useEffect(() => {
+        if (!isInView) return; // Don't start until in view
+
         let isMounted = true;
 
         const runSequence = async () => {
@@ -53,10 +59,10 @@ export default function AboutTap() {
         runSequence();
 
         return () => { isMounted = false; };
-    }, [targetText]);
+    }, [targetText, isInView]);
 
     return (
-        <section className="relative w-full min-h-screen bg-black flex flex-col items-center justify-center pt-0 md:pt-20 overflow-hidden perspective-1000">
+        <section ref={sectionRef} className="relative w-full min-h-screen bg-black flex flex-col items-center justify-center pt-0 md:pt-20 overflow-hidden perspective-1000">
 
             {/* Header Text */}
             {/* Header Content - Split Layout */}

@@ -46,11 +46,11 @@ export function ServicesMopile() {
         offset: ["start end", "center center"],
     });
 
-    // Smooth physics-based scroll
+    // Smooth physics-based scroll - Optimized for snappier, less laggy feel
     const smoothProgress = useSpring(scrollYProgress, {
-        mass: 0.1,
-        stiffness: 100,
-        damping: 20,
+        mass: 0.05,      // Reduced mass for quicker response
+        stiffness: 150,  // Increased stiffness for tighter follow
+        damping: 15,     // Adjusted damping to prevent over-oscillation while keeping it fast
         restDelta: 0.001
     });
 
@@ -130,13 +130,15 @@ export function ServicesMopile() {
 
                 {/* --- REALISTIC PHONE DEVICE --- */}
                 <motion.div
+                    className="relative grid place-items-center will-change-transform"
                     style={{
                         rotate,
                         y: yParam,
                         x: xParam,
                         scale,
+                        transformStyle: "preserve-3d", // Force 3D context
+                        backfaceVisibility: "hidden"  // Optimization hint
                     }}
-                    className="relative grid place-items-center will-change-transform" // Optimized for performance
                 >
                     {/* Phone Frame */}
                     <div className="relative  w-[320px] h-[650px] md:w-[380px] md:h-[780px] bg-black rounded-[55px] shadow-2xl overflow-hidden ring-1 ring-white/20 group cursor-pointer z-20 ">

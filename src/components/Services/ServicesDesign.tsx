@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, LayoutGroup, useScroll, useTransform } from "motion/react";
+import { motion, LayoutGroup, useScroll, useTransform, Variants } from "motion/react";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { Monitor, Type, Palette, Layout, Globe, ChevronDown, Maximize2, BarChart3, PieChart, Activity, Box, Circle, Square, Zap, TrendingUp, Users, MousePointer2 } from "lucide-react";
+import { Monitor, Type, Palette, Layout, Globe, ChevronDown, Maximize2, BarChart3, PieChart, Activity, Box, Circle, Square, Zap, TrendingUp, Users, MousePointer2, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { GlowingHeader } from "@/components/ui/GlowingHeader";
 
 // --- Configuration Types ---
 type FontOption = "sans" | "serif" | "mono";
@@ -75,6 +76,63 @@ const THEMES = {
 
 const NAV_LINKS = ["About Us", "Services", "Work", "Careers", "Contact"];
 
+// --- Animation Variants ---
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2
+        }
+    }
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut"
+        }
+    }
+};
+
+const cardStaggerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.4
+        }
+    },
+    exit: { opacity: 0 }
+};
+
+const floatVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: { type: "spring", stiffness: 100, damping: 20 }
+    }
+};
+
+const slideRightVariant: Variants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.8,
+            ease: "easeOut"
+        }
+    }
+};
+
 // --- Mock Data for Dashboard ---
 const STATS = [
     { label: "Total Users", value: "124,592", change: "+12.5%", icon: <Users size={16} />, data: [40, 30, 45, 50, 45, 60, 55, 70] },
@@ -82,41 +140,35 @@ const STATS = [
     { label: "Active Sessions", value: "1,430", change: "+24%", icon: <Zap size={16} />, data: [20, 40, 30, 50, 45, 65, 60, 80] },
 ];
 
-function ScrollRevealHeading() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "center center"]
-    });
-
-    // Make opacity persist once visible
-    const opacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
-
-    return (
-        <div ref={containerRef} className="relative z-10 mb-6">
-            <h2 className="text-4xl md:text-7xl uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50">
-                Customize Your Design
-            </h2>
-            <motion.h2
-                style={{ opacity }}
-                className="absolute inset-0 text-4xl md:text-7xl uppercase font-bold text-white"
-                aria-hidden="true"
-            >
-                Customize Your Design
-            </motion.h2>
-        </div>
-    );
-}
 
 export default function ServicesDesign() {
     // State
     const [selectedFont, setSelectedFont] = useState<FontOption>("sans");
-    const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("white");
+    const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("purple");
     const [selectedSize, setSelectedSize] = useState<SizeOption>("md");
     const [layoutMode, setLayoutMode] = useState<LayoutMode>("split");
     const [buttonStyle, setButtonStyle] = useState<ButtonStyle>("pill");
     const [cardStyle, setCardStyle] = useState<CardStyle>("glass");
     const [brandName, setBrandName] = useState("");
+    const [showHint, setShowHint] = useState(false);
+    const controlsRef = useRef<HTMLDivElement>(null);
+
+    // Scroll Hint Logic
+    const { scrollYProgress } = useScroll({
+        target: controlsRef,
+        offset: ["start 80%", "center center"]
+    });
+
+    React.useEffect(() => {
+        const unsubscribe = scrollYProgress.on("change", (v) => {
+            if (v > 0 && !showHint) {
+                // Trigger hint once
+                // but we need a better "on view" trigger.
+                // Let's use whileInView on the motion div, but we need state to dismiss it.
+            }
+        });
+        return unsubscribe;
+    }, [scrollYProgress, showHint]);
 
     // Dynamic Classes
     const theme = THEMES[selectedTheme];
@@ -138,103 +190,133 @@ export default function ServicesDesign() {
         <section className="w-full min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center py-24 px-4 overflow-hidden relative">
 
             {/* Header */}
-            <div className="text-center mb-12 max-w-5xl relative z-10">
-                <ScrollRevealHeading />
+            <motion.div
+                className="text-center mb-12 max-w-5xl relative z-10"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+            >
+                <div className="mb-6">
+                    <GlowingHeader>Customize Your Design</GlowingHeader>
+                </div>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    variants={itemVariants}
                     className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto"
                 >
                     Experience the power of a flexible design system. Customize typography, color palettes, and spatial dynamics in real-time.
                 </motion.p>
-            </div>
+            </motion.div>
 
             {/* Controls */}
             <motion.div
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-wrap items-center justify-center gap-4 mb-12 p-3 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-30 shadow-2xl max-w-6xl"
+                ref={controlsRef}
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                onViewportEnter={() => {
+                    if (!showHint) {
+                        setShowHint(true);
+                        setTimeout(() => setShowHint(false), 3000);
+                    }
+                }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="relative mb-12 z-30"
             >
+                <motion.div
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 p-4 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl max-w-full md:max-w-[90vw] xl:max-w-6xl mx-auto"
+                >
 
-                {/* Layout Mode */}
-                <ControlGroup label="Choose Layout" icon={<Layout size={14} />}>
-                    {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
-                        <ControlButton key={mode} isActive={layoutMode === mode} onClick={() => setLayoutMode(mode)} label={mode} />
-                    ))}
-                </ControlGroup>
-                <Divider />
+                    {/* Row 1 Group: Layout, Typography, Size */}
+                    <div className="flex items-center gap-4 flex-wrap xl:flex-nowrap justify-center">
+                        {/* Layout Mode */}
+                        <ControlGroup label="Choose Layout" icon={<Layout size={14} />}>
+                            {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
+                                <ControlButton key={mode} isActive={layoutMode === mode} onClick={() => setLayoutMode(mode)} label={mode} />
+                            ))}
+                        </ControlGroup>
+                        <Divider />
 
-                {/* Typography */}
-                <ControlGroup label="Typography" icon={<Type size={14} />}>
-                    {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
-                        <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
-                    ))}
-                </ControlGroup>
-                <Divider />
+                        {/* Typography */}
+                        <ControlGroup label="Typography" icon={<Type size={14} />}>
+                            {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
+                                <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
+                            ))}
+                        </ControlGroup>
+                        <Divider />
 
-                {/* Size */}
-                <ControlGroup label="Interface Scale" icon={<Maximize2 size={14} />}>
-                    {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
-                        <ControlButton key={s} isActive={selectedSize === s} onClick={() => setSelectedSize(s)} label={s === 'sm' ? 'S' : s === 'md' ? 'M' : 'L'} />
-                    ))}
-                </ControlGroup>
-                <Divider />
-
-                {/* Theme */}
-                <ControlGroup label="Color Theme" icon={<Palette size={14} />}>
-                    {(["white", "green", "purple", "orange"] as ThemeOption[]).map((t) => (
-                        <button
-                            key={t}
-                            onClick={() => setSelectedTheme(t)}
-                            className={cn(
-                                "w-6 h-6 rounded-full border border-white/10 transition-all",
-                                THEMES[t].primary,
-                                selectedTheme === t ? cn("ring-2 ring-white scale-110", THEMES[t].glow) : "opacity-50 hover:opacity-100"
-                            )}
-                        />
-                    ))}
-                </ControlGroup>
-                <Divider />
-
-
-
-                {/* Brand Name Input */}
-                <ControlGroup label="Brand Name" icon={<Type size={14} />}>
-                    <input
-                        type="text"
-                        value={brandName}
-                        onChange={(e) => setBrandName(e.target.value.toUpperCase().slice(0, 8))}
-                        className="bg-transparent border-b border-white/20 text-white font-bold text-center w-[8ch] focus:outline-none focus:border-white transition-colors placeholder-white/20"
-                        placeholder="BRAND"
-                        maxLength={8}
-                    />
-                </ControlGroup>
-                <Divider />
-
-                {/* Details - Clarified */}
-                <ControlGroup label="Element Style" icon={<MousePointer2 size={14} />}>
-                    <div className="flex gap-2">
-                        <ControlDropdown
-                            label="Button"
-                            value={buttonStyle}
-                            options={[{ label: "Pill", value: "pill" }, { label: "Rect", value: "rect" }]}
-                            onChange={(val) => setButtonStyle(val as ButtonStyle)}
-                            icon={<Circle size={14} />}
-                            radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
-                        />
-                        <ControlDropdown
-                            label="Card"
-                            value={cardStyle}
-                            options={[{ label: "Glass", value: "glass" }, { label: "Solid", value: "solid" }, { label: "Bordered", value: "bordered" }]}
-                            onChange={(val) => setCardStyle(val as CardStyle)}
-                            icon={<Box size={14} />}
-                            radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
-                        />
+                        {/* Size */}
+                        <ControlGroup label="Interface Scale" icon={<Maximize2 size={14} />}>
+                            {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
+                                <ControlButton key={s} isActive={selectedSize === s} onClick={() => setSelectedSize(s)} label={s === 'sm' ? 'S' : s === 'md' ? 'M' : 'L'} />
+                            ))}
+                        </ControlGroup>
                     </div>
-                </ControlGroup>
+
+                    {/* Row 2 Group: Theme, Brand, Element Style */}
+                    <div className="flex items-center gap-4 flex-wrap xl:flex-nowrap justify-center">
+                        <ControlGroup label="Color Theme" icon={<Palette size={14} />}>
+                            {(["white", "green", "purple", "orange"] as ThemeOption[]).map((t) => (
+                                <button
+                                    key={t}
+                                    onClick={() => setSelectedTheme(t)}
+                                    className={cn(
+                                        "w-6 h-6 rounded-full border border-white/10 transition-all",
+                                        THEMES[t].primary,
+                                        selectedTheme === t ? cn("ring-2 ring-white scale-110", THEMES[t].glow) : "opacity-50 hover:opacity-100"
+                                    )}
+                                />
+                            ))}
+                        </ControlGroup>
+                        <Divider />
+
+                        {/* Brand Name Input */}
+                        <ControlGroup label="Brand Name" icon={<Type size={14} />}>
+                            <input
+                                type="text"
+                                value={brandName}
+                                onChange={(e) => setBrandName(e.target.value.toUpperCase().slice(0, 8))}
+                                className="bg-transparent border-b border-white/20 text-white font-bold text-center w-[8ch] focus:outline-none focus:border-white transition-colors placeholder-white/20"
+                                placeholder="BRAND"
+                                maxLength={8}
+                            />
+                        </ControlGroup>
+                        <Divider />
+
+                        {/* Details - Compact */}
+                        <ControlGroup label="Style" icon={<MousePointer2 size={14} />}>
+                            <div className="flex gap-2">
+                                <ControlDropdown
+                                    label="Btn"
+                                    value={buttonStyle}
+                                    options={[{ label: "Pill", value: "pill" }, { label: "Rect", value: "rect" }]}
+                                    onChange={(val) => setButtonStyle(val as ButtonStyle)}
+                                    icon={<Circle size={14} />}
+                                    radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
+                                    compact
+                                />
+                                <ControlDropdown
+                                    label="Card"
+                                    value={cardStyle}
+                                    options={[{ label: "Glass", value: "glass" }, { label: "Solid", value: "solid" }, { label: "Bordered", value: "bordered" }]}
+                                    onChange={(val) => setCardStyle(val as CardStyle)}
+                                    icon={<Box size={14} />}
+                                    radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
+                                    compact
+                                />
+                            </div>
+                        </ControlGroup>
+                    </div>
+
+
+                </motion.div>
+
+                {/* Edit Hint Arrow */}
+                <div className="absolute top-1/2 -left-32 -translate-y-1/2 hidden md:block pointer-events-none">
+                    <ItemsHint show={showHint} />
+                </div>
 
             </motion.div>
 
@@ -242,10 +324,11 @@ export default function ServicesDesign() {
             <LayoutGroup>
                 <motion.div
                     layout
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    variants={itemVariants}
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className={cn(
                         "w-full max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl mx-auto flex flex-col min-h-[700px] transition-all duration-500",
                         theme.border,
@@ -277,25 +360,31 @@ export default function ServicesDesign() {
 
                         {/* 1. Minimal Layout */}
                         {layoutMode === "minimal" && (
-                            <div className="h-full flex flex-col items-center justify-center text-center gap-8 max-w-4xl mx-auto mt-20">
+                            <motion.div
+                                className="h-full flex flex-col items-center justify-center text-center gap-8 max-w-4xl mx-auto mt-20"
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="visible"
+                            >
                                 <motion.div
                                     layoutId="hero-text"
                                     className="space-y-6"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
+                                    variants={itemVariants}
                                 >
-                                    <motion.h1 layout className={cn("font-bold text-white tracking-tight leading-[0.9]", size.title, theme.textGlow)}>
+                                    <motion.h1 layout variants={itemVariants} className={cn("font-bold text-white tracking-tight leading-[0.9]", size.title, theme.textGlow)}>
                                         {displayBrand} <span className={cn("inline-block", theme.text)}>System</span>
                                     </motion.h1>
-                                    <motion.p layout className={cn("text-white/50 max-w-xl mx-auto", size.body)}>
+                                    <motion.p layout variants={itemVariants} className={cn("text-white/50 max-w-xl mx-auto", size.body)}>
                                         Adaptable. Scalable. Beautiful.
                                     </motion.p>
                                 </motion.div>
 
-                                <motion.div layoutId="hero-actions" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+
+
+                                <motion.div variants={slideRightVariant} className="w-fit mx-auto">
                                     <ActionButton primary theme={theme} radius={buttonRadius}>Start Now</ActionButton>
                                 </motion.div>
-                            </div>
+                            </motion.div>
                         )}
 
                         {/* 2. Grid Layout */}
@@ -322,9 +411,10 @@ export default function ServicesDesign() {
                                     {STATS.map((stat, i) => (
                                         <motion.div
                                             key={stat.label}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.1 }}
+                                            variants={itemVariants}
+                                            initial="hidden"
+                                            animate="visible"
+                                            transition={{ delay: 0.2 + (i * 0.1) }}
                                             className={cn("p-5 flex items-center justify-between group cursor-pointer hover:border-white/20", cardClass, radiusClass)} // radiusClass applied
                                         >
                                             <div>
@@ -338,8 +428,9 @@ export default function ServicesDesign() {
 
                                 {/* Graph Area */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate="visible"
                                     transition={{ delay: 0.3 }}
                                     className={cn("md:col-span-12 h-64 p-8 relative overflow-hidden flex items-end gap-2", cardClass, radiusClass)}
                                 >
@@ -367,8 +458,13 @@ export default function ServicesDesign() {
                         {/* 3. Split Layout */}
                         {layoutMode === "split" && (
                             <div className="flex flex-col md:flex-row items-center gap-12 h-full max-w-6xl mx-auto">
-                                <div className="flex-1 text-left space-y-8">
-                                    <motion.div layoutId="hero-text" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
+                                <motion.div
+                                    className="flex-1 text-left space-y-8"
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                >
+                                    <motion.div layoutId="hero-text" variants={itemVariants}>
                                         <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6", theme.card, theme.text)}>
                                             <span className="relative flex h-2 w-2 mr-1">
                                                 <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-75", theme.accent)}></span>
@@ -385,18 +481,18 @@ export default function ServicesDesign() {
                                             Control every pixel with {displayBrand}. Typography, color, and layout that adapts to your brand identity instantly.
                                         </motion.p>
                                     </motion.div>
-                                    <motion.div layoutId="hero-actions" className="flex flex-col sm:flex-row gap-4">
+                                    <motion.div layoutId="hero-actions" className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
                                         <ActionButton primary theme={theme} radius={buttonRadius}>Start Now </ActionButton>
                                         <ActionButton theme={theme} radius={buttonRadius}>View Components</ActionButton>
                                     </motion.div>
-                                </div>
+                                </motion.div>
 
                                 <div className="flex-1 w-full relative">
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        variants={cardStaggerVariants}
+                                        initial="hidden"
+                                        animate="visible"
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.8 }}
                                         className="w-full aspect-[4/3] relative flex items-center justify-center overflow-visible"
                                     >
                                         {/* Simplified Spotlight - Static for performance */}
@@ -460,6 +556,8 @@ export default function ServicesDesign() {
                                                 {/* Top Left: Zap */}
                                                 <motion.div
                                                     layout
+                                                    variants={floatVariants}
+                                                    custom={0}
                                                     className={cn(
                                                         "absolute -left-4 top-4 w-14 h-14 flex items-center justify-center shadow-lg z-20 hover:scale-110 transition-transform cursor-pointer backdrop-blur-md",
                                                         cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
@@ -474,6 +572,8 @@ export default function ServicesDesign() {
                                                 {/* Top Right: Growth */}
                                                 <motion.div
                                                     layout
+                                                    variants={floatVariants}
+                                                    custom={1}
                                                     className={cn(
                                                         "absolute -right-6 -top-2 w-36 py-3 px-4 shadow-lg z-20 hover:translate-y-[-5px] transition-transform backdrop-blur-md",
                                                         cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
@@ -495,6 +595,8 @@ export default function ServicesDesign() {
                                                 {/* Bottom Left: Users */}
                                                 <motion.div
                                                     layout
+                                                    variants={floatVariants}
+                                                    custom={2}
                                                     className={cn(
                                                         "absolute -left-4 bottom-14 py-2 px-3 shadow-lg z-20 flex items-center gap-3 hover:scale-105 transition-transform backdrop-blur-md",
                                                         cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
@@ -516,6 +618,8 @@ export default function ServicesDesign() {
                                                 {/* Bottom Right: Activity */}
                                                 <motion.div
                                                     layout
+                                                    variants={floatVariants}
+                                                    custom={3}
                                                     className={cn(
                                                         "absolute -right-6 bottom-14 w-28 p-3 shadow-lg z-20 hover:rotate-1 transition-transform backdrop-blur-md",
                                                         cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
@@ -543,7 +647,7 @@ export default function ServicesDesign() {
 
                     </div>
                 </motion.div>
-            </LayoutGroup>
+            </LayoutGroup >
         </section >
     );
 }
@@ -568,9 +672,28 @@ function ActionButton({ children, primary, theme, radius }: { children: React.Re
     );
 }
 
+function ItemsHint({ show }: { show: boolean }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: show ? 1 : 0, x: show ? 0 : -20 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3"
+        >
+            <div className="flex flex-col items-end">
+                <span className="text-white text-sm font-bold tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">Edit Here</span>
+            </div>
+            <div className="relative">
+                <ArrowRight className="text-white w-6 h-6 animate-pulse" />
+                <div className="absolute inset-0 bg-white blur-lg opacity-50 animate-pulse" />
+            </div>
+        </motion.div>
+    );
+}
+
 function ControlGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon: React.ReactNode }) {
     return (
-        <div className="flex flex-col md:flex-row items-center gap-2 px-2">
+        <div className="flex flex-col md:flex-row items-center gap-1.5 px-1.5">
             <span className="text-[10px] md:text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2 mb-1 md:mb-0">
                 {icon} <span className="text-white/70">{label}</span>
             </span>
@@ -586,7 +709,7 @@ function ControlButton({ label, isActive, onClick }: { label: string; isActive: 
         <button
             onClick={onClick}
             className={cn(
-                "px-5 py-2.5 text-xs font-bold tracking-wider rounded-xl transition-all duration-300 uppercase relative overflow-hidden",
+                "px-4 py-2 text-[11px] font-bold tracking-wider rounded-xl transition-all duration-300 uppercase relative overflow-hidden",
                 isActive
                     ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.4)] scale-105 z-10"
                     : "text-white/60 hover:text-white hover:bg-white/10 border border-white/5 hover:border-white/20"
@@ -601,13 +724,14 @@ function Divider() {
     return <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/10 to-transparent mx-2 hidden md:block" />;
 }
 
-function ControlDropdown({ label, value, options, onChange, icon, radius = "rounded-xl" }: {
+function ControlDropdown({ label, value, options, onChange, icon, radius = "rounded-xl", compact }: {
     label: string,
     value: string,
     options: { label: string, value: string }[],
     onChange: (val: string) => void,
     icon: React.ReactNode,
-    radius?: string
+    radius?: string,
+    compact?: boolean
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -616,7 +740,7 @@ function ControlDropdown({ label, value, options, onChange, icon, radius = "roun
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Close on blur delay
-                className={cn("flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group min-w-[110px] justify-between hover:border-white/30", radius)}
+                className={cn("flex items-center gap-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group justify-between hover:border-white/30", radius, compact ? "px-2.5 py-1.5 min-w-[80px]" : "px-3 py-2 min-w-[100px]")}
             >
                 <div className="flex items-center gap-2">
                     <span className="text-white/60 group-hover:text-white transition-colors">{icon}</span>

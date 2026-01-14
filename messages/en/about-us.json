@@ -39,7 +39,7 @@
         "section_subtitle": "We blend creativity with technical excellence to build digital products that define the future.",
         "services": {
             "custom": {
-                "title": "Custom Solutions",
+                "title": "Web Solutions",
                 "description": "Bespoke engineering for complex business challenges. We build scalable, high-performance software architectures.",
                 "cta": "Start Project",
                 "details_heading": "Tailored Engineering",
@@ -82,7 +82,7 @@
     },
     "dashboard": {
         "sidebar": {
-            "brand": "Make your custom dashboard with Limitless",
+            "brand": "Limitless Taps",
             "sections": {
                 "dashboard": "Dashboard",
                 "management": "Management"
@@ -98,7 +98,7 @@
             },
             "user": {
                 "name": "User",
-                "role": "Admin"
+                "role": "user@limitlesstaps.com"
             }
         },
         "header": {
@@ -116,7 +116,7 @@
         "charts": {
             "overview_title": "Overview",
             "recent_activity": "Recent Activity",
-            "commits_message": "You made 265 commits this month.",
+            "commits_message": "You made 2500 USD this week.",
             "traffic_sources": "Traffic Sources"
         },
         "reports": {

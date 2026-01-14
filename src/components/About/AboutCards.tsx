@@ -163,8 +163,8 @@ const canvasPropsConfig = {
 
 const springTransition = {
     type: "spring",
-    damping: 25,
-    stiffness: 120,
+    damping: 30,
+    stiffness: 280,
     mass: 0.5
 } as const;
 
@@ -201,7 +201,9 @@ export default function AboutCards() {
             }
         }
         if (activeCard) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
         }
 
         window.addEventListener("keydown", onKeyDown);
@@ -309,6 +311,7 @@ export default function AboutCards() {
             <AnimatePresence
                 onExitComplete={() => {
                     document.body.style.overflow = "auto";
+                    document.body.style.paddingRight = "";
                 }}
             >
                 {activeCard && (

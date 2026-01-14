@@ -28,47 +28,42 @@ import { useTranslations, useLocale } from "next-intl";
 
 // --- Background Effects ---
 const StarField = React.memo(() => {
-    const [stars, setStars] = useState<Array<{ id: number; top: string; left: string; size: number; delay: number; duration: number }>>([]);
-
-    useEffect(() => {
-        // Reduce star count for performance
-        const starCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 25 : 50;
-        const generatedStars = [...Array(starCount)].map((_, i) => ({
+    // Generate static stars once
+    const stars = useMemo(() => {
+        const starCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 15 : 30; // Reduced count
+        return [...Array(starCount)].map((_, i) => ({
             id: i,
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
-            size: Math.random() * 2 + 1,
-            delay: Math.random() * 5,
-            duration: Math.random() * 3 + 2,
+            size: Math.random() * 2 + 1, // varied size
+            opacity: Math.random() * 0.5 + 0.1,
+            animationDuration: Math.random() * 3 + 2,
         }));
-        setStars(generatedStars);
     }, []);
 
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {stars.map((star) => (
-                <motion.div
+                <div
                     key={star.id}
-                    initial={{ opacity: 0.1 }}
-                    animate={{ opacity: [0.1, 0.5, 0.1] }}
-                    transition={{
-                        duration: star.duration,
-                        repeat: Infinity,
-                        delay: star.delay,
-                        ease: "easeInOut",
-                    }}
+                    className="absolute rounded-full bg-white will-change-opacity"
                     style={{
-                        position: "absolute",
                         top: star.top,
                         left: star.left,
                         width: star.size,
                         height: star.size,
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        filter: "blur(0.5px)",
+                        opacity: star.opacity,
+                        // Use CSS animation for better performance than JS frame-loop
+                        animation: `twinkle ${star.animationDuration}s infinite ease-in-out`
                     }}
                 />
             ))}
+            <style jsx>{`
+                @keyframes twinkle {
+                    0%, 100% { opacity: 0.1; }
+                    50% { opacity: 0.7; }
+                }
+            `}</style>
         </div>
     );
 });
@@ -294,10 +289,11 @@ export default function AboutHero() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Add spring physics for ultra-smooth, lag-free feel
+    // Add spring physics - Tweaked for responsiveness (less laggy float)
     const smoothScroll = useSpring(scrollY, {
-        stiffness: 100,
-        damping: 30,
+        stiffness: 120, // Higher stiffness = follows scroll faster
+        damping: 20,    // Good damping prevents bouncing
+        mass: 0.1,      // Low mass = lighter/quicker movement
         restDelta: 0.001
     });
 
@@ -383,13 +379,7 @@ export default function AboutHero() {
                                 <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
                                 <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
                             </linearGradient>
-                            <filter id="glow">
-                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
+                            {/* Removed expensive SVG Gaussian Blur filter in favor of CSS drop-shadow on the element */}
                         </defs>
 
                         {/* The Path Definition - Maximized Width Infinity Symbol */}
@@ -409,7 +399,8 @@ export default function AboutHero() {
                             stroke="url(#infinity-gradient)"
                             strokeWidth="1.5"
                             strokeLinecap="round"
-                            filter="url(#glow)"
+                            // filter="url(#glow)" // Removed
+                            style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.8))" }} // Use CSS optimization
                             initial={{ pathLength: 0, pathOffset: 0 }}
                             animate={{
                                 pathLength: [0.1, 0.4, 0.1],
@@ -509,13 +500,7 @@ export default function AboutHero() {
                 </motion.div>
 
                 {/* --- 3D Dashboard Interface --- */}
-                {/* Improved Responsive Container:
-                    - Uses max-w-[95%] for mobile safety
-                    - Dynamic height with min-h constraints to fit content
-                    - Perspective class added
-                    - min-[1600px]:w-[130%] triggers the "huge" overflow look ONLY on very large screens (1600+)
-                    - Between 800px-1600px, it adapts naturally (max-w-[95%] or max-w-7xl)
-                */}
+                {/* Improved Responsive Container */}
                 <div className="relative w-full max-w-[95%] sm:max-w-[90%] md:max-w-[1200px] xl:max-w-[1800px] min-[1400px]:w-[130%] min-[1600px]:max-w-[1800px] mt-12 sm:mt-16 md:mt-4 mx-auto h-[60vh] min-h-[500px] sm:h-[650px] md:h-[850px] perspective-2000">
                     <motion.div
                         style={{
@@ -530,7 +515,7 @@ export default function AboutHero() {
                         initial={{ opacity: 0, scale: 0.8, y: 100 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative rounded-xl p-1 shadow-2xl h-full"
+                        className="relative rounded-xl p-1 shadow-2xl h-full will-change-transform" // Hardware acceleration
                     >
                         {/* Outer Glow */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-xl blur-md" />
@@ -556,7 +541,7 @@ export default function AboutHero() {
                                 {/* Logo */}
                                 <motion.div variants={stickerVariants} custom={0.1} className="px-3 sm:px-6 mb-4 sm:mb-8 flex items-center gap-2 sm:gap-3">
                                     <div className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 relative rounded-lg overflow-hidden border border-white/10">
-                                        <Image src="/Logo/social-white.jpg" alt="Logo" fill className="object-cover" />
+                                        <Image src="/Logo/social-white-black.jpg" alt="Logo" fill className="object-cover" />
                                     </div>
                                     <span className="text-xs sm:text-sm 2xl:text-base font-bold text-white hidden md:block tracking-wide">{t("dashboard.sidebar.brand")}</span>
                                 </motion.div>
@@ -578,7 +563,9 @@ export default function AboutHero() {
                                 {/* User */}
                                 <motion.div variants={stickerVariants} custom={0.6} className="mt-auto px-2 sm:px-4 pt-3 sm:pt-4 ltr:border-r-0 rtl:border-l-0 border-t border-[#8a8f98]/10">
                                     <div className="flex items-center gap-2 sm:gap-3">
-                                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#8a8f98]/20 flex items-center justify-center border border-[#8a8f98]/20 text-[#ffffff] text-xs sm:text-sm font-bold">{t("dashboard.sidebar.user.name").charAt(0)}</div>
+                                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#8a8f98]/20 relative overflow-hidden border border-[#8a8f98]/20">
+                                            <Image src="/Logo/social-white-black.jpg" alt="User" fill className="object-cover" />
+                                        </div>
                                         <div className="hidden md:block">
                                             <p className="text-xs sm:text-sm 2xl:text-base font-medium text-[#ffffff]">{t("dashboard.sidebar.user.name")}</p>
                                             <p className="text-[10px] sm:text-xs 2xl:text-sm text-[#8a8f98]">{t("dashboard.sidebar.user.role")}</p>
@@ -594,10 +581,16 @@ export default function AboutHero() {
                                     initial={{ y: -50, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.3 }}
-                                    className="h-12 sm:h-16 border-b border-[#8a8f98]/10 flex items-center justify-between px-3 sm:px-8 bg-[#0a0a0a]/50 backdrop-blur shrink-0 z-20"
+                                    className="h-12 sm:h-16 border-b border-[#8a8f98]/10 flex items-center justify-between px-3 sm:px-8 bg-[#0a0a0a]/50 backdrop-blur shrink-0 z-20 relative"
                                 >
-                                    <h2 className="text-sm sm:text-xl 2xl:text-2xl font-semibold text-[#ffffff] capitalize">{t(`dashboard.sidebar.nav.${activeView}`)}</h2>
-                                    <div className="flex items-center gap-2 sm:gap-4">
+                                    <h2 className="text-sm sm:text-xl 2xl:text-2xl font-semibold text-[#ffffff] capitalize shrink-0">{t(`dashboard.sidebar.nav.${activeView}`)}</h2>
+
+                                    {/* Central Promo Header - Hidden on small screens */}
+                                    <div className="absolute left-1/2 -translate-x-1/2 hidden xl:flex items-center gap-6">
+                                        <h2 className="text-base font-medium text-white/90">Our Limitless Dashboard <br className="hidden" /> Customized for your Business</h2>
+                                    </div>
+
+                                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
                                         <div className="bg-[#0a0a0a] rounded-md px-2 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-2 border border-[#8a8f98]/20 text-xs sm:text-sm 2xl:text-base text-[#8a8f98] w-24 sm:w-64 max-w-[150px] sm:max-w-none">
                                             <Search className="w-3 h-3 sm:w-4 sm:h-4" />
                                             <span className="hidden sm:inline font-normal truncate">{t("dashboard.header.search_placeholder")}</span>
@@ -649,9 +642,9 @@ export default function AboutHero() {
                                                             <p className="text-[10px] sm:text-sm text-[#8a8f98]">{t("dashboard.charts.commits_message")}</p>
                                                         </div>
                                                         <div className="space-y-3 sm:space-y-6 overflow-y-auto ltr:pr-2 rtl:pl-2">
-                                                            <RecentActivityItem name="Olivia Martin" email="olivia.martin@email.com" amount="+1,999.00" />
-                                                            <RecentActivityItem name="Jackson Lee" email="jackson.lee@email.com" amount="+39.00" />
-                                                            <RecentActivityItem name="Isabella Nguyen" email="isabella.nguyen@email.com" amount="+299.00" />
+                                                            <RecentActivityItem name="Ziad Ramzy" email="info@limitlesstaps.com" amount="+1,999.00" />
+                                                            <RecentActivityItem name="Galal elsayed" email="contact@limitlesstaps.com" amount="+39.00" />
+                                                            <RecentActivityItem name="Ahmed salem" email="support@limitlesstaps.com" amount="+299.00" />
                                                         </div>
                                                     </motion.div>
                                                 </div>

@@ -96,11 +96,14 @@ function ClientItem({ name, index }: { name: string; index: number }) {
                         <PlusIcon />
                     </div>
 
-                    <span
-                        className="text-xl md:text-2xl font-light tracking-wide text-[#444] group-hover:text-white transition-colors duration-300 uppercase z-10 relative select-none"
-                    >
-                        {name}
-                    </span>
+                    {/* Text content - Hidden for specific items behind the header */}
+                    {!["DEVOPS STRATEGY"].includes(name) && (
+                        <span
+                            className="text-xl md:text-2xl font-light tracking-wide text-[#444] group-hover:text-white transition-colors duration-300 uppercase z-10 relative select-none"
+                        >
+                            {name}
+                        </span>
+                    )}
 
                     {/* Corner Brackets - Faint initially, sharp on hover */}
                     <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
