@@ -189,9 +189,12 @@ export default function CareersPage() {
 
   // Refs for GSAP animations
   const heroRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const perksRef = useRef<HTMLDivElement>(null);
   const jobsRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLDivElement>(null);
+  const jobsSectionRef = useRef<HTMLElement>(null);
 
   // Filter jobs
   const filteredJobs = mockJobs.filter((job) => {
@@ -207,31 +210,113 @@ export default function CareersPage() {
 
   const departments = ["All", ...new Set(mockJobs.map((job) => job.department))];
 
-  // Initial animations
+  // Enhanced GSAP ScrollTrigger animations for all sections
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero section animation
-      gsap.from(heroRef.current?.children || [], {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      // Hero Section - Grid cells animation
+      if (gridRef.current) {
+        const gridCells = gridRef.current.querySelectorAll('.grid-cell');
+        
+        gsap.fromTo(
+          gridCells,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: {
+              each: 0.05,
+              from: "random",
+            },
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: heroSectionRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play reverse play reverse", // enter, leave, enterBack, leaveBack
+            },
+          }
+        );
+      }
 
-      // Toggle animation
-      gsap.from(toggleRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.6,
-        delay: 0.5,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: toggleRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Hero Header animation with ScrollTrigger
+      if (heroRef.current) {
+        const headerElements = heroRef.current.children;
+        
+        gsap.fromTo(
+          headerElements,
+          {
+            opacity: 0,
+            y: 100,
+            rotateX: 15,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      }
+
+      // Toggle section animation
+      if (toggleRef.current) {
+        gsap.fromTo(
+          toggleRef.current,
+          {
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: toggleRef.current,
+              start: "top 90%",
+              toggleActions: "play none none reverse", // play on enter, reverse only when scrolling back up past start
+            },
+          }
+        );
+      }
+
+      // Jobs section animation
+      if (jobsSectionRef.current) {
+        gsap.fromTo(
+          jobsSectionRef.current,
+          {
+            opacity: 0,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: jobsSectionRef.current,
+              start: "top 85%",
+              toggleActions: "play none none reverse", // play on enter, reverse only when scrolling back up past start
+            },
+          }
+        );
+      }
     });
 
     return () => ctx.revert();
@@ -247,15 +332,20 @@ export default function CareersPage() {
           jobs,
           {
             opacity: 0,
-            y: 30,
-            scale: 0.95,
+            y: 60,
+            scale: 0.9,
+            rotateX: 10,
           },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.6,
-            stagger: 0.1,
+            rotateX: 0,
+            duration: 0.7,
+            stagger: {
+              each: 0.1,
+              from: "start",
+            },
             ease: "power3.out",
             clearProps: "all",
           }
@@ -288,80 +378,100 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
-      {/* Hero Section */}
-      {/* <section className="relative overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-linear-to-b from-blue-600/5 to-transparent" />
-        <div className="relative h-screen max-w-(--breakpoint-xl) mx-auto px-6 py-20 md:py-32">
-          <div ref={heroRef} className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white">
-              Build the Future with Us
-            </h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Join a team of passionate innovators creating products that make a
-              difference. We&apos;re always looking for talented individuals who want to
-              push boundaries and grow their careers.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center pt-4">
-              
-              <button className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-all duration-500 ease-out hover:px-12 hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95">
-                <div className="absolute inset-0 bg-gradient-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="relative z-10 flex items-center gap-2">
-                  View Open Positions <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-                <div className="absolute inset-0 -z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
-              </button>
-              
-              <button className="group relative inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:pr-10 active:scale-95">
-                <span className="font-semibold">Learn About Our Culture</span>
-                <ArrowRight className="h-5 w-5 transition-all duration-300 group-hover:translate-x-1" />
-              </button>
-            </div>
+      {/* Hero Section with Grid Background */}
+      <section ref={heroSectionRef} className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[80vh] flex items-start justify-start overflow-hidden">
+        
+        {/* Background Grid Layer */}
+        <div className="absolute inset-0 z-0 flex flex-col">
+          <div ref={gridRef} className="w-full flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#1a1a1a] gap-px border border-[#1a1a1a]">
+            {[
+              "ENGINEERING",
+              "DESIGN",
+              "MARKETING",
+              "PRODUCT",
+              "REMOTE WORK",
+              "GROWTH",
+              "INNOVATION",
+              "TEAMWORK",
+              "BENEFITS",
+              "CULTURE",
+              "LEADERSHIP",
+              "OPPORTUNITIES",
+            ].map((word, index) => (
+              <div
+                key={index}
+                className="grid-cell group relative w-full min-h-[120px] md:min-h-[20vh] bg-[#0a0a0a]"
+                style={{ perspective: "1000px" }}
+              >
+                <div className="relative w-full h-full duration-300 ease-out transition-all transform-style-3d group-hover:-translate-y-2 group-hover:translate-z-10 group-hover:rotate-x-2 group-hover:shadow-2xl">
+                  <div className="absolute inset-0 bg-[#0a0a0a] flex items-center pl-4 md:pl-8 transition-colors duration-300 group-hover:bg-[#0f0f0f] border border-transparent group-hover:border-[#333]/30">
+                    
+                    {/* Intersection Stars */}
+                    <div className="absolute -top-[5.5px] -left-[5.5px] text-[#333] z-20 group-hover:opacity-50 transition-opacity">
+                      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-100">
+                        <path d="M5.5 0V11" stroke="#333" strokeWidth="1" />
+                        <path d="M0 5.5H11" stroke="#333" strokeWidth="1" />
+                      </svg>
+                    </div>
+
+                    {/* Word Label */}
+                    <span className="text-sm md:text-lg font-light tracking-wide text-[#444] group-hover:text-white transition-colors duration-300 uppercase z-10 relative select-none">
+                      {word}
+                    </span>
+
+                    {/* Corner Brackets */}
+                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Shiny sheen effect */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+
+                  {/* Bottom Depth Face */}
+                  <div className="absolute inset-x-0 -bottom-2 h-2 bg-[#050505] origin-top transform rotate-x-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </section> */}
 
-      {/* Company Perks */}
-      {/* <section ref={perksRef} className="py-20 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Why Join Limitless Taps?
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              We believe in creating an environment where everyone can do their best
-              work and grow professionally.
-            </p>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
-            className="perks-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
+        {/* Overlay Content Layer */}
+        <div className="relative z-10 w-full max-w-[1800px] px-4 md:px-12 pointer-events-none flex flex-col justify-start pt-24 lg:pt-18">
+          <motion.div
+            ref={heroRef}
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
           >
-            {companyPerks.map((perk, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="perk-card group p-6 rounded-xl border border-white/10 bg-zinc-900/50 hover:border-white/20 hover:bg-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/10 backdrop-blur-md"
-              >
-                <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-4 group-hover:bg-blue-600/20 transition-colors">
-                  <perk.icon className="w-6 h-6 text-blue-500" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-white">{perk.title}</h3>
-                <p className="text-sm text-gray-400">{perk.description}</p>
-              </motion.div>
-            ))}
+            <h2 className="text-[13vw] leading-[0.8] font-medium uppercase tracking-[-0.02em] font-sans text-white/90 mix-blend-difference mb-8">
+              Build The
+              <br />
+              Future
+              <br />
+              With Us
+            </h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-white/80 text-lg md:text-xl max-w-xl font-light leading-relaxed pl-2 pointer-events-auto"
+            >
+              Join a team of passionate innovators creating products that make a difference.
+            </motion.p>
           </motion.div>
         </div>
-      </section> */}
+      </section>
+
+      {/* Company Perks - Commented out */}
+      {/* ... */}
 
       {/* Jobs Toggle Section */}
-      <section className="py-16">
+      <section ref={jobsSectionRef} className="py-16">
         <div className="max-w-(--breakpoint-xl) mx-auto px-6">
           <div ref={toggleRef} className="max-w-7xl mb-12">
             <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] leading-[0.95] text-white uppercase text-left">

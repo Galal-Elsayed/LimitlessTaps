@@ -329,8 +329,8 @@ const CMSProjects: Project[] = [
 
 // Tab configuration - easily extensible
 const tabs: TabConfig[] = [
-  { id: "mobile", label: "Mobile", projects: mobileProjects },
   { id: "web", label: "Web", projects: webProjects },
+  { id: "mobile", label: "Mobile", projects: mobileProjects },
   { id: "costume-solutions", label: "Costume Solutions", projects: costumeSolutionsProjects },
   { id: "CMS", label: "CMS", projects: CMSProjects },
   // Add more tabs here as needed
@@ -348,107 +348,178 @@ const Features = () => {
   const tabsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const activeProjects = useMemo(
     () => tabs.find((tab) => tab.id === activeTab)?.projects || [],
     [activeTab]
   );
 
-  // Initial animations on mount
+  // Enhanced GSAP ScrollTrigger animations for all sections
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate header
-      gsap.from(headerRef.current?.children || [], {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-      });
+      // Hero Section - Grid cells animation
+      if (gridRef.current) {
+        const gridCells = gridRef.current.querySelectorAll('.grid-cell');
+        
+        gsap.fromTo(
+          gridCells,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: {
+              each: 0.05,
+              from: "random",
+            },
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: heroSectionRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play reverse play reverse", // enter, leave, enterBack, leaveBack
+            },
+          }
+        );
+      }
 
-      // Animate tabs
-      gsap.from(tabsRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        delay: 0.4,
-        ease: "power2.out",
-      });
-    }, sectionRef);
+      // Hero Header animation with ScrollTrigger
+      if (headerRef.current) {
+        const headerElements = headerRef.current.children;
+        
+        gsap.fromTo(
+          headerElements,
+          {
+            opacity: 0,
+            y: 100,
+            rotateX: 15,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      }
+
+      // Tabs section animation
+      if (tabsRef.current) {
+        gsap.fromTo(
+          tabsRef.current,
+          {
+            opacity: 0,
+            y: 30,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: tabsRef.current,
+              start: "top 90%",
+              end: "bottom 10%",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      }
+
+      // Projects section - staggered entrance
+      if (projectsRef.current) {
+        const projectCards = projectsRef.current.querySelectorAll('.project-card');
+        
+        // Set initial state
+        gsap.set(projectCards, {
+          opacity: 1,
+          scale: 1,
+          rotateY: 0,
+        });
+        
+        // Create ScrollTrigger animation
+        gsap.from(projectCards, {
+          opacity: 0,
+          scale: 0.9,
+          rotateY: 5,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: projectsRef.current,
+            start: "top 85%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+
+        // Parallax effect on scroll for project cards (separate from entrance animation)
+        projectCards.forEach((card) => {
+          gsap.to(card, {
+            y: -30,
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 2,
+            },
+          });
+        });
+      }
+    });
 
     return () => ctx.revert();
   }, []);
 
-  // Animate projects on tab change or mount
+  // Animate projects on tab change
   useEffect(() => {
     if (!projectsRef.current) return;
 
     const projects = projectsRef.current.children;
     
     const ctx = gsap.context(() => {
-      // Animate out old projects
-      gsap.to(projects, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
-        stagger: 0.05,
-        onComplete: () => {
-          // Animate in new projects
-          gsap.fromTo(
-            projects,
-            {
-              opacity: 0,
-              y: 50,
-              scale: 0.95,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.7,
-              stagger: 0.15,
-              ease: "power3.out",
-              clearProps: "all",
-            }
-          );
+      // Animate out old projects then animate in new ones
+      gsap.fromTo(
+        projects,
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.9,
+          rotateY: 8,
         },
-      });
-
-      // ScrollTrigger for each project card
-      Array.from(projects).forEach((project) => {
-        const image = project.querySelector(".project-image");
-        const content = project.querySelector(".project-content");
-
-        // Parallax effect on images
-        if (image) {
-          gsap.to(image, {
-            yPercent: -10,
-            ease: "none",
-            scrollTrigger: {
-              trigger: project,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotateY: 0,
+          duration: 0.8,
+          stagger: {
+            each: 0.12,
+            from: "start",
+          },
+          ease: "power3.out",
+          clearProps: "transform",
         }
-
-        // Fade in content on scroll
-        if (content) {
-          gsap.from(content.children, {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: content,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          });
-        }
-      });
+      );
     }, projectsRef);
 
     return () => ctx.revert();
@@ -555,22 +626,93 @@ const Features = () => {
     });
   };
 
+  // Work-related words for the grid
+  const workWords = [
+    "WEB DEVELOPMENT",
+    "MOBILE APPS",
+    "E-COMMERCE",
+    "UI/UX DESIGN",
+    "DASHBOARDS",
+    "CMS SOLUTIONS",
+    "API INTEGRATION",
+    "RESPONSIVE DESIGN",
+    "PERFORMANCE",
+    "SCALABILITY",
+    "INNOVATION",
+    "PORTFOLIO",
+  ];
+
   return (
-    <div ref={sectionRef} className="min-h-screen flex items-center justify-center">
-      <div className="max-w-7xl w-full py-10 px-6">
-        <div ref={headerRef} className="max-w-7xl">
-          <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] leading-[0.95] text-white uppercase text-left">
-            <span className="block">Strengthen</span>
-            <span className="block">Your</span>
-            <span className="block mt-8">Strategy</span>
-          </h2>
-          <p className="mt-8 text-gray-400 text-xl sm:text-2xl max-w-2xl text-left">
-            Enhance your strategy with intelligent tools designed for success.
-          </p>
+    <>
+      {/* Hero Section with Grid Background */}
+      <section ref={heroSectionRef} className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[80vh] flex items-start justify-start overflow-hidden">
+        
+        {/* Background Grid Layer - Only in Hero */}
+        <div className="absolute inset-0 z-0 flex flex-col">
+          <div ref={gridRef} className="w-full flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#1a1a1a] gap-px border border-[#1a1a1a]">
+            {workWords.map((word, index) => (
+              <div
+                key={index}
+                className="grid-cell group relative w-full min-h-[120px] md:min-h-[20vh] bg-[#0a0a0a]"
+                style={{ perspective: "1000px" }}
+              >
+                <div className="relative w-full h-full duration-300 ease-out transition-all transform-style-3d group-hover:-translate-y-2 group-hover:translate-z-10 group-hover:rotate-x-2 group-hover:shadow-2xl">
+                  <div className="absolute inset-0 bg-[#0a0a0a] flex items-center pl-4 md:pl-8 transition-colors duration-300 group-hover:bg-[#0f0f0f] border border-transparent group-hover:border-[#333]/30">
+                    
+                    {/* Intersection Stars */}
+                    <div className="absolute -top-[5.5px] -left-[5.5px] text-[#333] z-20 group-hover:opacity-50 transition-opacity">
+                      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-100">
+                        <path d="M5.5 0V11" stroke="#333" strokeWidth="1" />
+                        <path d="M0 5.5H11" stroke="#333" strokeWidth="1" />
+                      </svg>
+                    </div>
+
+                    {/* Word Label */}
+                    <span className="text-sm md:text-lg font-light tracking-wide text-[#444] group-hover:text-white transition-colors duration-300 uppercase z-10 relative select-none">
+                      {word}
+                    </span>
+
+                    {/* Corner Brackets */}
+                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Shiny sheen effect */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+
+                  {/* Bottom Depth Face */}
+                  <div className="absolute inset-x-0 -bottom-2 h-2 bg-[#050505] origin-top transform rotate-x-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
+        {/* Overlay Content Layer */}
+        <div className="relative z-10 w-full max-w-[1800px] px-4 md:px-12 pointer-events-none flex flex-col justify-start pt-24 lg:pt-18">
+          <div ref={headerRef} className="relative">
+            <h2 className="text-[13vw] leading-[0.8] font-medium uppercase tracking-[-0.02em] font-sans text-white/90 mix-blend-difference mb-8">
+              Strengthen
+              <br />
+              Your
+              <br />
+              Strategy
+            </h2>
+
+            <p className="text-white/80 text-lg md:text-xl max-w-xl font-light leading-relaxed pl-2 pointer-events-auto">
+              Enhance your strategy with intelligent tools designed for success.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section - Separate from Hero */}
+      <div ref={sectionRef} className="relative bg-[#0a0a0a] w-full py-10 px-6">
+
         {/* Tab Bar */}
-        <div ref={tabsRef} className="mt-8 flex justify-center">
+        <div ref={tabsRef} className="flex justify-center">
           <div className="inline-flex items-center gap-1 p-1 bg-muted rounded-lg border border-border/50">
             {tabs.map((tab) => (
               <button
@@ -589,16 +731,20 @@ const Features = () => {
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div ref={projectsRef} className="mt-8 md:mt-16 w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Projects Grid - Optimized widths */}
+        <div ref={projectsRef} className="mt-8 md:mt-16 w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {activeProjects.map((project) => (
             <div
               key={project.id}
               className="project-card group cursor-pointer"
               onClick={() => openModal(project)}
             >
-              {/* Device Frame */}
-              <div className="relative min-w-[250px] h-[450px] rounded-[2.5rem] overflow-hidden bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px]">
+              {/* Device Frame - Different dimensions for mobile vs web */}
+              <div className={`relative rounded-[2.5rem] overflow-hidden bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px] ${
+                project.id.includes('mobile') 
+                  ? 'w-full max-w-[280px] mx-auto h-[550px]' 
+                  : 'w-full h-[400px] rounded-2xl'
+              }`}>
                 
                 {/* Frame Header (Conditional) */}
                 {project.id.includes('mobile') ? (
@@ -652,9 +798,9 @@ const Features = () => {
                 <div className={`relative w-full h-full ${!project.id.includes('mobile') ? 'pt-8' : ''} overflow-hidden`}>
                   <div className={`absolute inset-x-0 ${project.id.includes('mobile') ? 'top-0' : 'top-8'} transition-all ease-in-out
                     ${project.id.includes('web') 
-                      ? "duration-[8000ms] group-hover:translate-y-[clamp(-1000%,calc(-100%+418px),0%)]" 
+                      ? "duration-[8000ms] group-hover:translate-y-[clamp(-1000%,calc(-100%+368px),0%)]" 
                       : project.id.includes('mobile')
-                        ? "duration-1000 group-hover:translate-y-[calc(-100%+450px)]"
+                        ? "duration-1000 group-hover:translate-y-[calc(-100%+550px)]"
                         : "duration-[3000ms] group-hover:translate-y-[-15%]"
                     }`}
                   >
@@ -663,7 +809,7 @@ const Features = () => {
                       alt={project.title}
                       width={800}
                       height={2000}
-                      className={`w-full ${project.id.includes('mobile') ? 'h-[700px]' : 'h-auto'} object-cover object-top origin-top transition-transform duration-700 ${project.id.includes('web') ? 'group-hover:scale-100' : ''}`}
+                      className={`w-full ${project.id.includes('mobile') ? 'h-[900px]' : 'h-auto'} object-cover object-top origin-top transition-transform duration-700 ${project.id.includes('web') ? 'group-hover:scale-100' : ''}`}
                     />
                   </div>
                 </div>
@@ -806,7 +952,7 @@ const Features = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
