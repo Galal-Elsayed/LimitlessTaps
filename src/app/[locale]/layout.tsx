@@ -11,17 +11,22 @@ import { Preloader } from "@/components/ui/Preloader";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const cairo = Cairo({
   variable: "--font-cairo",
   subsets: ["arabic", "latin"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -34,6 +39,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ["/Logo/black.png"],
+  },
+  other: {
+    'format-detection': 'telephone=no',
   },
 };
 
@@ -124,6 +132,11 @@ export default async function RootLayout({
       dir={isArabic ? "rtl" : "ltr"}
       className={`${inter.variable} ${cairo.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
           {/* <Preloader /> */}

@@ -194,8 +194,9 @@ void main(){
   // camera setup
   vec3 ro = vec3(0.0, 0.0, 5.0);
   vec3 rd = normalize(vec3(uv * 0.7, -1.5));
-  mat2 mx = mm2(uTime * 0.4 + um.x * 6.0);
-  mat2 my = mm2(uTime * 0.3 + um.y * 6.0);
+  // Reduce mouse influence to lower movement and GPU load
+  mat2 mx = mm2(uTime * 0.4 + um.x * 2.0);
+  mat2 my = mm2(uTime * 0.3 + um.y * 2.0);
   ro.xz *= mx; rd.xz *= mx;
   ro.xy *= my; rd.xy *= my;
 

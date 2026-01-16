@@ -28,6 +28,8 @@ const ScrollCarousel = () => {
                         height={800}
                         className="md:h-[80%] w-full object-contain"
                         quality={75}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
             ),
@@ -50,6 +52,8 @@ const ScrollCarousel = () => {
                         height={800}
                         className="h-[80%] w-full object-contain"
                         quality={75}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
             ),
@@ -72,6 +76,8 @@ const ScrollCarousel = () => {
                         height={800}
                         className="h-[80%] w-full object-contain"
                         quality={75}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
             ),
