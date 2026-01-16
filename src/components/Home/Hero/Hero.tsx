@@ -33,8 +33,9 @@ export default function Hero() {
           alt="Color Waves"
           fill
           className="object-cover opacity-30"
-          loading="lazy"
-          quality={75}
+          priority
+          quality={90}
+          sizes="100vw"
         />
       </div>
 
@@ -101,7 +102,7 @@ export default function Hero() {
                     width={24}
                     height={24}
                     className="h-6 w-6 object-contain transition-transform duration-700 ease-in-out group-hover:scale-110"
-                    unoptimized
+                    priority
                   />
                   {t("cta_primary")}
                 </span>
