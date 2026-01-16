@@ -341,6 +341,8 @@ const Features = () => {
   const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  // Track current image index for each mobile project in grid view
+  const [projectImageIndexes, setProjectImageIndexes] = useState<Record<string, number>>({});
 
   // Refs for GSAP animations
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -732,88 +734,151 @@ const Features = () => {
         </div>
 
         {/* Projects Grid - Optimized widths */}
-        <div ref={projectsRef} className="mt-8 md:mt-16 w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={projectsRef} className={`mt-8 md:mt-16 w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 ${activeTab === 'mobile' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
           {activeProjects.map((project) => (
             <div
               key={project.id}
               className="project-card group cursor-pointer"
               onClick={() => openModal(project)}
             >
-              {/* Device Frame - Different dimensions for mobile vs web */}
-              <div className={`relative rounded-[2.5rem] overflow-hidden bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px] ${
-                project.id.includes('mobile') 
-                  ? 'w-full max-w-[280px] mx-auto h-[550px]' 
-                  : 'w-full h-[400px] rounded-2xl'
-              }`}>
-                
-                {/* Frame Header (Conditional) */}
-                {project.id.includes('mobile') ? (
-                  /* iPhone Notch Frame */
-                  <>
-                    <div className="absolute top-0 left-0 right-0 h-10 z-20 flex justify-center items-start pt-1">
-                      <div className="w-25 h-7 bg-black rounded-[1.25rem] border border-x border-white/5 flex items-center justify-center gap-2 ">
-                        {/* Camera */}
-                        <div className="w-2 h-2 rounded-full bg-[#1a1a3a] ring-1 ring-white/10" />
-                        {/* Speaker */}
-                        <div className="w-12 h-1.5 bg-[#0a0a0a] rounded-full" />
-                      </div>
+              {/* Mobile projects use full frame with carousel, Web projects use browser frame */}
+              {project.id.includes('mobile') ? (
+                /* Full Frame for mobile projects with image carousel */
+                <div className="relative rounded-[2.5rem]  bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px] w-full max-w-[280px] mx-auto h-[550px]">
+                  {/* iPhone Side Buttons */}
+                  {/* Volume Buttons (Left Side) */}
+                  <div className="absolute left-[-6px] top-[70px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
+                  <div className="absolute left-[-6px] top-[130px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
+                  <div className="absolute left-[-6px] top-[170px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
+                  
+                  {/* Power Button (Right Side) */}
+                  <div className="absolute right-[-6px] top-[140px] w-[3px] h-[60px] bg-gray-500 rounded-r-sm" />
+                  
+                  {/* iPhone Notch */}
+                  <div className="absolute top-0 left-0 right-0 h-10 z-20 flex justify-center items-start pt-1">
+                    <div className="w-25 h-7 bg-black rounded-[1.25rem] border border-x border-white/5 flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[#1a1a3a] ring-1 ring-white/10" />
+                      <div className="w-12 h-1.5 bg-[#0a0a0a] rounded-full" />
                     </div>
-                    {/* Bottom Home Indicator */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-20" />
-                  </>
-                ) : (
-                  /* Browser Frame Header */
-                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#252525] border-b border-white/5 z-20 flex items-center px-4 gap-3">
-                    <div className="flex gap-1.5 shrink-0">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  </div>
+                  {/* Bottom Home Indicator */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-20" />
+                  
+                  {/* Overlay with info */}
+                  <div className="absolute inset-0 bg-linear-to-t rounded-[2.5rem] from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-6">
+                    <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">
+                      {project.category}
+                    </span>
+                    <h3 className="text-white text-xl font-bold mt-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-white/60 text-sm mt-2 line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      {project.details}
+                    </p>
+                  </div>
+                  
+                  {/* Mobile Screen Content with Carousel */}
+                  <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
+                    <Image
+                      src={project.gallery[projectImageIndexes[project.id] || 0]}
+                      alt={project.title}
+                      width={800}
+                      height={2000}
+                      className="w-full h-full object-cover object-top transition-opacity duration-300"
+                    />
+                    
+                    {/* Navigation Buttons - Only show on hover if multiple images */}
+                    {project.gallery.length > 1 && (
+                      <>
+                        {/* Previous Button */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const currentIndex = projectImageIndexes[project.id] || 0;
+                            const newIndex = currentIndex === 0 ? project.gallery.length - 1 : currentIndex - 1;
+                            setProjectImageIndexes(prev => ({ ...prev, [project.id]: newIndex }));
+                          }}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-all text-white z-30 duration-300 opacity-0 group-hover:opacity-100"
+                          aria-label="Previous image"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        {/* Image Counter */}
+                        <div className="absolute top-12 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white text-xs z-30 opacity-0 duration-300 group-hover:opacity-100 transition-opacity">
+                          {(projectImageIndexes[project.id] || 0) + 1} / {project.gallery.length}
+                        </div>
+                        
+                        {/* Next Button */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const currentIndex = projectImageIndexes[project.id] || 0;
+                            const newIndex = (currentIndex + 1) % project.gallery.length;
+                            setProjectImageIndexes(prev => ({ ...prev, [project.id]: newIndex }));
+                          }}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-all text-white z-30 duration-300 opacity-0 group-hover:opacity-100"
+                          aria-label="Next image"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* Browser Frame for web projects */
+                <div className="relative min-w-[300px] min-h-[250px] rounded-2xl overflow-hidden bg-black border-[3px] border-[#2a2a2a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_25px_50px_rgba(0,0,0,0.6)] group-hover:translate-y-[-4px] w-full aspect-4/3">
+                  {/* Browser Frame Header - macOS Style */}
+                  <div className="absolute top-0 left-0 right-0 h-9 bg-[#1e1e1e] border-b border-white/5 z-20 flex items-center px-3 gap-3">
+                    {/* Traffic Light Buttons */}
+                    <div className="flex gap-2 shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 transition-colors cursor-pointer" title="Close" />
+                      <div className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e]/80 transition-colors cursor-pointer" title="Minimize" />
+                      <div className="w-3 h-3 rounded-full bg-[#27c93f] hover:bg-[#27c93f]/80 transition-colors cursor-pointer" title="Maximize" />
                     </div>
                     {/* URL Bar */}
-                    <div className="flex-1 max-w-[280px] h-5 bg-black/30 rounded-md border border-white/5 flex items-center px-2 gap-2 overflow-hidden">
+                    <div className="flex-1 max-w-md h-6 bg-[#2a2a2a] rounded-md border border-white/5 flex items-center px-3 gap-2 overflow-hidden">
                       <div className="w-2.5 h-2.5 rounded-full border border-white/20 flex items-center justify-center shrink-0">
                         <div className="w-1 h-1 bg-white/40 rounded-full" />
                       </div>
-                      <span className="text-[10px] text-white/40 font-medium truncate select-none">
+                      <span className="text-[11px] text-white/50 font-medium truncate select-none">
                         {project.displayUrl || "localhost:3000"}
                       </span>
                     </div>
                   </div>
-                )}
 
-                {/* Overlay with info */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-6">
-                  <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">
-                    {project.category}
-                  </span>
-                  <h3 className="text-white text-xl font-bold mt-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/60 text-sm mt-2 line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    {project.details}
-                  </p>
-                </div>
-                
-                {/* Scrolling Page Content */}
-                <div className={`relative w-full h-full ${!project.id.includes('mobile') ? 'pt-8' : ''} overflow-hidden`}>
-                  <div className={`absolute inset-x-0 ${project.id.includes('mobile') ? 'top-0' : 'top-8'} transition-all ease-in-out
-                    ${project.id.includes('web') 
-                      ? "duration-[8000ms] group-hover:translate-y-[clamp(-1000%,calc(-100%+368px),0%)]" 
-                      : project.id.includes('mobile')
-                        ? "duration-1000 group-hover:translate-y-[calc(-100%+550px)]"
-                        : "duration-[3000ms] group-hover:translate-y-[-15%]"
-                    }`}
-                  >
-                    <Image
-                      src={project.mainImage}
-                      alt={project.title}
-                      width={800}
-                      height={2000}
-                      className={`w-full ${project.id.includes('mobile') ? 'h-[900px]' : 'h-auto'} object-cover object-top origin-top transition-transform duration-700 ${project.id.includes('web') ? 'group-hover:scale-100' : ''}`}
-                    />
+                  {/* Overlay with info */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-6">
+                    <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">
+                      {project.category}
+                    </span>
+                    <h3 className="text-white text-xl font-bold mt-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-white/60 text-sm mt-2 line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      {project.details}
+                    </p>
+                  </div>
+                  
+                  {/* Scrolling Page Content */}
+                  <div className="relative w-full h-full pt-9 overflow-hidden">
+                    <div className="absolute inset-x-0 top-9 transition-all ease-in-out duration-8000 group-hover:translate-y-[clamp(-1000%,calc(-100%+368px),0%)]">
+                      <Image
+                        src={project.mainImage}
+                        alt={project.title}
+                        width={800}
+                        height={2000}
+                        className="w-full h-auto object-top origin-top transition-transform duration-700"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Title below for accessibility */}
               <div className="mt-4 px-2">
@@ -848,8 +913,8 @@ const Features = () => {
 
             {/* Modal Content */}
             <div className="p-8">
-              {/* Main Image */}
-              <div className="w-full aspect-video rounded-xl overflow-hidden bg-muted mb-6">
+              {/* Main Image with Navigation */}
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-muted mb-6">
                 <Image
                   className="modal-main-image w-full h-full object-cover"
                   src={selectedProject.gallery[selectedImageIndex]}
@@ -857,6 +922,38 @@ const Features = () => {
                   width={1200}
                   height={675}
                 />
+                
+                {/* Navigation Arrows */}
+                {selectedProject.gallery.length > 1 && (
+                  <>
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => handleImageChange(selectedImageIndex === 0 ? selectedProject.gallery.length - 1 : selectedImageIndex - 1)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-all text-white z-10"
+                      aria-label="Previous image"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    
+                    {/* Next Button */}
+                    <button
+                      onClick={() => handleImageChange((selectedImageIndex + 1) % selectedProject.gallery.length)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-all text-white z-10"
+                      aria-label="Next image"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                    
+                    {/* Image Counter */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white text-sm">
+                      {selectedImageIndex + 1} / {selectedProject.gallery.length}
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Gallery Thumbnails */}
