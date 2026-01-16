@@ -24,22 +24,16 @@ export const StickyScroll = ({
   const cardLength = content.length;
 
   // Memoize breakpoints calculation
-  const cardsBreakpoints = useMemo(
-    () => content.map((_, index) => (index + 0.5) / cardLength),
-    [content, cardLength]
-  );
+  const cardsBreakpoints = useMemo(() => content.map((_, index) => (index + 0.5) / cardLength), [content, cardLength]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0,
-    );
+    const closestBreakpointIndex = cardsBreakpoints.reduce((acc, breakpoint, index) => {
+      const distance = Math.abs(latest - breakpoint);
+      if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+        return index;
+      }
+      return acc;
+    }, 0);
     setActiveCard(closestBreakpointIndex);
   });
 
@@ -53,11 +47,8 @@ export const StickyScroll = ({
   }, [activeCard, cardLength]);
 
   return (
-    <motion.div
-      className="flex h-full w-full relative bg-[#0a0a0a]"
-      ref={ref}
-    >
-      <div className="relative flex items-start w-3/4 md:w-1/2! md:pl-20">
+    <motion.div className="flex h-full w-full relative bg-[#0a0a0a]" ref={ref}>
+      <div className="relative flex items-start w-3/4 md:w-[35%]! md:pl-20">
         <div className="max-w-4xl">
           {content.map((item, index) => (
             <div key={item.title + index} className="md:h-screen! h-[90vh] flex flex-col justify-center">
@@ -87,32 +78,28 @@ export const StickyScroll = ({
           ))}
         </div>
       </div>
-      <div
-        className={cn(
-          "sticky top-0 h-screen w-1/2 overflow-hidden bg-[#0a0a0a]",
-          contentClassName,
+      <div className={cn("sticky top-0 h-screen w-[65%] overflow-hidden bg-[#0a0a0a]", contentClassName)}>
+        {content.map(
+          (item, index) =>
+            // Only render content for visible cards to reduce DOM and image loads
+            visibleCards.has(index) && (
+              <motion.div
+                key={item.title + index}
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: activeCard === index ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.5,
+                }}
+                className="absolute inset-0 h-full w-full"
+              >
+                {item.content}
+              </motion.div>
+            )
         )}
-      >
-        {content.map((item, index) => (
-          // Only render content for visible cards to reduce DOM and image loads
-          visibleCards.has(index) && (
-            <motion.div
-              key={item.title + index}
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: activeCard === index ? 1 : 0,
-              }}
-              transition={{
-                duration: 0.5,
-              }}
-              className="absolute inset-0 h-full w-full"
-            >
-              {item.content}
-            </motion.div>
-          )
-        ))}
       </div>
     </motion.div>
   );

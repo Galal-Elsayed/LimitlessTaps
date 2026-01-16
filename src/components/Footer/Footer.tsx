@@ -32,7 +32,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-white/10 px-8 pt-14 pb-10 text-gray-300">
+    <footer className="bg-[#0a0a0a] border-t border-white/10 px-8 pt-14 pb-0 text-gray-300">
       <div className="max-w-[1400px] mx-auto">
         {/* Top grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
@@ -90,7 +90,10 @@ export default function Footer() {
               unoptimized
             />
             <div className="flex items-center gap-2 text-sm">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.9)]" aria-hidden="true" />
+              <span
+                className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.9)]"
+                aria-hidden="true"
+              />
               <span className="text-emerald-300">{tFooter("all_systems_operational")}</span>
             </div>
 
@@ -113,8 +116,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom row (no divider; copyright right) */}
-        <div className="mt-12 text-sm text-gray-300 text-right">
+        <div className="text-sm text-gray-300 text-right">
           <p>{tFooter("copyright")}</p>
+        </div>
+
+        {/* Fading Brand Name */}
+        <div className="w-full flex justify-center select-none pointer-events-none overflow-hidden">
+          <h1 className="text-[10vw] font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white/20 to-transparent opacity-50 whitespace-nowrap">
+            LIMITLESS TAPS
+          </h1>
         </div>
       </div>
     </footer>
