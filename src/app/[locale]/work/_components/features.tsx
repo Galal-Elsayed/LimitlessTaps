@@ -7,7 +7,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
-import Dashboard3Wrapper from "./Dashboard3Wrapper";
+import { motion } from "framer-motion";
 
 // Dynamically import dashboards to avoid SSR issues
 const Dashboard3 = dynamic(() => import("./Dashboard3"), { ssr: false });
@@ -339,9 +339,53 @@ const tabs: TabConfig[] = [
   { id: "mobile", label: "Mobile", projects: mobileProjects },
   { id: "costume-solutions", label: "Costume Solutions", projects: costumeSolutionsProjects },
   { id: "CMS", label: "CMS", projects: [] }, // CMS tab renders dashboards specially
-  // Add more tabs here as needed
   // { id: "desktop", label: "Desktop", projects: desktopProjects },
 ];
+
+function FloatingPaths({ position }: { position: number }) {
+  const paths = Array.from({ length: 36 }, (_, i) => ({
+    id: i,
+    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position
+      } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position
+      } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${684 - i * 5 * position
+      } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    color: `rgba(15,23,42,${0.1 + i * 0.03})`,
+    width: 0.5 + i * 0.03,
+  }));
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <svg
+        className="w-full h-full text-white"
+        viewBox="0 0 696 316"
+        fill="none"
+        preserveAspectRatio="none"
+      >
+        <title>Background Paths</title>
+        {paths.map((path) => (
+          <motion.path
+            key={path.id}
+            d={path.d}
+            stroke="currentColor"
+            strokeWidth={path.width}
+            strokeOpacity={0.1 + path.id * 0.03}
+            initial={{ pathLength: 0.3, opacity: 0.6 }}
+            animate={{
+              pathLength: 1,
+              opacity: [0.3, 0.6, 0.3],
+              pathOffset: [0, 1, 0],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 const Features = () => {
   const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
@@ -357,7 +401,6 @@ const Features = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   const activeProjects = useMemo(
     () => tabs.find((tab) => tab.id === activeTab)?.projects || [],
@@ -367,41 +410,10 @@ const Features = () => {
   // Enhanced GSAP ScrollTrigger animations for all sections
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero Section - Grid cells animation
-      if (gridRef.current) {
-        const gridCells = gridRef.current.querySelectorAll('.grid-cell');
-        
-        gsap.fromTo(
-          gridCells,
-          {
-            opacity: 0,
-            scale: 0.8,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: {
-              each: 0.05,
-              from: "random",
-            },
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: heroSectionRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play reverse play reverse", // enter, leave, enterBack, leaveBack
-            },
-          }
-        );
-      }
-
       // Hero Header animation with ScrollTrigger
       if (headerRef.current) {
         const headerElements = headerRef.current.children;
-        
+
         gsap.fromTo(
           headerElements,
           {
@@ -454,14 +466,14 @@ const Features = () => {
       // Projects section - staggered entrance
       if (projectsRef.current) {
         const projectCards = projectsRef.current.querySelectorAll('.project-card');
-        
+
         // Set initial state
         gsap.set(projectCards, {
           opacity: 1,
           scale: 1,
           rotateY: 0,
         });
-        
+
         // Create ScrollTrigger animation
         gsap.from(projectCards, {
           opacity: 0,
@@ -503,7 +515,7 @@ const Features = () => {
     if (!projectsRef.current) return;
 
     const projects = projectsRef.current.children;
-    
+
     const ctx = gsap.context(() => {
       // Animate out old projects then animate in new ones
       gsap.fromTo(
@@ -565,7 +577,7 @@ const Features = () => {
   // Modal animations
   const openModal = (project: Project) => {
     setSelectedProject(project);
-    
+
     // Animate modal entrance
     gsap.fromTo(
       modalRef.current,
@@ -617,7 +629,7 @@ const Features = () => {
     if (index === selectedImageIndex) return;
 
     const mainImage = document.querySelector(".modal-main-image");
-    
+
     gsap.to(mainImage, {
       opacity: 0,
       scale: 0.95,
@@ -635,73 +647,23 @@ const Features = () => {
   };
 
   // Work-related words for the grid
-  const workWords = [
-    "WEB DEVELOPMENT",
-    "MOBILE APPS",
-    "E-COMMERCE",
-    "UI/UX DESIGN",
-    "DASHBOARDS",
-    "CMS SOLUTIONS",
-    "API INTEGRATION",
-    "RESPONSIVE DESIGN",
-    "PERFORMANCE",
-    "SCALABILITY",
-    "INNOVATION",
-    "PORTFOLIO",
-  ];
+
 
   return (
     <>
       {/* Hero Section with Grid Background */}
-      <section ref={heroSectionRef} className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[80vh] flex items-start justify-start overflow-hidden">
-        
+      <section ref={heroSectionRef} className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[100vh] flex items-start justify-start overflow-hidden">
+
         {/* Background Grid Layer - Only in Hero */}
-        <div className="absolute inset-0 z-0 flex flex-col">
-          <div ref={gridRef} className="w-full flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#1a1a1a] gap-px border border-[#1a1a1a]">
-            {workWords.map((word, index) => (
-              <div
-                key={index}
-                className="grid-cell group relative w-full min-h-[120px] md:min-h-[20vh] bg-[#0a0a0a]"
-                style={{ perspective: "1000px" }}
-              >
-                <div className="relative w-full h-full duration-300 ease-out transition-all transform-style-3d group-hover:-translate-y-2 group-hover:translate-z-10 group-hover:rotate-x-2 group-hover:shadow-2xl">
-                  <div className="absolute inset-0 bg-[#0a0a0a] flex items-center pl-4 md:pl-8 transition-colors duration-300 group-hover:bg-[#0f0f0f] border border-transparent group-hover:border-[#333]/30">
-                    
-                    {/* Intersection Stars */}
-                    <div className="absolute -top-[5.5px] -left-[5.5px] text-[#333] z-20 group-hover:opacity-50 transition-opacity">
-                      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-100">
-                        <path d="M5.5 0V11" stroke="#333" strokeWidth="1" />
-                        <path d="M0 5.5H11" stroke="#333" strokeWidth="1" />
-                      </svg>
-                    </div>
-
-                    {/* Word Label */}
-                    <span className="text-sm md:text-lg font-light tracking-wide text-[#444] group-hover:text-white transition-colors duration-300 uppercase z-10 relative select-none">
-                      {word}
-                    </span>
-
-                    {/* Corner Brackets */}
-                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#333] opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    {/* Shiny sheen effect */}
-                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-
-                  {/* Bottom Depth Face */}
-                  <div className="absolute inset-x-0 -bottom-2 h-2 bg-[#050505] origin-top transform rotate-x-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="absolute inset-0 z-0">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
         </div>
 
         {/* Overlay Content Layer */}
-        <div className="relative z-10 w-full max-w-[1800px] px-4 md:px-12 pointer-events-none flex flex-col justify-start pt-24 lg:pt-18">
+        <div className="relative z-10 w-full max-w-[1800px] pointer-events-none flex flex-col justify-start pt-24 lg:pt-18">
           <div ref={headerRef} className="relative">
-            <h2 className="text-[13vw] leading-[0.8] font-medium uppercase tracking-[-0.02em] font-sans text-white/90 mix-blend-difference mb-8">
+            <h2 className="text-[10vw] leading-[0.8] font-medium uppercase tracking-[-0.02em] font-pop text-white/90 mix-blend-difference mb-8">
               Strengthen
               <br />
               Your
@@ -727,11 +689,10 @@ const Features = () => {
                 key={tab.id}
                 data-tab={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`px-6 py-2 rounded-md font-medium text-sm transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`px-6 py-2 rounded-md font-medium text-sm transition-all duration-200 ${activeTab === tab.id
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 {tab.label}
               </button>
@@ -756,10 +717,10 @@ const Features = () => {
                   <div className="absolute left-[-6px] top-[70px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
                   <div className="absolute left-[-6px] top-[130px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
                   <div className="absolute left-[-6px] top-[170px] w-[3px] h-[28px] bg-gray-500 rounded-l-sm" />
-                  
+
                   {/* Power Button (Right Side) */}
                   <div className="absolute right-[-6px] top-[140px] w-[3px] h-[60px] bg-gray-500 rounded-r-sm" />
-                  
+
                   {/* iPhone Notch */}
                   <div className="absolute top-0 left-0 right-0 h-10 z-20 flex justify-center items-start pt-1">
                     <div className="w-25 h-7 bg-black rounded-[1.25rem] border border-x border-white/5 flex items-center justify-center gap-2">
@@ -769,7 +730,7 @@ const Features = () => {
                   </div>
                   {/* Bottom Home Indicator */}
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-20" />
-                  
+
                   {/* Overlay with info */}
                   <div className="absolute inset-0 bg-linear-to-t rounded-[2.5rem] from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-6">
                     <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">
@@ -782,7 +743,7 @@ const Features = () => {
                       {project.details}
                     </p>
                   </div>
-                  
+
                   {/* Mobile Screen Content with Carousel */}
                   <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
                     <Image
@@ -792,7 +753,7 @@ const Features = () => {
                       height={2000}
                       className="w-full h-full object-cover object-top transition-opacity duration-300"
                     />
-                    
+
                     {/* Navigation Buttons - Only show on hover if multiple images */}
                     {project.gallery.length > 1 && (
                       <>
@@ -811,12 +772,12 @@ const Features = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
-                        
+
                         {/* Image Counter */}
                         <div className="absolute top-12 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white text-xs z-30 opacity-0 duration-300 group-hover:opacity-100 transition-opacity">
                           {(projectImageIndexes[project.id] || 0) + 1} / {project.gallery.length}
                         </div>
-                        
+
                         {/* Next Button */}
                         <button
                           onClick={(e) => {
@@ -870,7 +831,7 @@ const Features = () => {
                       {project.details}
                     </p>
                   </div>
-                  
+
                   {/* Scrolling Page Content */}
                   <div className="relative w-full h-full pt-9 overflow-hidden">
                     <div className="absolute inset-x-0 top-9 transition-all ease-in-out duration-8000 group-hover:translate-y-[clamp(-1000%,calc(-100%+368px),0%)]">
@@ -985,7 +946,7 @@ const Features = () => {
                   width={1200}
                   height={675}
                 />
-                
+
                 {/* Navigation Arrows */}
                 {selectedProject.gallery.length > 1 && (
                   <>
@@ -999,7 +960,7 @@ const Features = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                     </button>
-                    
+
                     {/* Next Button */}
                     <button
                       onClick={() => handleImageChange((selectedImageIndex + 1) % selectedProject.gallery.length)}
@@ -1010,7 +971,7 @@ const Features = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
-                    
+
                     {/* Image Counter */}
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white text-sm">
                       {selectedImageIndex + 1} / {selectedProject.gallery.length}
@@ -1025,11 +986,10 @@ const Features = () => {
                   <button
                     key={index}
                     onClick={() => handleImageChange(index)}
-                    className={`shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 transition-all ${
-                      selectedImageIndex === index
-                        ? "border-blue-500"
-                        : "border-white/10 hover:border-white/30"
-                    }`}
+                    className={`shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 transition-all ${selectedImageIndex === index
+                      ? "border-blue-500"
+                      : "border-white/10 hover:border-white/30"
+                      }`}
                   >
                     <Image
                       src={image}

@@ -57,7 +57,7 @@ export default function HowWeBuild() {
     <section className="w-full py-24 bg-[#0a0a0a] overflow-hidden">
       <div className="max-w-[1800px] mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center uppercase mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

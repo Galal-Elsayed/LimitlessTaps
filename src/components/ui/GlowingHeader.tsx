@@ -20,8 +20,8 @@ export function GlowingHeader({ children, className, textSize = "text-4xl md:tex
     const opacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
 
     return (
-        <div ref={containerRef} className={cn("relative z-10 mb-6", className)}>
-            <h2 className={cn(textSize, "uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50")}>
+        <div ref={containerRef} className={cn("relative z-10 mb-6 ", className)}>
+            <h2 className={cn(textSize, "uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50 ")}>
                 {children}
             </h2>
             <motion.h2
