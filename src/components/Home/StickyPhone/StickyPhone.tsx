@@ -87,11 +87,11 @@ const ScrollCarousel = () => {
   return (
     <div className="bg-[#0a0a0a] text-white">
       {/* Header Section */}
-      <div className="pt-24 text-center max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5 bg-linear-to-b from-white to-white/60 bg-clip-text text-transparent">
+      <div className="pt-24 text-center max-w-4xl mx-auto px-4">
+        <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5 bg-linear-to-b from-white to-white/60 bg-clip-text text-transparent font-app">
           {t("sticky_header")}
         </h2>
-        <p className="text-xl md:text-2xl text-[#86868b] font-medium">{t("sticky_subheader")}</p>
+        <p className="text-xl md:text-2xl text-[#86868b] font-medium font-app">{t("sticky_subheader")}</p>
       </div>
 
       {/* Sticky Scroll Reveal Section */}

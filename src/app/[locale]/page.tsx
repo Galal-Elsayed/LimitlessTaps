@@ -1,6 +1,7 @@
 import Hero from "@/components/Home/Hero/Hero";
 import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 import StickyPhone from "@/components/Home/StickyPhone/StickyPhone";
+import HowWeBuild from "@/components/Home/HowWeBuild/HowWeBuild";
 import Carousel from "@/components/Home/Carousel/Carousel";
 export default async function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default async function HomePage() {
       <Hero />
       <Carousel />
       <StickyPhone />
+      <HowWeBuild />
       <Arc />
     </div>
   );

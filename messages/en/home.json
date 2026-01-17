@@ -67,5 +67,17 @@
   "software_solutions_header": "Software Solutions",
   "software_solutions_desc": "Custom dashboards and systems that drive real insights.",
   "design_maintenance_header": "Design & Maintenance",
-  "design_maintenance_desc": "Beautiful design, security hardening, and continuous support."
+  "design_maintenance_desc": "Beautiful design, security hardening, and continuous support.",
+  "how_we_build_title": "How We Build Your Digital Future",
+  "build_step_1_title": "Discovery & Design",
+  "build_step_1_text": "First, we clarify your color preferences and design a tailored UI/UX before implementation begins.",
+  "build_step_2_title": "Strategy & Growth",
+  "build_step_2_text": "We identify best practices to boost your sales and customer base, ensuring the solution drives business value.",
+  "build_step_3_title": "Layout & Structure",
+  "build_step_3_text": "We select the optimal layout and architectural foundation for your project.",
+  "build_step_4_title": "Responsive Development",
+  "build_step_4_text": "Finally, we ensure your website or app is fully responsive and compatible across all devices.",
+  "build_step_5_title": "Optimization & Launch",
+  "build_step_5_text": "We optimize performance through A/B testing and analytics to maximize your business growth.",
+  "timeline_description": "Our proven 5-step process ensures transparency, efficiency, and excellence in every project we deliver."
 }

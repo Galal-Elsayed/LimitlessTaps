@@ -43,7 +43,7 @@ export default function Hero() {
             className="inline-flex items-center gap-4 rounded-xl border border-white/10 bg-zinc-900/50 px-4 py-3 text-sm font-medium text-white backdrop-blur-md transition-all hover:bg-white/5 hover:border-white/20 group"
           >
             <span className="flex h-3.5 w-3.5 items-center justify-center rounded-[1px] bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.8)] animate-pulse"></span>
-            <span className="font-[family-name:var(--font-jetbrains-mono)] tracking-wider uppercase text-xs sm:text-sm text-gray-300 group-hover:text-white transition-colors">
+            <span className="font-app tracking-wider uppercase text-xs sm:text-sm text-gray-300 group-hover:text-white transition-colors">
               {t("hero_badge")}
             </span>
             <ArrowRight
@@ -63,7 +63,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1]"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] font-app"
             >
               {t("hero_title")}
             </motion.h1>
@@ -73,7 +73,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed"
+              className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed font-app"
             >
               {t("hero_subtitle")}
             </motion.p>
