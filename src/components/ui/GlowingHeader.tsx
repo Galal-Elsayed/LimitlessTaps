@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 interface GlowingHeaderProps {
     children: React.ReactNode;
     className?: string;
+    textSize?: string;
 }
 
-export function GlowingHeader({ children, className }: GlowingHeaderProps) {
+export function GlowingHeader({ children, className, textSize = "text-4xl md:text-7xl" }: GlowingHeaderProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -20,12 +21,12 @@ export function GlowingHeader({ children, className }: GlowingHeaderProps) {
 
     return (
         <div ref={containerRef} className={cn("relative z-10 mb-6", className)}>
-            <h2 className="text-4xl md:text-7xl uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50">
+            <h2 className={cn(textSize, "uppercase font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/20 to-white/10 opacity-50")}>
                 {children}
             </h2>
             <motion.h2
                 style={{ opacity }}
-                className="absolute inset-0 text-4xl md:text-7xl uppercase font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+                className={cn("absolute inset-0 uppercase font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]", textSize)}
                 aria-hidden="true"
             >
                 {children}

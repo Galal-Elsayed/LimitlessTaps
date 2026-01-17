@@ -1,16 +1,17 @@
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
+import Webhero from "@/components/Services/Web/Webhero";
+import ServicesWeb from "@/components/Services/Web/ServicesWeb";
+import WebCards from "@/components/Services/Web/WebCards";
 
 export default async function WebDevelopmentPage() {
     const t = await getTranslations('services');
 
     return (
         <div className="min-h-screen bg-[#0a0a0a]">
-            <Navbar />
-            <main className="p-8 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl text-white mb-4">{t("web_development_title")}</h1>
-                <p className="text-gray-400 text-lg">{t("web_development_desc")}</p>
-            </main>
+            <Webhero />
+            <ServicesWeb />
+            <WebCards />
         </div>
     );
 }

@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
+import ServicesDesign from "@/components/Services/WebDesign/ServicesDesign";
+import WebdesignHero from "@/components/Services/WebDesign/WebdesignHero";
 
 export default async function WebDesignPage() {
     const t = await getTranslations('services');
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a]">
-            <Navbar />
-            <main className="p-8 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl text-white mb-4">{t("web_design_title")}</h1>
-                <p className="text-gray-400 text-lg">{t("web_design_desc")}</p>
-            </main>
-        </div>
+        <>
+            <WebdesignHero />
+            <ServicesDesign />
+        </>
     );
 }

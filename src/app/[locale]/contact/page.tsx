@@ -73,7 +73,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.6 }}
                         className='col-span-1 lg:col-span-2'
                     >
-                        <h1 className="text-4xl flex font-bold tracking-tight mb-3">
+                        <h1 className="text-6xl uppercase flex font-bold tracking-tight mb-3">
                             {t.rich('hero.title', {
                                 br: () => <br />,
                                 gradient: (chunks) => <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-[#00d4ff]">{chunks}</span>

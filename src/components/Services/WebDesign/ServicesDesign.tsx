@@ -190,7 +190,7 @@ export default function ServicesDesign() {
         <section className="w-full min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center py-24 px-4 overflow-hidden relative">
 
             {/* Header */}
-            <motion.div
+            {/* <motion.div
                 className="text-center mb-12 max-w-5xl relative z-10"
                 variants={containerVariants}
                 initial="hidden"
@@ -206,7 +206,7 @@ export default function ServicesDesign() {
                 >
                     Experience the power of a flexible design system. Customize typography, color palettes, and spatial dynamics in real-time.
                 </motion.p>
-            </motion.div>
+            </motion.div> */}
 
             {/* Controls */}
             <motion.div
@@ -330,7 +330,7 @@ export default function ServicesDesign() {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className={cn(
-                        "w-full max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl mx-auto flex flex-col min-h-[700px] transition-all duration-500",
+                        "w-full max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl mx-auto flex flex-col min-h-[680px] transition-all duration-500",
                         theme.border,
                         theme.glow,
                         // Apply radius to the CONTAINER too if desired, or keep it fixed. 

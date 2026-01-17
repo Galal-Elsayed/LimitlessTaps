@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Wand2, Users, Tag, Image as ImageIcon, Sparkles, Rocket, ArrowRight } from "lucide-react";
-import { GlowingHeader } from "../ui/GlowingHeader";
+import { GlowingHeader } from "../../ui/GlowingHeader";
 
 const FEATURES = [
     {

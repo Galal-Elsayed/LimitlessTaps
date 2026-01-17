@@ -24,7 +24,7 @@ import {
     IconCaretLeftFilled,
     IconCaretDownFilled,
 } from "@tabler/icons-react";
-import { GlowingHeader } from "../ui/GlowingHeader";
+import { GlowingHeader } from "../../ui/GlowingHeader";
 
 // --- TEXT CONTENT CONSTANTS ---
 const TOPICS = [
@@ -54,18 +54,6 @@ export default function ServicesWeb() {
     return (
         <section className="min-h-screen bg-[#0a0a0a] py-24 px-4 overflow-hidden flex flex-col items-center">
 
-            {/* 1. Header: Top Center */}
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-16 md:mb-44 z-10"
-            >
-                <GlowingHeader> web mastery </GlowingHeader>
-                <p className="text-white/50 max-w-xl mx-auto text-lg">
-                    Crafting digital experiences that transcend boundaries.
-                </p>
-            </motion.div>
 
             {/* 2. Main Layout: 3 Columns - Widened */}
             <div className="w-full max-w-[1800px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-center">
@@ -100,9 +88,9 @@ export default function ServicesWeb() {
                 {/* Center Column: MacBook (Larger) */}
                 <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center perspective-[1200px] relative z-20 py-10">
                     {/* Glow effect behind laptop */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="scale-[0.8] md:scale-[1.3] xl:scale-[1.4] transform-gpu">
+                    <div className="scale-[0.8] md:scale-[1.2] xl:scale-[1.3] transform-gpu">
                         <MacbookPresentation />
                     </div>
                 </div>

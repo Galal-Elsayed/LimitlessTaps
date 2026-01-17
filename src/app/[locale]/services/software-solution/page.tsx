@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
+import ServicesSoft from "@/components/Services/SoftwareSolution/ServicesSoft";
+import SolutionHero from "@/components/Services/SoftwareSolution/SolutionHero";
 
 export default async function SoftwareSolutionPage() {
     const t = await getTranslations('services');
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a]">
-            <Navbar />
-            <main className="p-8 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl text-white mb-4">{t("software_solution_title")}</h1>
-                <p className="text-gray-400 text-lg">{t("software_solution_desc")}</p>
-            </main>
-        </div>
+        <>
+            <SolutionHero />
+            <ServicesSoft />
+        </>
     );
 }

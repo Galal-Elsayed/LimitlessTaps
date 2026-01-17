@@ -28,10 +28,11 @@ import { useTranslations, useLocale } from "next-intl";
 
 // --- Background Effects ---
 const StarField = React.memo(() => {
-    // Generate static stars once
-    const stars = useMemo(() => {
-        const starCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 15 : 30; // Reduced count
-        return [...Array(starCount)].map((_, i) => ({
+    const [stars, setStars] = useState<{ id: number; top: string; left: string; size: number; opacity: number; animationDuration: number; }[]>([]);
+
+    useEffect(() => {
+        const starCount = window.innerWidth < 768 ? 15 : 30; // Reduced count
+        const generatedStars = [...Array(starCount)].map((_, i) => ({
             id: i,
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
@@ -39,6 +40,7 @@ const StarField = React.memo(() => {
             opacity: Math.random() * 0.5 + 0.1,
             animationDuration: Math.random() * 3 + 2,
         }));
+        setStars(generatedStars);
     }, []);
 
     return (
@@ -446,8 +448,8 @@ export default function AboutHero() {
             >
                 {/* Headline */}
                 <h1
-                    className="text-center text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[84px] font-medium tracking-tight text-[#F7F8F8] max-w-5xl leading-[1.1] sm:leading-[1.02] overflow-visible"
-                    style={{ fontWeight: 510, letterSpacing: "-0.04em" }}
+                    className="text-center text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[84px] font-semibold tracking-tight text-[#F7F8F8] max-w-5xl leading-[1.1] sm:leading-[1.02] overflow-visible"
+                    style={{ letterSpacing: "-0.04em" }}
                 >
                     <div className="flex flex-wrap justify-center gap-x-[0.2em] gap-y-[0.1em]">
                         {words.map((word, i) => (

@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
+import { ServicesMopile } from "@/components/Services/Mopile/ServicesMopile";
+import MopileHero from "@/components/Services/Mopile/MopileHero";
 
 export default async function MobileApplicationPage() {
     const t = await getTranslations('services');
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a]">
-            <Navbar />
-            <main className="p-8 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl text-white mb-4">{t("mobile_application_title")}</h1>
-                <p className="text-gray-400 text-lg">{t("mobile_application_desc")}</p>
-            </main>
-        </div>
+        <>
+            <MopileHero />
+            <ServicesMopile />
+        </>
     );
 }
