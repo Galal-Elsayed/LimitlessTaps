@@ -48,9 +48,9 @@ const EXPERIENCES: ServiceItem[] = [
         underlineColor: "bg-blue-400",
     },
     {
-        title: "Mobile experiences",
+        title: "Software Solution",
         description:
-            "Interactive AR experiences that combine 3D content, photos and video - including data tracking, analytics and calls to action.",
+            "Tailored software solutions designed to streamline operations and drive growth. From enterprise resource planning to custom automation tools, we build systems that solve complex challenges.",
         image: "/Services/Illustrations/develop.mp4",
         accentColor: "text-gray-100",
         underlineColor: "bg-gray-100",
@@ -92,7 +92,7 @@ export default function ServicesDesc() {
             className="w-full relative z-10 bg-[#0a0a0a] overflow-hidden"
         >
 
-            <section className="w-full text-white py-24 px-4 md:px-12 lg:px-24 relative z-10">
+            <section className="w-full text-white pt-24 pb-64 px-4 md:px-12 lg:px-24 relative z-10">
                 <div className="max-w-[1500px] mx-auto flex flex-col items-center">
                     <div className="mb-48 text-center w-full">
                         <GlowingHeader textSize="text-3xl md:text-4xl lg:text-8xl">
