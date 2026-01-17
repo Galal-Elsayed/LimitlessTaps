@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { GlowingHeader } from "@/components/ui/GlowingHeader";
 import Laptop3D from "./ReusableComponents/Laptop3D";
-import SamsungPhone3D from "./ReusableComponents/SamsungPhone3D";
+import SamsungPhone3D from "./SamsungPhone3D";
 import Monitor3D from "./ReusableComponents/Monitor3D";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,11 +18,12 @@ interface ServiceItem {
     image: string; // Used for fallback items (index > 1)
     accentColor: string;
     underlineColor: string;
+    titleClassName?: string;
 }
 
 const EXPERIENCES: ServiceItem[] = [
     {
-        title: "Web experiences",
+        title: "Web Development",
         description:
             "First-class immersive experience websites that help your business to achieve sustained, long-term success.",
         image: "/assets/poppr/Laptop.jpg",
@@ -34,24 +35,25 @@ const EXPERIENCES: ServiceItem[] = [
         description:
             "We build high-performance native and cross-platform apps using React Native, Flutter, and Swift/Kotlin. Scalable, secure, and intuitive solutions tailored to your needs.",
         image: "/assets/poppr/AR_phone.jpg", // Not used, 3D model is rendered instead
-        accentColor: "text-orange-400",
-        underlineColor: "bg-orange-400",
+        accentColor: "text-blue-500",
+        underlineColor: "bg-blue-500",
+        titleClassName: "whitespace-nowrap",
     },
     {
         title: "Web Design & Templates",
         description:
             "Stunning, responsive designs and premium templates tailored to elevate your brand's digital presence.",
         image: "/assets/poppr/VR.jpg",
-        accentColor: "text-cyan-400",
-        underlineColor: "bg-cyan-400",
+        accentColor: "text-blue-400",
+        underlineColor: "bg-blue-400",
     },
     {
         title: "Mobile experiences",
         description:
             "Interactive AR experiences that combine 3D content, photos and video - including data tracking, analytics and calls to action.",
         image: "/Services/Illustrations/develop.mp4",
-        accentColor: "text-purple-400",
-        underlineColor: "bg-purple-400",
+        accentColor: "text-gray-100",
+        underlineColor: "bg-gray-100",
     },
 ];
 
@@ -194,7 +196,8 @@ function ServiceRowItem({ item, index }: { item: ServiceItem; index: number }) {
                     <h3
                         className={cn(
                             "text-3xl md:text-5xl font-bold mb-4 transition-colors duration-300",
-                            item.accentColor
+                            item.accentColor,
+                            item.titleClassName
                         )}
                     >
                         {item.title}

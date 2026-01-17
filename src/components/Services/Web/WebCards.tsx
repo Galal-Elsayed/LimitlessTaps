@@ -74,32 +74,32 @@ const PWAShape = () => (
 
 const WEB_SERVICES = [
     {
-        title: "High-Performance Static Websites",
-        description: "We engineer blazing-fast, SEO-optimized static websites using Next.js and React. Our architecture ensures near-instant load times, superior search engine ranking, and a flawless user experience for marketing pages, portfolios, and blogs.",
+        title: "High-Performance Websites",
+        description: "We engineer blazing-fast, SEO-optimized static websites using Next.js and React. Our architecture ensures near-instant load times and superior SEO ranking. we guarantee your content reaches users with minimal latency.",
         colSpan: "lg:col-span-4",
         shape: <StaticShape />,
     },
     {
         title: "Scalable SaaS Platforms",
-        description: "From MVP to enterprise scale, we build robust Software-as-a-Service applications. Featuring multi-tenant architecture, secure authentication, real-time data processing, and seamless third-party integrations, our platforms are designed to grow with your business.",
+        description: "From MVP to enterprise scale, we build robust Software-as-a-Service applications. Featuring multi-tenant architecture, secure authentication, real-time data processing, and seamless third-party integrations, our platforms are designed to grow with your business. We prioritize code maintainability, cloud-native scalability, and modular design, ensuring your platform adapts effortlessly to future market demands while maintaining strictly high security standards and operational efficiency. Furthermore, we implement comprehensive DevOps pipelines with automated testing and continuous deployment (CI/CD) to accelerate delivery cycles. Our solutions include advanced monitoring and observability stacks, giving you real-time insights into system performance and user behavior.",
         colSpan: "lg:col-span-8",
         shape: <SaaSShape />,
     },
     {
         title: "Custom E-commerce Solutions",
-        description: "Drive conversions with bespoke e-commerce experiences. Whether it's a headless Shopify build or a completely custom storefront, we create seamless, high-converting shopping journeys that truly reflect your brand identity and maximize sales.",
+        description: "Drive conversions with bespoke e-commerce experiences. Whether it's a headless Shopify build or a completely custom storefront, we create seamless, high-converting shopping journeys that truly reflect your brand identity and maximize sales. Our solutions include detailed analytics implementation, personalized product recommendations, and optimized checkout flows to reduce cart abandonment.",
         colSpan: "lg:col-span-6",
         shape: <EcommerceShape />,
     },
     {
         title: "Headless CMS & Dynamic Content",
-        description: "Empower your team with flexible content management using Sanity, Contentful, or Strapi. We decouple the frontend to give you ultimate creative freedom, lightning-fast performance, and an intuitive editing experience without technical bottlenecks.",
+        description: "Empower your team with flexible content management using Sanity, Contentful, or Strapi. We decouple the frontend to give you ultimate creative freedom, lightning-fast performance, and an intuitive editing experience without technical bottlenecks. Content updates are instantly propagated globally, and our custom workflows ensure your marketing team can launch campaigns faster than ever.",
         colSpan: "lg:col-span-6",
         shape: <CMSShape />,
     },
     {
         title: "Progressive Web Apps (PWA)",
-        description: "Bridge the gap between web and mobile. Our Progressive Web Apps deliver native-app-like experiences—offline capabilities, push notifications, and home screen installation—ensuring engagement anytime, anywhere, on any device.",
+        description: "Bridge the gap between web and mobile. Our Progressive Web Apps deliver native-app-like experiences—offline capabilities, push notifications, and home screen installation—ensuring engagement anytime, anywhere, on any device. By utilizing service workers and modern web APIs, we create resilient applications that function reliably even in poor network conditions.",
         colSpan: "lg:col-span-12",
         shape: <PWAShape />,
     },

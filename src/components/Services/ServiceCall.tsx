@@ -3,52 +3,16 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
-// --- Magnetic Button ---
-const MagneticButton = ({ children, className, href }: { children: React.ReactNode, className?: string, href: string }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const xSpring = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
-    const ySpring = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const { clientX, clientY } = e;
-        const { left, top, width, height } = ref.current?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
-        const centerX = left + width / 2;
-        const centerY = top + height / 2;
-        x.set((clientX - centerX) * 0.3);
-        y.set((clientY - centerY) * 0.3);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ x: xSpring, y: ySpring }}
-            className="relative"
-        >
-            <Link href={href} className={className}>
-                {children}
-            </Link>
-        </motion.div>
-    );
-};
+import Image from "next/image";
 
 export default function ServiceCall() {
     const containerRef = useRef<HTMLDivElement>(null);
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"],
     });
+
 
     const y = useTransform(scrollYProgress, [0, 1], [-50, 50]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
@@ -177,15 +141,22 @@ export default function ServiceCall() {
                     transition={{ delay: 0.5, duration: 0.6 }}
                     className="flex flex-col md:flex-row items-center gap-6"
                 >
-                    <MagneticButton
+                    <Link
                         href="/contact"
                         className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
                     >
                         <span className="relative z-10 flex items-center gap-2">
+                            <Image
+                                src="/Home/infinity.apng"
+                                alt="Start Project"
+                                width={24}
+                                height={24}
+                                className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
+                                priority
+                            />
                             Start Project
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                         </span>
-                    </MagneticButton>
+                    </Link>
 
                     <Link
                         href="/services"

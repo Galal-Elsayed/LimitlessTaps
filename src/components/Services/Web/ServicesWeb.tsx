@@ -31,22 +31,22 @@ const TOPICS = [
     {
         title: "Web Development",
         desc: "Pixel-perfect, responsive web solutions.",
-        color: "text-blue-400"
+        color: "text-white"
     },
     {
         title: "eCommerce",
         desc: "Scalable storefronts that convert.",
-        color: "text-emerald-400"
+        color: "text-white"
     },
     {
         title: "SaaS Platforms",
         desc: "Robust architecture for modern software.",
-        color: "text-purple-400"
+        color: "text-white"
     },
     {
         title: "UI/UX Design",
         desc: "Interactive experiences that engage users.",
-        color: "text-orange-400"
+        color: "text-white"
     }
 ];
 
@@ -155,7 +155,9 @@ function MacbookPresentation() {
     return (
         <div className="flex flex-col items-center py-12 relative">
             <Lid step={step} loopIndex={loopIndex} />
-            <Base />
+            <div className="-mt-1">
+                <Base />
+            </div>
         </div>
     );
 }
@@ -191,7 +193,7 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                     transformOrigin: "bottom",
                     transformStyle: "preserve-3d",
                 }}
-                className="absolute inset-0 h-[17rem] w-[32rem] rounded-2xl bg-[#010101] p-2"
+                className="absolute inset-0 h-[15rem] w-[32rem] rounded-2xl bg-[#010101] p-2"
             >
                 <div className="absolute inset-0 h-full w-full rounded-xl overflow-hidden bg-black border-[4px] border-[#1a1a1a]">
 
