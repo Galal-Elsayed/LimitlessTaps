@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
 import ServicesHero from "@/components/Services/ServicesHero";
-import ServicesDesc from "@/components/Services/ServicesDesc";
-import ServicesCarousel from "@/components/Services/ServicesCarousel";
 import ServiceCall from "@/components/Services/ServiceCall";
+import ServicesGridCards from "@/components/Services/ServicesGridCards";
+import ServiceApproach from "@/components/Services/ServiceApproach";
 
 export default async function ServicesPage() {
     const t = await getTranslations('services');
@@ -11,8 +11,8 @@ export default async function ServicesPage() {
     return (
         <div className="bg-[#0a0a0a]">
             <ServicesHero />
-            <ServicesDesc />
-            <ServicesCarousel />
+            <ServicesGridCards />
+            <ServiceApproach />
             <ServiceCall />
         </div>
     );

@@ -118,7 +118,7 @@ export default function ServiceCall() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8"
+                    className="text-5xl uppercase md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8"
                 >
                     Unlock <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-white">Limitless</span> Possibilities.
                 </motion.h2>

@@ -645,8 +645,8 @@ export default function AboutHero() {
                                                         </div>
                                                         <div className="space-y-3 sm:space-y-6 overflow-y-auto ltr:pr-2 rtl:pl-2">
                                                             <RecentActivityItem name="Ziad Ramzy" email="info@limitlesstaps.com" amount="+1,999.00" />
-                                                            <RecentActivityItem name="Galal elsayed" email="contact@limitlesstaps.com" amount="+39.00" />
-                                                            <RecentActivityItem name="Ahmed salem" email="support@limitlesstaps.com" amount="+299.00" />
+                                                            <RecentActivityItem name="Galal Elsayed" email="contact@limitlesstaps.com" amount="+39.00" />
+                                                            <RecentActivityItem name="Ahmed Salem" email="support@limitlesstaps.com" amount="+299.00" />
                                                         </div>
                                                     </motion.div>
                                                 </div>

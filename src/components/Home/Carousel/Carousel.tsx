@@ -16,14 +16,14 @@ export default function Carousel2() {
       header: t("web_dev_header"),
       desc: t("web_dev_desc"),
       type: "video" as const,
-      src: "/Home/Carousel/3d-techny-lettering-css-and-laptop-with-program-code-text.mp4",
+      src: "/Home/Carousel/3d-techny-lettering-css-and-laptop-with-program-code-text-h264.mp4",
       link: "/services/web-development",
     },
     {
       header: t("mobile_apps_header"),
       desc: t("mobile_apps_desc"),
       type: "video" as const,
-      src: "/Home/Carousel/online-translator-on-smartphone.mp4",
+      src: "/Home/Carousel/online-translator-on-smartphone-h264.mp4",
       link: "/services/mobile-apps",
     },
     {
