@@ -55,6 +55,7 @@ export default function Navbar() {
     { key: "services", href: "/services", isDropdown: true },
     { key: "company", href: "/about-us" },
     { key: "portfolio", href: "/work" },
+    { key: "studio", href: "/studio" },
     { key: "careers", href: "/careers" },
     { key: "contact", href: "/contact", isButton: true },
   ];

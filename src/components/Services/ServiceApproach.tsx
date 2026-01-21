@@ -1,12 +1,11 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { Compass, PenTool, Code2, Rocket, Target } from "lucide-react";
+import { Compass, PenTool, Code2, Rocket, Target, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import React, { useRef } from "react";
 import { Header } from "@/components/ui/header";
-
-// --- Background Shape Components (Adapted for Right Column) ---
+import { useTranslations, useLocale } from "next-intl";
 
 // --- Background Shape Components (Animated) ---
 
@@ -159,45 +158,15 @@ const LaunchShape = () => (
     </div>
 );
 
-const steps = [
-    {
-        id: "01",
-        title: "Discovery",
-        description: "We begin by understanding your vision, goals, and audience. Deep research and strategic analysis form the foundation of every project.",
-        icon: Compass,
-        Shape: DiscoveryShape,
-    },
-    {
-        id: "02",
-        title: "Strategy",
-        description: "Insights transform into actionable plans. We define the approach, set milestones, and align on success metrics.",
-        icon: Target,
-        Shape: StrategyShape,
-    },
-    {
-        id: "03",
-        title: "Design",
-        description: "Ideas take visual form. Our design process is iterative, collaborative, and focused on creating meaningful experiences.",
-        icon: PenTool,
-        Shape: DesignShape,
-    },
-    {
-        id: "04",
-        title: "Development",
-        description: "Designs become reality. We build with precision, performance, and scalability as core principles.",
-        icon: Code2,
-        Shape: DevelopmentShape,
-    },
-    {
-        id: "05",
-        title: "Launch",
-        description: "The culmination of our work. We ensure a seamless launch and provide ongoing support for continued success.",
-        icon: Rocket,
-        Shape: LaunchShape,
-    }
-];
+type StepData = {
+    id: string;
+    title: string;
+    description: string;
+    icon: LucideIcon;
+    Shape: React.FC;
+};
 
-const ProcessCard = ({ step, index, total }: { step: typeof steps[0], index: number, total: number }) => {
+const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index: number; total: number; phaseText: string }) => {
     // Tighter offset + sticky
     const topOffset = 100 + (index * 40);
 
@@ -262,7 +231,7 @@ const ProcessCard = ({ step, index, total }: { step: typeof steps[0], index: num
                 {/* Vertical Text */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <span className="text-xs font-bold tracking-[0.3em] uppercase text-white [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl] rotate-180 opacity-60 shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                        Phase {step.id}
+                        {phaseText} {step.id}
                     </span>
                 </div>
             </div>
@@ -271,6 +240,48 @@ const ProcessCard = ({ step, index, total }: { step: typeof steps[0], index: num
 };
 
 export default function ServiceApproach() {
+    const t = useTranslations('services');
+    const locale = useLocale();
+    const isAr = locale === 'ar';
+
+    const steps: StepData[] = [
+        {
+            id: t('approach.steps.discovery.id'),
+            title: t('approach.steps.discovery.title'),
+            description: t('approach.steps.discovery.description'),
+            icon: Compass,
+            Shape: DiscoveryShape,
+        },
+        {
+            id: t('approach.steps.strategy.id'),
+            title: t('approach.steps.strategy.title'),
+            description: t('approach.steps.strategy.description'),
+            icon: Target,
+            Shape: StrategyShape,
+        },
+        {
+            id: t('approach.steps.design.id'),
+            title: t('approach.steps.design.title'),
+            description: t('approach.steps.design.description'),
+            icon: PenTool,
+            Shape: DesignShape,
+        },
+        {
+            id: t('approach.steps.development.id'),
+            title: t('approach.steps.development.title'),
+            description: t('approach.steps.development.description'),
+            icon: Code2,
+            Shape: DevelopmentShape,
+        },
+        {
+            id: t('approach.steps.launch.id'),
+            title: t('approach.steps.launch.title'),
+            description: t('approach.steps.launch.description'),
+            icon: Rocket,
+            Shape: LaunchShape,
+        }
+    ];
+
     return (
         <section className="bg-black pt-32 pb-48 px-2 md:px-0 relative w-full min-h-screen">
             {/* Background Grid Pattern */}
@@ -281,20 +292,36 @@ export default function ServiceApproach() {
                 }}
             />
 
-            <div className="w-full max-w-[95%] xl:max-w-[1600px] mx-auto relative z-10">
+            <div className="w-full max-w-[95%] xl:max-w-[1500px] mx-auto relative z-10">
                 {/* Header Section */}
-                <div className="mb-32 text-center md:text-left px-4">
+                <div className={cn(
+                    "mb-32 px-4",
+                    isAr ? "text-center md:text-right" : "text-center md:text-left"
+                )}>
 
-                    <Header title="OUR PROCESS UNVEILED." className="text-5xl md:text-7xl lg:text-8xl mb-8" />
-                    <p className="text-2xl text-neutral-400 max-w-3xl">
-                        A rigorous, transparent journey from abstract concept to market-ready reality.
+                    <Header
+                        title={t('approach.header')}
+                        className={cn(
+                            "text-5xl md:text-7xl lg:text-8xl mb-8",
+                            // In Arabic, tracking-tighter can clip characters with some fonts/effects AND it looks bad.
+                            isAr ? "tracking-normal py-2" : ""
+                        )}
+                    />
+                    <p className={cn(
+                        "text-2xl text-neutral-400 max-w-3xl",
+                        isAr ? "ml-auto" : "" // Push to right if using text-right, but strictly flex/grid might be better, or just rely on inline flow. 
+                        // text-right on parent aligns inline content. `max-w-3xl` limits width. 
+                        // If it's block-level, we need `ml-auto` to align the box itself to the right if we want the TEXT to be on the right side of the screen visually?
+                        // "on the right side of the section" implies layout position.
+                    )}>
+                        {t('approach.subtitle')}
                     </p>
                 </div>
 
                 {/* Stack Container - Full Width */}
-                <div className="flex flex-col relative pb-[10vh] w-full gap-8 md:gap-0">
+                <div className="flex flex-col relative pb-[10vh] w-full max-w-[1450px] mx-auto gap-8 md:gap-0">
                     {steps.map((step, index) => (
-                        <ProcessCard key={step.id} step={step} index={index} total={steps.length} />
+                        <ProcessCard key={step.id} step={step} index={index} total={steps.length} phaseText={t('approach.phase')} />
                     ))}
                 </div>
             </div>

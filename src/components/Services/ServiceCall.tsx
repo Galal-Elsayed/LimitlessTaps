@@ -4,8 +4,10 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function ServiceCall() {
+    const t = useTranslations('services');
     const containerRef = useRef<HTMLDivElement>(null);
 
     const { scrollYProgress } = useScroll({
@@ -120,7 +122,7 @@ export default function ServiceCall() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-5xl uppercase md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8"
                 >
-                    Unlock <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-white">Limitless</span> Possibilities.
+                    {t('call.unlock')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-white">{t('call.limitless')}</span> {t('call.possibilities')}
                 </motion.h2>
 
                 <motion.p
@@ -130,7 +132,7 @@ export default function ServiceCall() {
                     transition={{ delay: 0.4, duration: 0.8 }}
                     className="text-lg md:text-2xl text-white/50 font-light mb-16 max-w-2xl leading-relaxed"
                 >
-                    Seamlessly bridging vision and reality. We craft digital experiences that defy boundaries.
+                    {t('call.description')}
                 </motion.p>
 
                 {/* 3. Actions */}
@@ -148,13 +150,13 @@ export default function ServiceCall() {
                         <span className="relative z-10 flex items-center gap-2">
                             <Image
                                 src="/Home/infinity.apng"
-                                alt="Start Project"
+                                alt={t('call.startProject')}
                                 width={24}
                                 height={24}
                                 className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
                                 priority
                             />
-                            Start Project
+                            {t('call.startProject')}
                         </span>
                     </Link>
 
@@ -162,7 +164,7 @@ export default function ServiceCall() {
                         href="/services"
                         className="group inline-flex items-center justify-center px-10 py-5 rounded-full font-medium text-lg text-white/70 border border-white/10 hover:bg-white/5 transition-all hover:text-white"
                     >
-                        View Services
+                        {t('call.viewServices')}
                     </Link>
                 </motion.div>
 

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 /* Fonts are loaded via next/font in layout.tsx */
 /* Global styles */
@@ -41,9 +42,7 @@ Link {
   cursor: pointer;
 }
 
-
 /* List styling with colored bullets */
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -255,5 +254,14 @@ html[lang="ar"] {
   body {
     background-color: var(--lt-bg);
     color: var(--lt-text);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

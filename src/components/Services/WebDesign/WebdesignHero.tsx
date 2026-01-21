@@ -6,8 +6,8 @@ import ServiceHeroBase from '../ReusableComponents/ServiceHeroBase';
 export default function WebdesignHero() {
     return (
         <ServiceHeroBase
-            title={<>Customize
-                <br />your DESIGN</>}
+            title={<>WEB SITE
+                <br />DESIGN</>}
         />
     );
 }

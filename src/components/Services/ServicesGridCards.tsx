@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/ui/header";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
 import {
     AppWindow,
     GalleryVerticalEnd,
@@ -180,16 +182,14 @@ const InteractionDesignVisual = () => {
     );
 };
 
-const VisualDesignVisual = () => {
-    // Reference Match: List Style (Icon - Title - Subtitle)
-    // Tightly packed to fit height
-    const items = [
-        { title: "Motion Design", sub: "Animation", icon: MoreHorizontal, color: "bg-blue-500" },
-        { title: "Brand Identity", sub: "Identity", icon: SwatchBook, color: "bg-pink-500" },
-        { title: "UI/UX Design", sub: "Interface", icon: LayoutTemplate, color: "bg-amber-500" },
-        { title: "Design Systems", sub: "Systems", icon: Layers, color: "bg-emerald-500" },
-    ];
+type VisualDesignItem = {
+    title: string;
+    sub: string;
+    icon: React.ElementType;
+    color: string;
+};
 
+const VisualDesignVisual = ({ items }: { items: VisualDesignItem[] }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-start pt-4 space-y-1.5 overflow-visible relative px-4">
             {/* Masking for clean exit */}
@@ -234,7 +234,13 @@ const VisualDesignVisual = () => {
     );
 };
 
-const WireframingVisual = () => {
+type WireframingSteps = {
+    idea: string;
+    sketch: string;
+    final: string;
+};
+
+const WireframingVisual = ({ steps }: { steps: WireframingSteps }) => {
     return (
         <div className="w-full h-full flex items-end justify-center pb-6 relative">
             <div className="flex items-center gap-6 relative z-10">
@@ -244,7 +250,7 @@ const WireframingVisual = () => {
                     whileHover={{ scale: 1.1, rotate: 5 }}
                 >
                     <Lightbulb className="w-6 h-6 text-amber-500 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">Idea</div>
+                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">{steps.idea}</div>
                 </motion.div>
 
                 {/* Connecting Line */}
@@ -263,7 +269,7 @@ const WireframingVisual = () => {
                     whileHover={{ scale: 1.1, rotate: -5 }}
                 >
                     <PenTool className="w-6 h-6 text-sky-500 drop-shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
-                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">Sketch</div>
+                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">{steps.sketch}</div>
                 </motion.div>
 
                 {/* Icon 3 - Final */}
@@ -272,20 +278,20 @@ const WireframingVisual = () => {
                     whileHover={{ scale: 1.1, rotate: 5 }}
                 >
                     <AppWindow className="w-6 h-6 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">Final</div>
+                    <div className="absolute -bottom-5 text-[9px] font-bold text-neutral-400 uppercase tracking-wider">{steps.final}</div>
                 </motion.div>
             </div>
         </div>
     );
 };
 
-const UserResearchVisual = () => {
-    // Multi-column badges - Adjusted size
+const UserResearchVisual = ({ badges }: { badges: string[] }) => {
+    // Split badges into 4 columns
     const badgeColumns = [
-        ["Strategy", "Planning", "Goals"],
-        ["Analysis", "Data", "Metrics"],
-        ["Users", "Personas", "Flows"],
-        ["Testing", "Feedback", "Iterate"]
+        badges.slice(0, 3),
+        badges.slice(3, 6),
+        badges.slice(6, 9),
+        badges.slice(9, 12)
     ];
 
     return (
@@ -401,9 +407,11 @@ type CardProps = {
     className?: string; // For Grid sizing
     icon?: React.ReactNode;
     layout?: "vertical" | "horizontal";
+    learnMoreText: string;
+    learnMoreHref?: string;
 };
 
-const ServiceCard = ({ title, description, children, className, icon, layout = "vertical" }: CardProps) => {
+const ServiceCard = ({ title, description, children, className, icon, layout = "vertical", learnMoreText, learnMoreHref }: CardProps) => {
     return (
         <div className={cn(
             // LIGHTER BACKGROUND: bg-[#111] instead of #0a0a0a
@@ -433,9 +441,18 @@ const ServiceCard = ({ title, description, children, className, icon, layout = "
                 </p>
 
                 {/* Learn More Link - Blue */}
-                <div className="mt-4 md:mt-auto pt-2 flex items-center text-blue-500 text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out delay-75">
-                    Learn more <ArrowRight className="ml-1 w-4 h-4" />
-                </div>
+                {learnMoreHref ? (
+                    <Link
+                        href={learnMoreHref}
+                        className="mt-4 md:mt-auto pt-2 flex items-center text-blue-500 text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out delay-75 hover:text-blue-400"
+                    >
+                        {learnMoreText} <ArrowRight className="ml-1 w-4 h-4" />
+                    </Link>
+                ) : (
+                    <div className="mt-4 md:mt-auto pt-2 flex items-center text-blue-500 text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out delay-75">
+                        {learnMoreText} <ArrowRight className="ml-1 w-4 h-4" />
+                    </div>
+                )}
             </div>
 
             {/* 2. Visual Section */}
@@ -450,6 +467,10 @@ const ServiceCard = ({ title, description, children, className, icon, layout = "
 };
 
 export default function ServicesGridCards() {
+    const t = useTranslations('services');
+    const locale = useLocale();
+    const isAr = locale === 'ar';
+
     return (
         <section className="pb-44 pt-24 px-4 md:px-8 bg-[#0a0a0a] relative overflow-hidden">
             {/* Simplified Background */}
@@ -458,7 +479,13 @@ export default function ServicesGridCards() {
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header Section */}
                 <div className="mx-auto max-w-5xl text-center pb-12 md:pb-16">
-                    <Header title="WE HANDLE JUST ABOUT EVERYTHING" className="text-4xl md:text-4xl lg:text-7xl mb-6" />
+                    <Header
+                        title={t('gridCards.header')}
+                        className={cn(
+                            "text-4xl md:text-4xl lg:text-7xl mb-6",
+                            isAr ? "tracking-normal py-2" : ""
+                        )}
+                    />
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -466,61 +493,89 @@ export default function ServicesGridCards() {
                         transition={{ delay: 0.1 }}
                         className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto"
                     >
-                        We handle everything from design to deployment to get your website shipped and ready to go!
+                        {t('gridCards.subtitle')}
                     </motion.p>
                 </div>
 
                 {/* Compact Bento Grid - STRICT FLUXIS LAYOUT */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 gap-5 max-w-[1240px] mx-auto auto-rows-[300px] lg:auto-rows-[240px] h-[90vh]">
 
-                    {/* 1. Interaction Design (Row 1, Col 1-2) - HORIZONTAL */}
+                    {/* 1. Mobile Applications (Row 1, Col 1-2) - HORIZONTAL */}
                     <ServiceCard
-                        title="Interaction Design"
-                        description="Create engaging interactions that captivate and delight users."
+                        title={t('gridCards.interactionDesign.title')}
+                        description={t('gridCards.interactionDesign.description')}
                         className="lg:col-span-2 lg:row-start-1 lg:col-start-1"
-                        icon={<MousePointer2 className="h-5 w-5" />}
+                        icon={<Smartphone className="h-5 w-5" />}
                         layout="horizontal"
+                        learnMoreText={t('gridCards.learnMore')}
+                        learnMoreHref="/services/mobile-application"
                     >
                         <InteractionDesignVisual />
                     </ServiceCard>
 
                     {/* 2. Visual Design (Row 1-2, Col 3) - VERTICAL TALL */}
                     <ServiceCard
-                        title="Visual Design and Branding"
-                        description="Craft compelling visuals that define and elevate your brand."
+                        title={t('gridCards.visualDesign.title')}
+                        description={t('gridCards.visualDesign.description')}
                         className="lg:col-start-3 lg:row-start-1 lg:row-span-2"
                         icon={<Share2 className="h-5 w-5" />}
+                        learnMoreText={t('gridCards.learnMore')}
                     >
-                        <VisualDesignVisual />
+                        <VisualDesignVisual items={[
+                            { title: t('gridCards.visualDesign.items.motionDesign.title'), sub: t('gridCards.visualDesign.items.motionDesign.sub'), icon: MoreHorizontal, color: "bg-blue-500" },
+                            { title: t('gridCards.visualDesign.items.brandIdentity.title'), sub: t('gridCards.visualDesign.items.brandIdentity.sub'), icon: SwatchBook, color: "bg-pink-500" },
+                            { title: t('gridCards.visualDesign.items.uiuxDesign.title'), sub: t('gridCards.visualDesign.items.uiuxDesign.sub'), icon: LayoutTemplate, color: "bg-amber-500" },
+                            { title: t('gridCards.visualDesign.items.designSystems.title'), sub: t('gridCards.visualDesign.items.designSystems.sub'), icon: Layers, color: "bg-emerald-500" },
+                        ]} />
                     </ServiceCard>
 
                     {/* 3. User Research (Row 2-3, Col 1) - VERTICAL TALL */}
                     <ServiceCard
-                        title="User Research and SEO"
-                        description="Understand your users deeply through research and insights."
+                        title={t('gridCards.userResearch.title')}
+                        description={t('gridCards.userResearch.description')}
                         className="lg:col-start-1 lg:row-start-2 lg:row-span-2"
                         icon={<Search className="h-5 w-5" />}
+                        learnMoreText={t('gridCards.learnMore')}
                     >
-                        <UserResearchVisual />
+                        <UserResearchVisual badges={[
+                            t('gridCards.userResearch.badges.0'),
+                            t('gridCards.userResearch.badges.1'),
+                            t('gridCards.userResearch.badges.2'),
+                            t('gridCards.userResearch.badges.3'),
+                            t('gridCards.userResearch.badges.4'),
+                            t('gridCards.userResearch.badges.5'),
+                            t('gridCards.userResearch.badges.6'),
+                            t('gridCards.userResearch.badges.7'),
+                            t('gridCards.userResearch.badges.8'),
+                            t('gridCards.userResearch.badges.9'),
+                            t('gridCards.userResearch.badges.10'),
+                            t('gridCards.userResearch.badges.11'),
+                        ]} />
                     </ServiceCard>
 
                     {/* 4. Wireframing (Row 2, Col 2) - SQUARE-ISH */}
                     <ServiceCard
-                        title="Wireframing and Prototyping"
-                        description="Transform ideas into tangible prototypes."
+                        title={t('gridCards.wireframing.title')}
+                        description={t('gridCards.wireframing.description')}
                         className="lg:col-start-2 lg:row-start-2"
                         icon={<Layers className="h-5 w-5" />}
+                        learnMoreText={t('gridCards.learnMore')}
                     >
-                        <WireframingVisual />
+                        <WireframingVisual steps={{
+                            idea: t('gridCards.wireframing.steps.idea'),
+                            sketch: t('gridCards.wireframing.steps.sketch'),
+                            final: t('gridCards.wireframing.steps.final'),
+                        }} />
                     </ServiceCard>
 
                     {/* 5. Everything Else (Row 3, Col 2-3) - HORIZONTAL */}
                     <ServiceCard
-                        title="And Everything else"
-                        description="Usability Testing, Information Architecture, Accessibility Design. You name it."
+                        title={t('gridCards.everythingElse.title')}
+                        description={t('gridCards.everythingElse.description')}
                         className="lg:col-start-2 lg:row-start-3 lg:col-span-2"
                         icon={<Globe className="h-5 w-5" />}
                         layout="horizontal" // User requested this to look like the first one
+                        learnMoreText={t('gridCards.learnMore')}
                     >
                         <EverythingElseVisual />
                     </ServiceCard>

@@ -1,7 +1,10 @@
 import { getTranslations } from "next-intl/server";
-import Navbar from "@/components/Navbar/Navbar";
-import ServicesSoft from "@/components/Services/SoftwareSolution/ServicesSoft";
 import SolutionHero from "@/components/Services/SoftwareSolution/SolutionHero";
+
+import SoftwareCards from "@/components/Services/SoftwareSolution/SoftwareCards";
+import ServiceCall from "@/components/Services/ServiceCall";
+import { Data } from "@/components/Services/SoftwareSolution/Data";
+import SolutionGrid from "@/components/Services/SoftwareSolution/SolutionGrid";
 
 export default async function SoftwareSolutionPage() {
     const t = await getTranslations('services');
@@ -9,7 +12,12 @@ export default async function SoftwareSolutionPage() {
     return (
         <>
             <SolutionHero />
-            <ServicesSoft />
+            <Data />
+            <SolutionGrid />
+            <div className="sr-only">
+                <SoftwareCards />
+            </div>
+            <ServiceCall />
         </>
     );
 }

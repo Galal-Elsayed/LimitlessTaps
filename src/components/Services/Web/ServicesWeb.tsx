@@ -1,4 +1,5 @@
 "use client";
+// Force Update
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ import {
     IconCommand,
     IconCaretLeftFilled,
     IconCaretDownFilled,
+    IconMenu2,
 } from "@tabler/icons-react";
 import { GlowingHeader } from "../../ui/GlowingHeader";
 
@@ -31,22 +33,42 @@ const TOPICS = [
     {
         title: "Web Development",
         desc: "Pixel-perfect, responsive web solutions.",
-        color: "text-white"
+        color: "text-white",
+        icons: [
+            "/About/next.webp",
+            "/About/react-svgrepo-com.svg",
+            "/About/wordpress-svgrepo-com.svg"
+        ]
     },
     {
         title: "eCommerce",
         desc: "Scalable storefronts that convert.",
-        color: "text-white"
+        color: "text-white",
+        icons: [
+            "/About/woo.webp",
+            "/About/salla.webp",
+            "/About/shopify.webp"
+        ]
     },
     {
         title: "SaaS Platforms",
         desc: "Robust architecture for modern software.",
-        color: "text-white"
+        color: "text-white",
+        icons: [
+            "/About/oracle.webp",
+            "/About/odoo.webp",
+            "/About/spring-boot.webp"
+        ]
     },
     {
         title: "UI/UX Design",
         desc: "Interactive experiences that engage users.",
-        color: "text-white"
+        color: "text-white",
+        icons: [
+            "/About/figma-svgrepo-com.svg",
+            "/About/adobe-xd-svgrepo-com.svg",
+            "/About/framer-svgrepo-com.svg"
+        ]
     }
 ];
 
@@ -59,16 +81,16 @@ export default function ServicesWeb() {
             <div className="w-full max-w-[1800px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-center">
 
                 {/* Left Column: Narrative */}
-                <div className="lg:col-span-3 order-2 lg:order-1 space-y-12 text-right lg:text-right">
+                <div className="lg:col-span-3 order-2 lg:order-1 space-y-12 text-left lg:text-left">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">Precision Engineering</h3>
+                        <h3 className="text-3xl font-bold text-white mb-4">Custom Web Development</h3>
                         <p className="text-white/40 leading-relaxed text-lg">
-                            We build with clean, maintainable code that scales. Performance is not an afterthought, it's our baseline.
+                            We engineer bespoke digital experiences using <span className="text-white/60 font-medium">React</span> and <span className="text-white/60 font-medium">Next.js</span>. Our full-stack approach ensures pixel-perfect performance and scalability across all custom code solutions.
                         </p>
                     </motion.div>
 
@@ -78,19 +100,19 @@ export default function ServicesWeb() {
                         transition={{ delay: 0.4 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">Modern Stack</h3>
+                        <h3 className="text-3xl font-bold text-white mb-4">eCommerce Solutions</h3>
                         <p className="text-white/40 leading-relaxed text-lg">
-                            Leveraging Next.js, React, and cutting-edge tools to deliver blazing fast applications.
+                            We build high-converting online stores tailored to your vision. Whether utilizing powerful platforms like <span className="text-white/60 font-medium">Shopify</span>, <span className="text-white/60 font-medium">Salla</span>, or <span className="text-white/60 font-medium">WooCommerce</span>, we ensure seamless shopping experiences.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Center Column: MacBook (Larger) */}
-                <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center perspective-[1200px] relative z-20 py-10">
+                <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center perspective-[1400px] relative z-20 py-10">
                     {/* Glow effect behind laptop */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="scale-[0.8] md:scale-[1.2] xl:scale-[1.3] transform-gpu">
+                    <div className="scale-[0.8] md:scale-[1.2] xl:scale-[1.3] transform-style-3d">
                         <MacbookPresentation />
                     </div>
                 </div>
@@ -103,9 +125,9 @@ export default function ServicesWeb() {
                         transition={{ delay: 0.2 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">Global Reach</h3>
+                        <h3 className="text-3xl font-bold text-white mb-4">SaaS Platforms</h3>
                         <p className="text-white/40 leading-relaxed text-lg">
-                            Applications designed to perform globally, with CDNs and edge computing integration.
+                            We architect scalable <span className="text-white/60 font-medium">Software-as-a-Service</span> platforms designed for growth. Our solutions prioritize security and cloud-native efficiency, enabling you to launch complex products with confidence.
                         </p>
                     </motion.div>
 
@@ -115,9 +137,9 @@ export default function ServicesWeb() {
                         transition={{ delay: 0.4 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">Interactive UI</h3>
+                        <h3 className="text-3xl font-bold text-white mb-4">UI/UX Design</h3>
                         <p className="text-white/40 leading-relaxed text-lg">
-                            Immersive interfaces that delight users and keep them engaged longer.
+                            Our design process leverages professional tools like <span className="text-white/60 font-medium">Figma</span> to craft user-centric interfaces. We focus on intuitive user flows and aesthetic excellence.
                         </p>
                     </motion.div>
                 </div>
@@ -138,7 +160,7 @@ function MacbookPresentation() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setStep("loop");
-        }, 3000); // Show logo for 3 seconds
+        }, 1200); // Show logo for 1.2 seconds (Faster start)
         return () => clearTimeout(timer);
     }, []);
 
@@ -147,7 +169,7 @@ function MacbookPresentation() {
         if (step !== "loop") return;
         const interval = setInterval(() => {
             setLoopIndex((prev) => (prev + 1) % TOPICS.length);
-        }, 3000); // Change text every 3 seconds
+        }, 2500); // Change text every 2.5 seconds
         return () => clearInterval(interval);
     }, [step]);
 
@@ -169,7 +191,7 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
             {/* Outer Shell */}
             <div
                 style={{
-                    transform: "perspective(800px) rotateX(-25deg) translateZ(0px)",
+                    transform: "perspective(800px) rotateX(-25deg)",
                     transformOrigin: "bottom",
                     transformStyle: "preserve-3d",
                 }}
@@ -189,7 +211,7 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
             {/* Screen */}
             <div
                 style={{
-                    transform: "perspective(800px) rotateX(-25deg) translateZ(0px)",
+                    transform: "perspective(800px) rotateX(-25deg)",
                     transformOrigin: "bottom",
                     transformStyle: "preserve-3d",
                 }}
@@ -198,56 +220,114 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                 <div className="absolute inset-0 h-full w-full rounded-xl overflow-hidden bg-black border-[4px] border-[#1a1a1a]">
 
                     {/* --- SCREEN CONTENT --- */}
-                    <div className="relative w-full h-full flex flex-col items-center justify-center">
-                        <AnimatePresence mode="wait">
-                            {step === "logo" ? (
-                                <motion.div
-                                    key="logo"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 1.2, filter: "blur(10px)" }}
-                                    transition={{ duration: 0.8 }}
-                                    className="relative w-40 h-40"
-                                >
-                                    <Image src="/Logo/Main-Logo-Static.png" alt="Logo" fill className="object-contain" />
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key={`loop-${loopIndex}`}
-                                    className="text-center"
-                                >
-                                    {/* Pop-Out Effect Container */}
+                    <div className="relative w-full h-full flex flex-col bg-[#111] overflow-hidden">
+
+
+                        {/* Main Content Area */}
+                        <div className="flex-1 relative flex flex-col items-center justify-center w-full z-10 min-h-0 bg-[#0a0a0a]">
+                            {/* Background Grid inside Browser */}
+                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0"></div>
+                            {/* Vignette */}
+                            {/* --- MINI WEBSITE UI --- */}
+                            {/* Mini Navbar */}
+                            <div className="h-6 w-full bg-[#0a0a0a]/80 flex items-center justify-center  shrink-0 z-50 px-5 absolute top-0 left-0">
+                                {/* Logo */}
+                                <div className="text-[6px] font-bold text-white tracking-wider">LIMITLESS</div>
+
+                            </div>
+
+                            {/* Mini Footer */}
+                            <div className="h-5 w-full bg-[#0a0a0a]/80   shrink-0 z-50 flex justify-between items-center px-5 absolute bottom-0 left-0">
+                                <div className="flex gap-2">
+                                    <span className="text-[3px] text-white/40 font-medium">© 2026 Limitless Taps</span>
+                                </div>
+                                <div className="flex gap-2">
+                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">Privacy</span>
+                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">Terms</span>
+                                </div>
+                            </div>
+
+                            {/* Vignette */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30 z-0 pointer-events-none" />
+
+                            <AnimatePresence mode="wait">
+                                {step === "logo" ? (
                                     <motion.div
-                                        initial={{ z: 0, scale: 0.9, opacity: 0 }}
-                                        animate={{
-                                            z: 50, // "Pop out" (simulated via scale since real z-transform needs preserve-3d parent setup carefully)
-                                            scale: 1,
-                                            opacity: 1
-                                        }}
-                                        exit={{ z: 0, scale: 1.1, opacity: 0 }}
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 200,
-                                            damping: 20
-                                        }}
-                                        className="relative z-10"
+                                        key="logo"
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 1.2, filter: "blur(10px)" }}
+                                        transition={{ duration: 0.8 }}
+                                        className="relative w-20 h-20 z-10"
                                     >
-                                        <h3 className={cn("text-5xl font-black mb-2", TOPICS[loopIndex].color)}>
-                                            {TOPICS[loopIndex].title}
-                                        </h3>
-                                        <p className="text-xl text-white font-medium">
-                                            {TOPICS[loopIndex].desc}
-                                        </p>
+                                        <Image src="/Logo/Main-Logo-Static.png" alt="Logo" fill className="object-contain" />
                                     </motion.div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                                ) : (
+                                    <motion.div
+                                        key={`loop-${loopIndex}`}
+                                        className="flex flex-col items-center justify-center gap-2 z-10 w-full px-4"
+                                    >
+                                        {/* Text Content */}
+                                        <motion.div
+                                            initial={{ z: 0, scale: 0.9, opacity: 0, y: 15 }}
+                                            animate={{
+                                                z: 50,
+                                                scale: 1,
+                                                opacity: 1,
+                                                y: 0
+                                            }}
+                                            exit={{ scale: 1.1, opacity: 0, filter: "blur(10px)" }}
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 200,
+                                                damping: 20
+                                            }}
+                                            className="text-center space-y-1"
+                                        >
+                                            <h3 className={cn("text-xl md:text-2xl font-black tracking-tight leading-tight", TOPICS[loopIndex].color)}>
+                                                {TOPICS[loopIndex].title}
+                                            </h3>
+                                            <p className="text-[10px] md:text-xs text-white/70 font-medium max-w-[14rem] leading-relaxed mx-auto">
+                                                {TOPICS[loopIndex].desc}
+                                            </p>
+                                        </motion.div>
 
-                        {/* Background Grid inside Screen */}
-                        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:30px_30px]" />
+                                        {/* Icons Row */}
+                                        <motion.div
+                                            className="flex items-center justify-center gap-2 mt-0.5"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 0.2, duration: 0.5 }}
+                                        >
+                                            {TOPICS[loopIndex].icons.map((icon, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    initial={{ opacity: 0, y: 15, scale: 0.5 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    transition={{
+                                                        delay: 0.3 + (idx * 0.1),
+                                                        type: "spring",
+                                                        stiffness: 300,
+                                                        damping: 20
+                                                    }}
+                                                    className="relative w-7 h-7 md:w-8 md:h-8 bg-white/5 rounded-md p-1 border border-white/10 backdrop-blur-md shadow-lg flex items-center justify-center group"
+                                                >
+                                                    <Image
+                                                        src={icon}
+                                                        alt="Tech Icon"
+                                                        fill
+                                                        className="object-contain p-1 group-hover:scale-110 transition-transform duration-300"
+                                                    />
+                                                </motion.div>
+                                            ))}
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
-                        {/* Vignette */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-0 pointer-events-none" />
+
+
                     </div>
 
                 </div>
@@ -367,16 +447,16 @@ const Keypad = () => {
                 <KBtn className="w-8">ctrl</KBtn>
                 <KBtn className="w-8">opt</KBtn>
                 <KBtn className="w-10">cmd</KBtn>
-                <KBtn className="w-[8.2rem]"></KBtn> {/* Spacebar */}
+                <KBtn className="w-[7rem]"></KBtn> {/* Spacebar */}
                 <KBtn className="w-10">cmd</KBtn>
                 <KBtn className="w-8">opt</KBtn>
-                <div className="flex h-6 w-[4.9rem] flex-col justify-end gap-[1px]">
-                    <div className="flex justify-center"><KBtn className="h-3 w-full"><IconCaretUpFilled className="w-2 h-2" /></KBtn></div>
-                    <div className="flex gap-[1px]">
-                        <KBtn className="h-3 w-full"><IconCaretLeftFilled className="w-2 h-2" /></KBtn>
-                        <KBtn className="h-3 w-full"><IconCaretDownFilled className="w-2 h-2" /></KBtn>
-                        <KBtn className="h-3 w-full"><IconCaretRightFilled className="w-2 h-2" /></KBtn>
-                    </div>
+                <div className="grid grid-cols-3 h-6 w-[4.5rem] gap-[1px]">
+                    <div /> {/* Empty top-left */}
+                    <KBtn className="h-3 w-full"><IconCaretUpFilled className="w-3 h-3" /></KBtn>
+                    <div /> {/* Empty top-right */}
+                    <KBtn className="h-3 w-full"><IconCaretLeftFilled className="w-3 h-3" /></KBtn>
+                    <KBtn className="h-3 w-full"><IconCaretDownFilled className="w-3 h-3" /></KBtn>
+                    <KBtn className="h-3 w-full"><IconCaretRightFilled className="w-3 h-3" /></KBtn>
                 </div>
             </div>
 

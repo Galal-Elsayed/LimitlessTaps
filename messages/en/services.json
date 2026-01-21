@@ -8,5 +8,130 @@
     "software_solution_title": "Software Solution",
     "software_solution_desc": "Enterprise software and integrations.",
     "web_design_title": "Web Design",
-    "web_design_desc": "Beautiful, user-centered design."
+    "web_design_desc": "Beautiful, user-centered design.",
+    "hero": {
+        "select": "Select",
+        "services": "Services",
+        "description": "End-to-end software solutions tailored for impact. From immersive web experiences to scalable enterprise architectures, we build the digital foundation for your future.",
+        "badges": {
+            "api_integration": "API INTEGRATION",
+            "enterprise_software": "ENTERPRISE SOFTWARE",
+            "database_architecture": "DATABASE ARCHITECTURE",
+            "web_development": "WEB DEVELOPMENT",
+            "saas_platforms": "SAAS PLATFORMS",
+            "performance_optimization": "PERFORMANCE OPTIMIZATION",
+            "mvp_development": "MVP DEVELOPMENT",
+            "ui_ux_design": "UI/UX DESIGN",
+            "devops_strategy": "DEVOPS STRATEGY",
+            "ecommerce_systems": "E-COMMERCE SYSTEMS",
+            "quality_assurance": "QUALITY ASSURANCE",
+            "digital_transformation": "DIGITAL TRANSFORMATION",
+            "technical_consulting": "TECHNICAL CONSULTING",
+            "cloud_infrastructure": "CLOUD INFRASTRUCTURE",
+            "systems_migration": "SYSTEMS MIGRATION",
+            "mobile_applications": "MOBILE APPLICATIONS"
+        }
+    },
+    "gridCards": {
+        "header": "WE HANDLE JUST ABOUT EVERYTHING",
+        "subtitle": "We handle everything from design to deployment to get your website shipped and ready to go!",
+        "learnMore": "Learn more",
+        "interactionDesign": {
+            "title": "Mobile Applications",
+            "description": "Cross-platform mobile solutions built with React Native and Flutter for seamless iOS and Android experiences."
+        },
+        "visualDesign": {
+            "title": "Web Development",
+            "description": "Build robust, scalable web solutions with cutting-edge technologies and best practices.",
+            "items": {
+                "motionDesign": {
+                    "title": "Frontend Development",
+                    "sub": "React & Next.js"
+                },
+                "brandIdentity": {
+                    "title": "Backend Systems",
+                    "sub": "APIs & Databases"
+                },
+                "uiuxDesign": {
+                    "title": "CMS Integration",
+                    "sub": "Content Management"
+                },
+                "designSystems": {
+                    "title": "System Architecture",
+                    "sub": "Scalable Design"
+                }
+            }
+        },
+        "userResearch": {
+            "title": "SEO & Search Rankings",
+            "description": "Dominate search results with data-driven SEO strategies, technical optimization, and content that ranks.",
+            "badges": [
+                "Keyword Research",
+                "Technical SEO",
+                "On-Page SEO",
+                "Link Building",
+                "Analytics",
+                "Content Strategy",
+                "Site Audits",
+                "Local SEO",
+                "Core Web Vitals",
+                "Schema Markup",
+                "Page Speed",
+                "SERP Tracking"
+            ]
+        },
+        "wireframing": {
+            "title": "Wireframing and Prototyping",
+            "description": "Transform ideas into tangible prototypes.",
+            "steps": {
+                "idea": "Idea",
+                "sketch": "Sketch",
+                "final": "Final"
+            }
+        },
+        "everythingElse": {
+            "title": "And Everything else",
+            "description": "Usability Testing, Information Architecture, Accessibility Design. You name it."
+        }
+    },
+    "approach": {
+        "header": "OUR PROCESS UNVEILED.",
+        "subtitle": "A rigorous, transparent journey from abstract concept to market-ready reality.",
+        "phase": "Phase",
+        "steps": {
+            "discovery": {
+                "id": "01",
+                "title": "Discovery",
+                "description": "We begin by understanding your vision, goals, and audience. Deep research and strategic analysis form the foundation of every project."
+            },
+            "strategy": {
+                "id": "02",
+                "title": "Strategy",
+                "description": "Insights transform into actionable plans. We define the approach, set milestones, and align on success metrics."
+            },
+            "design": {
+                "id": "03",
+                "title": "Design",
+                "description": "Ideas take visual form. Our design process is iterative, collaborative, and focused on creating meaningful experiences."
+            },
+            "development": {
+                "id": "04",
+                "title": "Development",
+                "description": "Designs become reality. We build with precision, performance, and scalability as core principles."
+            },
+            "launch": {
+                "id": "05",
+                "title": "Launch",
+                "description": "The culmination of our work. We ensure a seamless launch and provide ongoing support for continued success."
+            }
+        }
+    },
+    "call": {
+        "unlock": "Unlock",
+        "limitless": "Limitless",
+        "possibilities": "Possibilities.",
+        "description": "Seamlessly bridging vision and reality. We craft digital experiences that defy boundaries.",
+        "startProject": "Start Project",
+        "viewServices": "View Services"
+    }
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import ServiceHeroBase from '../ReusableComponents/ServiceHeroBase';
 
-export default function MopileHero() {
+export default function MobileHero() {
     return (
         <ServiceHeroBase
             title={<>MOBILE <br />  Applications</>}

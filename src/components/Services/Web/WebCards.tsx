@@ -2,7 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+import SeoCards from "../ReusableComponents/SeoCards";
 
 // --- SHAPES ---
 
@@ -81,7 +81,7 @@ const WEB_SERVICES = [
     },
     {
         title: "Scalable SaaS Platforms",
-        description: "From MVP to enterprise scale, we build robust Software-as-a-Service applications. Featuring multi-tenant architecture, secure authentication, real-time data processing, and seamless third-party integrations, our platforms are designed to grow with your business. We prioritize code maintainability, cloud-native scalability, and modular design, ensuring your platform adapts effortlessly to future market demands while maintaining strictly high security standards and operational efficiency. Furthermore, we implement comprehensive DevOps pipelines with automated testing and continuous deployment (CI/CD) to accelerate delivery cycles. Our solutions include advanced monitoring and observability stacks, giving you real-time insights into system performance and user behavior.",
+        description: "From MVP to enterprise scale, we build robust Software-as-a-Service applications. Featuring multi-tenant architecture, secure authentication, real-time data processing, and seamless third-party integrations, our platforms are designed to grow with your business. We prioritize code maintainability, cloud-native scalability, and modular design, ensuring your platform adapts effortlessly to future market demands while maintaining strictly high security standards and operational efficiency. Furthermore, we implement comprehensive DevOps pipelines with automated testing and continuous deployment (CI/CD) to accelerate delivery cycles.",
         colSpan: "lg:col-span-8",
         shape: <SaaSShape />,
     },
@@ -107,74 +107,15 @@ const WEB_SERVICES = [
 
 export default function WebCards() {
     return (
-        <section className="w-full py-24 px-4 md:px-8 bg-[#0a0a0a] relative overflow-hidden">
-            {/* SEO Hidden Header Structure */}
-            <div className="sr-only">
-                <h2>Comprehensive Web Development Services</h2>
-                <ul>
-                    <li>Custom Website Development</li>
-                    <li>SaaS Application Building</li>
-                    <li>E-commerce Store Development</li>
-                    <li>CMS Integration</li>
-                </ul>
-            </div>
-
-            <div className="max-w-7xl mx-auto">
-                <ul className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {WEB_SERVICES.map((service, index) => (
-                        <GridItem
-                            key={index}
-                            area={service.colSpan}
-                            title={service.title}
-                            description={service.description}
-                            shape={service.shape}
-                        />
-                    ))}
-                </ul>
-            </div>
-        </section>
+        <SeoCards
+            items={WEB_SERVICES}
+            seoHeader="Comprehensive Web Development Services"
+            seoList={[
+                "Custom Website Development",
+                "SaaS Application Building",
+                "E-commerce Store Development",
+                "CMS Integration"
+            ]}
+        />
     );
 }
-
-interface GridItemProps {
-    area: string;
-    title: string;
-    description: string;
-    shape: React.ReactNode;
-}
-
-const GridItem = ({ area, title, description, shape }: GridItemProps) => {
-    return (
-        <li className={cn("min-h-[14rem] list-none", area)}>
-            <div className="relative h-full rounded-2xl border border-white/10 bg-black/20 p-2 md:rounded-3xl md:p-3">
-                <GlowingEffect
-                    blur={0}
-                    borderWidth={3}
-                    spread={80}
-                    glow={true}
-                    disabled={false}
-                    proximity={64}
-                    inactiveZone={0.01}
-                    variant="default" // Multi-color gradient
-                />
-
-                <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-black/40 border border-white/5 p-6 md:p-8 shadow-xl backdrop-blur-sm transition-colors hover:bg-black/60 group">
-
-                    {/* Abstract Shape Background */}
-                    {shape}
-
-                    <div className="relative flex flex-1 flex-col justify-between gap-3 z-10">
-                        <div className="space-y-4">
-                            <h3 className="font-sans text-3xl md:text-5xl font-bold tracking-tighter text-white leading-none">
-                                {title}
-                            </h3>
-                            <p className="font-sans text-sm text-neutral-400 md:text-base leading-relaxed max-w-2xl">
-                                {description}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    );
-};
