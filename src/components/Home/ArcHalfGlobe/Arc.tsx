@@ -28,10 +28,10 @@ export function CTATitle() {
   const t = useTranslations("common");
   return (
     <div className="space-y-4">
-      <h1 className="text-white font-bold leading-tight tracking-tight text-7xl md:text-6xl lg:text-8xl">
+      <h1 className="font-app font-semibold leading-tight tracking-tight text-7xl md:text-6xl lg:text-8xl">
         {t("cta_title")}
       </h1>
-      <p className="text-white/70 text-lg md:text-3xl lg:text-4xl font-medium">{t("cta_subtitle")}</p>
+      <p className="font-app text-lg md:text-2xl lg:text-3xl font-semibold">{t("cta_subtitle")}</p>
     </div>
   );
 }

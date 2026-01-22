@@ -4,7 +4,13 @@ import { Check, Loader, Brain, Bug, Rocket, Radio, Eye } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-export default function LaunchSupportCard() {
+interface LaunchSupportCardProps {
+  className?: string;
+}
+
+import { cn } from "@/lib/utils";
+
+export default function LaunchSupportCard({ className }: LaunchSupportCardProps) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   const steps = [
@@ -51,7 +57,12 @@ export default function LaunchSupportCard() {
   const isComplete = activeStepIndex === steps.length;
 
   return (
-    <div className="w-full rounded-xl bg-[#0F0F10] border border-white/10 p-5 md:p-6 flex flex-col mx-auto md:mx-0 transition-all duration-300">
+    <div
+      className={cn(
+        "w-full rounded-xl bg-[#0F0F10] border border-white/10 p-5 md:p-6 flex flex-col mx-auto md:mx-0 transition-all duration-300",
+        className,
+      )}
+    >
       <h2 className="text-2xl font-bold text-white mb-3">Launch & Support</h2>
       <p className="text-gray-400 text-sm mb-6 leading-relaxed">
         Deploy smoothly. Monitor performance, fix issues fast, and stay available when you need us.
@@ -95,16 +106,16 @@ export default function LaunchSupportCard() {
                         color: loadingColors,
                       }
                     : isCompleted
-                    ? {
-                        borderColor: "rgba(52, 211, 153, 0.2)",
-                        backgroundColor: "rgba(52, 211, 153, 0.1)",
-                        color: "#34D399",
-                      }
-                    : {
-                        borderColor: "#27272a",
-                        backgroundColor: "rgba(24, 24, 27, 0.5)",
-                        color: "#52525b",
-                      }
+                      ? {
+                          borderColor: "rgba(52, 211, 153, 0.2)",
+                          backgroundColor: "rgba(52, 211, 153, 0.1)",
+                          color: "#34D399",
+                        }
+                      : {
+                          borderColor: "#27272a",
+                          backgroundColor: "rgba(24, 24, 27, 0.5)",
+                          color: "#52525b",
+                        }
                 }
                 transition={isLoading ? { duration: 2, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
                 className="relative flex items-center p-3 rounded-xl border transition-all"

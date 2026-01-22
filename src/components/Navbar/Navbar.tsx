@@ -149,19 +149,19 @@ export default function Navbar() {
         >
           <div
             className={`
-                        px-4 py-1 rounded-lg 
-                        bg-white/10 hover:bg-white/20 
-                        border border-white/20 hover:border-white/40
-                        transition-all duration-300
-                        flex items-center justify-center
-                        backdrop-blur-sm
-                        shadow-[0_4px_0_0_rgba(255,255,255,0.2)]
-                        hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(255,255,255,0.2)]
-                        active:translate-y-[4px] active:shadow-none
-                        min-w-[140px]
-                    `}
+              px-4 py-1 rounded-lg
+              bg-[#eeeeee] hover:bg-white
+              text-black font-extrabold text-sm tracking-wider uppercase
+              shadow-[0_5px_0_0_#bebebe]
+              hover:shadow-[0_2px_0_0_#bebebe] hover:translate-y-0.5
+              active:shadow-none active:translate-y-1
+              transition-all duration-100 ease-out
+              flex items-center justify-center
+              min-w-35
+              border border-white/10
+            `}
           >
-            <span className="text-sm font-bold uppercase tracking-widest text-white">{t(link.key)}</span>
+            {t(link.key)}
           </div>
         </div>
       );
@@ -187,10 +187,11 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${active
-                ? "[clip-path:inset(0_0_0_0)]"
-                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-              }
+                            ${
+                              active
+                                ? "[clip-path:inset(0_0_0_0)]"
+                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+                            }
                         `}
             aria-hidden="true"
           >
@@ -234,10 +235,11 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${servicesGlowActive
-              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-              : "text-gray-300"
-            }
+                        ${
+                          servicesGlowActive
+                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                            : "text-gray-300"
+                        }
                     `}
         />
       </button>
@@ -256,16 +258,18 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
-          } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
+          mobileMenuOpen ? "max-[900px]:hidden" : ""
+        } bg-[#0a0a0a]`}
       >
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[70px]">
+        <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
-              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-              : "opacity-100"
-              }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
+              mobileMenuOpen
+                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+                : "opacity-100"
+            }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -491,8 +495,9 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
-                                }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${
+                                mobileServicesOpen ? "rotate-180" : ""
+                              }`}
                             />
                           </button>
 
@@ -552,8 +557,9 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
-                      }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -564,10 +570,11 @@ export default function Navbar() {
                         onClick={() => router.replace(pathname, { locale: lang.locale })}
                         className={`
                                                     flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300 border
-                                                    ${currentLocale === lang.key
-                            ? "bg-white text-black border-white shadow-[0_0_14px_rgba(255,255,255,0.3)]"
-                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                          }
+                                                    ${
+                                                      currentLocale === lang.key
+                                                        ? "bg-white text-black border-white shadow-[0_0_14px_rgba(255,255,255,0.3)]"
+                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                                                    }
                                                 `}
                       >
                         <div className="flex items-center justify-center gap-2">

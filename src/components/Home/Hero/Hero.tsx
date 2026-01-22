@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react";
 const PlasmaGlobe = dynamic(() => import("@/components/lightswind/plasma-globe"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full min-h-[300px] sm:min-h-[450px] lg:min-h-[550px] rounded-xl bg-gradient-to-b from-blue-500/10 to-purple-500/10 animate-pulse" />
+    <div className="w-full h-full min-h-75 sm:min-h-112.5 lg:min-h-137.5 rounded-xl bg-linear-to-b from-blue-500/10 to-purple-500/10 animate-pulse" />
   ),
 });
 
@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a] pb-40">
       {/* Global Background Waves */}
-      <div className="absolute inset-0 z-0 pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,#0a0a0a_30%,#0a0a0a_80%,transparent)]">
+      <div className="absolute inset-0 z-0 pointer-events-none mask-[linear-gradient(to_bottom,transparent,#0a0a0a_30%,#0a0a0a_80%,transparent)]">
         <Image
           src="/Home/wave.png"
           alt="Color Waves"
@@ -37,7 +37,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4">
         {/* Badge */}
-        <div className="flex justify-center mb-8">
+        {/* <div className="flex justify-center mb-8">
           <Link
             href="/services"
             className="inline-flex items-center gap-4 rounded-xl border border-white/10 bg-zinc-900/50 px-4 py-3 text-sm font-medium text-white backdrop-blur-md transition-all hover:bg-white/5 hover:border-white/20 group"
@@ -52,7 +52,7 @@ export default function Hero() {
               }`}
             />
           </Link>
-        </div>
+        </div> */}
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
@@ -63,7 +63,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] font-app"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight  leading-[1.1] font-app"
             >
               {t("hero_title")}
             </motion.h1>

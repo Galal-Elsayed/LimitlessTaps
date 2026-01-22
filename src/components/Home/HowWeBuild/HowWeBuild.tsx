@@ -85,7 +85,7 @@ export default function HowWeBuild() {
               onClick={() => setHoveredIndex(index)} // For mobile tap
               className={cn(
                 "relative rounded-3xl overflow-hidden cursor-pointer transition-[flex] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group",
-                hoveredIndex === index ? "flex-[3]" : "flex-[1]"
+                hoveredIndex === index ? "flex-[3]" : "flex-[1]",
               )}
             >
               {/* Background & Media */}
@@ -111,7 +111,7 @@ export default function HowWeBuild() {
                 <div
                   className={cn(
                     "absolute inset-0 bg-gradient-to-t via-black/20 to-transparent transition-opacity duration-500",
-                    hoveredIndex === index ? "from-black/80 opacity-90" : "from-black/90 opacity-100"
+                    hoveredIndex === index ? "from-black/80 opacity-90" : "from-black/90 opacity-100",
                   )}
                 />
               </div>
@@ -120,7 +120,7 @@ export default function HowWeBuild() {
               <div
                 className={cn(
                   "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
-                  hoveredIndex === index ? "opacity-0 pointer-events-none" : "opacity-100"
+                  hoveredIndex === index ? "opacity-0 pointer-events-none" : "opacity-100",
                 )}
               >
                 <div className="transform -rotate-90 whitespace-nowrap">
@@ -134,14 +134,14 @@ export default function HowWeBuild() {
               <div
                 className={cn(
                   "absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end transition-all duration-500",
-                  hoveredIndex === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  hoveredIndex === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
                 )}
               >
                 {/* Badge */}
                 <div
                   className={cn(
                     "w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg mb-4 shadow-lg bg-gradient-to-br",
-                    item.gradient
+                    item.gradient,
                   )}
                 >
                   0{item.id}
