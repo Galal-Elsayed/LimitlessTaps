@@ -5,14 +5,15 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Monitor, Smartphone, Play, Plus, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square } from "lucide-react";
 import { Header } from "@/components/ui/header";
+import { useTranslations, useLocale } from "next-intl";
 
 // Mock Data
 type Category = "all" | "simple" | "medium" | "advanced";
 
 interface Template {
     id: string;
-    title: string;
-    description: string;
+    titleKey: string;
+    descriptionKey: string;
     category: Category;
     image: string;
     demoUrl: string;
@@ -23,8 +24,8 @@ const TEMPLATES: Template[] = [
     // Simple
     {
         id: "1",
-        title: "Zenith",
-        description: "Minimalist portfolio for creative professionals. Focus on work with zero distractions.",
+        titleKey: "zenith",
+        descriptionKey: "zenith",
         category: "simple",
         image: "/placeholder-zenith.png",
         demoUrl: "https://example.com/demo1",
@@ -32,8 +33,8 @@ const TEMPLATES: Template[] = [
     },
     {
         id: "2",
-        title: "Aura",
-        description: "Clean and airy landing page for wellness brands. Breathable whitespace and soft typography.",
+        titleKey: "aura",
+        descriptionKey: "aura",
         category: "simple",
         image: "/placeholder-aura.png",
         demoUrl: "https://example.com/demo2",
@@ -42,8 +43,8 @@ const TEMPLATES: Template[] = [
     // Medium
     {
         id: "3",
-        title: "Nexus",
-        description: "Modern SaaS landing page with analytics integration and interactive pricing tables.",
+        titleKey: "nexus",
+        descriptionKey: "nexus",
         category: "medium",
         image: "/placeholder-nexus.png",
         demoUrl: "https://example.com/demo3",
@@ -51,8 +52,8 @@ const TEMPLATES: Template[] = [
     },
     {
         id: "4",
-        title: "Flow",
-        description: "E-commerce template with smooth page transitions and a custom cart experience.",
+        titleKey: "flow",
+        descriptionKey: "flow",
         category: "medium",
         image: "/placeholder-flow.png",
         demoUrl: "https://example.com/demo4",
@@ -61,8 +62,8 @@ const TEMPLATES: Template[] = [
     // Advanced
     {
         id: "5",
-        title: "Momentum",
-        description: "High-performance project management landing page inspired by Linear. Built for speed.",
+        titleKey: "momentum",
+        descriptionKey: "momentum",
         category: "advanced",
         image: "/placeholder-momentum.png",
         demoUrl: "https://example.com/demo5",
@@ -70,8 +71,8 @@ const TEMPLATES: Template[] = [
     },
     {
         id: "6",
-        title: "Quantum",
-        description: "Interactive 3D web experience for deep tech startups. Features WebGL background.",
+        titleKey: "quantum",
+        descriptionKey: "quantum",
         category: "advanced",
         image: "/placeholder-quantum.png",
         demoUrl: "https://example.com/demo6",
@@ -79,19 +80,22 @@ const TEMPLATES: Template[] = [
     },
 ];
 
-const CATEGORIES: { id: Category; label: string }[] = [
-    { id: "all", label: "All Templates" },
-    { id: "simple", label: "Simple" },
-    { id: "medium", label: "Medium" },
-    { id: "advanced", label: "Advanced" },
-];
-
 export default function StudioTemplates() {
+    const t = useTranslations("studio.templates");
+    const locale = useLocale();
+    const isArabic = locale === "ar";
     const [activeCategory, setActiveCategory] = useState<Category>("all");
+
+    const categories: { id: Category; labelKey: string }[] = [
+        { id: "all", labelKey: "filters.all" },
+        { id: "simple", labelKey: "filters.simple" },
+        { id: "medium", labelKey: "filters.medium" },
+        { id: "advanced", labelKey: "filters.advanced" },
+    ];
 
     // Filter templates
     const filteredTemplates = TEMPLATES.filter(
-        (t) => activeCategory === "all" || t.category === activeCategory
+        (tpl) => activeCategory === "all" || tpl.category === activeCategory
     );
 
     return (
@@ -103,22 +107,22 @@ export default function StudioTemplates() {
                 {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
                     <div className="text-left w-1/3 flex justify-start">
-                        <Header title="CHOOSE" className="text-[6vw] md:text-[5vw] leading-none" />
+                        <Header title={t("header.choose")} className={`text-[6vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : ""}`} />
                     </div>
 
                     <div className="text-center w-1/3 flex justify-center">
-                        <Header title="YOUR" className="text-[8vw] md:text-[6.5vw] leading-none z-10" />
+                        <Header title={t("header.your")} className={`text-[8vw] md:text-[6.5vw] leading-none z-10 ${isArabic ? "pb-4" : ""}`} />
                     </div>
 
                     <div className="text-right w-1/3 flex justify-end">
-                        <Header title="TEMPLATE" className="text-[6vw] md:text-[5vw] leading-none" />
+                        <Header title={t("header.template")} className={`text-[6vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : ""}`} />
                     </div>
                 </div>
 
                 {/* Filters Row (Bigger, Less Rounded) */}
                 <div className="flex justify-center">
                     <div className="flex flex-wrap justify-center gap-3 bg-neutral-900/50 p-2 rounded-2xl border border-white/5 backdrop-blur-sm">
-                        {CATEGORIES.map((cat) => (
+                        {categories.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
@@ -129,7 +133,7 @@ export default function StudioTemplates() {
                                         : "bg-transparent text-neutral-400 border-transparent hover:text-white hover:bg-white/5"
                                 )}
                             >
-                                {cat.label}
+                                {t(cat.labelKey)}
                             </button>
                         ))}
                     </div>
@@ -141,7 +145,7 @@ export default function StudioTemplates() {
             <div className="w-full max-w-[1400px] flex flex-col items-center gap-24 md:gap-32 relative z-10 pb-20">
                 <AnimatePresence mode="popLayout">
                     {filteredTemplates.map((template, index) => (
-                        <TemplateItem key={template.id} template={template} index={index} />
+                        <TemplateItem key={template.id} template={template} index={index} t={t} />
                     ))}
                 </AnimatePresence>
             </div>
@@ -149,9 +153,12 @@ export default function StudioTemplates() {
     );
 }
 
-function TemplateItem({ template, index }: { template: Template; index: number }) {
+function TemplateItem({ template, index, t }: { template: Template; index: number; t: ReturnType<typeof useTranslations> }) {
     const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const title = t(`items.${template.titleKey}.title`);
+    const description = t(`items.${template.descriptionKey}.description`);
 
     return (
         <motion.div
@@ -174,7 +181,7 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                         )}
                     >
                         <Monitor size={14} />
-                        <span>Desktop</span>
+                        <span>{t("toggle.desktop")}</span>
                     </button>
                     <button
                         onClick={() => setViewMode("mobile")}
@@ -184,7 +191,7 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                         )}
                     >
                         <Smartphone size={14} />
-                        <span>Mobile</span>
+                        <span>{t("toggle.mobile")}</span>
                     </button>
                 </div>
             </div>
@@ -226,7 +233,7 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                                     {/* URL / Title in Tab */}
                                     <div className="flex items-center gap-2 text-[11px] text-neutral-300 font-medium">
                                         <Lock size={10} className="text-neutral-500" />
-                                        <span>limitless.studio/{template.title.toLowerCase()}</span>
+                                        <span>limitless.studio/{title.toLowerCase()}</span>
                                     </div>
 
                                     {/* Close Tab Icon */}
@@ -278,7 +285,7 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                                     exit={{ opacity: 0 }}
                                     src={template.demoUrl}
                                     className="w-full h-full bg-white"
-                                    title={template.title}
+                                    title={title}
                                 />
                             ) : (
                                 <motion.div
@@ -290,7 +297,7 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                                     className="w-full h-full flex flex-col items-center justify-center relative bg-neutral-900"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                                    <h3 className="text-8xl font-black text-white/5 uppercase tracking-tighter select-none scale-150 rotate-[-15deg]">{template.title}</h3>
+                                    <h3 className="text-8xl font-black text-white/5 uppercase tracking-tighter select-none scale-150 rotate-[-15deg]">{title}</h3>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -311,13 +318,13 @@ function TemplateItem({ template, index }: { template: Template; index: number }
             >
                 <div className="flex flex-col gap-3 max-w-2xl">
                     <div className="flex items-center gap-3">
-                        <h3 className="text-2xl font-bold text-white">{template.title}</h3>
+                        <h3 className="text-2xl font-bold text-white">{title}</h3>
                         <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-white px-2 py-0.5 rounded-sm">
-                            {template.category}
+                            {t(`filters.${template.category}`)}
                         </span>
                     </div>
                     <p className="text-neutral-400 text-sm md:text-base leading-relaxed">
-                        {template.description}
+                        {description}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-2">
                         {template.tags.map(tag => (
@@ -338,13 +345,13 @@ function TemplateItem({ template, index }: { template: Template; index: number }
                             : "bg-white text-black hover:bg-neutral-200"
                     )}
                 >
-                    <div className="relative z-10 flex items-center gap-2">
+                    <div className="relative z-10 flex items-center justify-center gap-2">
                         {isPlaying ? (
-                            "Stop Demo"
+                            t("cta.stop_demo")
                         ) : (
                             <>
                                 <Play size={16} fill="currentColor" />
-                                View Demo
+                                {t("cta.view_demo")}
                             </>
                         )}
                     </div>
