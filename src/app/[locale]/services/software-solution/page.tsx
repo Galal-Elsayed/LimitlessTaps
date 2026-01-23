@@ -2,9 +2,9 @@ import { getTranslations } from "next-intl/server";
 import SolutionHero from "@/components/Services/SoftwareSolution/SolutionHero";
 
 import SoftwareCards from "@/components/Services/SoftwareSolution/SoftwareCards";
-import ServiceCall from "@/components/Services/ServiceCall";
 import { Data } from "@/components/Services/SoftwareSolution/Data";
 import SolutionGrid from "@/components/Services/SoftwareSolution/SolutionGrid";
+import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 
 export default async function SoftwareSolutionPage() {
     const t = await getTranslations('services');
@@ -17,7 +17,7 @@ export default async function SoftwareSolutionPage() {
             <div className="sr-only">
                 <SoftwareCards />
             </div>
-            <ServiceCall />
+            <Arc />
         </>
     );
 }

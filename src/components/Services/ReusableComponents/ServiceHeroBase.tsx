@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 import { cn } from "@/lib/utils";
-
+import Header from '@/components/ui/header';
 // --- LIGHT RAYS COMPONENT ---
 // This entire block is identical to Webhero's implementation
 export type RaysOrigin =
@@ -464,23 +464,15 @@ interface ServiceHeroBaseProps {
 export default function ServiceHeroBase({ title, className, raysColor = "#ffffff", minHeight = "h-[50vh]" }: ServiceHeroBaseProps) {
     return (
         <section className={cn("relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a]", minHeight, className)}>
-            {/* Background Light Rays */}
-            <LightRays
-                raysColor={raysColor}
-                raysSpeed={0.5}
-                rayLength={3}
-                lightSpread={0.5}
-                mouseInfluence={0.3}
-                followMouse={true}
-                className="opacity-40"
-            />
 
             {/* Overlay Content */}
+
             <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 space-y-8">
                 {/* Header */}
-                <h1 className="text-5xl md:text-7xl lg:text-[180px] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85]">
-                    {title}
-                </h1>
+                <Header
+                    title={title}
+                    className="text-5xl md:text-7xl lg:text-[180px] font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85]"
+                />
             </div>
 
             {/* Vignette Overlay */}

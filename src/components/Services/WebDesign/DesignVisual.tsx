@@ -75,7 +75,7 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
                 {/* Inner Bezel (Black Border) */}
                 <div className="bg-black rounded-[1.5rem] overflow-hidden relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] border border-white/5">
                     {/* Screen Content */}
-                    <div className="relative w-full aspect-[16/10] bg-[#1e1e1e] overflow-hidden">
+                    <div className="relative w-full aspect-video bg-[#1e1e1e] overflow-hidden">
                         {children}
 
                         {/* Screen Reflection/Glare */}
@@ -141,7 +141,7 @@ const FigmaUI = () => {
                     <div className="absolute inset-0 bg-[#1e1e1e]" style={{ backgroundImage: "radial-gradient(#444 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
 
                     {/* --- MAIN DESIGN CONTENT --- */}
-                    <div className="relative w-[800px] h-[500px] bg-black border border-white/10 shadow-2xl flex flex-col items-center justify-center scale-75 md:scale-100 group">
+                    <div className="relative w-[800px] h-[420px] bg-black border border-white/10 shadow-2xl flex flex-col items-center justify-center scale-75 md:scale-100 group">
                         {/* "We design your website from a to z" text */}
                         <div className="text-center z-10 relative space-y-4">
                             <motion.h2

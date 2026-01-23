@@ -98,19 +98,22 @@ const SOFTWARE_SERVICES = [
 ];
 
 export function SoftwareCards() {
-  return (
-    <SeoCards
-      items={SOFTWARE_SERVICES}
-      seoHeader="Custom Software Development & Cloud Solutions"
-      seoList={[
-        "Enterprise Resource Planning (ERP)",
-        "Cloud Migration & Architecture",
-        "API Development",
-        "Business Intelligence Solution",
-        "Cybersecurity Services",
-      ]}
-    />
-  );
+
+    return (
+        <SeoCards
+            items={SOFTWARE_SERVICES}
+            seoHeader="Custom Software Development & Cloud Solutions"
+            seoList={[
+                "Enterprise Resource Planning (ERP)",
+                "Cloud Migration & Architecture",
+                "API Development",
+                "Business Intelligence Solution",
+                "Cybersecurity Services"
+            ]}
+            gradientBottom={false}
+
+        />
+    );
 }
 
 export default SoftwareCards;

@@ -104,6 +104,8 @@ export function DesignCards() {
                 "Interactive Prototyping",
                 "Motion Design & Animation"
             ]}
+            gradientBottom={false}
+
         />
     );
 }

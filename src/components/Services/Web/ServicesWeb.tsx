@@ -27,6 +27,7 @@ import {
     IconMenu2,
 } from "@tabler/icons-react";
 import { GlowingHeader } from "../../ui/GlowingHeader";
+import FloatingLines from "../../FloatingLines";
 
 // --- TEXT CONTENT CONSTANTS ---
 const TOPICS = [
@@ -37,7 +38,12 @@ const TOPICS = [
         icons: [
             "/About/next.webp",
             "/About/react-svgrepo-com.svg",
-            "/About/wordpress-svgrepo-com.svg"
+            "/About/wordpress-svgrepo-com.svg",
+            "/About/angular-svgrepo-com.svg",
+            "/About/django-svgrepo-com.svg",
+            "/About/laravel-svgrepo-com.svg",
+            "/About/node-svgrepo-com.svg",
+            "/About/vue-svgrepo-com.svg"
         ]
     },
     {
@@ -72,6 +78,15 @@ const TOPICS = [
     }
 ];
 
+// --- FLOATING LINES CONFIG ---
+const FL_TOP_POS = { x: 10.0, y: 0.5, rotate: -0.4 };
+const FL_MID_POS = { x: 5.0, y: 0.0, rotate: 0 };
+const FL_BOT_POS = { x: 2.0, y: -0.7, rotate: 0.4 };
+const FL_ENABLED: ("top" | "middle" | "bottom")[] = ['top', 'middle', 'bottom'];
+const FL_LINES_GRADIENT = ['#ffffff', '#888888']; // Preserving this if you want it back, or just rely on default. Previous code removed it, user asked to add middle wave back. 
+// User asked for "waves color like the image" previously which removed linesGradient.
+// Then "ok add the third wave again".
+
 export default function ServicesWeb() {
     return (
         <section className="min-h-screen bg-[#0a0a0a] py-24 px-4 overflow-hidden flex flex-col items-center">
@@ -88,7 +103,7 @@ export default function ServicesWeb() {
                         transition={{ delay: 0.2 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">Custom Web Development</h3>
+                        <h3 className="text-3xl font-bold text-white mb-4"> Web Development</h3>
                         <p className="text-white/40 leading-relaxed text-lg">
                             We engineer bespoke digital experiences using <span className="text-white/60 font-medium">React</span> and <span className="text-white/60 font-medium">Next.js</span>. Our full-stack approach ensures pixel-perfect performance and scalability across all custom code solutions.
                         </p>
@@ -153,25 +168,16 @@ export default function ServicesWeb() {
 // --- MACBOOK COMPONENTS ---
 
 function MacbookPresentation() {
-    const [step, setStep] = useState<"logo" | "loop">("logo");
+    const [step, setStep] = useState<"logo" | "loop">("loop");
     const [loopIndex, setLoopIndex] = useState(0);
-
-    // Initial Logo Timer
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setStep("loop");
-        }, 1200); // Show logo for 1.2 seconds (Faster start)
-        return () => clearTimeout(timer);
-    }, []);
 
     // Loop Timer
     useEffect(() => {
-        if (step !== "loop") return;
         const interval = setInterval(() => {
             setLoopIndex((prev) => (prev + 1) % TOPICS.length);
-        }, 2500); // Change text every 2.5 seconds
+        }, 5000); // Change text every 5 seconds
         return () => clearInterval(interval);
-    }, [step]);
+    }, []);
 
 
     return (
@@ -224,20 +230,33 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
 
 
                         {/* Main Content Area */}
-                        <div className="flex-1 relative flex flex-col items-center justify-center w-full z-10 min-h-0 bg-[#0a0a0a]">
-                            {/* Background Grid inside Browser */}
-                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0"></div>
-                            {/* Vignette */}
+                        <div className="flex-1 relative flex flex-col items-center justify-center w-full z-10 min-h-0 bg-[#252525] overflow-hidden">
+                            {/* Glow Effect */}
+                            <div className="absolute inset-0 z-0 bg-white/5" />
+
+                            {/* Floating Lines Background */}
+                            <div className="absolute inset-0 z-0">
+                                <FloatingLines 
+                                    topWavePosition={FL_TOP_POS}
+                                    middleWavePosition={FL_MID_POS}
+                                    bottomWavePosition={FL_BOT_POS}
+                                    enabledWaves={FL_ENABLED}
+                                    lineCount={4}
+                                    lineDistance={5}
+                                    animationSpeed={0.5} 
+                                />
+                            </div>
+
                             {/* --- MINI WEBSITE UI --- */}
                             {/* Mini Navbar */}
-                            <div className="h-6 w-full bg-[#0a0a0a]/80 flex items-center justify-center  shrink-0 z-50 px-5 absolute top-0 left-0">
+                            <div className="h-6 w-full bg-[#0a0a0a] flex items-center justify-center  shrink-0 z-50 px-5 absolute top-0 left-0">
                                 {/* Logo */}
                                 <div className="text-[6px] font-bold text-white tracking-wider">LIMITLESS</div>
 
                             </div>
 
                             {/* Mini Footer */}
-                            <div className="h-5 w-full bg-[#0a0a0a]/80   shrink-0 z-50 flex justify-between items-center px-5 absolute bottom-0 left-0">
+                            <div className="h-5 w-full bg-[#0a0a0a]   shrink-0 z-50 flex justify-between items-center px-5 absolute bottom-0 left-0">
                                 <div className="flex gap-2">
                                     <span className="text-[3px] text-white/40 font-medium">© 2026 Limitless Taps</span>
                                 </div>
@@ -246,9 +265,8 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                                     <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">Terms</span>
                                 </div>
                             </div>
-
-                            {/* Vignette */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30 z-0 pointer-events-none" />
+                            
+                            {/* Removed previous blur/vignette layers for clarity */}
 
                             <AnimatePresence mode="wait">
                                 {step === "logo" ? (
@@ -265,61 +283,89 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                                 ) : (
                                     <motion.div
                                         key={`loop-${loopIndex}`}
-                                        className="flex flex-col items-center justify-center gap-2 z-10 w-full px-4"
+                                        className="flex flex-col items-center justify-center gap-6 z-10 w-full px-8 relative"
                                     >
-                                        {/* Text Content */}
+
+                                        {/* Text Section */}
                                         <motion.div
-                                            initial={{ z: 0, scale: 0.9, opacity: 0, y: 15 }}
-                                            animate={{
-                                                z: 50,
-                                                scale: 1,
-                                                opacity: 1,
-                                                y: 0
-                                            }}
-                                            exit={{ scale: 1.1, opacity: 0, filter: "blur(10px)" }}
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 200,
-                                                damping: 20
-                                            }}
-                                            className="text-center space-y-1"
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            exit={{ y: -20, opacity: 0 }}
+                                            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                                            className="text-center space-y-3 relative z-10"
                                         >
-                                            <h3 className={cn("text-xl md:text-2xl font-black tracking-tight leading-tight", TOPICS[loopIndex].color)}>
-                                                {TOPICS[loopIndex].title}
-                                            </h3>
-                                            <p className="text-[10px] md:text-xs text-white/70 font-medium max-w-[14rem] leading-relaxed mx-auto">
+                                            {/* Main Headline - Typewriter Effect */}
+                                            <motion.h3 
+                                                key={loopIndex} // Remount to restart animation
+                                                className={cn(
+                                                    "text-3xl md:text-3xl font-bold tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 filter drop-shadow-sm",
+                                                    TOPICS[loopIndex].color
+                                                )}
+                                                variants={{
+                                                    hidden: { opacity: 1 },
+                                                    visible: {
+                                                        opacity: 1,
+                                                        transition: {
+                                                            staggerChildren: 0.08
+                                                        }
+                                                    }
+                                                }}
+                                                initial="hidden"
+                                                animate="visible"
+                                            >
+                                                {TOPICS[loopIndex].title.split("").map((char, index) => (
+                                                    <motion.span 
+                                                        key={index} 
+                                                        variants={{
+                                                            hidden: { opacity: 0 },
+                                                            visible: { opacity: 1 }
+                                                        }}
+                                                    >
+                                                        {char}
+                                                    </motion.span>
+                                                ))}
+                                            </motion.h3>
+
+                                            {/* Description */}
+                                            <p className="text-[9px] md:text-[10px] text-blue-100/90 font-semibold max-w-[16rem] leading-relaxed mx-auto">
                                                 {TOPICS[loopIndex].desc}
                                             </p>
                                         </motion.div>
 
-                                        {/* Icons Row */}
+                                        {/* Visual Connector / Tech Stack Section */}
                                         <motion.div
-                                            className="flex items-center justify-center gap-2 mt-0.5"
+                                            className="relative z-10 flex flex-col items-center gap-2"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.2, duration: 0.5 }}
+                                            transition={{ delay: 0.15, duration: 0.5 }}
                                         >
-                                            {TOPICS[loopIndex].icons.map((icon, idx) => (
-                                                <motion.div
-                                                    key={idx}
-                                                    initial={{ opacity: 0, y: 15, scale: 0.5 }}
-                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                    transition={{
-                                                        delay: 0.3 + (idx * 0.1),
-                                                        type: "spring",
-                                                        stiffness: 300,
-                                                        damping: 20
-                                                    }}
-                                                    className="relative w-7 h-7 md:w-8 md:h-8 bg-white/5 rounded-md p-1 border border-white/10 backdrop-blur-md shadow-lg flex items-center justify-center group"
-                                                >
-                                                    <Image
-                                                        src={icon}
-                                                        alt="Tech Icon"
-                                                        fill
-                                                        className="object-contain p-1 group-hover:scale-110 transition-transform duration-300"
-                                                    />
-                                                </motion.div>
-                                            ))}
+                                        
+                                            {/* Icons Row - Individual Bubbles */}
+                                            <div className="flex items-center justify-center gap-4">
+                                                {TOPICS[loopIndex].icons.map((icon, idx) => (
+                                                    <motion.div
+                                                        key={idx}
+                                                        initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                                        transition={{
+                                                            delay: 0.5 + (idx * 0.08), // Faster stagger per icon
+                                                            type: "spring", stiffness: 300, damping: 15
+                                                        }}
+                                                        className="relative w-10 h-10 md:w-11 md:h-11 bg-black/20 border border-white/10 rounded-full shadow-lg backdrop-blur-md flex items-center justify-center group"
+                                                    >
+                                                        {/* Inner Icon Container */}
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center relative overflow-hidden">
+                                                            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                            <Image
+                                                                src={icon}
+                                                                alt="Tech Icon"
+                                                                fill
+                                                                className="object-contain p-2 group-hover:scale-110 transition-transform duration-300"
+                                                            />
+                                                        </div>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
                                         </motion.div>
                                     </motion.div>
                                 )}
@@ -361,7 +407,7 @@ function Base() {
             <div className="absolute inset-x-0 bottom-0 mx-auto h-2 w-20 rounded-tl-3xl rounded-tr-3xl bg-gradient-to-t from-[#272729] to-[#050505]" />
         </div>
     );
-}
+};
 
 // --- KEYBOARD PARTS (Copied from macbook-scroll.tsx) ---
 

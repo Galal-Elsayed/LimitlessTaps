@@ -69,9 +69,8 @@ export function CTAButtons() {
       >
         <span className="font-medium">{t("cta_secondary")}</span>
         <ArrowRight
-          className={`h-4 w-4 transition-transform duration-300 ${
-            isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-          }`}
+          className={`h-4 w-4 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+            }`}
         />
       </Link>
     </div>

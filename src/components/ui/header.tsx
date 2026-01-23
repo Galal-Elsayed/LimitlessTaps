@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-interface HeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    title?: string;
+interface HeaderProps extends Omit<React.HTMLAttributes<HTMLHeadingElement>, 'title'> {
+    title?: React.ReactNode;
     className?: string; // Allow overriding styles
 }
 

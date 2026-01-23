@@ -116,6 +116,8 @@ export default function WebCards() {
                 "E-commerce Store Development",
                 "CMS Integration"
             ]}
+            gradientBottom={false}
+
         />
     );
 }

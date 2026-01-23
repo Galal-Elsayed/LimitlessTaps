@@ -1,10 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import Navbar from "@/components/Navbar/Navbar";
 import { ServicesMopile } from "@/components/Services/Mopile/ServicesMopile";
 import MobileHero from "@/components/Services/Mopile/MobileHero";
 import MobileCards from "@/components/Services/Mopile/MobileCards";
-import SidePageAction from "@/components/Services/ReusableComponents/SidePageAction";
-import ServiceCall from "@/components/Services/ServiceCall";
+import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 
 
 export default async function MobileApplicationPage() {
@@ -15,7 +13,7 @@ export default async function MobileApplicationPage() {
             <MobileHero />
             <ServicesMopile />
             <MobileCards />
-            <ServiceCall />
+            <Arc />
 
         </>
     );

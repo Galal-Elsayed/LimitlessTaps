@@ -53,9 +53,9 @@ export default function Navbar() {
   // Navigation links without locale prefix - next-intl's router handles this
   const navLinks = [
     { key: "services", href: "/services", isDropdown: true },
-    { key: "company", href: "/about-us" },
-    { key: "portfolio", href: "/work" },
     { key: "studio", href: "/studio" },
+    { key: "portfolio", href: "/work" },
+    { key: "company", href: "/about-us" },
     { key: "careers", href: "/careers" },
     { key: "contact", href: "/contact", isButton: true },
   ];

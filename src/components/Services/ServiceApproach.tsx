@@ -9,8 +9,12 @@ import { useTranslations, useLocale } from "next-intl";
 
 // --- Background Shape Components (Animated) ---
 
+const Glow = ({ className }: { className?: string }) => (
+    <div className={cn("absolute inset-0 blur-3xl rounded-full opacity-40", className)} />
+);
+
 const DiscoveryShape = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             {/* Pulsating Radar Rings */}
             {[1, 2, 3].map((i) => (
@@ -46,7 +50,7 @@ const DiscoveryShape = () => (
 );
 
 const StrategyShape = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             <motion.path
                 d="M100 50 L160 150 L40 150 Z"
@@ -74,7 +78,7 @@ const StrategyShape = () => (
 );
 
 const DesignShape = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             <motion.path
                 d="M-50 100 C 50 100, 50 300, 150 300"
@@ -99,7 +103,7 @@ const DesignShape = () => (
 );
 
 const DevelopmentShape = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             <motion.rect
                 x="40" y="100" width="120" height="200"
@@ -127,7 +131,7 @@ const DevelopmentShape = () => (
 );
 
 const LaunchShape = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             {[1, 2, 3].map(i => (
                 <motion.line
@@ -158,20 +162,106 @@ const LaunchShape = () => (
     </div>
 );
 
+// Map colors explicitly to ensure Tailwind generates the classes
+const colorStyles: Record<string, {
+    border: string;
+    text: string;
+    bg: string;
+    hoverBorder: string;
+    hoverShadow: string;
+    hoverText: string;
+    glow: string;
+    numberGlow: string;
+    activeShadow: string;
+    lineBg: string;
+    lineShadow: string;
+}> = {
+    blue: {
+        border: "border-blue-400",
+        text: "text-blue-400",
+        bg: "bg-blue-400/20",
+        hoverBorder: "group-hover:border-blue-500",
+        hoverShadow: "group-hover:shadow-blue-500/50",
+        activeShadow: "shadow-blue-500/50",
+        hoverText: "group-hover:text-blue-500",
+        glow: "bg-blue-400/20",
+        numberGlow: "drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]",
+        lineBg: "bg-blue-400",
+        lineShadow: "shadow-[0_0_20px_rgba(59,130,246,1)]"
+    },
+    purple: {
+        border: "border-purple-500",
+        text: "text-purple-500",
+        bg: "bg-purple-500/20",
+        hoverBorder: "group-hover:border-purple-500",
+        hoverShadow: "group-hover:shadow-purple-500/50",
+        activeShadow: "shadow-purple-500/50",
+        hoverText: "group-hover:text-purple-500",
+        glow: "bg-purple-500/20",
+        numberGlow: "drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]",
+        lineBg: "bg-purple-500",
+        lineShadow: "shadow-[0_0_20px_rgba(168,85,247,1)]"
+    },
+    red: {
+        border: "border-red-500",
+        text: "text-red-500",
+        bg: "bg-red-500/20",
+        hoverBorder: "group-hover:border-red-500",
+        hoverShadow: "group-hover:shadow-red-500/50",
+        activeShadow: "shadow-red-500/50",
+        hoverText: "group-hover:text-red-500",
+        glow: "bg-red-500/20",
+        numberGlow: "drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]",
+        lineBg: "bg-red-500",
+        lineShadow: "shadow-[0_0_20px_rgba(236,72,153,1)]"
+    },
+    emerald: {
+        border: "border-emerald-500",
+        text: "text-emerald-500",
+        bg: "bg-emerald-500/20",
+        hoverBorder: "group-hover:border-emerald-500",
+        hoverShadow: "group-hover:shadow-emerald-500/50",
+        activeShadow: "shadow-emerald-500/50",
+        hoverText: "group-hover:text-emerald-500",
+        glow: "bg-emerald-500/20",
+        numberGlow: "drop-shadow-[0_0_15px_rgba(16,185,129,0.6)]",
+        lineBg: "bg-emerald-500",
+        lineShadow: "shadow-[0_0_20px_rgba(16,185,129,1)]"
+    },
+    orange: {
+        border: "border-orange-500",
+        text: "text-orange-500",
+        bg: "bg-orange-500/20",
+        hoverBorder: "group-hover:border-orange-500",
+        hoverShadow: "group-hover:shadow-orange-500/50",
+        activeShadow: "shadow-orange-500/50",
+        hoverText: "group-hover:text-orange-500",
+        glow: "bg-orange-500/20",
+        numberGlow: "drop-shadow-[0_0_15px_rgba(249,115,22,0.6)]",
+        lineBg: "bg-orange-500",
+        lineShadow: "shadow-[0_0_20px_rgba(249,115,22,1)]"
+    }
+};
+
 type StepData = {
     id: string;
     title: string;
     description: string;
     icon: LucideIcon;
     Shape: React.FC;
+    color: string;
 };
 
 const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index: number; total: number; phaseText: string }) => {
     // Tighter offset + sticky
     const topOffset = 100 + (index * 40);
+    const styles = colorStyles[step.color] || colorStyles.blue;
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-20% 0px -20% 0px" });
 
     return (
         <motion.div
+            ref={ref}
             className="sticky w-full border border-white/10 overflow-hidden shadow-2xl origin-top flex flex-col md:flex-row group"
             style={{
                 top: `${topOffset}px`,
@@ -181,7 +271,7 @@ const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index:
         >
             {/* 1. Animated Top Border Line (Left to Right) - Spanning Entire Card */}
             <motion.div
-                className="absolute top-0 left-0 h-[2px] z-50 bg-white shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+                className="absolute top-0 left-0 h-[3px] z-50 bg-white/80 shadow-[0_0_20px_rgba(255,255,255,1)]"
                 initial={{ width: "0%" }}
                 whileInView={{ width: "100%" }}
                 viewport={{ once: false }}
@@ -190,16 +280,21 @@ const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index:
 
 
 
-            {/* 
-                LAYOUT GRID: 
+            {/*
+                LAYOUT GRID:
                 - Left: Sides BG #0a0a0a
                 - Middle: Center BG Black (#000000)
                 - Right: Sides BG #0a0a0a
              */}
 
             {/* LEFT COLUMN: Number */}
-            <div className="w-full md:w-[15%] bg-[#0a0a0a] border-b md:border-b-0 md:border-r border-white/5 p-6 md:p-10 flex items-start justify-center md:items-center relative z-10">
-                <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+            <div className="w-full md:w-[15%] bg-black border-b md:border-b-0 md:border-r border-white/5 p-6 md:p-10 flex items-start justify-center md:items-center relative z-10 overflow-hidden">
+                <Glow className={cn("transition-opacity duration-500", isInView ? styles.glow : "opacity-0")} />
+                <span className={cn(
+                    "text-4xl md:text-5xl font-bold transition-colors duration-300 relative z-10",
+                    isInView ? styles.text : "text-white",
+                    isInView ? styles.numberGlow : "drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                )}>
                     {step.id}
                 </span>
             </div>
@@ -208,8 +303,24 @@ const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index:
             <div className="flex-1 bg-black p-8 md:p-12 flex flex-col justify-center relative z-10 min-h-[550px]">
                 <div className="flex flex-col gap-8">
                     {/* Icon in Circle */}
-                    <div className="w-20 h-20 rounded-full bg-[#111] border border-white/20 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-                        <step.icon className="w-10 h-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                    <div className={cn(
+                        "w-20 h-20 rounded-full bg-black border flex items-center justify-center transition-all duration-500 relative overflow-hidden",
+                        isInView ? styles.border : "border-white/20",
+                        styles.hoverBorder,
+                        isInView 
+                            ? `scale-110 shadow-[0_0_30px] ${styles.activeShadow}`
+                            : `group-hover:scale-110 group-hover:shadow-[0_0_30px] ${styles.hoverShadow} shadow-[0_0_15px_rgba(255,255,255,0.1)]`
+                    )}>
+                        <div className={cn(
+                            "absolute inset-0 rounded-full blur-md transition-opacity duration-500",
+                            styles.bg,
+                            isInView ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                        )} />
+                        <step.icon className={cn(
+                            "w-10 h-10 transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]",
+                            isInView ? styles.text : "text-white",
+                            styles.hoverText
+                        )} />
                     </div>
 
                     <div>
@@ -224,7 +335,13 @@ const ProcessCard = ({ step, index, total, phaseText }: { step: StepData; index:
             </div>
 
             {/* RIGHT COLUMN: Phase Vertical Text + SVG - BG #0a0a0a */}
-            <div className="w-full md:w-[20%] bg-[#0a0a0a] border-t md:border-t-0 md:border-l border-white/5 relative z-10 overflow-hidden flex items-center justify-center">
+            <div className={cn(
+                "w-full md:w-[20%] bg-black border-t md:border-t-0 md:border-l border-white/5 relative z-10 overflow-hidden flex items-center justify-center transition-colors duration-500",
+                isInView ? styles.text : "text-white"
+            )}>
+                {/* Glow Background */}
+                <Glow className={cn("transition-opacity duration-500", isInView ? styles.glow : "opacity-0")} />
+
                 {/* Decorative SVG Pattern - Restored to Right Column */}
                 <step.Shape />
 
@@ -251,6 +368,7 @@ export default function ServiceApproach() {
             description: t('approach.steps.discovery.description'),
             icon: Compass,
             Shape: DiscoveryShape,
+            color: 'blue'
         },
         {
             id: t('approach.steps.strategy.id'),
@@ -258,6 +376,7 @@ export default function ServiceApproach() {
             description: t('approach.steps.strategy.description'),
             icon: Target,
             Shape: StrategyShape,
+            color: 'purple'
         },
         {
             id: t('approach.steps.design.id'),
@@ -265,6 +384,7 @@ export default function ServiceApproach() {
             description: t('approach.steps.design.description'),
             icon: PenTool,
             Shape: DesignShape,
+            color: 'red'
         },
         {
             id: t('approach.steps.development.id'),
@@ -272,6 +392,7 @@ export default function ServiceApproach() {
             description: t('approach.steps.development.description'),
             icon: Code2,
             Shape: DevelopmentShape,
+            color: 'emerald'
         },
         {
             id: t('approach.steps.launch.id'),
@@ -279,6 +400,7 @@ export default function ServiceApproach() {
             description: t('approach.steps.launch.description'),
             icon: Rocket,
             Shape: LaunchShape,
+            color: 'orange'
         }
     ];
 

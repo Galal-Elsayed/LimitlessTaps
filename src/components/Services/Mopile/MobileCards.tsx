@@ -96,6 +96,7 @@ export function MobileCards() {
                 "Augmented Reality Mobile Apps",
                 "Wearable & IoT App Development"
             ]}
+            gradientBottom={false}
         />
     );
 }

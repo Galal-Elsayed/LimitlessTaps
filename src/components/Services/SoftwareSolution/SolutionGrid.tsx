@@ -52,7 +52,7 @@ const gridItems = [
 
 export const SolutionGrid = ({ className }: { className?: string }) => {
   return (
-    <div className="relative w-full flex flex-col items-center mt-24 bg-[#0a0a0a]">
+    <div className="relative w-full flex flex-col items-center mt-24 bg-[#0a0a0a] pb-44">
       {/* Connecting Line from Data Component to Grid */}
       <div className="absolute -top-24 left-1/2 w-px h-24 bg-gradient-to-b from-white/20 via-white/40 to-white/10 -translate-x-1/2" />
       <div className="absolute -top-1 left-1/2 w-3 h-3 bg-white/50 rounded-full blur-sm -translate-x-1/2" />
@@ -84,8 +84,7 @@ export const SolutionGrid = ({ className }: { className?: string }) => {
         ))}
       </div>
 
-      {/* Black Bottom Gradient to connect with next section */}
-      <div className="w-full h-28 mt-48 bg-gradient-to-b from-[#0a0a0a] to-black" />
+
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent, useSpring } from "motion/react";
 import { IconWifi, IconBattery4, IconAntennaBars5, IconBrandApple, IconBrandAndroid, IconDeviceMobile, IconPalette } from "@tabler/icons-react";
+import Header from "../../ui/header";
 
 // Service Data for the Phone Loop
 const services = [
@@ -43,28 +44,28 @@ export function ServicesMopile() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "center center"],
+        offset: ["start start", "end end"],
     });
 
-    // Smooth physics-based scroll - Optimized for snappier, less laggy feel
+    // Smooth physics-based scroll
     const smoothProgress = useSpring(scrollYProgress, {
-        mass: 0.05,      // Reduced mass for quicker response
-        stiffness: 150,  // Increased stiffness for tighter follow
-        damping: 15,     // Adjusted damping to prevent over-oscillation while keeping it fast
+        mass: 0.1,
+        stiffness: 100,
+        damping: 20,
         restDelta: 0.001
     });
 
     const [activeService, setActiveService] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false); // Start false, enable on scroll
+    const [isPlaying, setIsPlaying] = useState(false);
     const [showPopOut, setShowPopOut] = useState(false);
     const DURATION = 5000;
 
-    // Monitor Scroll Progress to toggle state
+    // Monitor Scroll Progress
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        if (latest > 0.7 && !showPopOut) {
+        if (latest > 0.4 && !showPopOut) {
             setShowPopOut(true);
             setIsPlaying(true);
-        } else if (latest <= 0.7 && showPopOut) {
+        } else if (latest <= 0.4 && showPopOut) {
             setShowPopOut(false);
             setIsPlaying(false);
         }
@@ -87,30 +88,29 @@ export function ServicesMopile() {
     };
 
     // --- ANIMATIONS ---
-    // Timeline: 0 (entering) -> 1 (fully visible/centered)
+    
+    // 1. Rotation: Fully sideways (90deg) -> Vertical (0deg)
+    const rotate = useTransform(smoothProgress, [0, 0.4], [90, 0]);
 
-    // 1. Rotation: Horizontal (90deg) -> Vertical (0deg)
-    const rotate = useTransform(smoothProgress, [0, 0.2, 0.7, 1], [90, 90, 0, 0]);
-
-    // 2. Y Position
-    const yParam = useTransform(smoothProgress, [0, 1], [0, 0]);
+    // 2. Y Position - Use negative start value to pull it up closer to header in sideways state
+    const yParam = useTransform(smoothProgress, [0, 0.4], [-150, 20]);
 
     // 3. X Position
     const xParam = useTransform(smoothProgress, [0, 1], [0, 0]);
 
-    // 4. Scale - Reduced initial scale to prevent clipping top/bottom
-    const scale = useTransform(smoothProgress, [0, 1], [1.1, 1]);
+    // 4. Scale - Start bigger
+    const scale = useTransform(smoothProgress, [0, 0.4], [1.3, 1]);
 
     // 5. Header Animations
-    const textOpacity = useTransform(smoothProgress, [0.6, 0.8], [0, 1]); // Appears late
-    const leftTextX = useTransform(smoothProgress, [0.6, 0.8], [-50, 0]);
-    const rightTextX = useTransform(smoothProgress, [0.6, 0.8], [50, 0]);
+    const textOpacity = useTransform(smoothProgress, [0.3, 0.5], [0, 1]);
+    const leftTextX = useTransform(smoothProgress, [0.3, 0.5], [-100, 0]);
+    const rightTextX = useTransform(smoothProgress, [0.3, 0.5], [100, 0]);
 
 
     return (
-        <div ref={containerRef} className="relative h-screen bg-[#0a0a0a] w-full overflow-hidden font-sans">
-            {/* Sticky Container */}
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden perspective-1000 py-12 pb-24">
+        <div ref={containerRef} className="relative h-[160vh] bg-[#0a0a0a] w-full overflow-clip font-sans">
+            {/* Sticky Container - Reduced padding to give more space for the phone */}
+            <div className="sticky top-0 h-screen w-full flex items-center justify-center perspective-1000 overflow-visible">
 
                 {/* HEADERS */}
                 < motion.div
@@ -118,13 +118,11 @@ export function ServicesMopile() {
                     }
                     className="absolute uppercase top-[8%] left-[5%] md:left-[12%] z-50 pointer-events-none"
                 >
-                    <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-                        Mobile
-                    </h2>
+                    <Header title="Mobile" className="md:text-8xl" />
                 </motion.div >
 
                 <motion.div style={{ opacity: textOpacity, x: rightTextX }} className="absolute uppercase top-[8%] right-[5%] md:right-[7%] z-50 pointer-events-none">
-                    <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">Services</h2>
+                    <Header title="Services" className="md:text-8xl" />
                 </motion.div>
 
 
