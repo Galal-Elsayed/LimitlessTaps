@@ -49,9 +49,9 @@ const WhatWeDeliverLines = ({
           </mask>
 
           <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={lightColor} stopOpacity="0" />
-            <stop offset="50%" stopColor={lightColor} stopOpacity="1" />
-            <stop offset="100%" stopColor={lightColor} stopOpacity="0" />
+            <stop offset="0%" stopColor="#3737E6" stopOpacity="0" />
+            <stop offset="50%" stopColor="#FC33FC" stopOpacity="1" />
+            <stop offset="100%" stopColor="#3737E6" stopOpacity="0" />
           </linearGradient>
         </defs>
 

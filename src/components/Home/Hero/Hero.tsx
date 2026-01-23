@@ -63,7 +63,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight  leading-[1.1] font-app"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight  leading-[1.1] text-white"
             >
               {t("hero_title")}
             </motion.h1>
@@ -73,7 +73,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed font-app"
+              className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed"
             >
               {t("hero_subtitle")}
             </motion.p>

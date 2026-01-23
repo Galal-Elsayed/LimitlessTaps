@@ -100,7 +100,7 @@ export default function WhatWeDeliver() {
       <div className="px-4 md:px-8 max-w-7xl mx-auto relative z-20 -mt-24">
         <div className="absolute -top-40 left-4 md:left-8 z-20 max-w-xl text-left">
           <h2 className="text-3xl font-bold tracking-tight font-app md:text-5xl">WHAT WE DELIVER</h2>
-          <p className="mt-4 text-base font-app md:text-lg">
+          <p className="mt-4 text-base md:text-lg">
             Modern solutions that work everywhere, load fast, and solve real problems using clean architecture, and
             future-ready design.
           </p>
