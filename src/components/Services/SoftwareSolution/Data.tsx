@@ -1,6 +1,6 @@
 "use client";
 
-import DatabaseWithRestApi from "@/components/ui/database-with-rest-api";
+import DatabaseWithRestApi from "@/components/Services/SoftwareSolution/database-with-rest-api";
 
 export const Data = () => {
   return (
