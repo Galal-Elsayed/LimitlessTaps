@@ -4,6 +4,7 @@ import ServicesHero from "@/components/Services/ServicesHero";
 import ServiceCall from "@/components/Services/ServiceCall";
 import ServicesGridCards from "@/components/Services/ServicesGridCards";
 import ServiceApproach from "@/components/Services/ServiceApproach";
+import StickyPhone from "@/components/Services/StickyPhone/StickyPhone";
 
 export default async function ServicesPage() {
     const t = await getTranslations('services');

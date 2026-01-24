@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import {
     IconBrightnessDown,
     IconBrightnessUp,
@@ -29,83 +30,71 @@ import {
 import { GlowingHeader } from "../../ui/GlowingHeader";
 import FloatingLines from "../../FloatingLines";
 
-// --- TEXT CONTENT CONSTANTS ---
-const TOPICS = [
-    {
-        title: "Web Development",
-        desc: "Pixel-perfect, responsive web solutions.",
-        color: "text-white",
-        icons: [
-            "/About/next.webp",
-            "/About/react-svgrepo-com.svg",
-            "/About/wordpress-svgrepo-com.svg",
-            "/About/angular-svgrepo-com.svg",
-            "/About/django-svgrepo-com.svg",
-            "/About/laravel-svgrepo-com.svg",
-            "/About/node-svgrepo-com.svg",
-            "/About/vue-svgrepo-com.svg"
-        ]
-    },
-    {
-        title: "eCommerce",
-        desc: "Scalable storefronts that convert.",
-        color: "text-white",
-        icons: [
-            "/About/woo.webp",
-            "/About/salla.webp",
-            "/About/shopify.webp"
-        ]
-    },
-    {
-        title: "SaaS Platforms",
-        desc: "Robust architecture for modern software.",
-        color: "text-white",
-        icons: [
-            "/About/oracle.webp",
-            "/About/odoo.webp",
-            "/About/spring-boot.webp"
-        ]
-    },
-    {
-        title: "UI/UX Design",
-        desc: "Interactive experiences that engage users.",
-        color: "text-white",
-        icons: [
-            "/About/figma-svgrepo-com.svg",
-            "/About/adobe-xd-svgrepo-com.svg",
-            "/About/framer-svgrepo-com.svg"
-        ]
-    }
-];
-
 // --- FLOATING LINES CONFIG ---
 const FL_TOP_POS = { x: 10.0, y: 0.5, rotate: -0.4 };
 const FL_MID_POS = { x: 5.0, y: 0.0, rotate: 0 };
 const FL_BOT_POS = { x: 2.0, y: -0.7, rotate: 0.4 };
 const FL_ENABLED: ("top" | "middle" | "bottom")[] = ['top', 'middle', 'bottom'];
-const FL_LINES_GRADIENT = ['#ffffff', '#888888']; // Preserving this if you want it back, or just rely on default. Previous code removed it, user asked to add middle wave back. 
-// User asked for "waves color like the image" previously which removed linesGradient.
-// Then "ok add the third wave again".
+const FL_LINES_GRADIENT = ['#ffffff', '#888888'];
+
+// Topic keys for mapping
+const TOPIC_KEYS = ["web_development", "ecommerce", "saas", "uiux"] as const;
+
+// Icon paths for each topic
+const TOPIC_ICONS = {
+    web_development: [
+        "/About/next.webp",
+        "/About/react-svgrepo-com.svg",
+        "/About/wordpress-svgrepo-com.svg",
+        "/About/angular-svgrepo-com.svg",
+        "/About/django-svgrepo-com.svg",
+        "/About/laravel-svgrepo-com.svg",
+        "/About/node-svgrepo-com.svg",
+        "/About/vue-svgrepo-com.svg"
+    ],
+    ecommerce: [
+        "/About/woo.webp",
+        "/About/salla.webp",
+        "/About/shopify.webp"
+    ],
+    saas: [
+        "/About/oracle.webp",
+        "/About/odoo.webp",
+        "/About/spring-boot.webp"
+    ],
+    uiux: [
+        "/About/figma-svgrepo-com.svg",
+        "/About/adobe-xd-svgrepo-com.svg",
+        "/About/framer-svgrepo-com.svg"
+    ]
+};
 
 export default function ServicesWeb() {
+    const t = useTranslations('webDevelopment.services_web');
+
+    // Rich text renderer for highlighted content
+    const highlightRenderer = {
+        highlight: (chunks: React.ReactNode) => <span className="text-white font-medium">{chunks}</span>
+    };
+
     return (
         <section className="min-h-screen bg-[#0a0a0a] py-24 px-4 overflow-hidden flex flex-col items-center">
-
 
             {/* 2. Main Layout: 3 Columns - Widened */}
             <div className="w-full max-w-[1800px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-center">
 
                 {/* Left Column: Narrative */}
-                <div className="lg:col-span-3 order-2 lg:order-1 space-y-12 text-left lg:text-left">
+                <div className="lg:col-span-3 order-2 lg:order-1 space-y-4 lg:space-y-12 text-center lg:text-left">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                         viewport={{ once: true }}
+                        className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4"> Web Development</h3>
-                        <p className="text-white/40 leading-relaxed text-lg">
-                            We engineer bespoke digital experiences using <span className="text-white/60 font-medium">React</span> and <span className="text-white/60 font-medium">Next.js</span>. Our full-stack approach ensures pixel-perfect performance and scalability across all custom code solutions.
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('left_column.web_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                            {t.rich('left_column.web_description', highlightRenderer)}
                         </p>
                     </motion.div>
 
@@ -114,10 +103,11 @@ export default function ServicesWeb() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                         viewport={{ once: true }}
+                        className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">eCommerce Solutions</h3>
-                        <p className="text-white/40 leading-relaxed text-lg">
-                            We build high-converting online stores tailored to your vision. Whether utilizing powerful platforms like <span className="text-white/60 font-medium">Shopify</span>, <span className="text-white/60 font-medium">Salla</span>, or <span className="text-white/60 font-medium">WooCommerce</span>, we ensure seamless shopping experiences.
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase whitespace-nowrap">{t('left_column.ecommerce_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                            {t.rich('left_column.ecommerce_description', highlightRenderer)}
                         </p>
                     </motion.div>
                 </div>
@@ -128,21 +118,22 @@ export default function ServicesWeb() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
                     <div className="scale-[0.8] md:scale-[1.2] xl:scale-[1.3] transform-style-3d">
-                        <MacbookPresentation />
+                        <MacbookPresentation t={t} />
                     </div>
                 </div>
 
                 {/* Right Column: Narrative */}
-                <div className="lg:col-span-3 order-3 lg:order-3 space-y-12 text-left">
+                <div className="lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-12 text-center lg:text-left">
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                         viewport={{ once: true }}
+                        className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">SaaS Platforms</h3>
-                        <p className="text-white/40 leading-relaxed text-lg">
-                            We architect scalable <span className="text-white/60 font-medium">Software-as-a-Service</span> platforms designed for growth. Our solutions prioritize security and cloud-native efficiency, enabling you to launch complex products with confidence.
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('right_column.saas_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                            {t.rich('right_column.saas_description', highlightRenderer)}
                         </p>
                     </motion.div>
 
@@ -151,10 +142,11 @@ export default function ServicesWeb() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                         viewport={{ once: true }}
+                        className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-4">UI/UX Design</h3>
-                        <p className="text-white/40 leading-relaxed text-lg">
-                            Our design process leverages professional tools like <span className="text-white/60 font-medium">Figma</span> to craft user-centric interfaces. We focus on intuitive user flows and aesthetic excellence.
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('right_column.uiux_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                            {t.rich('right_column.uiux_description', highlightRenderer)}
                         </p>
                     </motion.div>
                 </div>
@@ -167,14 +159,18 @@ export default function ServicesWeb() {
 
 // --- MACBOOK COMPONENTS ---
 
-function MacbookPresentation() {
+interface MacbookPresentationProps {
+    t: ReturnType<typeof useTranslations>;
+}
+
+function MacbookPresentation({ t }: MacbookPresentationProps) {
     const [step, setStep] = useState<"logo" | "loop">("loop");
     const [loopIndex, setLoopIndex] = useState(0);
 
     // Loop Timer
     useEffect(() => {
         const interval = setInterval(() => {
-            setLoopIndex((prev) => (prev + 1) % TOPICS.length);
+            setLoopIndex((prev) => (prev + 1) % TOPIC_KEYS.length);
         }, 5000); // Change text every 5 seconds
         return () => clearInterval(interval);
     }, []);
@@ -182,7 +178,7 @@ function MacbookPresentation() {
 
     return (
         <div className="flex flex-col items-center py-12 relative">
-            <Lid step={step} loopIndex={loopIndex} />
+            <Lid step={step} loopIndex={loopIndex} t={t} />
             <div className="-mt-1">
                 <Base />
             </div>
@@ -190,8 +186,18 @@ function MacbookPresentation() {
     );
 }
 
+interface LidProps {
+    step: "logo" | "loop";
+    loopIndex: number;
+    t: ReturnType<typeof useTranslations>;
+}
 
-function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) {
+function Lid({ step, loopIndex, t }: LidProps) {
+    const currentKey = TOPIC_KEYS[loopIndex];
+    const title = t(`topics.${currentKey}.title`);
+    const desc = t(`topics.${currentKey}.desc`);
+    const icons = TOPIC_ICONS[currentKey];
+
     return (
         <div className="relative [perspective:800px]">
             {/* Outer Shell */}
@@ -236,14 +242,14 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
 
                             {/* Floating Lines Background */}
                             <div className="absolute inset-0 z-0">
-                                <FloatingLines 
+                                <FloatingLines
                                     topWavePosition={FL_TOP_POS}
                                     middleWavePosition={FL_MID_POS}
                                     bottomWavePosition={FL_BOT_POS}
                                     enabledWaves={FL_ENABLED}
                                     lineCount={4}
                                     lineDistance={5}
-                                    animationSpeed={0.5} 
+                                    animationSpeed={0.5}
                                 />
                             </div>
 
@@ -258,14 +264,14 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                             {/* Mini Footer */}
                             <div className="h-5 w-full bg-[#0a0a0a]   shrink-0 z-50 flex justify-between items-center px-5 absolute bottom-0 left-0">
                                 <div className="flex gap-2">
-                                    <span className="text-[3px] text-white/40 font-medium">© 2026 Limitless Taps</span>
+                                    <span className="text-[3px] text-white/40 font-medium">{t('footer.copyright')}</span>
                                 </div>
                                 <div className="flex gap-2">
-                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">Privacy</span>
-                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">Terms</span>
+                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">{t('footer.privacy')}</span>
+                                    <span className="text-[3px] text-white/40 hover:text-white cursor-pointer">{t('footer.terms')}</span>
                                 </div>
                             </div>
-                            
+
                             {/* Removed previous blur/vignette layers for clarity */}
 
                             <AnimatePresence mode="wait">
@@ -295,11 +301,11 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                                             className="text-center space-y-3 relative z-10"
                                         >
                                             {/* Main Headline - Typewriter Effect */}
-                                            <motion.h3 
+                                            <motion.h3
                                                 key={loopIndex} // Remount to restart animation
                                                 className={cn(
                                                     "text-3xl md:text-3xl font-bold tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 filter drop-shadow-sm",
-                                                    TOPICS[loopIndex].color
+                                                    "text-white"
                                                 )}
                                                 variants={{
                                                     hidden: { opacity: 1 },
@@ -313,9 +319,9 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                                                 initial="hidden"
                                                 animate="visible"
                                             >
-                                                {TOPICS[loopIndex].title.split("").map((char, index) => (
-                                                    <motion.span 
-                                                        key={index} 
+                                                {title.split("").map((char, index) => (
+                                                    <motion.span
+                                                        key={index}
                                                         variants={{
                                                             hidden: { opacity: 0 },
                                                             visible: { opacity: 1 }
@@ -328,7 +334,7 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
 
                                             {/* Description */}
                                             <p className="text-[9px] md:text-[10px] text-blue-100/90 font-semibold max-w-[16rem] leading-relaxed mx-auto">
-                                                {TOPICS[loopIndex].desc}
+                                                {desc}
                                             </p>
                                         </motion.div>
 
@@ -339,10 +345,10 @@ function Lid({ step, loopIndex }: { step: "logo" | "loop", loopIndex: number }) 
                                             animate={{ opacity: 1 }}
                                             transition={{ delay: 0.15, duration: 0.5 }}
                                         >
-                                        
+
                                             {/* Icons Row - Individual Bubbles */}
                                             <div className="flex items-center justify-center gap-4">
-                                                {TOPICS[loopIndex].icons.map((icon, idx) => (
+                                                {icons.map((icon, idx) => (
                                                     <motion.div
                                                         key={idx}
                                                         initial={{ opacity: 0, scale: 0.5, y: 10 }}

@@ -9,6 +9,8 @@
     "software_solution_desc": "Enterprise software and integrations.",
     "web_design_title": "Web Design",
     "web_design_desc": "Beautiful, user-centered design.",
+    "wordpress_cms_title": "WordPress & CMS",
+    "wordpress_cms_desc": "Custom WordPress and CMS solutions.",
     "hero": {
         "select": "Select",
         "services": "Services",

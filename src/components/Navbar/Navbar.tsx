@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import Image from "next/image";
 import { useState, useRef, useEffect, Fragment } from "react";
@@ -27,9 +27,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  // With 'as-needed' locale prefix, English pages don't have /en in the URL
-  // Only Arabic pages will have /ar prefix
-  const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
+  // Get the current locale using next-intl's hook
+  const currentLocale = useLocale();
   const isRTL = currentLocale === "ar";
 
   // Close mobile menu on route change
@@ -85,18 +84,26 @@ export default function Navbar() {
       title: tServices("web_design_title"),
       description: tServices("web_design_desc"),
     },
+    {
+      key: "wordpress_cms",
+      href: "/services/wordpress",
+      title: tServices("wordpress_cms_title"),
+      description: tServices("wordpress_cms_desc"),
+    },
   ];
 
-  // Language links for switching
+  // Language links for switching - Use native language names
   const languageLinks = [
     {
       key: "en",
-      title: "EN",
+      title: "English",
+      shortTitle: "EN",
       locale: "en" as const,
     },
     {
       key: "ar",
-      title: "AR",
+      title: "العربية",
+      shortTitle: "عربي",
       locale: "ar" as const,
     },
   ];
@@ -185,11 +192,10 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${
-                              active
-                                ? "[clip-path:inset(0_0_0_0)]"
-                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-                            }
+                            ${active
+                ? "[clip-path:inset(0_0_0_0)]"
+                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+              }
                         `}
             aria-hidden="true"
           >
@@ -233,11 +239,10 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${
-                          servicesGlowActive
-                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-                            : "text-gray-300"
-                        }
+                        ${servicesGlowActive
+              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+              : "text-gray-300"
+            }
                     `}
         />
       </button>
@@ -256,18 +261,16 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
-          mobileMenuOpen ? "max-[900px]:hidden" : ""
-        } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
+          } bg-[#0a0a0a]`}
       >
         <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
-              mobileMenuOpen
-                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-                : "opacity-100"
-            }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
+              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+              : "opacity-100"
+              }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -319,7 +322,7 @@ export default function Navbar() {
                                         ${langGlowActive ? "text-white" : "text-gray-300"}
                                     `}
                 >
-                  {currentLocale}
+                  {currentLocale === "ar" ? "عربي" : "EN"}
                 </span>
 
                 <ChevronDown
@@ -472,9 +475,8 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${
-                                mobileServicesOpen ? "rotate-180" : ""
-                              }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
+                                }`}
                             />
                           </button>
 
@@ -534,9 +536,8 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
-                      isRTL ? "text-right" : "text-left"
-                    }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
+                      }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -547,11 +548,10 @@ export default function Navbar() {
                         onClick={() => router.replace(pathname, { locale: lang.locale })}
                         className={`
                                                     flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-300 border
-                                                    ${
-                                                      currentLocale === lang.key
-                                                        ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                                                    }
+                                                    ${currentLocale === lang.key
+                            ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                          }
                                                 `}
                       >
                         <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>

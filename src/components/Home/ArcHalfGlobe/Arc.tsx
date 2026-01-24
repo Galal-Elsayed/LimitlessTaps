@@ -26,9 +26,12 @@ export function CTAArc() {
 
 export function CTATitle() {
   const t = useTranslations("common");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+
   return (
     <div className="space-y-4">
-      <h1 className="font-app text-7xl md:text-6xl lg:text-8xl">{t("cta_title")}</h1>
+      <h1 className={`font-app text-7xl md:text-6xl lg:text-8xl ${isRTL ? 'pb-4' : ''}`}>{t("cta_title")}</h1>
       <p className="text-lg md:text-2xl lg:text-3xl font-semibold">{t("cta_subtitle")}</p>
     </div>
   );
@@ -67,9 +70,8 @@ export function CTAButtons() {
       >
         <span className="font-medium">{t("cta_secondary")}</span>
         <ArrowRight
-          className={`h-4 w-4 transition-transform duration-300 ${
-            isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-          }`}
+          className={`h-4 w-4 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+            }`}
         />
       </Link>
     </div>
