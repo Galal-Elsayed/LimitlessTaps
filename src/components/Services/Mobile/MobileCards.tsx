@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import SeoCards from "../ReusableComponents/SeoCards";
 
 // --- SHAPES ---
@@ -51,50 +52,52 @@ const WearableShape = () => (
     </div>
 );
 
-const MOBILE_SERVICES = [
-    {
-        title: "iOS Development",
-        description: "Native iOS applications built with Swift and SwiftUI. We deliver seamless performance, polished animations, and full adherence to Apple's Human Interface Guidelines, ensuring your app feels right at home on every iPhone and iPad.",
-        colSpan: "lg:col-span-4",
-        shape: <IOSShape />,
-    },
-    {
-        title: "Android Development",
-        description: "Robust Android apps using Kotlin and Jetpack Compose. We cover the fragmented Android ecosystem with adaptive layouts and material design, guaranteeing a consistent and high-quality experience across thousands of device variations.",
-        colSpan: "lg:col-span-8",
-        shape: <AndroidShape />,
-    },
-    {
-        title: "Cross-Platform Solutions",
-        description: "Efficient multi-platform development using React Native or Flutter. Write once, deploy everywhere without compromising on native-like performance. Ideal for startups looking to capture both markets simultaneously with a unified codebase.",
-        colSpan: "lg:col-span-6",
-        shape: <CrossPlatformShape />,
-    },
-    {
-        title: "AR & Emerging Tech",
-        description: "Next-gen mobile experiences leveraging ARKit and ARCore. From immersive retail previews to interactive educational tools, we push the boundaries of what mobile devices can do, creating memorable and practical augmented reality applications.",
-        colSpan: "lg:col-span-6",
-        shape: <ARShape />,
-    },
-    {
-        title: "Wearable & IoT Solutions",
-        description: "Extending your digital presence to wrists and connected devices. We develop companion apps for WatchOS and WearOS, as well as complex IoT controllers that bridge the physical and digital worlds seamlessly.",
-        colSpan: "lg:col-span-12",
-        shape: <WearableShape />,
-    },
-];
-
 export function MobileCards() {
+    const t = useTranslations('mobileApplication.mobile_cards');
+
+    const MOBILE_SERVICES = [
+        {
+            title: t('cards.ios.title'),
+            description: t('cards.ios.description'),
+            colSpan: "lg:col-span-4",
+            shape: <IOSShape />,
+        },
+        {
+            title: t('cards.android.title'),
+            description: t('cards.android.description'),
+            colSpan: "lg:col-span-8",
+            shape: <AndroidShape />,
+        },
+        {
+            title: t('cards.cross_platform.title'),
+            description: t('cards.cross_platform.description'),
+            colSpan: "lg:col-span-6",
+            shape: <CrossPlatformShape />,
+        },
+        {
+            title: t('cards.ar.title'),
+            description: t('cards.ar.description'),
+            colSpan: "lg:col-span-6",
+            shape: <ARShape />,
+        },
+        {
+            title: t('cards.wearable.title'),
+            description: t('cards.wearable.description'),
+            colSpan: "lg:col-span-12",
+            shape: <WearableShape />,
+        },
+    ];
+
     return (
         <SeoCards
             items={MOBILE_SERVICES}
-            seoHeader="Expert Mobile App Development Services"
+            seoHeader={t('seo_header')}
             seoList={[
-                "Native iOS Application Development",
-                "Android App Development",
-                "Cross-Platform React Native & Flutter",
-                "Augmented Reality Mobile Apps",
-                "Wearable & IoT App Development"
+                t('seo_list.item1'),
+                t('seo_list.item2'),
+                t('seo_list.item3'),
+                t('seo_list.item4'),
+                t('seo_list.item5')
             ]}
             gradientBottom={false}
         />

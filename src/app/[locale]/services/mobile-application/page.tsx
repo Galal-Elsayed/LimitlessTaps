@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { ServicesMopile } from "@/components/Services/Mopile/ServicesMopile";
-import MobileHero from "@/components/Services/Mopile/MobileHero";
-import MobileCards from "@/components/Services/Mopile/MobileCards";
+import { ServicesMopile } from "@/components/Services/Mobile/ServicesMobile";
+import MobileHero from "@/components/Services/Mobile/MobileHero";
+import MobileCards from "@/components/Services/Mobile/MobileCards";
 import Arc from "@/components/Home/ArcHalfGlobe/Arc";
 
 

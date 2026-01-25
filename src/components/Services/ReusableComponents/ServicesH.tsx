@@ -18,9 +18,9 @@ export default function ServicesH({
     description,
     badges,
     hiddenBadges = [],
-    height = "min-h-screen",
-    headerClassName = "text-[13vw] leading-[0.8]", // Default styles
-    descriptionClassName = "max-w-xl text-lg md:text-xl" // Default styles
+    height = "min-h-[70vh] md:min-h-screen", // Mobile: 70vh, Desktop: screen height
+    headerClassName = "text-[15vw] md:text-[13vw] leading-[0.9] md:leading-[0.8]", // Larger text on mobile
+    descriptionClassName = "max-w-xl text-xl md:text-xl" // Larger description on mobile
 }: ServicesHProps) {
     return (
         <section className={`relative bg-[#0a0a0a] text-[#bfbfbf] w-full ${height} flex items-start justify-start overflow-hidden perspective-2000`}>
@@ -35,7 +35,7 @@ export default function ServicesH({
             </div>
 
             {/* Overlay Content Layer */}
-            <div className="relative z-10 w-full max-w-[1800px] px-4 md:px-12 pointer-events-none flex flex-col justify-start h-full pt-24 lg:pt-18">
+            <div className="relative z-10 w-full max-w-[1800px] px-4 md:px-12 pointer-events-none flex flex-col justify-start h-full pt-32 lg:pt-18">
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}

@@ -1,10 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import Image from "next/image";
 import { useState, useRef, useEffect, Fragment } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Globe } from "lucide-react";
 import { NavDropdown } from "@/components/ui/nav-dropdown";
 import { AnimatePresence, motion } from "motion/react";
 import { Transition } from "@headlessui/react";
@@ -27,9 +27,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  // With 'as-needed' locale prefix, English pages don't have /en in the URL
-  // Only Arabic pages will have /ar prefix
-  const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
+  // Get the current locale using next-intl's hook
+  const currentLocale = useLocale();
   const isRTL = currentLocale === "ar";
 
   // Close mobile menu on route change
@@ -85,21 +84,27 @@ export default function Navbar() {
       title: tServices("web_design_title"),
       description: tServices("web_design_desc"),
     },
+    {
+      key: "wordpress_cms",
+      href: "/services/wordpress",
+      title: tServices("wordpress_cms_title"),
+      description: tServices("wordpress_cms_desc"),
+    },
   ];
 
-  // Language links for switching
+  // Language links for switching - Use native language names
   const languageLinks = [
     {
       key: "en",
       title: "English",
+      shortTitle: "EN",
       locale: "en" as const,
-      flag: "https://flagcdn.com/w40/gb.png",
     },
     {
       key: "ar",
       title: "العربية",
+      shortTitle: "عربي",
       locale: "ar" as const,
-      flag: "https://flagcdn.com/w40/eg.png",
     },
   ];
 
@@ -187,11 +192,10 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${
-                              active
-                                ? "[clip-path:inset(0_0_0_0)]"
-                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-                            }
+                            ${active
+                ? "[clip-path:inset(0_0_0_0)]"
+                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+              }
                         `}
             aria-hidden="true"
           >
@@ -235,11 +239,10 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${
-                          servicesGlowActive
-                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-                            : "text-gray-300"
-                        }
+                        ${servicesGlowActive
+              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+              : "text-gray-300"
+            }
                     `}
         />
       </button>
@@ -258,18 +261,16 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
-          mobileMenuOpen ? "max-[900px]:hidden" : ""
-        } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
+          } bg-[#0a0a0a]`}
       >
         <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
-              mobileMenuOpen
-                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-                : "opacity-100"
-            }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
+              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+              : "opacity-100"
+              }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -303,49 +304,32 @@ export default function Navbar() {
           {/* Desktop Language Switcher (Hidden on mobile/tablet) */}
           <div className="hidden min-[900px]:flex items-center gap-4">
             <div className="relative group" onMouseEnter={handleLangMouseEnter} onMouseLeave={handleLangMouseLeave}>
-              <button className="flex items-center gap-1 focus:outline-none py-2 cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 640 640"
+              <button className="flex items-center gap-2 focus:outline-none px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <Globe
                   className={`
-                                        w-5 h-5 transition-all duration-300 ease-out
+                                        w-3.5 h-3.5 transition-all duration-300 ease-out
                                         ${langGlowActive ? "text-white" : "text-gray-300"}
                                     `}
                   style={{
                     filter: langGlowActive ? "drop-shadow(0 0 10px rgba(255,255,255,0.9))" : "none",
                   }}
-                  fill="currentColor"
-                >
-                  <path d="M415.9 344L225 344C227.9 408.5 242.2 467.9 262.5 511.4C273.9 535.9 286.2 553.2 297.6 563.8C308.8 574.3 316.5 576 320.5 576C324.5 576 332.2 574.3 343.4 563.8C354.8 553.2 367.1 535.8 378.5 511.4C398.8 467.9 413.1 408.5 416 344zM224.9 296L415.8 296C413 231.5 398.7 172.1 378.4 128.6C367 104.2 354.7 86.8 343.3 76.2C332.1 65.7 324.4 64 320.4 64C316.4 64 308.7 65.7 297.5 76.2C286.1 86.8 273.8 104.2 262.4 128.6C242.1 172.1 227.8 231.5 224.9 296zM176.9 296C180.4 210.4 202.5 130.9 234.8 78.7C142.7 111.3 74.9 195.2 65.5 296L176.9 296zM65.5 344C74.9 444.8 142.7 528.7 234.8 561.3C202.5 509.1 180.4 429.6 176.9 344L65.5 344zM463.9 344C460.4 429.6 438.3 509.1 406 561.3C498.1 528.6 565.9 444.8 575.3 344L463.9 344zM575.3 296C565.9 195.2 498.1 111.3 406 78.7C438.3 130.9 460.4 210.4 463.9 296L575.3 296z" />
-                </svg>
+                />
 
-                <div className="relative relative-inline-block">
-                  <span className="block text-[14px] font-medium tracking-wide text-gray-300 transition-colors duration-300">
-                    {t("language_selector")}
-                  </span>
-                  <span
-                    className={`
-                                            absolute inset-0 flex items-center justify-center
-                                            text-[14px] font-medium tracking-wide text-white
-                                            transition-all duration-300 ease-out
-                                        `}
-                    style={{
-                      clipPath: langGlowActive ? "inset(0 0 0 0)" : "inset(0 50% 0 50%)",
-                    }}
-                    aria-hidden="true"
-                  >
-                    {t("language_selector")}
-                  </span>
-                </div>
+                <span
+                  className={`
+                                        text-[12px] font-bold tracking-wide uppercase
+                                        transition-colors duration-300
+                                        ${langGlowActive ? "text-white" : "text-gray-300"}
+                                    `}
+                >
+                  {currentLocale === "ar" ? "عربي" : "EN"}
+                </span>
 
                 <ChevronDown
                   className={`
-                                        w-4 h-4 transition-all duration-300 ease-out
+                                        w-3 h-3 transition-all duration-300 ease-out
                                         ${langGlowActive ? "rotate-180 text-white" : "text-gray-300"}
                                     `}
-                  style={{
-                    filter: langGlowActive ? "drop-shadow(0 0 8px rgba(255,255,255,0.7))" : "none",
-                  }}
                 />
               </button>
 
@@ -361,7 +345,7 @@ export default function Navbar() {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <div
-                  className="absolute z-50 pt-2 px-4 left-1/2 -translate-x-1/2 w-36"
+                  className="absolute z-50 pt-2 px-4 left-1/2 -translate-x-1/2 w-24"
                   onMouseEnter={handleLangMouseEnter}
                   onMouseLeave={handleLangMouseLeave}
                 >
@@ -382,19 +366,15 @@ export default function Navbar() {
                               router.replace(pathname, { locale: lang.locale });
                               setLangOpen(false);
                             }}
-                            className="group flex items-center justify-center rounded-lg p-2 hover:bg-white/10 transition-colors duration-200 cursor-pointer w-full"
+                            className="group flex items-center justify-center rounded-lg p-2 hover:bg-white/10 transition-colors duration-200 cursor-pointer w-full text-center"
                           >
-                            <div className="flex items-center gap-2">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={lang.flag} alt={lang.title} className="w-5 h-5 rounded-full object-cover" />
-                              <p
-                                lang={lang.locale}
-                                dir={lang.locale === "ar" ? "rtl" : "ltr"}
-                                className="block font-semibold text-md text-gray-100 group-hover:text-white transition-colors"
-                              >
-                                {lang.title}
-                              </p>
-                            </div>
+                            <p
+                              lang={lang.locale}
+                              dir={lang.locale === "ar" ? "rtl" : "ltr"}
+                              className="block font-bold text-[12px] text-gray-100 group-hover:text-white transition-colors"
+                            >
+                              {lang.title}
+                            </p>
                           </button>
                         ))}
                       </div>
@@ -495,9 +475,8 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${
-                                mobileServicesOpen ? "rotate-180" : ""
-                              }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
+                                }`}
                             />
                           </button>
 
@@ -557,9 +536,8 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
-                      isRTL ? "text-right" : "text-left"
-                    }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
+                      }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -569,21 +547,16 @@ export default function Navbar() {
                         key={lang.key}
                         onClick={() => router.replace(pathname, { locale: lang.locale })}
                         className={`
-                                                    flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300 border
-                                                    ${
-                                                      currentLocale === lang.key
-                                                        ? "bg-white text-black border-white shadow-[0_0_14px_rgba(255,255,255,0.3)]"
-                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                                                    }
+                                                    flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-300 border
+                                                    ${currentLocale === lang.key
+                            ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                          }
                                                 `}
                       >
-                        <div className="flex items-center justify-center gap-2">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={lang.flag} alt={lang.title} className="w-4 h-4 rounded-full object-cover" />
-                          <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>
-                            {lang.title}
-                          </span>
-                        </div>
+                        <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>
+                          {lang.title}
+                        </span>
                       </button>
                     ))}
                   </div>

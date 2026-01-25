@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 import { cn } from "@/lib/utils";
+import { useLocale } from 'next-intl';
 import Header from '@/components/ui/header';
 // --- LIGHT RAYS COMPONENT ---
 // This entire block is identical to Webhero's implementation
@@ -462,6 +463,9 @@ interface ServiceHeroBaseProps {
 }
 
 export default function ServiceHeroBase({ title, className, raysColor = "#ffffff", minHeight = "h-[50vh]" }: ServiceHeroBaseProps) {
+    const locale = useLocale();
+    const isRTL = locale === "ar";
+
     return (
         <section className={cn("relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a]", minHeight, className)}>
 
@@ -471,7 +475,10 @@ export default function ServiceHeroBase({ title, className, raysColor = "#ffffff
                 {/* Header */}
                 <Header
                     title={title}
-                    className="text-5xl md:text-7xl lg:text-[180px] font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85]"
+                    className={cn(
+                        "text-[13vw] md:text-8xl lg:text-[180px] font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85]",
+                        isRTL && "pb-10"
+                    )}
                 />
             </div>
 

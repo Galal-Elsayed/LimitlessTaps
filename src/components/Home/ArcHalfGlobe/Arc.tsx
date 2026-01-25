@@ -26,12 +26,13 @@ export function CTAArc() {
 
 export function CTATitle() {
   const t = useTranslations("common");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+
   return (
     <div className="space-y-4">
-      <h1 className="font-app font-semibold leading-tight tracking-tight text-7xl md:text-6xl lg:text-8xl">
-        {t("cta_title")}
-      </h1>
-      <p className="font-app text-lg md:text-2xl lg:text-3xl font-semibold">{t("cta_subtitle")}</p>
+      <h1 className={`font-app text-7xl md:text-6xl lg:text-8xl ${isRTL ? 'pb-4' : ''}`}>{t("cta_title")}</h1>
+      <p className="text-lg md:text-2xl lg:text-3xl font-semibold">{t("cta_subtitle")}</p>
     </div>
   );
 }

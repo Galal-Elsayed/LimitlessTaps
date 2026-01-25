@@ -99,7 +99,7 @@ export default function StudioTemplates() {
     );
 
     return (
-        <section className="min-h-screen bg-neutral-950 py-24 px-4 md:px-8 relative overflow-hidden flex flex-col items-center">
+        <section className="min-h-screen bg-neutral-950 py-12 px-4 md:px-8 relative overflow-hidden flex flex-col items-center">
 
             {/* 3-Part Header Section (Replicating AboutTap layout) */}
             <div className="w-full max-w-[90%] mx-auto mb-16 z-10 flex flex-col gap-12">
@@ -142,7 +142,7 @@ export default function StudioTemplates() {
 
 
             {/* Vertical List of Templates */}
-            <div className="w-full max-w-[1400px] flex flex-col items-center gap-24 md:gap-32 relative z-10 pb-20">
+            <div className="w-full max-w-[1400px] flex flex-col items-center gap-12 md:gap-16 relative z-10 pb-10">
                 <AnimatePresence mode="popLayout">
                     {filteredTemplates.map((template, index) => (
                         <TemplateItem key={template.id} template={template} index={index} t={t} />
@@ -165,13 +165,13 @@ function TemplateItem({ template, index, t }: { template: Template; index: numbe
             layout
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             className="w-full flex flex-col items-center"
         >
 
             {/* Device Toggle Controls (Centered Above with Text Labels) */}
-            <div className="mb-6 z-30 flex items-center justify-center">
+            <div className="mb-3 z-30 flex items-center justify-center">
                 <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-white/10">
                     <button
                         onClick={() => setViewMode("desktop")}
@@ -205,7 +205,7 @@ function TemplateItem({ template, index, t }: { template: Template; index: numbe
                         // Seamless Design
                         "rounded-t-2xl rounded-b-none border-b-0",
                         viewMode === "desktop"
-                            ? "w-full aspect-[16/10]"
+                            ? "w-full aspect-[16/8.5]" // Shorter aspect ratio (was 16/10) to see more
                             : "w-[400px] aspect-[9/18] rounded-[3rem] border-[8px] border-[#1a1a1a]"
                     )}
                 >
@@ -308,7 +308,7 @@ function TemplateItem({ template, index, t }: { template: Template; index: numbe
             {/* Bottom Info Bar - Connected to Window */}
             <div
                 className={cn(
-                    "bg-[#222] border border-white/10 border-t-0 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl relative z-20 transition-all duration-700",
+                    "bg-[#222] border border-white/10 border-t-0 p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-2xl relative z-20 transition-all duration-700",
                     // Seamless Design
                     "rounded-b-2xl rounded-t-none",
                     viewMode === "desktop"

@@ -68,6 +68,8 @@ async function loadMessages(locale: string | undefined) {
     const privacy = (await import(`../../../messages/${resolvedLocale}/privacy.json`)).default;
     const terms = (await import(`../../../messages/${resolvedLocale}/terms.json`)).default;
     const studio = (await import(`../../../messages/${resolvedLocale}/studio.json`)).default;
+    const webDevelopment = (await import(`../../../messages/${resolvedLocale}/Web-Development.json`)).default;
+    const mobileApplication = (await import(`../../../messages/${resolvedLocale}/mopile-application.json`)).default;
 
     return {
       common,
@@ -82,6 +84,8 @@ async function loadMessages(locale: string | undefined) {
       privacy,
       terms,
       studio,
+      webDevelopment,
+      mobileApplication,
     };
   } catch (error) {
     console.error(`Failed to load messages for locale: ${resolvedLocale}`, error);
@@ -98,6 +102,8 @@ async function loadMessages(locale: string | undefined) {
     const privacy = (await import(`../../../messages/en/privacy.json`)).default;
     const terms = (await import(`../../../messages/en/terms.json`)).default;
     const studio = (await import(`../../../messages/en/studio.json`)).default;
+    const webDevelopment = (await import(`../../../messages/en/Web-Development.json`)).default;
+    const mobileApplication = (await import(`../../../messages/en/mopile-application.json`)).default;
 
     return {
       common,
@@ -112,6 +118,8 @@ async function loadMessages(locale: string | undefined) {
       privacy,
       terms,
       studio,
+      webDevelopment,
+      mobileApplication,
     };
   }
 }

@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "framer-motion";
+import { Header } from "@/components/ui/header";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -115,15 +116,18 @@ export default function ServiceCall() {
                 </div>
 
                 {/* 2. Text Content */}
-                <motion.h2
+                <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-5xl uppercase md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8"
+                    className="mb-8"
                 >
-                    {t('call.unlock')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-white">{t('call.limitless')}</span> {t('call.possibilities')}
-                </motion.h2>
+                    <Header
+                        title={<>{t('call.unlock')} <span className="text-white">{t('call.limitless')}</span> {t('call.possibilities')}</>}
+                        className="text-5xl uppercase md:text-7xl lg:text-8xl font-bold tracking-tighter"
+                    />
+                </motion.div>
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
