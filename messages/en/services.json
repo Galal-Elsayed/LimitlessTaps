@@ -97,34 +97,39 @@
         }
     },
     "approach": {
-        "header": "OUR Approach",
-        "subtitle": "A rigorous, transparent journey from abstract concept to market-ready reality.",
+        "header": "OUR APPROACH",
+        "subtitle": "A <highlight>rigorous</highlight>, <highlight>transparent</highlight> journey from <highlight>abstract concept</highlight> to <highlight>market-ready reality</highlight>. We believe in collaboration at every step.",
         "phase": "Phase",
         "steps": {
             "discovery": {
                 "id": "01",
                 "title": "Discovery",
-                "description": "We begin by understanding your vision, goals, and audience. Deep research and strategic analysis form the foundation of every project."
+                "description": "Deep dive into your vision, goals, and target audience."
             },
             "strategy": {
                 "id": "02",
                 "title": "Strategy",
-                "description": "Insights transform into actionable plans. We define the approach, set milestones, and align on success metrics."
+                "description": "Transforming insights into clear, actionable plans."
             },
             "design": {
                 "id": "03",
                 "title": "Design",
-                "description": "Ideas take visual form. Our design process is iterative, collaborative, and focused on creating meaningful experiences."
+                "description": "Crafting stunning visuals through iterative design."
             },
             "development": {
                 "id": "04",
                 "title": "Development",
-                "description": "Designs become reality. We build with precision, performance, and scalability as core principles."
+                "description": "Building robust solutions with precision and scale."
             },
             "launch": {
                 "id": "05",
                 "title": "Launch",
-                "description": "The culmination of our work. We ensure a seamless launch and provide ongoing support for continued success."
+                "description": "Seamless deployment backed by rigorous QA testing."
+            },
+            "support": {
+                "id": "06",
+                "title": "Support",
+                "description": "Continuous monitoring, updates, and optimization."
             }
         }
     },
