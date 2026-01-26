@@ -205,7 +205,7 @@ function TemplateItem({ template, index, t }: { template: Template; index: numbe
                         // Seamless Design
                         "rounded-t-2xl rounded-b-none border-b-0",
                         viewMode === "desktop"
-                            ? "w-full aspect-[16/8.5]" // Shorter aspect ratio (was 16/10) to see more
+                            ? "w-full h-[60vh]" // Fixed height relative to viewport
                             : "w-[400px] aspect-[9/18] rounded-[3rem] border-[8px] border-[#1a1a1a]"
                     )}
                 >
