@@ -1,6 +1,6 @@
 import Hero from "@/components/Home/Hero/Hero";
 import Arc from "@/components/Home/ArcHalfGlobe/Arc";
-import StickyPhone from "@/components/Home/StickyPhone/StickyPhone";
+import StickyPhone from "@/components/Home/Responsive/Responsive";
 import Carousel from "@/components/Home/ProjectsCarousel/Carousel";
 import WhatWeDeliver from "@/components/Home/WhatWeDeliver/WhatWeDeliver";
 import LayoutDesign from "@/components/Home/Desgin/LayoutDesign";
