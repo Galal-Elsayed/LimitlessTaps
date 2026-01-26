@@ -368,7 +368,7 @@ export default function ServicesApproach() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col justify-center gap-8 py-4 lg:py-8 order-3 h-full items-start z-10 relative">
+          <div className="flex flex-col pl-12 justify-center gap-8 py-4 lg:py-8 order-3 h-full items-start z-10 relative">
             {stepsRight.map((step, idx) => (
               <StepItem key={step.id} {...step} align="left" index={idx + 3} />
             ))}

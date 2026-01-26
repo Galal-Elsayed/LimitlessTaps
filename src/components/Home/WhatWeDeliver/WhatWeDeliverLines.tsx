@@ -38,16 +38,6 @@ const WhatWeDeliverLines = ({
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
 
-          {/* Fade Mask Gradient */}
-          <linearGradient id="fade-gradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="15%" stopColor="white" stopOpacity="1" />
-          </linearGradient>
-
-          <mask id="fade-mask">
-            <rect x="0" y="0" width="200" height="100" fill="url(#fade-gradient)" />
-          </mask>
-
           <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3737E6" stopOpacity="0" />
             <stop offset="50%" stopColor="#FC33FC" stopOpacity="1" />
@@ -55,69 +45,13 @@ const WhatWeDeliverLines = ({
           </linearGradient>
         </defs>
 
-        {/* Base Lines Removed as per request */}
-
         {/* Animated Glowing Lines */}
-        {/* Animated Glowing Lines - Layer 1 (Outer Glow) */}
         <g
           stroke="url(#line-gradient)"
           fill="none"
-          strokeWidth="3"
-          opacity="0.4"
+          strokeWidth="1.8"
           filter="url(#glow-filter)"
           strokeLinecap="round"
-          mask="url(#fade-mask)"
-        >
-          <path d="M 31 0 v 25 q 0 5 5 5 h 59 q 5 0 5 5 v 35" strokeDasharray="100" strokeDashoffset="100">
-            <animate
-              attributeName="stroke-dashoffset"
-              from="100"
-              to="-100"
-              dur="3s"
-              repeatCount="indefinite"
-              begin="0s"
-            />
-          </path>
-          <path d="M 77 0 v 20 q 0 5 5 5 h 13 q 5 0 5 5 v 35" strokeDasharray="60" strokeDashoffset="60">
-            <animate
-              attributeName="stroke-dashoffset"
-              from="60"
-              to="-60"
-              dur="2.5s"
-              repeatCount="indefinite"
-              begin="0.5s"
-            />
-          </path>
-          <path d="M 124 0 v 20 q 0 5 -5 5 h -14 q -5 0 -5 5 v 35" strokeDasharray="60" strokeDashoffset="60">
-            <animate
-              attributeName="stroke-dashoffset"
-              from="60"
-              to="-60"
-              dur="2.5s"
-              repeatCount="indefinite"
-              begin="1s"
-            />
-          </path>
-          <path d="M 170 0 v 25 q 0 5 -5 5 h -60 q -5 0 -5 5 v 35" strokeDasharray="100" strokeDashoffset="100">
-            <animate
-              attributeName="stroke-dashoffset"
-              from="100"
-              to="-100"
-              dur="3.2s"
-              repeatCount="indefinite"
-              begin="0.2s"
-            />
-          </path>
-        </g>
-
-        {/* Animated Glowing Lines - Layer 2 (Core Brightness) */}
-        <g
-          stroke="url(#line-gradient)"
-          fill="none"
-          strokeWidth="1.5"
-          filter="url(#glow-filter)"
-          strokeLinecap="round"
-          mask="url(#fade-mask)"
         >
           <path d="M 31 0 v 25 q 0 5 5 5 h 59 q 5 0 5 5 v 35" strokeDasharray="100" strokeDashoffset="100">
             <animate
