@@ -5,7 +5,7 @@ import "./globals.css";
 import { i18n } from "@/i18n.config";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import { Preloader } from "@/components/ui/Preloader";
 
 const inter = Inter({
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/Logo/black.png"],
   },
   other: {
-    'format-detection': 'telephone=no',
+    "format-detection": "telephone=no",
   },
 };
 
@@ -151,7 +151,7 @@ export default async function RootLayout({
       </head>
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
-          {/* <Preloader /> */}
+          <Preloader />
           <Toaster position="top-center" expand={false} richColors />
           <div className="pt-18">
             <Navbar />

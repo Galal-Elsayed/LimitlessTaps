@@ -26,10 +26,7 @@ const Features = () => {
   const tabsRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
 
-  const activeProjects = useMemo(
-    () => tabs.find((tab) => tab.id === activeTab)?.projects || [],
-    [activeTab]
-  );
+  const activeProjects = useMemo(() => tabs.find((tab) => tab.id === activeTab)?.projects || [], [activeTab]);
 
   // Enhanced GSAP ScrollTrigger animations for all sections
   useEffect(() => {
@@ -58,7 +55,7 @@ const Features = () => {
               end: "bottom 20%",
               toggleActions: "play reverse play reverse",
             },
-          }
+          },
         );
       }
 
@@ -83,7 +80,7 @@ const Features = () => {
               end: "bottom 10%",
               toggleActions: "play reverse play reverse",
             },
-          }
+          },
         );
       }
     });
@@ -123,51 +120,29 @@ const Features = () => {
   return (
     <>
       {/* Hero Section with Grid Background */}
-      <section ref={heroSectionRef} className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[100vh] flex items-start justify-start overflow-hidden">
-
+      <section
+        ref={heroSectionRef}
+        className="relative bg-[#0a0a0a] text-[#bfbfbf] w-full min-h-[60vh] h-[80vh] flex items-start justify-start overflow-hidden"
+      >
         {/* Background Grid Layer - Only in Hero */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/work-hero-bg.svg"
-            alt="Hero Background"
-            fill
-            className="object-cover opacity-60"
-            priority
-          />
+          <Image src="/work-hero-bg.svg" alt="Hero Background" fill className="object-cover opacity-60" priority />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
         </div>
 
         {/* Overlay Content Layer */}
-        <div className="relative z-10 w-full mx-auto h-screen p-10 max-w-[1800px] pointer-events-none flex flex-col justify-start pt-24 lg:pt-18">
-          <div ref={headerRef} className="relative  flex flex-col justify-between  h-full">
+        <div className="relative z-10 w-full mx-auto h-screen p-10 max-w-[1800px] pointer-events-none flex flex-col justify-center items-center">
+          <div ref={headerRef} className="relative flex flex-col justify-center items-center w-full">
             <Header
-              title={
-                  'Strengthen'
-              }
-              className="!text-[11vw] leading-[0.8] text-center w-full max-w-none font-medium uppercase tracking-[-0.02em] font-pop mb-8"
+              title={"Projects"}
+              className="!text-[11vw] leading-[0.8] text-center w-full max-w-none font-medium uppercase tracking-[-0.02em] font-app mb-64"
             />
-            <div className="flex justify-between gap-2 ">
-              <Header
-              title={
-                  'Your'
-              }
-              className="!text-[11vw]  text-center w-full max-w-none font-medium uppercase tracking-[-0.02em] font-pop mb-8"
-            />
-            <Header
-              title={
-                  'Strategy'
-              }
-              className="!text-[11vw]  text-center w-full max-w-none font-medium uppercase tracking-[-0.02em] font-pop mb-8"
-            />
-            </div>
-
-            
           </div>
         </div>
       </section>
 
       {/* Projects Section - Separate from Hero */}
       <div ref={sectionRef} className="relative bg-[#0a0a0a] w-full py-10 px-6">
-
         {/* Tab Bar */}
         <div ref={tabsRef} className="flex justify-center">
           <div className="inline-flex items-center gap-1 p-1 bg-muted rounded-lg border border-border/50">
@@ -176,10 +151,11 @@ const Features = () => {
                 key={tab.id}
                 data-tab={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`px-6 py-2 rounded-md font-medium text-sm transition-all duration-200 ${activeTab === tab.id
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-                  }`}
+                className={`px-6 py-2 rounded-md font-medium text-sm transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {tab.label}
               </button>
@@ -189,24 +165,16 @@ const Features = () => {
 
         {/* Projects Grid or CMS Dashboards */}
         {activeTab === "CMS" ? (
-            <CMSDashboards />
+          <CMSDashboards />
         ) : (
-            <ProjectsGrid 
-                projects={activeProjects} 
-                activeTab={activeTab} 
-                onProjectClick={setSelectedProject} 
-            />
+          <ProjectsGrid projects={activeProjects} activeTab={activeTab} onProjectClick={setSelectedProject} />
         )}
       </div>
 
       {/* Optimized Modal with Premium Design */}
       <AnimatePresence>
         {selectedProject && (
-            <ProjectModal 
-                project={selectedProject} 
-                activeTab={activeTab}
-                onClose={() => setSelectedProject(null)} 
-            />
+          <ProjectModal project={selectedProject} activeTab={activeTab} onClose={() => setSelectedProject(null)} />
         )}
       </AnimatePresence>
     </>
