@@ -244,7 +244,7 @@ export default function StickyPhone() {
   ];
 
   return (
-    <section className="w-full py-20 bg-[#0A0A0A] overflow-hidden">
+    <section className="w-full bg-[#0A0A0A] overflow-hidden">
       <div className="container max-w-[1400px] mx-auto px-4">
         <div className="-mb-14 -lg:mb-24 text-center">
           <h2 className="text-4xl md:text-6xl font-bold font-app text-white mb-4">
@@ -266,7 +266,7 @@ export default function StickyPhone() {
           </div>
 
           {/* Right Column: Image */}
-          <div className="relative w-[700px] lg:w-[950px] h-[600px] lg:h-[850px] flex items-center justify-center order-1 lg:order-2 justify-self-center">
+          <div className="relative w-full max-w-[400px] h-[350px] lg:max-w-none lg:w-[950px] lg:h-[850px] flex items-center justify-center order-1 lg:order-2 justify-self-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, x: 50 }}
               whileInView={{ opacity: 1, scale: 1.1, x: 0 }}
@@ -275,7 +275,7 @@ export default function StickyPhone() {
               className="w-full h-full relative"
             >
               <Image
-                src="/Home/StickyPhone/limitless-taps-mockups.png"
+                src="/Home/StickyPhone/limitless.png"
                 alt="Responsive Mockups"
                 fill
                 className="object-contain"

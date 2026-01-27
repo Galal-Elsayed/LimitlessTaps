@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-// --- Configuration Types ---
 type FontOption = "sans" | "serif" | "mono";
 type ThemeOption = "white" | "green" | "purple" | "blue";
 type LayoutMode = "minimal" | "grid" | "split";
@@ -179,14 +178,21 @@ const STATS = [
 export default function LayoutDesign() {
   // State
   const [selectedFont, setSelectedFont] = useState<FontOption>("sans");
-  const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("purple");
+  const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("green");
   const [selectedSize, setSelectedSize] = useState<SizeOption>("md");
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("split");
   const [buttonStyle, setButtonStyle] = useState<ButtonStyle>("pill");
-  const [cardStyle, setCardStyle] = useState<CardStyle>("glass");
+  const [cardStyle, setCardStyle] = useState<CardStyle>("bordered");
   const [brandName, setBrandName] = useState("");
   const [showHint, setShowHint] = useState(false);
   const controlsRef = useRef<HTMLDivElement>(null);
+
+  // Initialize size based on screen width
+  React.useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setSelectedSize("sm");
+    }
+  }, []);
 
   // Scroll Hint Logic
   const { scrollYProgress } = useScroll({
@@ -281,19 +287,19 @@ export default function LayoutDesign() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <h2 className="text-xl md:text-7xl font-app">
+        <h2 className="text-3xl md:text-7xl font-app">
           DESIGN THE FIRST IMPRESSION
           <span ref={dotRef} className="inline-block relative">
             .
           </span>
         </h2>
-        <p className="text-xl md:text-3xl p-4 text-[#86868b] font-medium">
+        <p className="text-sm md:text-3xl p-4 text-[#86868b] font-medium">
           Make your website’s first section truly yours.
         </p>
       </motion.div>
 
       {/* Connecting Line SVG */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible hidden md:block">
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(255,255,255,0)" />
@@ -319,13 +325,13 @@ export default function LayoutDesign() {
           filter="url(#glow)"
         />
         {/* Moving Dot on Line */}
-        <motion.circle r="3" fill="white" filter="url(#glow)">
+        <motion.circle r="3" fill="white" filter="url(#glow)" className="hidden md:block">
           <animateMotion dur="3s" repeatCount="indefinite" path={linePath} />
         </motion.circle>
       </svg>
 
       {/* Content Row: Layout Preview + Sidebar */}
-      <div className="flex flex-col lg:flex-row items-center lg:items-center justify-center gap-6 w-full">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-center justify-center gap-6 w-full">
         {/* Controls moved to sidebar */}
 
         {/* Main Preview Container */}
@@ -338,7 +344,7 @@ export default function LayoutDesign() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className={cn(
-              "w-full lg:flex-1 lg:max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl flex flex-col min-h-[400px] md:min-h-[550px] lg:min-h-[600px] transition-all duration-500",
+              "w-full lg:flex-1 lg:max-w-7xl bg-[#030303] border overflow-hidden relative shadow-2xl flex flex-col min-h-[300px] md:min-h-[550px] lg:min-h-[600px] transition-all duration-500",
               theme.border,
               theme.glow,
               // Apply radius to the CONTAINER too if desired, or keep it fixed.
@@ -546,7 +552,7 @@ export default function LayoutDesign() {
                     </motion.div>
                     <motion.div
                       layoutId="hero-actions"
-                      className="flex flex-col sm:flex-row gap-4"
+                      className="flex flex-row gap-2 sm:gap-4"
                       variants={itemVariants}
                     >
                       <ActionButton primary theme={theme} radius={buttonRadius}>
@@ -764,23 +770,23 @@ export default function LayoutDesign() {
             initial={{ opacity: 0, scale: 0.5, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.5, type: "spring" }}
-            className="absolute -top-16 left-1/2 -translate-x-1/2 z-50 hidden lg:block pointer-events-none"
+            className="absolute -top-8 md:-top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="bg-white text-black text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap relative">
+              <div className="bg-white text-black text-[10px] md:text-xs font-black uppercase tracking-wider px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap relative">
                 Try it yourself!
-                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45" />
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 md:-bottom-1.5 md:w-3 md:h-3 bg-white rotate-45" />
               </div>
             </motion.div>
           </motion.div>
 
-          <div className="flex flex-col gap-4 p-4 rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl w-full">
+          <div className="grid grid-cols-2 gap-2 p-3 rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl w-full lg:flex lg:flex-col lg:gap-4 lg:p-4">
             {/* Layout Mode */}
-            <ControlGroup label="Choose Layout" icon={<Layout size={14} />}>
+            <ControlGroup label="Layout" icon={<Layout size={14} />}>
               {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
                 <ControlButton
                   key={mode}
@@ -791,19 +797,19 @@ export default function LayoutDesign() {
               ))}
             </ControlGroup>
 
-            <Divider />
-
             {/* Typography */}
-            <ControlGroup label="Typography" icon={<Type size={14} />}>
+            <ControlGroup label="Type" icon={<Type size={14} />}>
               {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
                 <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
               ))}
             </ControlGroup>
 
-            <Divider />
+            <div className="hidden lg:block">
+              <Divider />
+            </div>
 
             {/* Size */}
-            <ControlGroup label="Interface Scale" icon={<Maximize2 size={14} />}>
+            <ControlGroup label="Scale" icon={<Maximize2 size={14} />}>
               {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
                 <ControlButton
                   key={s}
@@ -814,16 +820,14 @@ export default function LayoutDesign() {
               ))}
             </ControlGroup>
 
-            <Divider />
-
             {/* Color Theme */}
-            <ControlGroup label="Color Theme" icon={<Palette size={14} />}>
+            <ControlGroup label="Color" icon={<Palette size={14} />}>
               {(["white", "green", "purple", "blue"] as ThemeOption[]).map((t) => (
                 <button
                   key={t}
                   onClick={() => setSelectedTheme(t)}
                   className={cn(
-                    "w-8 h-8 rounded-full border border-white/10 transition-all",
+                    "w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/10 transition-all",
                     THEMES[t].primary,
                     selectedTheme === t
                       ? cn("ring-2 ring-white scale-110", THEMES[t].glow)
@@ -833,25 +837,30 @@ export default function LayoutDesign() {
               ))}
             </ControlGroup>
 
-            <Divider />
+            <div className="hidden lg:block">
+              <Divider />
+            </div>
 
+            {/* Brand Name Input */}
             {/* Brand Name Input */}
             <ControlGroup label="Brand Name" icon={<Type size={14} />}>
               <input
                 type="text"
                 value={brandName}
                 onChange={(e) => setBrandName(e.target.value.toUpperCase().slice(0, 8))}
-                className="bg-transparent border-b border-white/20 text-white font-bold w-full py-1 focus:outline-none focus:border-white transition-colors placeholder-white/20 text-sm"
+                className="bg-transparent border-b border-white/20 text-white font-bold w-full py-0.5 md:py-1 focus:outline-none focus:border-white transition-colors placeholder-white/20 text-[10px] md:text-sm"
                 placeholder="BRAND"
                 maxLength={8}
               />
             </ControlGroup>
 
-            <Divider />
+            <div className="hidden lg:block">
+              <Divider />
+            </div>
 
             {/* Details - Compact */}
             <ControlGroup label="Style" icon={<MousePointer2 size={14} />}>
-              <div className="flex gap-2 w-full">
+              <div className="flex gap-1 w-full">
                 <ControlDropdown
                   label="Btn"
                   value={buttonStyle}
@@ -870,7 +879,7 @@ export default function LayoutDesign() {
                   options={[
                     { label: "Glass", value: "glass" },
                     { label: "Solid", value: "solid" },
-                    { label: "Bordered", value: "bordered" },
+                    { label: "Border", value: "bordered" },
                   ]}
                   onChange={(val) => setCardStyle(val as CardStyle)}
                   icon={<Box size={14} />}
@@ -904,7 +913,7 @@ function ActionButton({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={cn(
-        "px-8 py-4 font-bold tracking-wide transition-all shadow-lg hover:shadow-xl text-sm md:text-base",
+        "px-4 py-2 md:px-8 md:py-4 font-bold tracking-wide transition-all shadow-lg hover:shadow-xl text-xs md:text-base",
         radius,
         primary
           ? cn(theme.primary, theme.glow, theme.buttonText)
@@ -939,7 +948,7 @@ function ItemsHint({ show }: { show: boolean }) {
 
 function ControlGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-1 lg:gap-2 w-full">
       <span className="text-[10px] md:text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
         {icon} <span className="text-white/70">{label}</span>
       </span>
@@ -953,7 +962,7 @@ function ControlButton({ label, isActive, onClick }: { label: string; isActive: 
     <button
       onClick={onClick}
       className={cn(
-        "px-3 py-1.5 text-[10px] font-bold tracking-wider rounded-xl transition-all duration-300 uppercase relative overflow-hidden",
+        "px-2 py-1 lg:px-3 lg:py-1.5 text-[10px] font-bold tracking-wider rounded-xl transition-all duration-300 uppercase relative overflow-hidden",
         isActive
           ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.4)] scale-105 z-10"
           : "text-white/60 hover:text-white hover:bg-white/10 border border-white/5 hover:border-white/20",
@@ -993,9 +1002,9 @@ function ControlDropdown({
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Close on blur delay
         className={cn(
-          "flex items-center gap-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group justify-between hover:border-white/30",
+          "flex items-center gap-1.5 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 group justify-between hover:border-white/30",
           radius,
-          compact ? "px-2.5 py-1.5 min-w-[80px]" : "px-3 py-2 min-w-[100px]",
+          compact ? "px-1 py-1 min-w-[50px]" : "px-3 py-2 min-w-[100px]",
         )}
       >
         <div className="flex items-center gap-2">

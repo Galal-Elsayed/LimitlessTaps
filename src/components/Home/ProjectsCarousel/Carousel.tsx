@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, ArrowRight, Copy, ExternalLink, X, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Copy, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -122,23 +122,16 @@ export default function Carousel() {
     <section className="w-full py-24 bg-[#0a0a0a] text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Header */}
-        <div className="text-center mb-12 space-y-6">
+        <div className="text-center mb-8 space-y-4">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold mb-4 font-app">Projects We&apos;ve Built</h2>
-            <p className="text-neutral-400 text-2xl">Real platforms driving real results for our clients</p>
+            <p className="text-neutral-400 text-lg md:text-2xl">Real platforms driving real results for our clients</p>
           </div>
-          <Button
-            variant="secondary"
-            className="rounded-full px-6 gap-2 bg-neutral-900 border border-neutral-800 text-white hover:bg-neutral-800"
-          >
-            <ExternalLink size={14} />
-            Explore Further
-          </Button>
         </div>
 
         {/* Carousel Container */}
         <div className="relative">
-          <div className="overflow-hidden rounded-3xl bg-neutral-900 border border-neutral-800 h-auto min-h-[520px] flex flex-col lg:flex-row relative transition-colors duration-300 hover:border-white/30">
+          <div className="overflow-hidden rounded-3xl bg-neutral-900 border border-neutral-800 h-auto min-h-[700px] lg:min-h-[520px] flex flex-col lg:flex-row relative transition-colors duration-300 hover:border-white/30">
             <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
                 key={currentIndex}
@@ -154,13 +147,13 @@ export default function Carousel() {
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
                 transition={{
-                  x: { type: "spring", stiffness: 150, damping: 20, mass: 0.8 },
+                  x: { duration: 0.6, ease: "easeInOut" },
                   opacity: { duration: 0.4, ease: "easeInOut" },
                 }}
-                className="absolute inset-0 flex flex-col lg:flex-row w-full h-full"
+                className="absolute inset-0 flex flex-col-reverse lg:flex-row w-full h-full"
               >
                 {/* Left: Info */}
-                <div className="w-full lg:w-[35%] p-6 md:p-8 flex flex-col justify-between z-10 bg-neutral-900">
+                <div className="w-full lg:w-[35%] p-4 md:p-8 flex flex-col justify-between z-10 bg-neutral-900">
                   <div>
                     <div className="flex justify-between items-start mb-6">
                       <span className="px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 text-[10px] uppercase tracking-wider font-medium border border-neutral-700">
@@ -175,7 +168,7 @@ export default function Carousel() {
                       </button>
                     </div>
 
-                    <h3 className="text-xl md:text-2xl font-bold mb-3">{currentProject.title}</h3>
+                    <h3 className="text-lg md:text-2xl font-bold mb-3">{currentProject.title}</h3>
                     <p className="text-sm text-neutral-400 mb-6 leading-relaxed line-clamp-3">
                       {currentProject.description}
                     </p>
@@ -191,10 +184,10 @@ export default function Carousel() {
                       ))}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6 mb-6">
+                    <div className="grid grid-cols-3 gap-2 md:gap-6 mb-6">
                       {currentProject.stats.map((stat, idx) => (
                         <div key={idx}>
-                          <div className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</div>
+                          <div className="text-base md:text-2xl font-bold text-white mb-1">{stat.value}</div>
                           <div className="text-[9px] uppercase tracking-wider text-neutral-500 font-semibold">
                             {stat.label}
                           </div>
@@ -205,7 +198,7 @@ export default function Carousel() {
 
                   <div className="pt-6 border-t border-neutral-800 flex gap-3 mt-auto">
                     <Button
-                      className="rounded-full px-4 py-3 h-auto bg-white text-black hover:bg-neutral-200 text-xs font-semibold flex-1"
+                      className="rounded-full px-3 py-2 md:px-4 md:py-3 h-auto bg-white text-black hover:bg-neutral-200 text-[10px] md:text-xs font-semibold flex-1"
                       asChild
                     >
                       <a href={currentProject.link} target="_blank" rel="noopener noreferrer">
@@ -214,7 +207,7 @@ export default function Carousel() {
                     </Button>
                     <Button
                       variant="outline"
-                      className="rounded-full px-4 py-3 h-auto border-neutral-700 text-white hover:bg-neutral-800 hover:text-white text-xs font-semibold bg-transparent flex-1"
+                      className="rounded-full px-3 py-2 md:px-4 md:py-3 h-auto border-neutral-700 text-white hover:bg-neutral-800 hover:text-white text-[10px] md:text-xs font-semibold bg-transparent flex-1"
                       onClick={() => setIsModalOpen(true)}
                     >
                       Case Study
@@ -223,15 +216,8 @@ export default function Carousel() {
                 </div>
 
                 {/* Right: Image */}
-                <div className="w-full lg:w-[65%] relative h-[250px] lg:h-auto bg-neutral-800 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-900/20 z-10" />
-                  <Image
-                    src={currentProject.image}
-                    alt={currentProject.title}
-                    fill
-                    className="object-screen"
-                    priority
-                  />
+                <div className="w-full lg:w-[65%] relative h-[220px] sm:h-[350px] lg:h-auto overflow-hidden shrink-0">
+                  <Image src={currentProject.image} alt={currentProject.title} fill className="object-cover" priority />
                 </div>
               </motion.div>
             </AnimatePresence>
