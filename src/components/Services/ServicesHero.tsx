@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import ServicesH from "./ReusableComponents/ServicesH";
+import ServicesH from "./ReusableComponents/ServicesHeroMain";
 
 export default function ServicesHero() {
     const t = useTranslations('services');
@@ -28,10 +28,15 @@ export default function ServicesHero() {
 
     return (
         <ServicesH
-            header={<>{t('hero.select')} <br />{t('hero.services')}</>}
+            header={<>{t('hero.services')}</>}
             description={t('hero.description')}
             badges={services}
-            hiddenBadges={[t('hero.badges.devops_strategy')]}
+            notHoverable={[
+                t('hero.badges.technical_consulting'),
+                t('hero.badges.cloud_infrastructure'),
+                t('hero.badges.systems_migration'),
+                t('hero.badges.mobile_applications'),
+            ]}
         />
     );
 }

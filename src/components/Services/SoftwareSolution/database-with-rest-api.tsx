@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { Folder, HeartHandshakeIcon, SparklesIcon, BarChart3, Cloud } from "lucide-react";
+import { Folder, HeartHandshakeIcon, SparklesIcon, BarChart3, Cloud, Users, Package, Briefcase, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DatabaseWithRestApiProps {
@@ -26,6 +26,7 @@ interface DatabaseWithRestApiProps {
   hideTopButtons?: boolean;
   hideBottomButtons?: boolean; // Controls Analytics/Cloud buttons
   hideCore?: boolean;
+  isRTL?: boolean;
 }
 
 const DatabaseWithRestApi = ({
@@ -43,16 +44,17 @@ const DatabaseWithRestApi = ({
   // 'hideBottomButtons' will hide the Analytics/Cloud/Core elements if needed.
   hideBottomButtons = false,
   hideCore = false,
+  isRTL = false,
 }: DatabaseWithRestApiProps) => {
   return (
-    <div className={cn("relative flex h-[450px] w-full flex-col items-center", className)}>
+    <div className={cn("relative flex h-[350px] min-[500px]:h-[400px] md:h-[450px] w-full flex-col items-center", className)}>
       {/* SVG Paths & Animation */}
       <svg
-        className="h-full sm:w-full"
+        className="h-full w-full"
         width="100%"
         height="100%"
         viewBox="0 0 200 100"
-        preserveAspectRatio="xMidYMin slice"
+        preserveAspectRatio="xMidYMin meet"
       >
         <defs>
           {/* Glow Filter */}
@@ -140,32 +142,48 @@ const DatabaseWithRestApi = ({
             {/* First Button (ERP) */}
             <g>
               <rect fill="#111" stroke="#333" strokeWidth="0.5" x="14" y="5" width="34" height="10" rx="5" />
-              <DatabaseIcon x="18" y="7.5" color="white" />
-              <text x="28" y="12" fill="white" fontSize="5" fontWeight="500">
+              <foreignObject x="16" y="7.5" width="5" height="5">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Database className="w-full h-full text-white" strokeWidth={2} />
+                </div>
+              </foreignObject>
+              <text x="33" y="12" fill="white" fontSize="4" fontWeight="500" textAnchor="middle">
                 {badgeTexts?.first || "GET"}
               </text>
             </g>
             {/* Second Button (CRM) */}
             <g>
               <rect fill="#111" stroke="#333" strokeWidth="0.5" x="60" y="5" width="34" height="10" rx="5" />
-              <DatabaseIcon x="64" y="7.5" color="white" />
-              <text x="74" y="12" fill="white" fontSize="5" fontWeight="500">
+              <foreignObject x="62" y="7.5" width="5" height="5">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Users className="w-full h-full text-white" strokeWidth={2} />
+                </div>
+              </foreignObject>
+              <text x="79" y="12" fill="white" fontSize="4" fontWeight="500" textAnchor="middle">
                 {badgeTexts?.second || "POST"}
               </text>
             </g>
             {/* Third Button (HRM) */}
             <g>
               <rect fill="#111" stroke="#333" strokeWidth="0.5" x="108" y="5" width="34" height="10" rx="5" />
-              <DatabaseIcon x="112" y="7.5" color="white" />
-              <text x="122" y="12" fill="white" fontSize="5" fontWeight="500">
+              <foreignObject x="110" y="7.5" width="5" height="5">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Briefcase className="w-full h-full text-white" strokeWidth={2} />
+                </div>
+              </foreignObject>
+              <text x="127" y="12" fill="white" fontSize="4" fontWeight="500" textAnchor="middle">
                 {badgeTexts?.third || "PUT"}
               </text>
             </g>
             {/* Fourth Button (Inventory) */}
             <g>
               <rect fill="#111" stroke="#333" strokeWidth="0.5" x="150" y="5" width="40" height="10" rx="5" />
-              <DatabaseIcon x="154" y="7.5" color="white" />
-              <text x="165" y="12" fill="white" fontSize="5" fontWeight="500">
+              <foreignObject x="152" y="7.5" width="5" height="5">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Package className="w-full h-full text-white" strokeWidth={2} />
+                </div>
+              </foreignObject>
+              <text x="172" y="12" fill="white" fontSize="4" fontWeight="500" textAnchor="middle">
                 {badgeTexts?.fourth || "DELETE"}
               </text>
             </g>
@@ -174,7 +192,7 @@ const DatabaseWithRestApi = ({
       </svg>
 
       {/* Main Box Area */}
-      <div className="absolute bottom-10 flex w-full flex-col items-center">
+      <div className="absolute bottom-10 flex w-full flex-col items-center px-10">
         {/* Box Title */}
         <div className="absolute -top-3 z-20 flex items-center justify-center rounded-full border border-white/10 bg-[#111] px-3 py-1 sm:-top-4">
           <SparklesIcon className="size-3 text-white/70" />

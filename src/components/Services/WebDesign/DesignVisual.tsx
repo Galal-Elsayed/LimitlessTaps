@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function DesignVisual() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -66,10 +67,10 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
             <div className="absolute -bottom-[120px] left-1/2 -translate-x-1/2 w-[400px] h-[30px] bg-[#222] rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-0 border-t border-white/5" style={{ transform: "translateZ(-20px)" }} />
 
             {/* Monitor Bezel */}
-            <div className="relative bg-[#111] rounded-[2rem] p-4 shadow-[0_0_0_2px_#333,0_40px_80px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
+            <div className="relative bg-[#111] rounded-[2rem] p-5 shadow-[0_0_0_2px_#333,0_40px_80px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
                 {/* Branding */}
                 <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold text-white/10 tracking-[0.3em] uppercase">
-                    Limitless
+                    Limitless Taps
                 </div>
 
                 {/* Inner Bezel (Black Border) */}
@@ -90,8 +91,23 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
 // --- FIGMA / DESIGN TOOL UI REPLICA ---
 
 const FigmaUI = () => {
+    const t = useTranslations('WebDesign.visual');
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
+
+    const layerItems = [
+        t('sidebar.layerItems.frame1'),
+        t('sidebar.layerItems.heroSection'),
+        t('sidebar.layerItems.textGroup'),
+        t('sidebar.layerItems.heading'),
+        t('sidebar.layerItems.subtext'),
+        t('sidebar.layerItems.image'),
+        t('sidebar.layerItems.footer'),
+        t('sidebar.layerItems.background'),
+    ];
+
     return (
-        <div className="flex flex-col h-full w-full text-white font-sans select-none bg-[#1e1e1e]">
+        <div className="flex flex-col h-full w-full text-white font-sans select-none bg-[#1e1e1e]" dir={isRTL ? 'rtl' : 'ltr'}>
             {/* 1. Top Toolbar */}
             <div className="h-10 bg-[#2c2c2c] border-b border-black flex items-center justify-between px-4 z-30 shrink-0">
                 <div className="flex items-center gap-4">
@@ -107,14 +123,14 @@ const FigmaUI = () => {
                     </div>
                 </div>
 
-                <div className="text-xs text-white/50 font-medium">Untitled - Limitless Design</div>
+                <div className="text-xs text-white/50 font-medium">{t('toolbar.title')}</div>
 
                 <div className="flex items-center gap-3">
                     <div className="flex -space-x-1">
                         <div className="w-5 h-5 rounded-full bg-red-500 border border-[#2c2c2c]" />
                         <div className="w-5 h-5 rounded-full bg-green-500 border border-[#2c2c2c]" />
                     </div>
-                    <div className="px-2 py-1 bg-blue-600 rounded text-[10px] font-bold">Share</div>
+                    <div className="px-2 py-1 bg-blue-600 rounded text-[10px] font-bold">{t('toolbar.share')}</div>
                     <div className="w-3 h-3 border-r-[6px] border-b-[6px] border-transparent border-t-white/50 border-l-white/50 rotate-45" /> {/* Play icon mock */}
                 </div>
             </div>
@@ -122,12 +138,10 @@ const FigmaUI = () => {
             <div className="flex flex-1 overflow-hidden relative">
                 {/* 2. Left Sidebar (Layers) */}
                 <div className="w-48 bg-[#2c2c2c] border-r border-black flex flex-col pt-2 shrink-0 z-20 hidden md:flex">
-                    <div className="px-3 py-2 text-[10px] font-bold text-white/40 uppercase tracking-wider">Layers</div>
+                    <div className="px-3 py-2 text-[10px] font-bold text-white/40 uppercase tracking-wider">{t('sidebar.layers')}</div>
                     <div className="space-y-1 px-2">
-                        {[
-                            "Frame 1", "Hero Section", "  Text Group", "    Heading", "    Subtext", "  Image", "Footer", "Background"
-                        ].map((layer, i) => (
-                            <div key={i} className={`px-2 py-1 text-[11px] text-white/70 rounded hover:bg-blue-500/10 cursor-pointer flex items-center gap-2 ${layer.includes("Text Group") ? "bg-blue-500/20 text-white" : ""}`}>
+                        {layerItems.map((layer, i) => (
+                            <div key={i} className={`px-2 py-1 text-[11px] text-white/70 rounded hover:bg-blue-500/10 cursor-pointer flex items-center gap-2 ${layer.includes(t('sidebar.layerItems.textGroup').trim()) ? "bg-blue-500/20 text-white" : ""}`}>
                                 <div className="w-2 h-2 border border-white/20" />
                                 <pre className="font-sans">{layer}</pre>
                             </div>
@@ -145,13 +159,13 @@ const FigmaUI = () => {
                         {/* "We design your website from a to z" text */}
                         <div className="text-center z-10 relative space-y-4">
                             <motion.h2
-                                className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tighter"
+                                className={`text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tighter ${isRTL ? 'pb-4' : ''}`}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                We design your<br />website from<br />
-                                <span className="text-blue-500">A</span> to <span className="text-purple-500">Z</span>.
+                                {t('canvas.headline')}<br />{t('canvas.headlineLine2')}<br />
+                                <span className="text-blue-500">{isRTL ? 'أ' : 'A'}</span> {isRTL ? 'إلى' : 'to'} <span className="text-purple-500">{isRTL ? 'ي' : 'Z'}</span>.
                             </motion.h2>
                             <motion.div
                                 className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
@@ -178,19 +192,19 @@ const FigmaUI = () => {
                             <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 border border-white" />
                             <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-blue-500 border border-white" />
                             <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-blue-500 border border-white" />
-                            <div className="absolute -top-4 left-0 text-[10px] bg-blue-500 text-white px-1">Frame 1</div>
+                            <div className="absolute -top-4 left-0 text-[10px] bg-blue-500 text-white px-1">{t('sidebar.layerItems.frame1')}</div>
                         </div>
                     </div>
 
                     {/* Cursor */}
-                    <Cursor />
+                    <Cursor label={t('cursor.label')} />
                 </div>
 
                 {/* 4. Right Sidebar (Properties) */}
                 <div className="w-56 bg-[#2c2c2c] border-l border-black flex flex-col pt-2 shrink-0 z-20 hidden md:flex">
                     <div className="px-4 py-2 flex items-center justify-between border-b border-white/5 pb-4">
-                        <span className="text-[11px] font-bold">Design</span>
-                        <span className="text-[11px] text-white/40">Prototype</span>
+                        <span className="text-[11px] font-bold">{t('sidebar.design')}</span>
+                        <span className="text-[11px] text-white/40">{t('sidebar.prototype')}</span>
                     </div>
 
                     {/* Align Tools */}
@@ -208,7 +222,7 @@ const FigmaUI = () => {
                         <PropertyRow label="H" value="Auto" />
                         <div className="h-px bg-white/5 w-full my-2" />
                         <div className="space-y-2">
-                            <div className="text-[10px] uppercase font-bold text-white/40">Fill</div>
+                            <div className="text-[10px] uppercase font-bold text-white/40">{t('sidebar.fill')}</div>
                             <div className="flex items-center gap-2">
                                 <div className="w-4 h-4 bg-white border border-white/20" />
                                 <div className="text-xs text-white/80">#FFFFFF</div>
@@ -239,7 +253,7 @@ const FloatingElement = ({ children, className, delay }: { children: React.React
     </motion.div>
 );
 
-const Cursor = () => (
+const Cursor = ({ label }: { label: string }) => (
     <motion.div
         className="absolute z-50 pointer-events-none"
         initial={{ x: 200, y: 200 }}
@@ -257,7 +271,7 @@ const Cursor = () => (
             <path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19169L11.7841 12.3673H5.65376Z" fill="black" stroke="white" strokeWidth="1" />
         </svg>
         <div className="absolute top-4 left-4 bg-blue-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded ml-1">
-            Designer
+            {label}
         </div>
     </motion.div>
 );

@@ -58,117 +58,122 @@ export default function ServiceCall() {
   return (
     <section
       ref={containerRef}
-      className="w-full relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] py-24"
+      className="w-full relative min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] py-20"
       style={{ transform: "translateZ(0)" }} // Hardware acceleration hint
     >
-      {/* --- Background Ambient Glow (Reduced for sharpness) --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] bg-white/[0.01] blur-[60px] rounded-full" />
-      </div>
+      <div className="relative w-full max-w-[95%] md:max-w-[80vw] mx-auto rounded-3xl border border-white/10 bg-black/80 p-8 md:p-16 overflow-hidden backdrop-blur-sm">
+        {/* --- Background Ambient Glow (Top Left) --- */}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-white/[0.05] blur-[100px] rounded-full pointer-events-none" />
 
-      {/* --- Infinity Symbol & Content --- */}
-      <motion.div
-        style={{ opacity, y }}
-        className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto"
-      >
-        {/* 1. The Infinity Symbol */}
-        <div className="relative w-64 h-32 md:w-80 md:h-40 mb-12 flex items-center justify-center">
-          <svg
-            viewBox="-20 -10 240 120"
-            className="w-full h-full will-change-transform"
-            style={{ overflow: "visible" }}
-          >
-            {/* 1. Dark Background Track (Static) */}
-            <path d={infinityPath} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="4" strokeLinecap="round" />
-
-            {/* 2. Glow Layer (Subtle bloom) */}
-            <motion.path
-              d={infinityPath}
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="8"
-              strokeLinecap="round"
-              variants={pathVariants}
-              initial="hidden"
-              whileInView="visible"
-              style={{ filter: "blur(4px)", opacity: 0.5 }}
-            />
-
-            {/* 3. Core Layer (Sharp, Bright) */}
-            <motion.path
-              d={infinityPath}
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="4"
-              strokeLinecap="round"
-              variants={pathVariants}
-              initial="hidden"
-              whileInView="visible"
-            />
-          </svg>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] bg-white/[0.01] blur-[60px] rounded-full" />
         </div>
 
-        {/* 2. Text Content */}
+        {/* --- Infinity Symbol & Content --- */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
+          style={{ opacity, y }}
+          className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto"
         >
-          <Header
-            title={
-              <>
-                {t("call.unlock")} <span className="text-white">{t("call.limitless")}</span> {t("call.possibilities")}
-              </>
-            }
-            className="text-5xl uppercase md:text-7xl lg:text-8xl font-bold tracking-tighter"
-          />
-        </motion.div>
+          {/* 1. The Infinity Symbol */}
+          <div className="relative w-64 h-32 md:w-80 md:h-40 mb-12 flex items-center justify-center">
+            <svg
+              viewBox="-20 -10 240 120"
+              className="w-full h-full will-change-transform"
+              style={{ overflow: "visible" }}
+            >
+              {/* 1. Dark Background Track (Static) */}
+              <path d={infinityPath} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="4" strokeLinecap="round" />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-lg md:text-2xl text-white/50 font-light mb-16 max-w-2xl leading-relaxed"
-        >
-          {t("call.description")}
-        </motion.p>
-
-        {/* 3. Actions */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex flex-col md:flex-row items-center gap-6"
-        >
-          <Link
-            href="/contact"
-            className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <Image
-                src="/Home/infinity.apng"
-                alt={t("call.startProject")}
-                width={24}
-                height={24}
-                className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
-                priority
+              {/* 2. Glow Layer (Subtle bloom) */}
+              <motion.path
+                d={infinityPath}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth="8"
+                strokeLinecap="round"
+                variants={pathVariants}
+                initial="hidden"
+                whileInView="visible"
+                style={{ filter: "blur(4px)", opacity: 0.5 }}
               />
-              {t("call.startProject")}
-            </span>
-          </Link>
 
-          <Link
-            href="/services"
-            className="group inline-flex items-center justify-center px-10 py-5 rounded-full font-medium text-lg text-white/70 border border-white/10 hover:bg-white/5 transition-all hover:text-white"
+              {/* 3. Core Layer (Sharp, Bright) */}
+              <motion.path
+                d={infinityPath}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth="4"
+                strokeLinecap="round"
+                variants={pathVariants}
+                initial="hidden"
+                whileInView="visible"
+                style={{ filter: "drop-shadow(0 0 2px rgba(255,255,255,0.8))" }}
+              />
+            </svg>
+          </div>
+
+          {/* 2. Text Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
           >
-            {t("call.viewServices")}
-          </Link>
+            <Header
+              title={
+                <>
+                  {t("call.unlock")} <span className="text-white">{t("call.limitless")}</span> {t("call.possibilities")}
+                </>
+              }
+              className="text-4xl uppercase md:text-6xl font-bold tracking-tighter"
+            />
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-base md:text-xl text-white/50 font-light mb-12 max-w-2xl leading-relaxed"
+          >
+            {t("call.description")}
+          </motion.p>
+
+          {/* 3. Actions */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-col md:flex-row items-center gap-6"
+          >
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <Image
+                  src="/Home/infinity.apng"
+                  alt={t("call.startProject")}
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
+                  priority
+                />
+                {t("call.startProject")}
+              </span>
+            </Link>
+
+            <Link
+              href="/services"
+              className="group inline-flex items-center justify-center px-10 py-5 rounded-full font-medium text-lg text-white/70 border border-white/10 hover:bg-white/5 transition-all hover:text-white"
+            >
+              {t("call.viewServices")}
+            </Link>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

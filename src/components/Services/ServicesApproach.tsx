@@ -340,22 +340,22 @@ export default function ServicesApproach() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr_1fr] gap-0 items-center h-full min-h-[600px] relative">
-          {/* Left Column */}
-          <div className="flex flex-col justify-center gap-8 py-4 lg:py-8 order-2 lg:order-1 h-full items-end z-10 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr_1fr] gap-6 lg:gap-0 items-center h-full min-h-[auto] lg:min-h-[600px] relative mt-8 lg:mt-0">
+          {/* Left Column - 3 cards ABOVE image on mobile */}
+          <div className="flex flex-col justify-center gap-4 lg:gap-8 py-4 lg:py-8 order-1 lg:order-1 h-full items-center lg:items-end z-10 relative">
             {stepsLeft.map((step, idx) => (
               <StepItem key={step.id} {...step} align="left" index={idx} />
             ))}
           </div>
 
           {/* Middle Column - Phone Image */}
-          <div className="relative w-full h-full min-h-[600px] flex items-center justify-center order-1 lg:order-2">
+          <div className="relative w-full h-[300px] lg:h-full lg:min-h-[600px] flex items-center justify-center order-2 lg:order-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] max-w-none z-0 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] lg:w-[120%] h-[100%] lg:h-[120%] max-w-none z-0 pointer-events-none"
             >
               <Image
                 src="/Services/service-phone.png"
@@ -367,8 +367,8 @@ export default function ServicesApproach() {
             </motion.div>
           </div>
 
-          {/* Right Column */}
-          <div className="flex flex-col pl-12 justify-center gap-8 py-4 lg:py-8 order-3 h-full items-start z-10 relative">
+          {/* Right Column - 3 cards BELOW image on mobile */}
+          <div className="flex flex-col pl-0 lg:pl-12 justify-center gap-4 lg:gap-8 py-4 lg:py-8 order-3 lg:order-3 h-full items-center lg:items-start z-10 relative">
             {stepsRight.map((step, idx) => (
               <StepItem key={step.id} {...step} align="left" index={idx + 3} />
             ))}

@@ -23,6 +23,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const terms = (await import(`../../messages/${locale}/terms.json`)).default;
   const aboutUs = (await import(`../../messages/${locale}/about-us.json`)).default;
   const studio = (await import(`../../messages/${locale}/studio.json`)).default;
+  const SoftwareSolutions = (await import(`../../messages/${locale}/SoftwareSolutions.json`)).default;
+  const WebDesign = (await import(`../../messages/${locale}/Web-Design.json`)).default;
+  const WordPress = (await import(`../../messages/${locale}/WordPress.json`)).default;
 
   return {
     locale,
@@ -39,6 +42,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
       terms,
       aboutUs,
       studio,
+      SoftwareSolutions,
+      WebDesign,
+      WordPress,
     },
   };
 });

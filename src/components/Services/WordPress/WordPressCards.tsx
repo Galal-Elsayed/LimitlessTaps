@@ -2,6 +2,7 @@
 
 import React from "react";
 import SeoCards from "../ReusableComponents/SeoCards";
+import { useTranslations } from "next-intl";
 
 // --- SHAPES ---
 
@@ -73,57 +74,57 @@ const MaintenanceShape = () => (
     </div>
 );
 
-// --- DATA ---
-
-const WORDPRESS_SERVICES = [
-    {
-        title: "Custom WordPress Development",
-        description: "We build custom WordPress websites tailored to your business needs. From corporate sites to blogs and portfolios, our expert developers create fast, secure, and SEO-friendly WordPress solutions that help you rank higher on Google.",
-        colSpan: "lg:col-span-4",
-        shape: <WordPressShape />,
-    },
-    {
-        title: "Premium Theme Development",
-        description: "Get a unique, custom-designed WordPress theme that reflects your brand. We develop responsive, lightweight themes optimized for speed and search engines. Our themes are built with clean code, following WordPress best practices for easy maintenance and updates. Whether you need a business theme, blog theme, or e-commerce theme, we deliver pixel-perfect designs.",
-        colSpan: "lg:col-span-8",
-        shape: <ThemeShape />,
-    },
-    {
-        title: "Plugin Development & Customization",
-        description: "Extend your WordPress site with custom plugins. We develop powerful plugins for booking systems, membership sites, custom forms, integrations, and more. Our plugins are secure, optimized, and compatible with the latest WordPress versions.",
-        colSpan: "lg:col-span-6",
-        shape: <PluginShape />,
-    },
-    {
-        title: "WooCommerce Online Stores",
-        description: "Launch your online store with WooCommerce. We build custom e-commerce solutions with secure payment gateways, inventory management, and conversion-optimized checkout flows. From product pages to shipping integrations, we handle everything for your success.",
-        colSpan: "lg:col-span-6",
-        shape: <WooCommerceShape />,
-    },
-    {
-        title: "WordPress Maintenance & Support",
-        description: "Keep your WordPress site secure and up-to-date with our maintenance services. We handle updates, backups, security monitoring, performance optimization, and bug fixes. Our support team ensures your website runs smoothly 24/7, so you can focus on growing your business.",
-        colSpan: "lg:col-span-12",
-        shape: <MaintenanceShape />,
-    },
-];
-
 export default function WordPressCards() {
+    const t = useTranslations('WordPress.cards');
+
+    const WORDPRESS_SERVICES = [
+        {
+            title: t('items.wordpress.title'),
+            description: t('items.wordpress.description'),
+            colSpan: "lg:col-span-4",
+            shape: <WordPressShape />,
+        },
+        {
+            title: t('items.theme.title'),
+            description: t('items.theme.description'),
+            colSpan: "lg:col-span-8",
+            shape: <ThemeShape />,
+        },
+        {
+            title: t('items.plugin.title'),
+            description: t('items.plugin.description'),
+            colSpan: "lg:col-span-6",
+            shape: <PluginShape />,
+        },
+        {
+            title: t('items.woocommerce.title'),
+            description: t('items.woocommerce.description'),
+            colSpan: "lg:col-span-6",
+            shape: <WooCommerceShape />,
+        },
+        {
+            title: t('items.maintenance.title'),
+            description: t('items.maintenance.description'),
+            colSpan: "lg:col-span-12",
+            shape: <MaintenanceShape />,
+        },
+    ];
+
     return (
         <SeoCards
             items={WORDPRESS_SERVICES}
-            seoHeader="Professional WordPress Development Services"
+            seoHeader={t('seoHeader')}
             seoList={[
-                "Custom WordPress Website Development",
-                "WordPress Theme Design & Development",
-                "WordPress Plugin Development",
-                "WooCommerce E-commerce Solutions",
-                "WordPress SEO Optimization",
-                "WordPress Maintenance & Support",
-                "Headless WordPress Development",
-                "WordPress Migration Services",
-                "WordPress Security Solutions",
-                "WordPress Speed Optimization"
+                t('seoList.item1'),
+                t('seoList.item2'),
+                t('seoList.item3'),
+                t('seoList.item4'),
+                t('seoList.item5'),
+                t('seoList.item6'),
+                t('seoList.item7'),
+                t('seoList.item8'),
+                t('seoList.item9'),
+                t('seoList.item10')
             ]}
             gradientBottom={false}
         />

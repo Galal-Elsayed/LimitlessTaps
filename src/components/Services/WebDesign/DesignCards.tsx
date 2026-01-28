@@ -2,6 +2,7 @@
 
 import React from "react";
 import SeoCards from "../ReusableComponents/SeoCards";
+import { useTranslations } from "next-intl";
 
 // --- SHAPES ---
 
@@ -59,50 +60,52 @@ const MotionShape = () => (
 );
 
 
-const DESIGN_SERVICES = [
-    {
-        title: "UI Design & Systems",
-        description: "Pixel-perfect user interfaces backed by comprehensive design systems. We create scalable visual languages that ensure consistency across all your digital products, reducing technical debt and accelerating future development cycles.",
-        colSpan: "lg:col-span-4",
-        shape: <UIShape />,
-    },
-    {
-        title: "Brand Identity",
-        description: "Forging digital identities that resonate. From logo conceptualization to full visual guidelines, we craft memorable brands that stand out in the digital landscape and communicate your values instantly to your audience.",
-        colSpan: "lg:col-span-8",
-        shape: <BrandingShape />,
-    },
-    {
-        title: "UX Research & Strategy",
-        description: "Data-driven user experiences. We conduct deep-dive research, user testing, and journey mapping to understand your users' needs. We translate these insights into intuitive flows that remove friction and delight users at every touchpoint.",
-        colSpan: "lg:col-span-6",
-        shape: <UXShape />,
-    },
-    {
-        title: "Prototyping & Interactions",
-        description: "High-fidelity prototypes that feel real. We bring designs to life with fluid motion and interactions before writing a single line of code, allowing for rapid iteration and stakeholder alignment.",
-        colSpan: "lg:col-span-6",
-        shape: <PrototypeShape />,
-    },
-    {
-        title: "Motion Design & Animation",
-        description: "Adding depth and character through movement. We design micro-interactions and complex animations that guide user attention, provide feedback, and create moments of delight that elevate the overall experience.",
-        colSpan: "lg:col-span-12",
-        shape: <MotionShape />,
-    },
-];
-
 export function DesignCards() {
+    const t = useTranslations('WebDesign.cards');
+
+    const DESIGN_SERVICES = [
+        {
+            title: t('items.ui.title'),
+            description: t('items.ui.description'),
+            colSpan: "lg:col-span-4",
+            shape: <UIShape />,
+        },
+        {
+            title: t('items.branding.title'),
+            description: t('items.branding.description'),
+            colSpan: "lg:col-span-8",
+            shape: <BrandingShape />,
+        },
+        {
+            title: t('items.ux.title'),
+            description: t('items.ux.description'),
+            colSpan: "lg:col-span-6",
+            shape: <UXShape />,
+        },
+        {
+            title: t('items.prototype.title'),
+            description: t('items.prototype.description'),
+            colSpan: "lg:col-span-6",
+            shape: <PrototypeShape />,
+        },
+        {
+            title: t('items.motion.title'),
+            description: t('items.motion.description'),
+            colSpan: "lg:col-span-12",
+            shape: <MotionShape />,
+        },
+    ];
+
     return (
         <SeoCards
             items={DESIGN_SERVICES}
-            seoHeader="Professional Web Design & UI/UX Services"
+            seoHeader={t('seoHeader')}
             seoList={[
-                "User Interface Design",
-                "Brand Identity Creation",
-                "User Experience (UX) Research",
-                "Interactive Prototyping",
-                "Motion Design & Animation"
+                t('seoList.item1'),
+                t('seoList.item2'),
+                t('seoList.item3'),
+                t('seoList.item4'),
+                t('seoList.item5')
             ]}
             gradientBottom={false}
 

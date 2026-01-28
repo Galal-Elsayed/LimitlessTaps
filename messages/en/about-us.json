@@ -24,7 +24,7 @@
         "form": {
             "title": "Start a Project",
             "email_label": "Email",
-            "email_value": "hello@limitlesstaps.com",
+            "email_value": "info@limitlesstaps.com",
             "message_label": "Message",
             "typed_message": "I want to start a project,\nlet's set up a meeting",
             "send_button": "Send Message"

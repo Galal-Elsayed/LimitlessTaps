@@ -1,0 +1,80 @@
+{
+    "hero": {
+        "title": "SOFTWARE",
+        "titleLine2": "SOLUTIONS"
+    },
+    "data": {
+        "title": "Centralized Enterprise System",
+        "circleText": "Core",
+        "badges": {
+            "first": "ERP",
+            "second": "CRM",
+            "third": "HRM",
+            "fourth": "Inventory"
+        },
+        "buttons": {
+            "first": "Analytics",
+            "second": "Cloud"
+        }
+    },
+    "cards": {
+        "seoHeader": "Custom Software Development & Cloud Solutions",
+        "seoList": [
+            "Enterprise Resource Planning (ERP)",
+            "Cloud Migration & Architecture",
+            "API Development",
+            "Business Intelligence Solution",
+            "Cybersecurity Services"
+        ],
+        "items": {
+            "enterprise": {
+                "title": "Enterprise Software Solutions",
+                "description": "Scalable, secure, and custom-tailored software for large organizations. We build mission-critical systems that streamline operations, automate workflows, and integrate seamlessly with your existing legacy infrastructure."
+            },
+            "cloud": {
+                "title": "Cloud Infrastructure",
+                "description": "Architecting resilient cloud-native environments. We leverage AWS, Azure, and Google Cloud to build self-healing, auto-scaling infrastructures that maximize uptime and minimize operational costs."
+            },
+            "api": {
+                "title": "API Development & Integration",
+                "description": "Connecting your digital ecosystem. We design robust RESTful and GraphQL APIs that serve as the backbone of your applications, enabling secure data exchange between disparate systems and third-party services."
+            },
+            "analytics": {
+                "title": "Data Analytics & BI",
+                "description": "Turning raw data into actionable insights. Our data engineering solutions aggregate, process, and visualize your business metrics, empowering you to make informed, data-driven decisions in real-time."
+            },
+            "security": {
+                "title": "Cybersecurity & Data Protection",
+                "description": "Safeguarding your digital assets. We implement rigorous security protocols, encryption standards, and compliance measures (GDPR, HIPAA) to protect sensitive data and ensure business continuity against cyber threats."
+            }
+        }
+    },
+    "grid": {
+        "items": {
+            "unified": {
+                "title": "Unified Data Ecosystem",
+                "description": "Break down silos. Ensure seamless data flow between ERP, CRM, and HRM systems for a single source of truth."
+            },
+            "realtime": {
+                "title": "Real-Time Intelligence",
+                "description": "Make decisions faster. Live analytics and customizable dashboards visualize your enterprise performance instantly."
+            },
+            "scalable": {
+                "title": "Scalable Architecture",
+                "description": "Built to grow. Our modular infrastructure handles increasing data loads and user volume without compromising speed."
+            },
+            "automated": {
+                "title": "Automated Workflows",
+                "description": "Efficiency first. Automate repetitive tasks and approval processes to reduce human error and operational costs."
+            },
+            "security": {
+                "title": "Bank-Grade Security",
+                "description": "Protect what matters. Enterprise-level encryption, role-based access control, and compliance protocols standard."
+            },
+            "cloud": {
+                "title": "Cloud-Native Agility",
+                "description": "Access anywhere. Secure, high-availability cloud deployment ensures your team stays connected from any device."
+            }
+        }
+    }
+}

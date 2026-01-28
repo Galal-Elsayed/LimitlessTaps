@@ -12,7 +12,8 @@
             "all": "كل القوالب",
             "simple": "بسيط",
             "medium": "متوسط",
-            "advanced": "متقدم"
+            "advanced": "متقدم",
+            "showing": "عرض"
         },
         "toggle": {
             "desktop": "سطح المكتب",

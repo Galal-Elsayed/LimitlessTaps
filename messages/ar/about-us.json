@@ -24,7 +24,7 @@
         "form": {
             "title": "ابدأ مشروعًا",
             "email_label": "البريد الإلكتروني",
-            "email_value": "hello@limitlesstaps.com",
+            "email_value": "info@limitlesstaps.com",
             "message_label": "الرسالة",
             "typed_message": "أريد أن أبدأ مشروعًا،\nدعنا نحدد موعد اجتماع",
             "send_button": "إرسال الرسالة"

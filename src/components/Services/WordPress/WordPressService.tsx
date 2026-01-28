@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function WordPressService() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +77,9 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
 // --- ENHANCED WORDPRESS UI ---
 
 const WordPressUI = () => {
+    const t = useTranslations('WordPress.service');
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
     const [activeTab, setActiveTab] = useState('editor'); // 'dashboard', 'plugins', 'editor'
 
     // Cycle through main views
@@ -87,22 +91,22 @@ const WordPressUI = () => {
     }, []);
 
     return (
-        <div className="flex flex-col h-full w-full text-[#1d2327] font-sans select-none bg-[#f0f0f1]">
+        <div className={`flex flex-col h-full w-full text-[#1d2327] font-sans select-none bg-[#f0f0f1] ${isRTL ? 'rtl' : 'ltr'}`}>
             {/* 1. Admin Bar */}
             <div className="h-8 bg-[#1d2327] flex items-center justify-between px-3 z-30 shrink-0 text-white text-[13px]">
                 <div className="flex items-center gap-4">
                     <div className="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center font-serif font-bold text-xs">W</div>
                     <div className="flex items-center gap-1 font-semibold">
-                        Limitless Site
+                        {t('adminBar.siteName')}
                     </div>
                     <div className="flex gap-3 text-white/70">
-                        <span>New</span>
-                        <span>Edit Page</span>
-                        <span className="hidden md:inline text-green-400 font-medium">SEO: Good ✅</span>
+                        <span>{t('adminBar.new')}</span>
+                        <span>{t('adminBar.editPage')}</span>
+                        <span className="hidden md:inline text-green-400 font-medium">{t('adminBar.seoGood')}</span>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span>Howdy, Admin</span>
+                    <span>{t('adminBar.howdy')}</span>
                     <div className="w-5 h-5 bg-white/20 rounded ml-1" />
                 </div>
             </div>
@@ -111,17 +115,17 @@ const WordPressUI = () => {
                 {/* 2. Admin Sidebar */}
                 <div className="w-40 bg-[#1d2327] flex flex-col pt-2 shrink-0 z-20 hidden md:flex text-white">
                     <div className="space-y-0.5">
-                        <SidebarItem icon="⚡" label="Dashboard" />
-                        <SidebarItem icon="📌" label="Posts" />
-                        <SidebarItem icon="📷" label="Media" />
-                        <SidebarItem icon="📄" label="Pages" active={activeTab === 'editor'} />
-                        <SidebarItem icon="💬" label="Comments" />
+                        <SidebarItem icon="⚡" label={t('sidebar.dashboard')} />
+                        <SidebarItem icon="📌" label={t('sidebar.posts')} />
+                        <SidebarItem icon="📷" label={t('sidebar.media')} />
+                        <SidebarItem icon="📄" label={t('sidebar.pages')} active={activeTab === 'editor'} />
+                        <SidebarItem icon="💬" label={t('sidebar.comments')} />
                         <div className="h-4" />
-                        <SidebarItem icon="🎨" label="Appearance" />
-                        <SidebarItem icon="🔌" label="Plugins" active={activeTab === 'plugins'} />
-                        <SidebarItem icon="👥" label="Users" />
-                        <SidebarItem icon="🔧" label="Tools" />
-                        <SidebarItem icon="⚙️" label="Settings" />
+                        <SidebarItem icon="🎨" label={t('sidebar.appearance')} />
+                        <SidebarItem icon="🔌" label={t('sidebar.plugins')} active={activeTab === 'plugins'} />
+                        <SidebarItem icon="👥" label={t('sidebar.users')} />
+                        <SidebarItem icon="🔧" label={t('sidebar.tools')} />
+                        <SidebarItem icon="⚙️" label={t('sidebar.settings')} />
                     </div>
                 </div>
 
@@ -143,6 +147,8 @@ const WordPressUI = () => {
 // --- VIEW 1: PAGE EDITOR (TYPING + DRAG & DROP) ---
 
 const EditorView = () => {
+    const t = useTranslations('WordPress.service.editor');
+
     return (
         <motion.div
             className="flex-1 flex flex-col bg-white h-full"
@@ -156,15 +162,15 @@ const EditorView = () => {
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-[#0a0a0a] rounded flex items-center justify-center text-white text-xl font-bold transition-colors">+</div>
                     <div className="h-6 w-px bg-gray-200 mx-2" />
-                    <div className="text-sm text-gray-400">Editing:</div>
-                    <div className="text-sm font-bold text-gray-800">Home Page</div>
+                    <div className="text-sm text-gray-400">{t('editing')}</div>
+                    <div className="text-sm font-bold text-gray-800">{t('homePage')}</div>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="flex flex-col items-end mr-2">
-                        <div className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">SEO Score</div>
+                        <div className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">{t('seoScore')}</div>
                         <SeoScoreAnimation />
                     </div>
-                    <div className="px-5 py-2 text-xs font-bold text-white bg-blue-600 rounded shadow-sm transition-all">Update</div>
+                    <div className="px-5 py-2 text-xs font-bold text-white bg-blue-600 rounded shadow-sm transition-all">{t('update')}</div>
                 </div>
             </div>
 
@@ -183,16 +189,16 @@ const EditorView = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.2 }}
                                 >
-                                    NEW FEATURE
+                                    {t('newFeature')}
                                 </motion.div>
 
                                 {/* TYPING ANIMATION HEADLINE */}
                                 <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight leading-tight min-h-[3rem]">
-                                    <TypingText text="Build faster with Limitless Blocks." />
+                                    <TypingText text={t('headline')} />
                                 </h1>
 
                                 <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm leading-relaxed">
-                                    Experience the next generation of WordPress editing. Drag, drop, and customize every pixel without writing a single line of code.
+                                    {t('description')}
                                 </p>
 
                                 <div className="flex gap-4">
@@ -200,24 +206,24 @@ const EditorView = () => {
                                         className="h-10 w-32 bg-blue-600 rounded flex items-center justify-center text-white text-xs font-bold shadow-sm"
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        Get Started
+                                        {t('getStarted')}
                                     </motion.div>
-                                    <div className="h-10 w-32 bg-white border border-gray-300 rounded flex items-center justify-center text-gray-700 text-xs font-bold shadow-sm">Documentation</div>
+                                    <div className="h-10 w-32 bg-white border border-gray-300 rounded flex items-center justify-center text-gray-700 text-xs font-bold shadow-sm">{t('documentation')}</div>
                                 </div>
                             </div>
 
                             {/* Features Grid Simulation */}
                             <div className="p-12 bg-white">
                                 <div className="grid grid-cols-3 gap-8">
-                                    <FeatureBlock icon="⚡" title="Lightning Fast" delay={2.5} />
-                                    <FeatureBlock icon="🎨" title="Pixel Perfect" delay={2.7} />
-                                    <FeatureBlock icon="🔒" title="Secure Core" delay={2.9} />
+                                    <FeatureBlock icon="⚡" title={t('lightningFast')} delay={2.5} />
+                                    <FeatureBlock icon="🎨" title={t('pixelPerfect')} delay={2.7} />
+                                    <FeatureBlock icon="🔒" title={t('secureCore')} delay={2.9} />
                                 </div>
                             </div>
 
                             {/* Cursor Dragging Block Interaction */}
                             <div className="px-12 pb-12">
-                                <DropZoneAnimation />
+                                <DropZoneAnimation dropText={t('dropBlockHere')} startText={t('startYourJourney')} />
                             </div>
 
                         </div>
@@ -232,15 +238,15 @@ const EditorView = () => {
                     transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
                 >
                     <div className="flex border-b border-gray-200">
-                        <div className="flex-1 p-3 text-center text-xs font-bold text-gray-900 border-b-2 border-blue-600">Settings</div>
-                        <div className="flex-1 p-3 text-center text-xs font-bold text-gray-400">Styles</div>
+                        <div className="flex-1 p-3 text-center text-xs font-bold text-gray-900 border-b-2 border-blue-600">{t('settings')}</div>
+                        <div className="flex-1 p-3 text-center text-xs font-bold text-gray-400">{t('styles')}</div>
                     </div>
 
                     <div className="p-4 space-y-6 overflow-y-auto">
                         {/* SEO Meta Box Simulation */}
                         <div className="border border-gray-200 rounded p-3 bg-gray-50">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-gray-700">Yoast SEO</span>
+                                <span className="text-xs font-bold text-gray-700">{t('yoastSeo')}</span>
                                 <div className="w-2 h-2 rounded-full bg-green-500" />
                             </div>
                             <div className="space-y-2">
@@ -252,13 +258,13 @@ const EditorView = () => {
                                         transition={{ duration: 3, delay: 1 }}
                                     />
                                 </div>
-                                <div className="text-[10px] text-gray-500">Readability: <strong className="text-green-600">Good</strong></div>
+                                <div className="text-[10px] text-gray-500">{t('readability')} <strong className="text-green-600">{t('good')}</strong></div>
                             </div>
                         </div>
 
                         {/* Block Properties */}
                         <div className="space-y-3">
-                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Typography</div>
+                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('typography')}</div>
                             <div className="flex gap-2">
                                 <div className="w-8 h-8 border border-gray-200 rounded flex items-center justify-center text-xs font-bold bg-gray-100">S</div>
                                 <div className="w-8 h-8 border border-gray-200 rounded flex items-center justify-center text-xs font-bold bg-blue-50 border-blue-200 text-blue-600">M</div>
@@ -268,7 +274,7 @@ const EditorView = () => {
                         </div>
 
                         <div className="space-y-3">
-                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Color Settings</div>
+                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('colorSettings')}</div>
                             <div className="grid grid-cols-5 gap-2">
                                 <div className="w-6 h-6 rounded-full bg-black ring-2 ring-offset-1 ring-gray-200" />
                                 <div className="w-6 h-6 rounded-full bg-blue-600" />
@@ -281,7 +287,7 @@ const EditorView = () => {
                 </motion.div>
 
                 {/* Simulated Cursor */}
-                <CursorDragAnimation />
+                <CursorDragAnimation movingText={t('movingCtaButton')} />
             </div>
         </motion.div>
     );
@@ -290,6 +296,8 @@ const EditorView = () => {
 // --- VIEW 2: PLUGIN INSTALLATION ---
 
 const PluginsView = () => {
+    const t = useTranslations('WordPress.service.plugins');
+
     return (
         <motion.div
             className="flex-1 flex flex-col bg-[#f0f0f1] h-full p-8"
@@ -300,9 +308,9 @@ const PluginsView = () => {
         >
             <div className="max-w-5xl mx-auto w-full space-y-6">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-medium text-[#1d2327]">Plugins <span className="text-gray-500 text-sm font-normal ml-2">Add New</span></h1>
+                    <h1 className="text-2xl font-medium text-[#1d2327]">{t('title')} <span className="text-gray-500 text-sm font-normal ml-2">{t('addNew')}</span></h1>
                     <div className="bg-white border border-gray-300 rounded px-3 py-1.5 text-sm text-gray-600 flex items-center gap-2">
-                        <span>🔍</span> Search plugins...
+                        <span>🔍</span> {t('searchPlugins')}
                     </div>
                 </div>
 
@@ -312,13 +320,13 @@ const PluginsView = () => {
                         <div className="flex items-start gap-4">
                             <div className="w-16 h-16 bg-blue-50 rounded flex items-center justify-center text-3xl">🚀</div>
                             <div>
-                                <h3 className="font-bold text-[#1d2327]">Limitless Speed</h3>
-                                <p className="text-xs text-gray-500 mt-1">Boost your site performance instantly. Cache, minify, and optimize.</p>
+                                <h3 className="font-bold text-[#1d2327]">{t('limitlessSpeed')}</h3>
+                                <p className="text-xs text-gray-500 mt-1">{t('limitlessSpeedDesc')}</p>
                             </div>
                         </div>
                         <div className="mt-auto flex items-center justify-between pt-2 border-t border-gray-50">
                             <div className="flex gap-1 text-xs text-yellow-500">★★★★★ <span className="text-gray-400">(500+)</span></div>
-                            <InstallButtonAnimation />
+                            <InstallButtonAnimation installNow={t('installNow')} installing={t('installing')} activate={t('activate')} />
                         </div>
                         {/* Success Toast simulating */}
                         <motion.div
@@ -327,15 +335,15 @@ const PluginsView = () => {
                             animate={{ opacity: [0, 1, 1, 0], y: [-10, 0, 0, -10] }}
                             transition={{ delay: 2.5, duration: 2 }}
                         >
-                            <span>✓</span> Activated
+                            <span>✓</span> {t('activated')}
                         </motion.div>
                     </div>
 
                     {/* Other Static Plugins */}
-                    <PluginCard name="Yoast SEO" icon="🚦" desc="Improve your SEO rankings." rated />
-                    <PluginCard name="WooCommerce" icon="🛍️" desc="Build your online store." />
-                    <PluginCard name="Elementor" icon="🎨" desc="The specialized website builder." />
-                    <PluginCard name="Security Pro" icon="🛡️" desc="Protect your website from threats." />
+                    <PluginCard name={t('yoastSeo')} icon="🚦" desc={t('yoastSeoDesc')} rated installNow={t('installNow')} />
+                    <PluginCard name={t('wooCommerce')} icon="🛍️" desc={t('wooCommerceDesc')} installNow={t('installNow')} />
+                    <PluginCard name={t('elementor')} icon="🎨" desc={t('elementorDesc')} installNow={t('installNow')} />
+                    <PluginCard name={t('securityPro')} icon="🛡️" desc={t('securityProDesc')} installNow={t('installNow')} />
                 </div>
             </div>
 
@@ -415,14 +423,14 @@ const FeatureBlock = ({ icon, title, delay = 0 }: { icon: string, title: string,
     </motion.div>
 );
 
-const DropZoneAnimation = () => (
+const DropZoneAnimation = ({ dropText, startText }: { dropText: string, startText: string }) => (
     <motion.div
         className="mt-8 border-2 border-dashed border-blue-400 bg-blue-50/50 rounded-lg h-32 flex items-center justify-center relative overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0] }}
         transition={{ duration: 4, repeat: Infinity, delay: 1 }}
     >
-        <div className="text-blue-400 text-sm font-medium">Drop block here</div>
+        <div className="text-blue-400 text-sm font-medium">{dropText}</div>
 
         {/* The block arriving */}
         <motion.div
@@ -431,12 +439,12 @@ const DropZoneAnimation = () => (
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 2.8, duration: 0.4 }} // Syncs with cursor drop
         >
-            Start Your Journey
+            {startText}
         </motion.div>
     </motion.div>
 );
 
-const CursorDragAnimation = () => (
+const CursorDragAnimation = ({ movingText }: { movingText: string }) => (
     <motion.div
         className="absolute z-50 pointer-events-none"
         initial={{ x: "90%", y: "40%" }} // Start near buttons
@@ -464,7 +472,7 @@ const CursorDragAnimation = () => (
             animate={{ opacity: [0, 1, 1, 0] }} // Show only during drag
             transition={{ duration: 2.5, times: [0.2, 0.3, 0.9, 1], repeat: Infinity, repeatDelay: 1.5 }}
         >
-            <span className="text-lg">🔳</span> Moving: CTA Button
+            <span className="text-lg">🔳</span> {movingText}
         </motion.div>
     </motion.div>
 );
@@ -489,7 +497,7 @@ const CursorClickAnimation = () => (
     </motion.div>
 );
 
-const InstallButtonAnimation = () => (
+const InstallButtonAnimation = ({ installNow, installing, activate }: { installNow: string, installing: string, activate: string }) => (
     <motion.button
         className="px-3 py-1.5 rounded text-xs font-bold border"
         initial={{ backgroundColor: "white", color: "#2271b1", borderColor: "#2271b1" }}
@@ -501,30 +509,30 @@ const InstallButtonAnimation = () => (
         transition={{ duration: 2, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 2 }}
     >
         <motion.span
-            animate={{ content: ["Install Now", "Installing...", "Activate"] }}
+            animate={{ content: [installNow, installing, activate] }}
             transition={{ duration: 2, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 2 }}
         >
-            <InstallText />
+            <InstallText installNow={installNow} installing={installing} activate={activate} />
         </motion.span>
     </motion.button>
 );
 
 // Hack for animating text content in framer motion
-const InstallText = () => {
-    const [text, setText] = useState("Install Now");
+const InstallText = ({ installNow, installing, activate }: { installNow: string, installing: string, activate: string }) => {
+    const [text, setText] = useState(installNow);
     useEffect(() => {
         const sequence = async () => {
             while (true) {
-                setText("Install Now");
+                setText(installNow);
                 await new Promise(r => setTimeout(r, 1500)); // Wait for cursor
-                setText("Installing...");
+                setText(installing);
                 await new Promise(r => setTimeout(r, 800));
-                setText("Activate");
+                setText(activate);
                 await new Promise(r => setTimeout(r, 1700));
             }
         };
         sequence();
-    }, []);
+    }, [installNow, installing, activate]);
     return <span>{text}</span>;
 }
 
@@ -537,17 +545,7 @@ const SidebarItem = ({ icon, label, active = false }: { icon: string, label: str
     </div>
 );
 
-const DraggableBlock = ({ icon, label, delay = 0 }: { icon: string, label: string, delay?: number }) => (
-    <motion.div
-        className="flex flex-col items-center justify-center p-3 border border-gray-200 rounded hover:border-blue-500 hover:shadow-md transition-all hover:bg-gray-50 group bg-white"
-        whileHover={{ scale: 1.05 }}
-    >
-        <span className="text-xl mb-1">{icon}</span>
-        <span className="text-[10px] text-gray-700 font-medium">{label}</span>
-    </motion.div>
-);
-
-const PluginCard = ({ name, icon, desc, rated = false }: { name: string, icon: string, desc: string, rated?: boolean }) => (
+const PluginCard = ({ name, icon, desc, rated = false, installNow }: { name: string, icon: string, desc: string, rated?: boolean, installNow: string }) => (
     <div className="bg-white border border-gray-200 rounded p-4 flex flex-col gap-3 shadow-sm opacity-60 hover:opacity-100 transition-opacity">
         <div className="flex items-start gap-3">
             <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center text-xl grayscale">{icon}</div>
@@ -558,7 +556,7 @@ const PluginCard = ({ name, icon, desc, rated = false }: { name: string, icon: s
         </div>
         <div className="mt-auto flex items-center justify-between">
             <div className="flex gap-0.5 text-[10px] text-gray-300">★★★★★</div>
-            <div className="px-2 py-1 rounded text-[10px] font-bold border border-gray-300 text-gray-500 bg-gray-50">Install Now</div>
+            <div className="px-2 py-1 rounded text-[10px] font-bold border border-gray-300 text-gray-500 bg-gray-50">{installNow}</div>
         </div>
     </div>
 );

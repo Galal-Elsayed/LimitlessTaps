@@ -1,0 +1,68 @@
+{
+    "hero": {
+        "title": "WEB SITE",
+        "titleLine2": "DESIGN"
+    },
+    "cards": {
+        "seoHeader": "Professional Web Design & UI/UX Services",
+        "seoList": {
+            "item1": "User Interface Design",
+            "item2": "Brand Identity Creation",
+            "item3": "User Experience (UX) Research",
+            "item4": "Interactive Prototyping",
+            "item5": "Motion Design & Animation"
+        },
+        "items": {
+            "ui": {
+                "title": "UI Design & Systems",
+                "description": "Pixel-perfect user interfaces backed by comprehensive design systems. We create scalable visual languages that ensure consistency across all your digital products, reducing technical debt and accelerating future development cycles."
+            },
+            "branding": {
+                "title": "Brand Identity",
+                "description": "Forging digital identities that resonate. From logo conceptualization to full visual guidelines, we craft memorable brands that stand out in the digital landscape and communicate your values instantly to your audience."
+            },
+            "ux": {
+                "title": "UX Research & Strategy",
+                "description": "Data-driven user experiences. We conduct deep-dive research, user testing, and journey mapping to understand your users' needs. We translate these insights into intuitive flows that remove friction and delight users at every touchpoint."
+            },
+            "prototype": {
+                "title": "Prototyping & Interactions",
+                "description": "High-fidelity prototypes that feel real. We bring designs to life with fluid motion and interactions before writing a single line of code, allowing for rapid iteration and stakeholder alignment."
+            },
+            "motion": {
+                "title": "Motion Design & Animation",
+                "description": "Adding depth and character through movement. We design micro-interactions and complex animations that guide user attention, provide feedback, and create moments of delight that elevate the overall experience."
+            }
+        }
+    },
+    "visual": {
+        "toolbar": {
+            "title": "Untitled - Limitless Taps Design",
+            "share": "Share"
+        },
+        "sidebar": {
+            "layers": "Layers",
+            "layerItems": {
+                "frame1": "Frame 1",
+                "heroSection": "Hero Section",
+                "textGroup": "  Text Group",
+                "heading": "    Heading",
+                "subtext": "    Subtext",
+                "image": "  Image",
+                "footer": "Footer",
+                "background": "Background"
+            },
+            "design": "Design",
+            "prototype": "Prototype",
+            "fill": "Fill"
+        },
+        "canvas": {
+            "headline": "We design your",
+            "headlineLine2": "website from",
+            "aToZ": "A to Z."
+        },
+        "cursor": {
+            "label": "Designer"
+        }
+    }
+}

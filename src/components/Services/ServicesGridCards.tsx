@@ -49,7 +49,7 @@ const InteractionDesignVisual = () => {
       {/* Subtle Glow - Blue */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-blue-600/10 blur-[80px] rounded-full pointer-events-none" />
 
-      <div className="relative flex items-end justify-center gap-2 w-full h-[90%] md:h-full pb-0 md:pb-3 scale-90 md:scale-95 origin-bottom">
+      <div className="relative flex items-end justify-center gap-2 w-full h-[90%] md:h-full pb-0 md:pb-3 scale-[0.75] min-[900px]:scale-90 md:scale-95 origin-bottom pt-4 min-[900px]:pt-0">
         {/* 1. Phone (Left) - Detailed Mobile Website */}
         <motion.div
           className="relative z-20 w-[90px] h-[180px] bg-[#050505] rounded-[1rem] border-[2px] border-[#222] shadow-xl flex flex-col overflow-hidden shrink-0"
@@ -190,40 +190,43 @@ type VisualDesignItem = {
 
 const VisualDesignVisual = ({ items }: { items: VisualDesignItem[] }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start pt-4 space-y-1.5 overflow-visible relative px-4">
+    <div className="w-full h-full flex flex-col items-center justify-start pt-2 min-[900px]:pt-4 space-y-1 min-[900px]:space-y-1.5 overflow-visible relative px-2 min-[900px]:px-4">
       {/* Masking for clean exit */}
       <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-[#111] to-transparent z-20 pointer-events-none" />
 
-      {items.map((item, i) => (
-        <motion.div
-          key={item.title}
-          className="flex items-center gap-3 w-full p-2.5 bg-[#1a1a1a] rounded-xl shadow-lg z-10 relative cursor-default group/item hover:scale-[1.02] transition-transform origin-center"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1 }}
-        >
-          {/* Icon Circle */}
-          <div
-            className={cn(
-              "w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white shadow-sm",
-              item.color,
-            )}
+      {/* 2-column grid for mobile, single column for larger */}
+      <div className="grid grid-cols-2 min-[900px]:grid-cols-1 gap-1.5 min-[900px]:gap-1.5 w-full">
+
+        {items.map((item, i) => (
+          <motion.div
+            key={item.title}
+            className="flex items-center gap-2 min-[900px]:gap-3 w-full p-2 min-[900px]:p-2.5 bg-[#1a1a1a] rounded-lg min-[900px]:rounded-xl shadow-lg z-10 relative cursor-default group/item hover:scale-[1.02] transition-transform origin-center"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
           >
-            <item.icon className="w-4 h-4 fill-current opacity-90" />
-          </div>
+            <div
+              className={cn(
+                "w-6 min-[900px]:w-8 h-6 min-[900px]:h-8 rounded-full flex items-center justify-center shrink-0 text-white shadow-sm",
+                item.color,
+              )}
+            >
+              <item.icon className="w-3 min-[900px]:w-4 h-3 min-[900px]:h-4 fill-current opacity-90" />
+            </div>
 
-          {/* Text Content */}
-          <div className="flex flex-col flex-1 min-w-0">
-            <span className="text-xs font-bold text-white leading-tight">{item.title}</span>
-            <span className="text-[10px] font-medium text-neutral-400 leading-tight">{item.sub}</span>
-          </div>
+            {/* Text Content */}
+            <div className="flex flex-col flex-1 min-w-0">
+              <span className="text-[10px] min-[900px]:text-xs font-bold text-white leading-tight truncate">{item.title}</span>
+              <span className="text-[8px] min-[900px]:text-[10px] font-medium text-neutral-400 leading-tight truncate">{item.sub}</span>
+            </div>
 
-          {/* Arrow/Indicator */}
-          <div className="w-5 h-5 rounded-full bg-neutral-100 flex items-center justify-center opacity-0 group-hover/item:opacity-100 transition-opacity">
-            <ArrowRight className="w-3 h-3 text-neutral-400" />
-          </div>
-        </motion.div>
-      ))}
+            {/* Arrow/Indicator */}
+            <div className="w-4 min-[900px]:w-5 h-4 min-[900px]:h-5 rounded-full bg-neutral-100 flex items-center justify-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+              <ArrowRight className="w-2 min-[900px]:w-3 h-2 min-[900px]:h-3 text-neutral-400" />
+            </div>
+          </motion.div>
+        ))}
+      </div>
 
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] z-0 pointer-events-none" />
@@ -239,7 +242,7 @@ type WireframingSteps = {
 
 const WireframingVisual = ({ steps }: { steps: WireframingSteps }) => {
   return (
-    <div className="w-full h-full flex items-end justify-center pb-6 relative">
+    <div className="w-full h-full flex items-center min-[900px]:items-end justify-center pb-0 min-[900px]:pb-6 relative">
       <div className="flex items-center gap-6 relative z-10">
         {/* Icon 1 - Idea */}
         <motion.div
@@ -511,13 +514,13 @@ export default function ServicesGridCards() {
           </motion.p>
         </div>
 
-        {/* Compact Bento Grid - STRICT FLUXIS LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 gap-5 max-w-[1240px] mx-auto auto-rows-[300px] lg:auto-rows-[240px] h-[90vh]">
+        {/* Compact Bento Grid - RESPONSIVE LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-3 gap-4 md:gap-5 max-w-[1240px] mx-auto auto-rows-[320px] md:auto-rows-[280px] xl:auto-rows-[240px] xl:h-[90vh]">
           {/* 1. Mobile Applications (Row 1, Col 1-2) - HORIZONTAL */}
           <ServiceCard
             title={t("gridCards.interactionDesign.title")}
             description={t("gridCards.interactionDesign.description")}
-            className="lg:col-span-2 lg:row-start-1 lg:col-start-1"
+            className="md:col-span-2 xl:col-span-2 xl:row-start-1 xl:col-start-1"
             icon={<Smartphone className="h-5 w-5" />}
             layout="horizontal"
             learnMoreText={t("gridCards.learnMore")}
@@ -530,7 +533,7 @@ export default function ServicesGridCards() {
           <ServiceCard
             title={t("gridCards.visualDesign.title")}
             description={t("gridCards.visualDesign.description")}
-            className="lg:col-start-3 lg:row-start-1 lg:row-span-2"
+            className="xl:col-start-3 xl:row-start-1 xl:row-span-2"
             icon={<Share2 className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
           >
@@ -568,7 +571,7 @@ export default function ServicesGridCards() {
           <ServiceCard
             title={t("gridCards.userResearch.title")}
             description={t("gridCards.userResearch.description")}
-            className="lg:col-start-1 lg:row-start-2 lg:row-span-2"
+            className="xl:col-start-1 xl:row-start-2 xl:row-span-2"
             icon={<Search className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
           >
@@ -594,7 +597,7 @@ export default function ServicesGridCards() {
           <ServiceCard
             title={t("gridCards.wireframing.title")}
             description={t("gridCards.wireframing.description")}
-            className="lg:col-start-2 lg:row-start-2"
+            className="xl:col-start-2 xl:row-start-2"
             icon={<Layers className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
           >
@@ -611,7 +614,7 @@ export default function ServicesGridCards() {
           <ServiceCard
             title={t("gridCards.everythingElse.title")}
             description={t("gridCards.everythingElse.description")}
-            className="lg:col-start-2 lg:row-start-3 lg:col-span-2"
+            className="md:col-span-2 xl:col-start-2 xl:row-start-3 xl:col-span-2"
             icon={<Globe className="h-5 w-5" />}
             layout="horizontal" // User requested this to look like the first one
             learnMoreText={t("gridCards.learnMore")}

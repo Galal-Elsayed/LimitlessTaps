@@ -9,7 +9,7 @@ export default function StudioHero() {
     const isArabic = locale === "ar";
 
     return (
-        <WavyBackground containerClassName="min-h-[60vh] h-[60vh]">
+        <WavyBackground containerClassName="min-h-[60vh] h-[80vh]">
             <Header
                 title={t("hero.title")}
                 className={`!text-[12vw] leading-[0.8] text-center w-full max-w-none ${isArabic ? "pb-12" : ""}`}

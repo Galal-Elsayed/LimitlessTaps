@@ -1,0 +1,107 @@
+{
+    "hero": {
+        "title": "cms &",
+        "titleLine2": "wordpress"
+    },
+    "cards": {
+        "seoHeader": "Professional WordPress Development Services",
+        "seoList": {
+            "item1": "Custom WordPress Website Development",
+            "item2": "WordPress Theme Design & Development",
+            "item3": "WordPress Plugin Development",
+            "item4": "WooCommerce E-commerce Solutions",
+            "item5": "WordPress SEO Optimization",
+            "item6": "WordPress Maintenance & Support",
+            "item7": "Headless WordPress Development",
+            "item8": "WordPress Migration Services",
+            "item9": "WordPress Security Solutions",
+            "item10": "WordPress Speed Optimization"
+        },
+        "items": {
+            "wordpress": {
+                "title": "Custom WordPress Development",
+                "description": "We build custom WordPress websites tailored to your business needs. From corporate sites to blogs and portfolios, our expert developers create fast, secure, and SEO-friendly WordPress solutions that help you rank higher on Google."
+            },
+            "theme": {
+                "title": "Premium Theme Development",
+                "description": "Get a unique, custom-designed WordPress theme that reflects your brand. We develop responsive, lightweight themes optimized for speed and search engines. Our themes are built with clean code, following WordPress best practices for easy maintenance and updates. Whether you need a business theme, blog theme, or e-commerce theme, we deliver pixel-perfect designs."
+            },
+            "plugin": {
+                "title": "Plugin Development & Customization",
+                "description": "Extend your WordPress site with custom plugins. We develop powerful plugins for booking systems, membership sites, custom forms, integrations, and more. Our plugins are secure, optimized, and compatible with the latest WordPress versions."
+            },
+            "woocommerce": {
+                "title": "WooCommerce Online Stores",
+                "description": "Launch your online store with WooCommerce. We build custom e-commerce solutions with secure payment gateways, inventory management, and conversion-optimized checkout flows. From product pages to shipping integrations, we handle everything for your success."
+            },
+            "maintenance": {
+                "title": "WordPress Maintenance & Support",
+                "description": "Keep your WordPress site secure and up-to-date with our maintenance services. We handle updates, backups, security monitoring, performance optimization, and bug fixes. Our support team ensures your website runs smoothly 24/7, so you can focus on growing your business."
+            }
+        }
+    },
+    "service": {
+        "adminBar": {
+            "siteName": "Limitless Taps Site",
+            "new": "New",
+            "editPage": "Edit Page",
+            "seoGood": "SEO: Good ✅",
+            "howdy": "Howdy, Admin"
+        },
+        "sidebar": {
+            "dashboard": "Dashboard",
+            "posts": "Posts",
+            "media": "Media",
+            "pages": "Pages",
+            "comments": "Comments",
+            "appearance": "Appearance",
+            "plugins": "Plugins",
+            "users": "Users",
+            "tools": "Tools",
+            "settings": "Settings"
+        },
+        "editor": {
+            "editing": "Editing:",
+            "homePage": "Home Page",
+            "seoScore": "SEO Score",
+            "update": "Update",
+            "settings": "Settings",
+            "styles": "Styles",
+            "yoastSeo": "Yoast SEO",
+            "readability": "Readability:",
+            "good": "Good",
+            "typography": "Typography",
+            "colorSettings": "Color Settings",
+            "newFeature": "NEW FEATURE",
+            "headline": "Build with Limitless Taps Blocks.",
+            "description": "Experience the next generation of WordPress editing. Drag, drop, and customize every pixel without writing a single line of code.",
+            "getStarted": "Get Started",
+            "documentation": "Documentation",
+            "lightningFast": "Lightning Fast",
+            "pixelPerfect": "Pixel Perfect",
+            "secureCore": "Secure Core",
+            "dropBlockHere": "Drop block here",
+            "startYourJourney": "Start Your Journey",
+            "movingCtaButton": "Moving: CTA Button"
+        },
+        "plugins": {
+            "title": "Plugins",
+            "addNew": "Add New",
+            "searchPlugins": "Search plugins...",
+            "limitlessSpeed": "Limitless Taps Speed",
+            "limitlessSpeedDesc": "Boost your site performance instantly. Cache, minify, and optimize.",
+            "activated": "Activated",
+            "yoastSeo": "Yoast SEO",
+            "yoastSeoDesc": "Improve your SEO rankings.",
+            "wooCommerce": "WooCommerce",
+            "wooCommerceDesc": "Build your online store.",
+            "elementor": "Elementor",
+            "elementorDesc": "The specialized website builder.",
+            "securityPro": "Security Pro",
+            "securityProDesc": "Protect your website from threats.",
+            "installNow": "Install Now",
+            "installing": "Installing...",
+            "activate": "Activate"
+        }
+    }
+}

@@ -70,6 +70,9 @@ async function loadMessages(locale: string | undefined) {
     const studio = (await import(`../../../messages/${resolvedLocale}/studio.json`)).default;
     const webDevelopment = (await import(`../../../messages/${resolvedLocale}/Web-Development.json`)).default;
     const mobileApplication = (await import(`../../../messages/${resolvedLocale}/mopile-application.json`)).default;
+    const SoftwareSolutions = (await import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`)).default;
+    const WebDesign = (await import(`../../../messages/${resolvedLocale}/Web-Design.json`)).default;
+    const WordPress = (await import(`../../../messages/${resolvedLocale}/WordPress.json`)).default;
 
     return {
       common,
@@ -86,6 +89,9 @@ async function loadMessages(locale: string | undefined) {
       studio,
       webDevelopment,
       mobileApplication,
+      SoftwareSolutions,
+      WebDesign,
+      WordPress,
     };
   } catch (error) {
     console.error(`Failed to load messages for locale: ${resolvedLocale}`, error);
@@ -104,6 +110,9 @@ async function loadMessages(locale: string | undefined) {
     const studio = (await import(`../../../messages/en/studio.json`)).default;
     const webDevelopment = (await import(`../../../messages/en/Web-Development.json`)).default;
     const mobileApplication = (await import(`../../../messages/en/mopile-application.json`)).default;
+    const SoftwareSolutions = (await import(`../../../messages/en/SoftwareSolutions.json`)).default;
+    const WebDesign = (await import(`../../../messages/en/Web-Design.json`)).default;
+    const WordPress = (await import(`../../../messages/en/WordPress.json`)).default;
 
     return {
       common,
@@ -120,6 +129,9 @@ async function loadMessages(locale: string | undefined) {
       studio,
       webDevelopment,
       mobileApplication,
+      SoftwareSolutions,
+      WebDesign,
+      WordPress,
     };
   }
 }

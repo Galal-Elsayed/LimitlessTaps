@@ -476,8 +476,8 @@ export default function ServiceHeroBase({ title, className, raysColor = "#ffffff
                 <Header
                     title={title}
                     className={cn(
-                        "text-[13vw] md:text-8xl lg:text-[180px] font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85]",
-                        isRTL && "pb-10"
+                        "text-[13vw] md:text-8xl lg:text-[180px] font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center",
+                        isRTL ? "leading-[1.2] pb-10" : "leading-[0.85]"
                     )}
                 />
             </div>

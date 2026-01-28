@@ -78,13 +78,13 @@ export default function ServicesWeb() {
     };
 
     return (
-        <section className="min-h-screen bg-[#0a0a0a] py-24 px-4 overflow-hidden flex flex-col items-center">
+        <section className="min-h-screen bg-[#0a0a0a] py-14 px-4 overflow-hidden flex flex-col items-center">
 
             {/* 2. Main Layout: 3 Columns - Widened */}
-            <div className="w-full max-w-[1800px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-center">
+            <div className="w-full max-w-[1500px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-2 items-center">
 
                 {/* Left Column: Narrative */}
-                <div className="lg:col-span-3 order-2 lg:order-1 space-y-4 lg:space-y-12 text-center lg:text-left">
+                <div className="lg:col-span-3 order-2 lg:order-1 space-y-4 lg:space-y-20 text-center lg:text-left ">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -92,8 +92,8 @@ export default function ServicesWeb() {
                         viewport={{ once: true }}
                         className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('left_column.web_title')}</h3>
-                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                        <h3 className="text-2xl md:text-2xl font-bold text-white mb-2 uppercase">{t('left_column.web_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-base lg:w-[90%]">
                             {t.rich('left_column.web_description', highlightRenderer)}
                         </p>
                     </motion.div>
@@ -105,8 +105,8 @@ export default function ServicesWeb() {
                         viewport={{ once: true }}
                         className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase whitespace-nowrap">{t('left_column.ecommerce_title')}</h3>
-                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                        <h3 className="text-2xl md:text-2xl font-bold text-white mb-2 uppercase whitespace-nowrap">{t('left_column.ecommerce_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-base lg:w-[90%]">
                             {t.rich('left_column.ecommerce_description', highlightRenderer)}
                         </p>
                     </motion.div>
@@ -117,13 +117,13 @@ export default function ServicesWeb() {
                     {/* Glow effect behind laptop */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="scale-[0.8] md:scale-[1.2] xl:scale-[1.3] transform-style-3d">
+                    <div className="scale-[0.8] md:scale-[1] xl:scale-[1.1] transform-style-3d">
                         <MacbookPresentation t={t} />
                     </div>
                 </div>
 
                 {/* Right Column: Narrative */}
-                <div className="lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-12 text-center lg:text-left">
+                <div className="lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center lg:text-left ml-10 lg:translate-x-7">
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -131,8 +131,8 @@ export default function ServicesWeb() {
                         viewport={{ once: true }}
                         className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('right_column.saas_title')}</h3>
-                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                        <h3 className="text-2xl md:text-2xl font-bold text-white mb-2 uppercase">{t('right_column.saas_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-base lg:w-[90%]">
                             {t.rich('right_column.saas_description', highlightRenderer)}
                         </p>
                     </motion.div>
@@ -144,8 +144,8 @@ export default function ServicesWeb() {
                         viewport={{ once: true }}
                         className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm lg:p-0 lg:bg-transparent lg:border-none lg:backdrop-blur-none"
                     >
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase">{t('right_column.uiux_title')}</h3>
-                        <p className="text-white/40 leading-relaxed text-sm md:text-lg">
+                        <h3 className="text-2xl md:text-2xl font-bold text-white mb-2 uppercase">{t('right_column.uiux_title')}</h3>
+                        <p className="text-white/40 leading-relaxed text-sm md:text-base lg:w-[90%]">
                             {t.rich('right_column.uiux_description', highlightRenderer)}
                         </p>
                     </motion.div>

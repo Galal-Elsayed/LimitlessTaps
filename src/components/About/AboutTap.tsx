@@ -12,6 +12,7 @@ export default function AboutTap() {
     const locale = useLocale();
     const isRTL = locale === "ar";
     const [screenState, setScreenState] = useState<"logo" | "form" | "sent">("logo");
+    const [isButtonPressed, setIsButtonPressed] = useState(false);
     const [typedText, setTypedText] = useState("");
     const targetText = t("tap.form.typed_message");
 
@@ -46,8 +47,18 @@ export default function AboutTap() {
                 await new Promise(r => setTimeout(r, 40 + Math.random() * 20));
             }
 
-            // 4. Send & Show Success
-            await new Promise(r => setTimeout(r, 800)); // Pause after typing
+            // 4. Click Button & Send
+            await new Promise(r => setTimeout(r, 500)); // Pause after typing
+            if (!isMounted) return;
+
+            // Simulate click
+            setIsButtonPressed(true);
+            await new Promise(r => setTimeout(r, 150)); // Hold click
+            if (!isMounted) return;
+            setIsButtonPressed(false);
+
+            // Wait slightly before showing success
+            await new Promise(r => setTimeout(r, 200));
             if (!isMounted) return;
             setScreenState("sent");
 
@@ -62,7 +73,7 @@ export default function AboutTap() {
     }, [targetText, isInView]);
 
     return (
-        <section ref={sectionRef} className="relative w-full min-h-screen bg-black flex flex-col items-center justify-center pt-0 md:pt-20 pb-40 min-[900px]:pb-0 overflow-hidden perspective-1000">
+        <section ref={sectionRef} className="relative w-full min-h-screen bg-black flex flex-col items-center justify-center pt-0 md:pt-20 pb-40 min-[900px]:pb-0 overflow-hidden">
 
             {/* Header Text */}
             {/* Header Content - Split Layout */}
@@ -198,9 +209,16 @@ export default function AboutTap() {
                                     </div>
                                 </div>
 
-                                <button className="mt-6 w-full h-14 bg-white text-black rounded-2xl font-bold shadow-lg shadow-white/10">
+                                <motion.button
+                                    animate={{
+                                        scale: isButtonPressed ? 0.95 : 1,
+                                        backgroundColor: isButtonPressed ? "#e5e5e5" : "#ffffff"
+                                    }}
+                                    transition={{ duration: 0.1 }}
+                                    className="mt-6 w-full h-14 bg-white text-black rounded-2xl font-bold shadow-lg shadow-white/10 z-1"
+                                >
                                     {t("tap.form.send_button")}
-                                </button>
+                                </motion.button>
                             </motion.div>
                         )}
 
@@ -231,11 +249,11 @@ export default function AboutTap() {
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                className="absolute bottom-0 pointer-events-none flex items-end justify-center z-20"
+                className="absolute bottom-0 pointer-events-none flex items-end justify-center z-[9999]"
             >
-                {/* 
+                {/* E
                   Hand Position Logic:
-                  Mobile: 
+                  Mobile:
                     - width: 80vw (relative to screen)
                     - translate-x: 10% (relative to hand width)
                     - translate-y: 5% (relative to hand height) 
@@ -246,13 +264,22 @@ export default function AboutTap() {
                     - translate-x-[17.5rem] (~280px or 70 units)
                     - Matches user-specified position (finger on button)
                 */}
-                <div className="relative w-[80vw] max-w-[400px] md:w-[500px] h-[80vw] max-h-[400px] md:h-[500px] translate-y-[10%] translate-x-[70%] min-[900px]:translate-y-0 md:translate-x-[17.5rem] [mask-image:linear-gradient(to_top,transparent,black_40%)]">
-                    <Image
-                        src="/About/hand-tap.png"
-                        alt="Hand Holding Phone"
-                        fill
-                        className="object-contain drop-shadow-2xl opacity-100"
-                    />
+                <div className="relative w-[80vw] max-w-[400px] md:w-[500px] h-[80vw] max-h-[400px] md:h-[500px] translate-y-[10%] translate-x-[70%] min-[900px]:translate-y-0 md:translate-x-[17.5rem]">
+                    <motion.div
+                        animate={{
+                            x: isButtonPressed ? -25 : 0,
+                            y: isButtonPressed ? -5 : 0,
+                        }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="w-full h-full relative"
+                    >
+                        <Image
+                            src="/About/hand-tap.png"
+                            alt="Hand Holding Phone"
+                            fill
+                            className="object-contain drop-shadow-2xl opacity-100"
+                        />
+                    </motion.div>
                 </div>
             </motion.div>
         </section>

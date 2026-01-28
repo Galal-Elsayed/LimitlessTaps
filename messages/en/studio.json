@@ -12,7 +12,8 @@
             "all": "All Templates",
             "simple": "Simple",
             "medium": "Medium",
-            "advanced": "Advanced"
+            "advanced": "Advanced",
+            "showing": "Showing"
         },
         "toggle": {
             "desktop": "Desktop",

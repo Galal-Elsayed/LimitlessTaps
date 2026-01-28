@@ -2,6 +2,7 @@
 
 import React from "react";
 import SeoCards from "../ReusableComponents/SeoCards";
+import { useTranslations } from "next-intl";
 
 // --- SHAPES ---
 
@@ -59,61 +60,56 @@ const SecurityShape = () => (
   </div>
 );
 
-const SOFTWARE_SERVICES = [
-  {
-    title: "Enterprise Software Solutions",
-    description:
-      "Scalable, secure, and custom-tailored software for large organizations. We build mission-critical systems that streamline operations, automate workflows, and integrate seamlessly with your existing legacy infrastructure.",
-    colSpan: "lg:col-span-4",
-    shape: <EnterpriseShape />,
-  },
-  {
-    title: "Cloud Infrastructure",
-    description:
-      "Architecting resilient cloud-native environments. We leverage AWS, Azure, and Google Cloud to build self-healing, auto-scaling infrastructures that maximize uptime and minimize operational costs.",
-    colSpan: "lg:col-span-8",
-    shape: <CloudShape />,
-  },
-  {
-    title: "API Development & Integration",
-    description:
-      "Connecting your digital ecosystem. We design robust RESTful and GraphQL APIs that serve as the backbone of your applications, enabling secure data exchange between disparate systems and third-party services.",
-    colSpan: "lg:col-span-6",
-    shape: <ApiShape />,
-  },
-  {
-    title: "Data Analytics & BI",
-    description:
-      "Turning raw data into actionable insights. Our data engineering solutions aggregate, process, and visualize your business metrics, empowering you to make informed, data-driven decisions in real-time.",
-    colSpan: "lg:col-span-6",
-    shape: <DataShape />,
-  },
-  {
-    title: "Cybersecurity & Data Protection",
-    description:
-      "Safeguarding your digital assets. We implement rigorous security protocols, encryption standards, and compliance measures (GDPR, HIPAA) to protect sensitive data and ensure business continuity against cyber threats.",
-    colSpan: "lg:col-span-12",
-    shape: <SecurityShape />,
-  },
-];
-
 export function SoftwareCards() {
+  const t = useTranslations("SoftwareSolutions.cards");
 
-    return (
-        <SeoCards
-            items={SOFTWARE_SERVICES}
-            seoHeader="Custom Software Development & Cloud Solutions"
-            seoList={[
-                "Enterprise Resource Planning (ERP)",
-                "Cloud Migration & Architecture",
-                "API Development",
-                "Business Intelligence Solution",
-                "Cybersecurity Services"
-            ]}
-            gradientBottom={false}
+  const SOFTWARE_SERVICES = [
+    {
+      title: t("items.enterprise.title"),
+      description: t("items.enterprise.description"),
+      colSpan: "lg:col-span-4",
+      shape: <EnterpriseShape />,
+    },
+    {
+      title: t("items.cloud.title"),
+      description: t("items.cloud.description"),
+      colSpan: "lg:col-span-8",
+      shape: <CloudShape />,
+    },
+    {
+      title: t("items.api.title"),
+      description: t("items.api.description"),
+      colSpan: "lg:col-span-6",
+      shape: <ApiShape />,
+    },
+    {
+      title: t("items.analytics.title"),
+      description: t("items.analytics.description"),
+      colSpan: "lg:col-span-6",
+      shape: <DataShape />,
+    },
+    {
+      title: t("items.security.title"),
+      description: t("items.security.description"),
+      colSpan: "lg:col-span-12",
+      shape: <SecurityShape />,
+    },
+  ];
 
-        />
-    );
+  return (
+    <SeoCards
+      items={SOFTWARE_SERVICES}
+      seoHeader={t("seoHeader")}
+      seoList={[
+        t("seoList.0"),
+        t("seoList.1"),
+        t("seoList.2"),
+        t("seoList.3"),
+        t("seoList.4"),
+      ]}
+      gradientBottom={false}
+    />
+  );
 }
 
 export default SoftwareCards;
