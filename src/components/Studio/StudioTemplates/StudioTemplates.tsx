@@ -104,6 +104,7 @@ const fadeTransition = { duration: 0.12 };
 const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<typeof useTranslations>; isRTL: boolean }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
 
     useEffect(() => {
         setCurrentIndex(0);
@@ -157,7 +158,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
                         className="w-full flex justify-center"
                         style={{ willChange: "transform, opacity" }}
                     >
-                        <TemplateItem template={activeItem} t={t} />
+                        <TemplateItem template={activeItem} t={t} viewMode={viewMode} setViewMode={setViewMode} />
                     </m.div>
                 </AnimatePresence>
             </div>
@@ -268,8 +269,12 @@ export default function StudioTemplates() {
 }
 
 // PERFORMANCE: TemplateItem using CSS transitions instead of Framer Motion for layout changes
-const TemplateItem = memo(({ template, t }: { template: Template; t: ReturnType<typeof useTranslations> }) => {
-    const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
+const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
+    template: Template;
+    t: ReturnType<typeof useTranslations>;
+    viewMode: "desktop" | "mobile";
+    setViewMode: React.Dispatch<React.SetStateAction<"desktop" | "mobile">>;
+}) => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const title = t(`items.${template.titleKey}.title`);
