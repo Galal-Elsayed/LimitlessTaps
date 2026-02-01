@@ -123,7 +123,7 @@ const DotMatrix = ({
 
                     // Dynamic alpha
                     // Base alpha
-                    let alpha = opacities[Math.floor(noise * opacities.length)];
+                    const alpha = opacities[Math.floor(noise * opacities.length)];
 
                     // Wave animation
                     const wave = Math.sin(time + nx * 10 + ny * 10);

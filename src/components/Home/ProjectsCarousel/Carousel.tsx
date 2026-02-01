@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight, Copy, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -40,7 +41,8 @@ const projects = [
     ],
     image: "/Home/How-We-Build/wireframe-apps-and-tools.png", // Placeholder
     link: "https://velvetvogue.com",
-    caseStudy: "Exploring the challenges of building a scalable multi-vendor marketplace from scratch...",
+    caseStudy:
+      "Exploring the challenges of building a scalable multi-vendor marketplace from scratch...",
   },
   {
     id: 3,
@@ -56,7 +58,8 @@ const projects = [
     ],
     image: "/Home/How-We-Build/board-with-mobile-app-development.png", // Placeholder
     link: "https://taskflowpro.com",
-    caseStudy: "How we achieved 99.9% uptime and scaled to 10k users in 3 months...",
+    caseStudy:
+      "How we achieved 99.9% uptime and scaled to 10k users in 3 months...",
   },
 ];
 
@@ -87,7 +90,10 @@ export default function Carousel() {
     return () => clearInterval(timer);
   }, [currentIndex, isPaused, isModalOpen]);
 
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: { offset: { x: number } }) => {
+  const handleDragEnd = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: { offset: { x: number } },
+  ) => {
     if (info.offset.x > 50) {
       handlePrev();
     } else if (info.offset.x < -50) {
@@ -124,15 +130,34 @@ export default function Carousel() {
         {/* Header */}
         <div className="text-center mb-8 space-y-4">
           <div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 font-app">Projects We&apos;ve Built</h2>
-            <p className="text-neutral-400 text-lg md:text-2xl">Real platforms driving real results for our clients</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 font-app">
+              Projects We&apos;ve Built
+            </h2>
+            <p className="text-neutral-400 text-lg md:text-2xl">
+              Real platforms driving real results for our clients
+            </p>
+            <div className="mt-6 flex justify-center">
+              <Button
+                className="inline-flex items-center justify-center rounded-xl bg-[#eeeeee] px-8 py-6 font-extrabold text-black tracking-widest uppercase shadow-[0_5px_0_0_#bebebe] border border-white/10 transition-all duration-100 ease-out hover:bg-white hover:shadow-[0_2px_0_0_#bebebe] hover:translate-y-0.5 active:shadow-none active:translate-y-1 group"
+                asChild
+              >
+                <Link href="/projects">
+                  Explore All Projects
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Carousel Container */}
         <div className="relative">
           <div className="overflow-hidden rounded-3xl bg-neutral-900 border border-neutral-800 h-auto min-h-[700px] lg:min-h-[520px] flex flex-col lg:flex-row relative transition-colors duration-300 hover:border-white/30">
-            <AnimatePresence initial={false} custom={direction} mode="popLayout">
+            <AnimatePresence
+              initial={false}
+              custom={direction}
+              mode="popLayout"
+            >
               <motion.div
                 key={currentIndex}
                 custom={direction}
@@ -164,11 +189,17 @@ export default function Carousel() {
                         className="p-1.5 rounded-full hover:bg-neutral-800 text-neutral-400 transition-colors"
                         title="Copy Link"
                       >
-                        {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                        {copied ? (
+                          <Check size={14} className="text-green-500" />
+                        ) : (
+                          <Copy size={14} />
+                        )}
                       </button>
                     </div>
 
-                    <h3 className="text-lg md:text-2xl font-bold mb-3">{currentProject.title}</h3>
+                    <h3 className="text-lg md:text-2xl font-bold mb-3">
+                      {currentProject.title}
+                    </h3>
                     <p className="text-sm text-neutral-400 mb-6 leading-relaxed line-clamp-3">
                       {currentProject.description}
                     </p>
@@ -187,7 +218,9 @@ export default function Carousel() {
                     <div className="grid grid-cols-3 gap-2 md:gap-6 mb-6">
                       {currentProject.stats.map((stat, idx) => (
                         <div key={idx}>
-                          <div className="text-base md:text-2xl font-bold text-white mb-1">{stat.value}</div>
+                          <div className="text-base md:text-2xl font-bold text-white mb-1">
+                            {stat.value}
+                          </div>
                           <div className="text-[9px] uppercase tracking-wider text-neutral-500 font-semibold">
                             {stat.label}
                           </div>
@@ -201,7 +234,11 @@ export default function Carousel() {
                       className="rounded-full px-3 py-2 md:px-4 md:py-3 h-auto bg-white text-black hover:bg-neutral-200 text-[10px] md:text-xs font-semibold flex-1"
                       asChild
                     >
-                      <a href={currentProject.link} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={currentProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Visit Website
                       </a>
                     </Button>
@@ -217,7 +254,13 @@ export default function Carousel() {
 
                 {/* Right: Image */}
                 <div className="w-full lg:w-[65%] relative h-[220px] sm:h-[350px] lg:h-auto overflow-hidden shrink-0">
-                  <Image src={currentProject.image} alt={currentProject.title} fill className="object-cover" priority />
+                  <Image
+                    src={currentProject.image}
+                    alt={currentProject.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -266,27 +309,49 @@ export default function Carousel() {
                   </button>
 
                   <div className="relative h-64 w-full shrink-0">
-                    <Image src={currentProject.image} alt={currentProject.title} fill className="object-contain p-4" />
+                    <Image
+                      src={currentProject.image}
+                      alt={currentProject.title}
+                      fill
+                      className="object-contain p-4"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent" />
                     <div className="absolute bottom-6 left-8">
-                      <span className="text-blue-400 font-medium mb-2 block">{currentProject.category}</span>
-                      <h3 className="text-3xl font-bold text-white">{currentProject.title} Case Study</h3>
+                      <span className="text-blue-400 font-medium mb-2 block">
+                        {currentProject.category}
+                      </span>
+                      <h3 className="text-3xl font-bold text-white">
+                        {currentProject.title} Case Study
+                      </h3>
                     </div>
                   </div>
 
                   <div className="p-8 space-y-6">
                     <div>
-                      <h4 className="text-xl font-semibold text-white mb-3">Overview</h4>
-                      <p className="text-neutral-400 leading-relaxed">{currentProject.caseStudy}</p>
+                      <h4 className="text-xl font-semibold text-white mb-3">
+                        Overview
+                      </h4>
+                      <p className="text-neutral-400 leading-relaxed">
+                        {currentProject.caseStudy}
+                      </p>
                     </div>
 
                     <div>
-                      <h4 className="text-xl font-semibold text-white mb-3">Key Results</h4>
+                      <h4 className="text-xl font-semibold text-white mb-3">
+                        Key Results
+                      </h4>
                       <div className="grid grid-cols-3 gap-4">
                         {currentProject.stats.map((stat, idx) => (
-                          <div key={idx} className="bg-neutral-800/50 p-4 rounded-xl border border-neutral-800">
-                            <div className="text-2xl font-bold text-white">{stat.value}</div>
-                            <div className="text-xs text-neutral-500 uppercase font-semibold mt-1">{stat.label}</div>
+                          <div
+                            key={idx}
+                            className="bg-neutral-800/50 p-4 rounded-xl border border-neutral-800"
+                          >
+                            <div className="text-2xl font-bold text-white">
+                              {stat.value}
+                            </div>
+                            <div className="text-xs text-neutral-500 uppercase font-semibold mt-1">
+                              {stat.label}
+                            </div>
                           </div>
                         ))}
                       </div>

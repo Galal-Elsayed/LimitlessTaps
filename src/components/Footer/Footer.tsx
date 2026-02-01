@@ -10,8 +10,9 @@ export default function Footer() {
   const tServices = useTranslations("services");
 
   const siteLinks = [
-    { key: "company", href: "/about-us" },
+    { key: "studio", href: "/studio" },
     { key: "portfolio", href: "/projects" },
+    { key: "company", href: "/about-us" },
     { key: "careers", href: "/careers" },
     { key: "contact", href: "/contact" },
   ];
@@ -36,6 +37,11 @@ export default function Footer() {
       key: "web_design",
       href: "/services/web-design",
       title: tServices("web_design_title"),
+    },
+    {
+      key: "wordpress_cms",
+      href: "/services/wordpress",
+      title: tServices("wordpress_cms_title"),
     },
   ];
 

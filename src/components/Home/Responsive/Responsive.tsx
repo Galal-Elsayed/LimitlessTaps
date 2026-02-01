@@ -15,37 +15,55 @@ const DiscoveryShape = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
+    {/* Central Core */}
+    <motion.circle
+      cx="100"
+      cy="100"
+      r="20"
+      fill="currentColor"
+      initial={{ scale: 0.8, opacity: 0.8 }}
+      animate={{ scale: [0.8, 1.1, 0.8], opacity: [0.8, 1, 0.8] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    />
+
+    {/* Inner Orbit */}
+    <motion.circle
+      cx="100"
+      cy="100"
+      r="45"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeDasharray="4 4"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+    />
+
+    {/* Outer Orbit with Satellite */}
+    <motion.g
+      animate={{ rotate: -360 }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+    >
+      <circle
+        cx="100"
+        cy="100"
+        r="75"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.3"
+      />
+      <circle cx="175" cy="100" r="6" fill="currentColor" />
+    </motion.g>
+
+    {/* Expanding Rings representing "Universal" reach */}
     <motion.circle
       cx="100"
       cy="100"
       r="30"
       stroke="currentColor"
-      strokeWidth="2"
-      initial={{ scale: 0.8, opacity: 0.8 }}
-      animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.8, 1, 0.8] }}
-      transition={{ duration: 3, repeat: Infinity }}
-    />
-    <motion.circle
-      cx="100"
-      cy="100"
-      r="60"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeDasharray="4 4"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-    />
-    <motion.circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <motion.line
-      x1="100"
-      y1="100"
-      x2="100"
-      y2="40"
-      stroke="currentColor"
-      strokeWidth="2"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-      style={{ transformOrigin: "100px 100px" }}
+      strokeWidth="1"
+      initial={{ opacity: 0.6, scale: 1 }}
+      animate={{ opacity: 0, scale: 2.5 }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
     />
   </svg>
 );
@@ -57,34 +75,46 @@ const StrategyShape = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
+    {/* Layout box that changes size/aspect ratio - "Adaptive" */}
     <motion.rect
-      x="70"
-      y="70"
-      width="60"
-      height="60"
+      x="60"
+      y="60"
+      width="80"
+      height="80"
+      rx="8"
       stroke="currentColor"
       strokeWidth="2"
-      animate={{ rotate: 90 }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      style={{ transformOrigin: "100px 100px" }}
+      animate={{
+        width: [80, 100, 60, 80],
+        height: [80, 60, 100, 80],
+        x: [60, 50, 70, 60],
+        y: [60, 70, 50, 60],
+      }}
+      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
     />
-    <motion.circle cx="100" cy="100" r="5" fill="currentColor" />
+
+    {/* Measurement lines suggesting resizing */}
     <motion.path
-      d="M100 40 L100 70 M100 130 L100 160 M40 100 L70 100 M130 100 L160 100"
+      d="M50 40 L50 160 M150 40 L150 160"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1"
       strokeDasharray="2 2"
+      opacity="0.5"
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      transition={{ duration: 4, repeat: Infinity }}
     />
-    <motion.circle
-      cx="100"
-      cy="100"
-      r="80"
+    <motion.path
+      d="M40 50 L160 50 M40 150 L160 150"
       stroke="currentColor"
-      strokeWidth="1.5"
-      opacity="0.4"
-      animate={{ scale: [1, 1.05, 1] }}
-      transition={{ duration: 2, repeat: Infinity }}
+      strokeWidth="1"
+      strokeDasharray="2 2"
+      opacity="0.5"
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      transition={{ duration: 4, repeat: Infinity, delay: 2 }}
     />
+
+    {/* Center Dot */}
+    <motion.circle cx="100" cy="100" r="4" fill="currentColor" />
   </svg>
 );
 
@@ -95,24 +125,73 @@ const DesignShape = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <motion.path
-      d="M50 100 Q100 50 150 100 T250 100"
+    {/* Phone Frame */}
+    <motion.rect
+      x="65"
+      y="50"
+      width="70"
+      height="100"
+      rx="10"
       stroke="currentColor"
-      strokeWidth="3"
+      strokeWidth="2"
+      initial={{ opacity: 0.8 }}
+      animate={{ opacity: [0.8, 1, 0.8] }}
+      transition={{ duration: 4, repeat: Infinity }}
+    />
+    {/* Screen Notch/Home Bar */}
+    <path
+      d="M90 140 H110"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      opacity="0.5"
+    />
+
+    {/* Floating Elements (Waves) coming out or inside */}
+    <motion.path
+      d="M75 90 Q100 110 125 90"
+      stroke="currentColor"
+      strokeWidth="2"
       fill="none"
-      animate={{ x: [-50, 0] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+      animate={{
+        d: [
+          "M75 90 Q100 110 125 90",
+          "M75 90 Q100 70 125 90",
+          "M75 90 Q100 110 125 90",
+        ],
+      }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.path
-      d="M50 120 Q100 70 150 120 T250 120"
+      d="M75 110 Q100 130 125 110"
       stroke="currentColor"
-      strokeWidth="3"
+      strokeWidth="2"
       fill="none"
       opacity="0.6"
-      animate={{ x: [-50, 0] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.2 }}
+      animate={{
+        d: [
+          "M75 110 Q100 130 125 110",
+          "M75 110 Q100 90 125 110",
+          "M75 110 Q100 130 125 110",
+        ],
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: 0.5,
+      }}
     />
-    <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+
+    <circle
+      cx="100"
+      cy="100"
+      r="60"
+      stroke="currentColor"
+      strokeWidth="1"
+      opacity="0.2"
+      strokeDasharray="4 4"
+    />
   </svg>
 );
 
@@ -123,38 +202,62 @@ const DevelopmentShape = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <motion.rect x="60" y="60" width="80" height="80" rx="10" stroke="currentColor" strokeWidth="2" />
-    <motion.line
-      x1="80"
-      y1="90"
-      x2="120"
-      y2="90"
+    {/* Background Device/Window */}
+    <motion.rect
+      x="80"
+      y="50"
+      width="60"
+      height="80"
+      rx="6"
       stroke="currentColor"
       strokeWidth="2"
-      animate={{ scaleX: [0, 1, 0] }}
-      transition={{ duration: 2, repeat: Infinity }}
+      opacity="0.5"
+      animate={{ x: [0, 5, 0], y: [0, -5, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
     />
-    <motion.line
-      x1="80"
-      y1="110"
-      x2="110"
-      y2="110"
+
+    {/* Foreground Device/Window */}
+    <motion.rect
+      x="50"
+      y="80"
+      width="80"
+      height="60"
+      rx="6"
       stroke="currentColor"
       strokeWidth="2"
-      animate={{ scaleX: [0, 1, 0] }}
-      transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
+      fill="#0A0A0A"
     />
-    <motion.circle
-      cx="100"
-      cy="100"
-      r="90"
+
+    {/* Code lines syncing */}
+    <motion.line
+      x1="65"
+      y1="100"
+      x2="115"
+      y2="100"
+      stroke="currentColor"
+      strokeWidth="2"
+      animate={{ scaleX: [0.8, 1, 0.8], opacity: [0.5, 1, 0.5] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    />
+    <motion.line
+      x1="65"
+      y1="115"
+      x2="105"
+      y2="115"
+      stroke="currentColor"
+      strokeWidth="2"
+      animate={{ scaleX: [0.8, 1, 0.8], opacity: [0.5, 1, 0.5] }}
+      transition={{ duration: 3, delay: 0.5, repeat: Infinity }}
+    />
+
+    {/* Connecting/Sync Arc */}
+    <motion.path
+      d="M130 60 A 40 40 0 0 1 140 140"
       stroke="currentColor"
       strokeWidth="1.5"
-      strokeDasharray="10 10"
+      strokeDasharray="4 4"
+      fill="none"
       opacity="0.4"
-      animate={{ rotate: -360 }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      style={{ transformOrigin: "100px 100px" }}
     />
   </svg>
 );
@@ -201,8 +304,12 @@ const StepItem = ({
       </div>
 
       <div className="flex flex-col gap-1 justify-center">
-        <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{title}</h3>
-        <p className="text-neutral-400 text-sm md:text-base max-w-sm block leading-relaxed">{description}</p>
+        <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
+          {title}
+        </h3>
+        <p className="text-neutral-400 text-sm md:text-base max-w-sm block leading-relaxed">
+          {description}
+        </p>
       </div>
     </motion.div>
   );
@@ -237,7 +344,8 @@ export default function StickyPhone() {
     },
     {
       title: "Cross-Platform Consistency",
-      description: "Maintain a unified brand experience whether your users are on iOS, Android, Windows, or macOS.",
+      description:
+        "Maintain a unified brand experience whether your users are on iOS, Android, Windows, or macOS.",
       Shape: DevelopmentShape,
       color: "emerald",
     },
@@ -251,7 +359,8 @@ export default function StickyPhone() {
             Responsive Across <br /> All Devices
           </h2>
           <p className="text-neutral-400 text-lg md:text-xl max-w-lg mx-auto">
-            Experience seamless performance and stunning visuals on every screen.
+            Experience seamless performance and stunning visuals on every
+            screen.
           </p>
         </div>
 

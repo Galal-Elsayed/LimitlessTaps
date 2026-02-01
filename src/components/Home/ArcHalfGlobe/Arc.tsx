@@ -53,7 +53,7 @@ export function CTAButtons() {
       {/* Primary Tech Button */}
       <Link
         href="/contact"
-        className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-black transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:bg-zinc-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-[0.98]"
+        className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-[#eeeeee] px-8 font-extrabold text-black tracking-widest uppercase shadow-[0_5px_0_0_#bebebe] border border-white/10 transition-all duration-100 ease-out hover:bg-white hover:shadow-[0_2px_0_0_#bebebe,0_0_20px_rgba(255,255,255,0.4)] hover:translate-y-0.5 active:shadow-none active:translate-y-1"
       >
         <div className="absolute inset-0 bg-linear-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <span className={`relative z-10 flex items-center gap-2`}>
@@ -72,16 +72,18 @@ export function CTAButtons() {
       {/* Secondary Glass Button */}
       <Link
         href="/services"
-        className="group relative inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 text-white backdrop-blur-xl transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:border-white/20 hover:bg-white/10 active:scale-[0.98]"
+        className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-neutral-900 px-8 font-extrabold text-white tracking-widest uppercase shadow-[0_5px_0_0_#262626] border border-white/10 transition-all duration-100 ease-out hover:bg-neutral-900/80 hover:shadow-[0_2px_0_0_#262626] hover:translate-y-0.5 active:shadow-none active:translate-y-1"
       >
-        <span className="font-medium">{t("cta_secondary")}</span>
-        <ArrowRight
-          className={`h-4 w-4 transition-transform duration-300 ${
-            isRTL
-              ? "rotate-180 group-hover:-translate-x-1"
-              : "group-hover:translate-x-1"
-          }`}
-        />
+        <span className="relative z-10 flex items-center gap-2">
+          {t("cta_secondary")}
+          <ArrowRight
+            className={`h-4 w-4 transition-transform duration-300 ${
+              isRTL
+                ? "rotate-180 group-hover:-translate-x-1"
+                : "group-hover:translate-x-1"
+            }`}
+          />
+        </span>
       </Link>
     </div>
   );

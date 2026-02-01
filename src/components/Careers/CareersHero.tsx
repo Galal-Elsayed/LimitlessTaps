@@ -1,95 +1,146 @@
 "use client";
 
 import React from "react";
-import { BackgroundPaths } from "@/components/ui/background-paths";
-import { Header } from "@/components/ui/header";
 import { motion } from "framer-motion";
+import { BackgroundPaths } from "@/components/ui/background-paths";
+import { ArrowRight, Globe, Zap, Heart, Briefcase, Mail } from "lucide-react";
 
-const AnimatedResume = ({ className }: { className?: string }) => (
-  <div className={`relative flex items-center justify-center ${className}`}>
-    {/* Subtle white glow */}
-    <div className="absolute inset-0 bg-white/5 blur-2xl rounded-full opacity-20" />
+const benefits = [
+  {
+    title: "Global Impact",
+    description:
+      "Work on products that touch millions of lives across the globe.",
+    icon: Globe,
+  },
+  {
+    title: "Fast-Paced Growth",
+    description:
+      "Accelerate your career in an environment that values speed and ownership.",
+    icon: Zap,
+  },
+  {
+    title: "Health & Wellness",
+    description:
+      "Comprehensive health coverage and wellness stipends to keep you at your best.",
+    icon: Heart,
+  },
+];
 
-    {/* Document Shape */}
-    <motion.div
-      className="relative w-48 h-64 border border-white/10 bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm"
-      initial={{ y: 0, rotate: -12 }}
-      animate={{ y: [-10, 10, -10], rotate: [-12, -8, -12] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    >
-      {/* Header Line */}
-      <div className="absolute top-6 left-6 right-6 h-3 bg-white/20 rounded-sm" />
-
-      {/* Content Lines */}
-      <div className="absolute top-16 left-6 right-12 h-2 bg-white/10 rounded-sm" />
-      <div className="absolute top-24 left-6 right-6 h-2 bg-white/10 rounded-sm" />
-      <div className="absolute top-32 left-6 right-10 h-2 bg-white/10 rounded-sm" />
-      <div className="absolute top-40 left-6 right-6 h-2 bg-white/10 rounded-sm" />
-
-      {/* Animated Scan Line */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent"
-        animate={{ top: ["-100%", "200%"] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1 }}
-      />
-    </motion.div>
-
-    {/* Floating Elements (Abstract additions) */}
-    <motion.div
-      className="absolute -right-8 top-12 w-16 h-16 border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md rounded-xl flex items-center justify-center"
-      animate={{
-        y: [10, -10, 10],
-        rotate: [12, 24, 12]
-      }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-    >
-      <span className="text-2xl text-white/40 font-mono">+</span>
-    </motion.div>
-  </div>
-);
+// Button style constant matching the Navbar "Start Project" button
+const BUTTON_STYLE_CLASSES = `
+  px-8 py-3 rounded-lg 
+  bg-[#eeeeee] hover:bg-white 
+  text-black font-extrabold text-sm tracking-widest uppercase 
+  shadow-[0_5px_0_0_#bebebe] 
+  hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#bebebe] 
+  active:translate-y-1 active:shadow-none 
+  transition-all duration-100 ease-out 
+  flex items-center justify-center gap-3 
+  border border-white/10
+`;
 
 export default function CareersHero() {
   return (
-    <div style={{ backgroundColor: "#0a0a0a" }}>
-      <BackgroundPaths>
-        <Header title="Build The Future With Us" className="mb-2" />
-
-        <div className="relative group max-w-2xl mx-auto mt-8">
-          {/* Dark Glass Card */}
-          <div className="relative bg-[#0a0a0a]/80 p-8 md:p-12 rounded-2xl backdrop-blur-md border border-white/10 shadow-2xl flex flex-col items-center text-center overflow-hidden">
-
-            {/* Subtle Gradient background effect inside card */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none" />
-
-            {/* Background Animated Icon */}
-            <div className="absolute -right-12 -top-12 md:-right-4 md:-top-4 opacity-30 pointer-events-none scale-75 md:scale-100">
-              <AnimatedResume className="transform rotate-12" />
+    <div className="bg-[#0a0a0a] min-h-screen text-white overflow-hidden pb-24">
+      {/* Hero Section */}
+      <div className="relative">
+        <BackgroundPaths>
+          <div className="flex flex-col items-center text-center">
+            <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-8 tracking-tighter font-app group">
+              Join the Limitless
+            </h1>
+            <p className="text-xl md:text-2xl text-neutral-400 max-w-2xl leading-relaxed">
+              We are building the future of digital experiences.{" "}
+              <br className="hidden md:block" />
+              Join a team where your work truly matters.
+            </p>
+            <div className="mt-10">
+              <a
+                href="#open-roles"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("open-roles")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className={BUTTON_STYLE_CLASSES}
+              >
+                View Open Roles
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </div>
+          </div>
+        </BackgroundPaths>
+      </div>
 
-            <div className="relative z-10 flex flex-col items-center">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white tracking-tight">
-                No Open Roles? No Problem.
-              </h3>
-
-              <p className="text-lg text-white/60 leading-relaxed max-w-lg mb-8">
-                We are always looking for exceptional talent to join our team.
-                Send us your CV and we'll keep you in mind for future opportunities.
+      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-20">
+        {/* Culture / Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+          {benefits.map((benefit, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 p-8 rounded-3xl hover:bg-neutral-900 transition-colors"
+            >
+              <div className="w-12 h-12 bg-neutral-800 rounded-2xl flex items-center justify-center mb-6 text-white">
+                <benefit.icon size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
+              <p className="text-neutral-400 leading-relaxed">
+                {benefit.description}
               </p>
+            </motion.div>
+          ))}
+        </div>
 
+        {/* Open Roles Section */}
+        <div id="open-roles" className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 font-app">
+              Open Positions
+            </h2>
+            <p className="text-neutral-400 text-lg">
+              Don't see your perfect role? We are always looking for talent.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center justify-center p-12 bg-neutral-900/30 border border-dashed border-neutral-800 rounded-3xl">
+            <div className="w-16 h-16 bg-neutral-800 rounded-full flex items-center justify-center mb-6 text-neutral-500">
+              <Briefcase size={24} />
+            </div>
+            <h3 className="text-2xl font-bold mb-2">No Open Roles Currently</h3>
+            <p className="text-neutral-500 mb-8 max-w-md text-center">
+              We don't have any specific openings right now, but things move
+              fast here. Check back soon!
+            </p>
+          </div>
+
+          <div className="mt-12 p-8 rounded-3xl bg-neutral-900/30 border border-neutral-800 text-center relative overflow-hidden">
+            {/* Decorative gradient for the CTA card */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+
+            <h3 className="text-2xl font-bold mb-4 relative z-10">
+              Can't find what you're looking for?
+            </h3>
+            <p className="text-neutral-400 mb-8 max-w-xl mx-auto relative z-10">
+              We're always interested in meeting extraordinary people. Send us
+              your resume and tell us why you'd be a great fit.
+            </p>
+            <div className="flex justify-center relative z-10">
               <a
                 href="mailto:careers@limitlesstaps.com"
-                className="px-8 py-4 rounded-lg bg-[#eeeeee] hover:bg-white text-black font-extrabold text-sm tracking-widest uppercase shadow-[0_5px_0_0_#bebebe] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#bebebe] active:translate-y-1 active:shadow-none transition-all duration-100 ease-out flex items-center gap-3 border border-white/10"
+                className={BUTTON_STYLE_CLASSES}
               >
-                <span>Send Your CV</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="opacity-70">
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
+                <Mail className="w-4 h-4" />
+                Email Us Directly
               </a>
             </div>
           </div>
         </div>
-      </BackgroundPaths>
+      </div>
     </div>
   );
 }

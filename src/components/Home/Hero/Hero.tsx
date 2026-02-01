@@ -8,12 +8,15 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
 // Dynamic import for heavy WebGL component - loads only on client
-const PlasmaGlobe = dynamic(() => import("@/components/lightswind/plasma-globe"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-75 sm:min-h-112.5 lg:min-h-137.5 rounded-xl bg-linear-to-b from-blue-500/10 to-purple-500/10 animate-pulse" />
-  ),
-});
+const PlasmaGlobe = dynamic(
+  () => import("@/components/lightswind/plasma-globe"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-75 sm:min-h-112.5 lg:min-h-137.5 rounded-xl bg-linear-to-b from-blue-500/10 to-purple-500/10 animate-pulse" />
+    ),
+  },
+);
 
 export default function Hero() {
   const t = useTranslations("home");
@@ -88,7 +91,7 @@ export default function Hero() {
               {/* Primary Button */}
               <Link
                 href="/contact"
-                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-white px-8 font-semibold text-black transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:bg-zinc-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] active:scale-[0.98]"
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-[#eeeeee] px-8 font-extrabold text-black tracking-widest uppercase shadow-[0_5px_0_0_#bebebe] border border-white/10 transition-all duration-100 ease-out hover:bg-white hover:shadow-[0_2px_0_0_#bebebe,0_0_20px_rgba(255,255,255,0.4)] hover:translate-y-0.5 active:shadow-none active:translate-y-1"
               >
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-100 via-white to-zinc-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <span className="relative z-10 flex items-center gap-2">
@@ -109,14 +112,18 @@ export default function Hero() {
               {/* Secondary Button */}
               <Link
                 href="/services"
-                className="group relative inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 text-white backdrop-blur-xl transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:border-white/20 hover:bg-white/10 active:scale-[0.98]"
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-xl bg-neutral-900 px-8 font-extrabold text-white tracking-widest uppercase shadow-[0_5px_0_0_#262626] border border-white/10 transition-all duration-100 ease-out hover:bg-neutral-900/80 hover:shadow-[0_2px_0_0_#262626] hover:translate-y-0.5 active:shadow-none active:translate-y-1"
               >
-                <span className="font-semibold">{t("cta_secondary")}</span>
-                <ArrowRight
-                  className={`h-5 w-5 transition-transform duration-300 ${
-                    isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-                  }`}
-                />
+                <span className="relative z-10 flex items-center gap-2">
+                  {t("cta_secondary")}
+                  <ArrowRight
+                    className={`h-5 w-5 transition-transform duration-300 ${
+                      isRTL
+                        ? "rotate-180 group-hover:-translate-x-1"
+                        : "group-hover:translate-x-1"
+                    }`}
+                  />
+                </span>
               </Link>
             </motion.div>
           </div>
