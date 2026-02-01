@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
 import { Preloader } from "@/components/ui/Preloader";
 import { FloatingRobot } from "@/components/ui/floating-robot";
+import { FloatingIcons } from "@/components/ui/floatingIcons";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -172,6 +173,7 @@ export default async function RootLayout({
           {children}
           <Footer />
           <FloatingRobot />
+          <FloatingIcons />
         </NextIntlClientProvider>
       </body>
     </html>

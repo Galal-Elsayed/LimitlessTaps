@@ -131,7 +131,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             {/* Previous Arrow */}
             <button
                 onClick={() => paginate(isRTL ? 1 : -1)}
-                className="hidden md:flex absolute -left-4 lg:-left-8 xl:-left-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-neutral-900/90 border border-white/10 text-white/60 hover:bg-neutral-800 hover:text-white active:scale-95 transition-transform"
+                className="hidden md:flex absolute -left-4 lg:-left-8 xl:-left-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
                 {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
             </button>
@@ -139,7 +139,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             {/* Next Arrow */}
             <button
                 onClick={() => paginate(isRTL ? -1 : 1)}
-                className="hidden md:flex absolute -right-4 lg:-right-8 xl:-right-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-neutral-900/90 border border-white/10 text-white/60 hover:bg-neutral-800 hover:text-white active:scale-95 transition-transform"
+                className="hidden md:flex absolute -right-4 lg:-right-8 xl:-right-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
                 {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
             </button>
@@ -167,7 +167,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             <div className="absolute -bottom-24 flex md:hidden gap-10 items-center z-20 pb-8">
                 <button
                     onClick={() => paginate(isRTL ? 1 : -1)}
-                    className="w-14 h-14 flex items-center justify-center rounded-full bg-neutral-900 border border-white/10 text-white active:scale-95 transition-transform shadow-lg"
+                    className="w-14 h-14 flex items-center justify-center rounded-full bg-white border border-neutral-200 text-black active:scale-95 transition-transform shadow-lg"
                 >
                     {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
                 </button>
@@ -176,7 +176,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
                 </div>
                 <button
                     onClick={() => paginate(isRTL ? -1 : 1)}
-                    className="w-14 h-14 flex items-center justify-center rounded-full bg-neutral-900 border border-white/10 text-white active:scale-95 transition-transform shadow-lg"
+                    className="w-14 h-14 flex items-center justify-center rounded-full bg-white border border-neutral-200 text-black active:scale-95 transition-transform shadow-lg"
                 >
                     {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
                 </button>
@@ -227,18 +227,25 @@ export default function StudioTemplates() {
 
                     {/* Filters Row */}
                     <div className="flex flex-col items-center gap-6">
-                        <div className="flex flex-wrap justify-center gap-3 bg-neutral-900/50 p-2 rounded-2xl border border-white/5">
+                        <div className="flex flex-wrap justify-center gap-2 bg-neutral-900/60 p-1.5 rounded-full border border-white/5 backdrop-blur-sm">
                             {categories.map((cat) => (
                                 <button
                                     key={cat.id}
                                     onClick={() => setActiveCategory(cat.id)}
                                     className={cn(
-                                        "px-8 py-3 rounded-xl text-sm md:text-base font-semibold transition-colors duration-150 border",
-                                        activeCategory === cat.id
-                                            ? "bg-white text-black border-white"
-                                            : "bg-transparent text-neutral-400 border-transparent hover:text-white hover:bg-white/5"
+                                        "relative px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 z-10",
+                                        activeCategory === cat.id ? "text-black" : "text-neutral-400 hover:text-white"
                                     )}
                                 >
+                                    {activeCategory === cat.id && (
+                                        <m.div
+                                            layoutId="activeFilter"
+                                            className="absolute inset-0 bg-white rounded-full -z-10"
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
                                     {t(cat.labelKey)}
                                 </button>
                             ))}

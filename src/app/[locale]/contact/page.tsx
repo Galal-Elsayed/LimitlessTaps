@@ -2,7 +2,7 @@
 
 
 import { motion } from 'motion/react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 import { Globe } from "@/components/ui/Globe";
 import ContactForm from "@/app/[locale]/contact/_components/ContactForm";
@@ -31,6 +31,9 @@ export default function ContactPage() {
         { start: [25.2048, 55.2708], end: [35.6895, 139.6917] },
         { start: [35.6895, 139.6917], end: [37.7595, -122.4367] },
     ];
+
+    const locale = useLocale();
+    const isArabic = locale === 'ar';
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
@@ -73,7 +76,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.6 }}
                         className='col-span-1 lg:col-span-2'
                     >
-                        <h1 className="text-6xl uppercase flex font-bold tracking-tight mb-3">
+                        <h1 className={`text-6xl uppercase flex font-bold tracking-tight mb-3`}>
                             {t.rich('hero.title', {
                                 br: () => <br />,
                                 gradient: (chunks) => <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-[#00d4ff]">{chunks}</span>

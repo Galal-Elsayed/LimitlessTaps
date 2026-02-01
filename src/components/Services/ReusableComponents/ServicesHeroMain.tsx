@@ -57,7 +57,7 @@ export default function ServicesH({
           <Header
             title={header}
             className={cn(
-              "text-[13vw]! md:text-8xl  font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85] mb-8",
+              "text-[11vw]! md:text-8xl  font-app font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 tracking-tighter uppercase drop-shadow-2xl text-center leading-[0.85] mb-8",
               headerClassName
             )}
           />

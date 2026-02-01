@@ -153,22 +153,22 @@ export default function ContactForm() {
                         disabled={isSubmitting}
                         className={`
                             w-full px-4 py-4 rounded-lg 
-                            bg-white/10 hover:bg-white/20 
-                            border border-white/20 hover:border-white/40
-                            transition-all duration-300
+                            bg-[#eeeeee] hover:bg-white 
+                            border border-white/10
+                            text-black font-extrabold text-sm tracking-wider uppercase
+                            shadow-[0_5px_0_0_#bebebe]
+                            hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#bebebe]
+                            active:translate-y-1 active:shadow-none
+                            transition-all duration-100 ease-out
                             flex items-center justify-center
-                            backdrop-blur-sm
-                            shadow-[0_4px_0_0_rgba(255,255,255,0.2)]
-                            hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(255,255,255,0.2)]
-                            active:translate-y-[4px] active:shadow-none
                             disabled:opacity-50 disabled:cursor-not-allowed
                             group
                         `}
                     >
-                        <span className="text-sm relative font-bold uppercase tracking-widest text-white flex items-center justify-center gap-3">
+                        <span className="text-sm relative font-bold uppercase tracking-widest text-black flex items-center justify-center gap-3">
                             {isSubmitting ? (
                                 <>
-                                    {t('form.sending')} 
+                                    {t('form.sending')}
                                     <Image src="/Home/infinity.apng" alt="Infinity" width={24} height={24} className='object-contain w-6 h-6' unoptimized />
                                 </>
                             ) : (
