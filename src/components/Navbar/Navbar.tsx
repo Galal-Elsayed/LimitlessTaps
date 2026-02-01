@@ -53,7 +53,7 @@ export default function Navbar() {
   const navLinks = [
     { key: "services", href: "/services", isDropdown: true },
     { key: "studio", href: "/studio" },
-    { key: "portfolio", href: "/work" },
+    { key: "portfolio", href: "/projects" },
     { key: "company", href: "/about-us" },
     { key: "careers", href: "/careers" },
     { key: "contact", href: "/contact", isButton: true },
@@ -142,7 +142,11 @@ export default function Navbar() {
   const langGlowActive = langOpen;
 
   // Render a regular nav link with animated glow
-  const renderNavLink = (link: { key: string; href: string; isButton?: boolean }) => {
+  const renderNavLink = (link: {
+    key: string;
+    href: string;
+    isButton?: boolean;
+  }) => {
     const active = isActive(link.href);
 
     if (link.isButton) {
@@ -192,10 +196,11 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${active
-                ? "[clip-path:inset(0_0_0_0)]"
-                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-              }
+                            ${
+                              active
+                                ? "[clip-path:inset(0_0_0_0)]"
+                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+                            }
                         `}
             aria-hidden="true"
           >
@@ -219,7 +224,9 @@ export default function Navbar() {
         onClick={() => router.push("/services")}
       >
         <div className="relative relative-inline-block">
-          <span className="block text-[14px] font-medium capitalize tracking-wide text-gray-300">{t("services")}</span>
+          <span className="block text-[14px] font-medium capitalize tracking-wide text-gray-300">
+            {t("services")}
+          </span>
           <span
             className={`
                             absolute inset-0 flex items-center justify-center
@@ -228,7 +235,9 @@ export default function Navbar() {
                             transition-all duration-300 ease-out
                         `}
             style={{
-              clipPath: servicesGlowActive ? "inset(0 0 0 0)" : "inset(0 50% 0 50%)",
+              clipPath: servicesGlowActive
+                ? "inset(0 0 0 0)"
+                : "inset(0 50% 0 50%)",
             }}
             aria-hidden="true"
           >
@@ -239,10 +248,11 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${servicesGlowActive
-              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-              : "text-gray-300"
-            }
+                        ${
+                          servicesGlowActive
+                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                            : "text-gray-300"
+                        }
                     `}
         />
       </button>
@@ -261,16 +271,18 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
-          } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
+          mobileMenuOpen ? "max-[900px]:hidden" : ""
+        } bg-[#0a0a0a]`}
       >
         <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
-              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-              : "opacity-100"
-              }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
+              mobileMenuOpen
+                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+                : "opacity-100"
+            }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -297,13 +309,21 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav Links (Hidden on mobile/tablet) */}
-          <div className={`hidden min-[900px]:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}>
-            {navLinks.map((link) => (link.isDropdown ? renderServicesDropdown() : renderNavLink(link)))}
+          <div
+            className={`hidden min-[900px]:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}
+          >
+            {navLinks.map((link) =>
+              link.isDropdown ? renderServicesDropdown() : renderNavLink(link),
+            )}
           </div>
 
           {/* Desktop Language Switcher (Hidden on mobile/tablet) */}
           <div className="hidden min-[900px]:flex items-center gap-4">
-            <div className="relative group" onMouseEnter={handleLangMouseEnter} onMouseLeave={handleLangMouseLeave}>
+            <div
+              className="relative group"
+              onMouseEnter={handleLangMouseEnter}
+              onMouseLeave={handleLangMouseLeave}
+            >
               <button className="flex items-center gap-2 focus:outline-none px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                 <Globe
                   className={`
@@ -311,7 +331,9 @@ export default function Navbar() {
                                         ${langGlowActive ? "text-white" : "text-gray-300"}
                                     `}
                   style={{
-                    filter: langGlowActive ? "drop-shadow(0 0 10px rgba(255,255,255,0.9))" : "none",
+                    filter: langGlowActive
+                      ? "drop-shadow(0 0 10px rgba(255,255,255,0.9))"
+                      : "none",
                   }}
                 />
 
@@ -417,7 +439,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className={`
                                 fixed top-0 bottom-0 right-0 
-                                w-[300px] z-50 
+                                w-75 z-50 
                                 bg-[#0a0a0a]/95 backdrop-blur-xl 
                                 min-[900px]:hidden 
                                 border-l border-white/10 
@@ -427,7 +449,7 @@ export default function Navbar() {
             >
               <div className="flex flex-col h-full relative">
                 {/* Header Area with Logo and Close Button - Matching Main Navbar Height (70px) */}
-                <div className="h-[70px] px-6 border-b border-white/10 flex justify-between items-center bg-[#0a0a0a]">
+                <div className="h-17.5 px-6 border-b border-white/10 flex justify-between items-center bg-[#0a0a0a]">
                   <div
                     className="cursor-pointer hover:opacity-80 transition-opacity duration-300"
                     onClick={() => {
@@ -452,7 +474,9 @@ export default function Navbar() {
                 </div>
 
                 {/* Content */}
-                <div className={`flex flex-col p-6 gap-3 ${isRTL ? "text-right" : "text-left"} flex-1`}>
+                <div
+                  className={`flex flex-col p-6 gap-3 ${isRTL ? "text-right" : "text-left"} flex-1`}
+                >
                   {navLinks.map((link, index) => (
                     <motion.div
                       key={link.key}
@@ -464,7 +488,9 @@ export default function Navbar() {
                       {link.isDropdown ? (
                         <div className="flex flex-col gap-2">
                           <button
-                            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                            onClick={() =>
+                              setMobileServicesOpen(!mobileServicesOpen)
+                            }
                             className={`
                                                             flex items-center justify-between w-full py-3 px-4 
                                                             text-lg font-medium text-white tracking-wide 
@@ -475,8 +501,9 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
-                                }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${
+                                mobileServicesOpen ? "rotate-180" : ""
+                              }`}
                             />
                           </button>
 
@@ -536,8 +563,9 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
-                      }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -545,16 +573,22 @@ export default function Navbar() {
                     {languageLinks.map((lang) => (
                       <button
                         key={lang.key}
-                        onClick={() => router.replace(pathname, { locale: lang.locale })}
+                        onClick={() =>
+                          router.replace(pathname, { locale: lang.locale })
+                        }
                         className={`
                                                     flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-300 border
-                                                    ${currentLocale === lang.key
-                            ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                          }
+                                                    ${
+                                                      currentLocale === lang.key
+                                                        ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                                                    }
                                                 `}
                       >
-                        <span lang={lang.locale} dir={lang.locale === "ar" ? "rtl" : "ltr"}>
+                        <span
+                          lang={lang.locale}
+                          dir={lang.locale === "ar" ? "rtl" : "ltr"}
+                        >
                           {lang.title}
                         </span>
                       </button>

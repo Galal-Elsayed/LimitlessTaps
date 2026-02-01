@@ -7,6 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
 import { Preloader } from "@/components/ui/Preloader";
+import { FloatingRobot } from "@/components/ui/floating-robot";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -170,6 +171,7 @@ export default async function RootLayout({
           </div>
           {children}
           <Footer />
+          <FloatingRobot />
         </NextIntlClientProvider>
       </body>
     </html>

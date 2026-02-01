@@ -5,7 +5,8 @@
       "Bash(find:*)",
       "Bash(npm install)",
       "Bash(npm run build:*)",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "WebFetch(domain:21st.dev)"
     ]
   }
 }

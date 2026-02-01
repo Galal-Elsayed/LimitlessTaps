@@ -1,0 +1,362 @@
+"use client";
+
+import React, { useState, memo } from "react";
+import { LazyMotion, domAnimation } from "motion/react";
+import { cn } from "@/lib/utils";
+import {
+  Monitor,
+  Smartphone,
+  Play,
+  X,
+  Lock,
+  ChevronLeft,
+  ChevronRight,
+  RefreshCw,
+  Minus,
+  Square,
+} from "lucide-react";
+import { Header } from "@/components/ui/header";
+import { useTranslations } from "next-intl";
+
+// Mock Data
+type Category = "all" | "simple" | "medium" | "advanced";
+
+interface Template {
+  id: string;
+  titleKey: string;
+  descriptionKey: string;
+  category: Category;
+  image: string;
+  demoUrl: string;
+  tags: string[];
+}
+
+const TEMPLATES: Template[] = [
+  // Simple
+  {
+    id: "1",
+    titleKey: "zenith",
+    descriptionKey: "zenith",
+    category: "simple",
+    image: "/placeholder-zenith.png",
+    demoUrl: "https://example.com/demo1",
+    tags: ["Portfolio", "Minimal", "React 19", "Tailwind"],
+  },
+  {
+    id: "2",
+    titleKey: "aura",
+    descriptionKey: "aura",
+    category: "simple",
+    image: "/placeholder-aura.png",
+    demoUrl: "https://example.com/demo2",
+    tags: ["Wellness", "Landing Page", "Framer Motion", "Next.js"],
+  },
+  // Medium
+  {
+    id: "3",
+    titleKey: "nexus",
+    descriptionKey: "nexus",
+    category: "medium",
+    image: "/placeholder-nexus.png",
+    demoUrl: "https://example.com/demo3",
+    tags: ["SaaS", "Analytics", "Dashboard", "Charts"],
+  },
+  {
+    id: "4",
+    titleKey: "flow",
+    descriptionKey: "flow",
+    category: "medium",
+    image: "/placeholder-flow.png",
+    demoUrl: "https://example.com/demo4",
+    tags: ["E-commerce", "Shopify", "Animations", "Stripe"],
+  },
+  // Advanced
+  {
+    id: "5",
+    titleKey: "momentum",
+    descriptionKey: "momentum",
+    category: "advanced",
+    image: "/placeholder-momentum.png",
+    demoUrl: "https://example.com/demo5",
+    tags: ["Project Management", "Next.js 15", "React 19", "Tailwind CSS 4"],
+  },
+  {
+    id: "6",
+    titleKey: "quantum",
+    descriptionKey: "quantum",
+    category: "advanced",
+    image: "/placeholder-quantum.png",
+    demoUrl: "https://example.com/demo6",
+    tags: ["WebGL", "Three.js", "3D", "Immersive"],
+  },
+];
+
+export default function ProjectsCards() {
+  const t = useTranslations("studio.templates");
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <section className="min-h-screen bg-neutral-950 py-12 pb-32 relative overflow-hidden flex flex-col items-center">
+        {/* Header Section */}
+        <div className="w-full max-w-4xl mx-auto mb-20 px-4 text-center z-10">
+          <Header
+            title="Selected Works"
+            className="text-5xl md:text-7xl mb-6"
+          />
+          <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Explore our latest projects and digital experiences crafted with
+            precision and passion.
+          </p>
+        </div>
+
+        {/* Vertical List */}
+        <div className="w-full flex flex-col items-center gap-32 px-4 md:px-16 lg:px-20 max-w-[1800px] mx-auto">
+          {TEMPLATES.map((template) => (
+            <TemplateItem key={template.id} template={template} t={t} />
+          ))}
+        </div>
+      </section>
+    </LazyMotion>
+  );
+}
+
+// PERFORMANCE: TemplateItem using CSS transitions instead of Framer Motion for layout changes
+const TemplateItem = memo(
+  ({
+    template,
+    t,
+  }: {
+    template: Template;
+    t: ReturnType<typeof useTranslations>;
+  }) => {
+    const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const title = t(`items.${template.titleKey}.title`);
+    const description = t(`items.${template.descriptionKey}.description`);
+
+    const isDesktop = viewMode === "desktop";
+    const isMobile = viewMode === "mobile";
+
+    return (
+      <div className="w-full flex flex-col items-center group">
+        {/* Device Toggle Controls */}
+        <div className="mb-6 z-30 flex items-center justify-center">
+          <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-white/10">
+            <button
+              onClick={() => setViewMode("desktop")}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-150 text-xs font-medium",
+                isDesktop
+                  ? "bg-white text-black"
+                  : "text-neutral-400 hover:text-white",
+              )}
+            >
+              <Monitor size={14} />
+              <span>{t("toggle.desktop")}</span>
+            </button>
+            <button
+              onClick={() => setViewMode("mobile")}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-150 text-xs font-medium",
+                isMobile
+                  ? "bg-white text-black"
+                  : "text-neutral-400 hover:text-white",
+              )}
+            >
+              <Smartphone size={14} />
+              <span>{t("toggle.mobile")}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Device Window - PURE CSS TRANSITIONS for max performance */}
+        <div className="relative w-full flex justify-center">
+          <div
+            className={cn(
+              "relative bg-[#222] overflow-hidden transition-all duration-300 ease-out",
+              // CSS containment for performance
+              "contain-layout contain-paint",
+              isDesktop
+                ? "w-full max-w-[1400px] h-[65vh] rounded-t-2xl border border-white/10 border-b-0 shadow-lg"
+                : "w-[350px] h-[600px] rounded-[40px] border-8 border-[#1a1a1a] shadow-md",
+            )}
+          >
+            {/* Safari-Style Window Header (Desktop Only) - No AnimatePresence */}
+            <div
+              className={cn(
+                "bg-[#333] flex items-end justify-between px-4 border-b border-black/20 select-none relative w-full overflow-hidden transition-all duration-200",
+                isDesktop ? "h-12 opacity-100" : "h-0 opacity-0",
+              )}
+            >
+              {/* Navigation Arrows + Refresh (Left) */}
+              <div className="absolute top-3.5 left-4 flex gap-4 text-neutral-400 items-center z-10">
+                <div className="flex gap-2">
+                  <ChevronLeft size={16} />
+                  <ChevronRight size={16} />
+                </div>
+                <RefreshCw size={14} />
+              </div>
+
+              {/* Active Tab */}
+              <div className="flex-1 flex items-end justify-center px-20 h-full">
+                <div className="relative w-full max-w-lg h-[34px] bg-[#222] rounded-t-lg flex items-center justify-center px-4 -mb-px">
+                  <div className="flex items-center gap-2 text-[11px] text-neutral-300 font-medium">
+                    <Lock size={10} className="text-neutral-500" />
+                    <span>limitless.studio/{title.toLowerCase()}</span>
+                  </div>
+                  <X size={12} className="absolute right-3 text-neutral-500" />
+                </div>
+              </div>
+
+              {/* Window Controls (Right) */}
+              <div className="absolute top-3.5 right-4 flex gap-4 text-neutral-400 items-center">
+                <Minus size={16} />
+                <Square size={14} />
+                <X size={16} />
+              </div>
+            </div>
+
+            {/* Mobile Notch & Status Bar - No AnimatePresence */}
+            <div
+              className={cn(
+                "absolute top-0 left-0 right-0 z-20 pointer-events-none transition-opacity duration-150",
+                isMobile ? "opacity-100" : "opacity-0",
+              )}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 md:w-28 md:h-7 bg-[#1a1a1a] rounded-b-[1rem] flex items-center justify-center">
+                <div className="w-12 h-1.5 md:w-16 md:h-2 bg-black/50 rounded-full" />
+              </div>
+              <div className="flex justify-between items-center px-5 pt-2 md:px-6 md:pt-3 text-[10px] font-medium text-white/50">
+                <span>9:41</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    <div className="w-0.5 h-1.5 bg-current rounded-sm" />
+                    <div className="w-0.5 h-2 bg-current rounded-sm" />
+                    <div className="w-0.5 h-2.5 bg-current rounded-sm" />
+                  </div>
+                  <div className="w-4 h-2 border border-current rounded-[2px] relative ml-1">
+                    <div className="absolute inset-0 bg-current left-0 right-[20%]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Area */}
+            <div className="relative w-full h-full bg-[#111] overflow-hidden">
+              {isPlaying ? (
+                <iframe
+                  src={template.demoUrl}
+                  className="w-full h-full bg-white"
+                  title={title}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center relative bg-neutral-900 group-hover:bg-neutral-800/80 transition-colors duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                  <h3 className="text-6xl md:text-8xl font-black text-white/5 group-hover:text-white/10 uppercase tracking-tighter select-none transform rotate-[-15deg] scale-150 transition-colors duration-500">
+                    {title}
+                  </h3>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Info Bar - PURE CSS TRANSITIONS */}
+        <div
+          className={cn(
+            "bg-[#222] border border-white/10 border-t-0 relative z-20 flex transition-all duration-300 ease-out shadow-md",
+            isDesktop
+              ? "w-full max-w-[1400px] rounded-b-2xl p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4"
+              : "w-[370px] mt-2 rounded-3xl p-3 flex-row items-center justify-between gap-3",
+          )}
+        >
+          <div
+            className={cn(
+              "flex flex-col gap-3 max-w-2xl",
+              isMobile && "gap-1 flex-1 overflow-hidden",
+            )}
+          >
+            <div className="flex items-center gap-3">
+              <h3
+                className={cn(
+                  "text-2xl font-bold text-white",
+                  isMobile && "text-base",
+                )}
+              >
+                {title}
+              </h3>
+              <span
+                className={cn(
+                  "text-[10px] uppercase font-bold tracking-wider text-black bg-white px-2 py-0.5 rounded-sm",
+                  isMobile && "px-1.5 py-0 text-[9px]",
+                )}
+              >
+                {t(`filters.${template.category}`)}
+              </span>
+            </div>
+
+            <p
+              className={cn(
+                "text-neutral-400 text-sm md:text-base leading-relaxed line-clamp-2",
+                isMobile && "text-[10px] leading-tight line-clamp-1",
+              )}
+            >
+              {description}
+            </p>
+
+            <div
+              className={cn(
+                "flex flex-wrap gap-2 mt-2",
+                isMobile && "mt-1 gap-1 flex-nowrap overflow-hidden",
+              )}
+            >
+              {template.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className={cn(
+                    "text-xs font-mono text-neutral-500 bg-neutral-900 border border-white/5 px-2 py-1 rounded-md",
+                    isMobile && "px-1.5 py-0.5 text-[9px] whitespace-nowrap",
+                  )}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className={cn(
+              "group relative rounded-full font-bold text-sm overflow-hidden shrink-0 transition-colors duration-150",
+              isMobile
+                ? "w-10 h-10 flex items-center justify-center p-0"
+                : "px-8 py-3 w-full md:w-auto",
+              isPlaying
+                ? "bg-red-500 text-white hover:bg-red-600"
+                : "bg-white text-black hover:bg-neutral-200",
+            )}
+          >
+            <div className="relative z-10 flex items-center justify-center gap-2">
+              {isPlaying ? (
+                isMobile ? (
+                  <Square size={14} fill="currentColor" />
+                ) : (
+                  t("cta.stop_demo")
+                )
+              ) : (
+                <>
+                  <Play size={16} fill="currentColor" />
+                  {!isMobile && t("cta.view_demo")}
+                </>
+              )}
+            </div>
+          </button>
+        </div>
+      </div>
+    );
+  },
+);
+TemplateItem.displayName = "TemplateItem";

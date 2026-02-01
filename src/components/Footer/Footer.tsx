@@ -11,23 +11,44 @@ export default function Footer() {
 
   const siteLinks = [
     { key: "company", href: "/about-us" },
-    { key: "portfolio", href: "/our-work" },
+    { key: "portfolio", href: "/projects" },
     { key: "careers", href: "/careers" },
     { key: "contact", href: "/contact" },
   ];
 
   const serviceLinks = [
-    { key: "web_development", href: "/services/web-development", title: tServices("web_development_title") },
-    { key: "mobile_application", href: "/services/mobile-application", title: tServices("mobile_application_title") },
-    { key: "software_solution", href: "/services/software-solution", title: tServices("software_solution_title") },
-    { key: "web_design", href: "/services/web-design", title: tServices("web_design_title") },
+    {
+      key: "web_development",
+      href: "/services/web-development",
+      title: tServices("web_development_title"),
+    },
+    {
+      key: "mobile_application",
+      href: "/services/mobile-application",
+      title: tServices("mobile_application_title"),
+    },
+    {
+      key: "software_solution",
+      href: "/services/software-solution",
+      title: tServices("software_solution_title"),
+    },
+    {
+      key: "web_design",
+      href: "/services/web-design",
+      title: tServices("web_design_title"),
+    },
   ];
 
   const socials = [
     { name: "Facebook", href: "#", src: "/Footer/facebook.svg", w: 24 },
     { name: "Instagram", href: "#", src: "/Footer/instagram.svg", w: 24 },
     { name: "WhatsApp", href: "#", src: "/Footer/whatsapp.svg", w: 24 },
-    { name: "Mail", href: "mailto:hello@example.com", src: "/Footer/mail.svg", w: 22 },
+    {
+      name: "Mail",
+      href: "mailto:hello@example.com",
+      src: "/Footer/mail.svg",
+      w: 22,
+    },
     { name: "LinkedIn", href: "#", src: "/Footer/linkedin.svg", w: 24 },
   ];
 
@@ -38,11 +59,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
           {/* Site */}
           <div>
-            <h3 className="text-xl font-semibold text-white mb-4 tracking-wide">{tNav("services")}</h3>
+            <h3 className="text-xl font-semibold text-white mb-4 tracking-wide">
+              {tNav("services")}
+            </h3>
             <ul className="space-y-2 text-sm">
               {serviceLinks.map((s) => (
                 <li key={s.key}>
-                  <Link href={s.href} className="text-gray-300 hover:text-white transition-colors">
+                  <Link
+                    href={s.href}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
                     {s.title}
                   </Link>
                 </li>
@@ -51,11 +77,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-200 mb-4 tracking-wide">{tFooter("site")}</h3>
+            <h3 className="text-lg font-semibold text-gray-200 mb-4 tracking-wide">
+              {tFooter("site")}
+            </h3>
             <ul className="space-y-2 text-sm">
               {siteLinks.map((l) => (
                 <li key={l.key}>
-                  <Link href={l.href} className="text-gray-300 hover:text-white transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
                     {tNav(l.key)}
                   </Link>
                 </li>
@@ -64,15 +95,23 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-200 mb-4 tracking-wide">{tFooter("legal")}</h3>
+            <h3 className="text-lg font-semibold text-gray-200 mb-4 tracking-wide">
+              {tFooter("legal")}
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/privacy"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   {tFooter("privacy")}
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/terms"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   {tFooter("terms")}
                 </Link>
               </li>
@@ -94,7 +133,9 @@ export default function Footer() {
                 className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.9)]"
                 aria-hidden="true"
               />
-              <span className="text-emerald-300">{tFooter("all_systems_operational")}</span>
+              <span className="text-emerald-300">
+                {tFooter("all_systems_operational")}
+              </span>
             </div>
 
             {/* Socials */}
