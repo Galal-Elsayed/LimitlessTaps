@@ -46,16 +46,30 @@ export default function Footer() {
   ];
 
   const socials = [
-    { name: "Facebook", href: "#", src: "/Footer/facebook.svg", w: 24 },
-    { name: "Instagram", href: "#", src: "/Footer/instagram.svg", w: 24 },
-    { name: "WhatsApp", href: "#", src: "/Footer/whatsapp.svg", w: 24 },
     {
-      name: "Mail",
-      href: "mailto:hello@example.com",
-      src: "/Footer/mail.svg",
-      w: 22,
+      name: "Facebook",
+      href: "https://www.facebook.com/limitlesstaps",
+      src: "/Footer/facebook.svg",
+      w: 24,
     },
-    { name: "LinkedIn", href: "#", src: "/Footer/linkedin.svg", w: 24 },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/limitlesstaps/",
+      src: "/Footer/instagram.svg",
+      w: 24,
+    },
+    {
+      name: "WhatsApp",
+      href: "https://wa.me/201050038476",
+      src: "/Footer/whatsapp.svg",
+      w: 24,
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/limitless-taps/",
+      src: "/Footer/linkedin.svg",
+      w: 24,
+    },
   ];
 
   return (
@@ -159,11 +173,25 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            <div className="flex flex-col items-start lg:items-end gap-1 text-sm text-gray-300 mt-2 font-medium">
+              <a
+                href="mailto:info@limitlesstaps.com"
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                info@limitlesstaps.com
+              </a>
+              <a
+                href="https://wa.me/201050038476"
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                +( 20 ) 10 5003 8476
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom row (no divider; copyright right) */}
-        <div className="text-sm text-gray-300 text-right">
+        <div className="text-sm text-gray-300 text-right pt-4 flex justify-center">
           <p>{tFooter("copyright")}</p>
         </div>
 
