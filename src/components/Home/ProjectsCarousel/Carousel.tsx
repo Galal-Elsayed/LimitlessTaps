@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,60 +10,7 @@ import { ArrowLeft, ArrowRight, Copy, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-// Mock Data matching the reference image style
-const projects = [
-  {
-    id: 1,
-    category: "Industrial",
-    title: "Power Axes International Foundation L.L.C",
-    description:
-      "A leading industrial company in UAE, Abu Dhabi, specializing in the production of power axes and other industrial equipment. The company is committed to providing high-quality products and services to its customers.",
-    techStack: ["Next.js", "Supabase", "TanStack Query", "Tailwind CSS"],
-    stats: [
-      { label: "Inquiries/Month", value: "80+" },
-      { label: "Response Time", value: "3x faster" },
-      { label: "Mobile Traffic", value: "65%" },
-    ],
-    image: "/Home/Carousel/poweraxes-uae.png", // Using a placeholder image for now as I don't have the exact one
-    link: "https://poweraxes.vercel.app",
-    caseStudy:
-      "Deep dive into how we optimized the booking flow for Mo's Experiences, resulting in a 3x increase in conversion rate...",
-  },
-  {
-    id: 2,
-    category: "E-Commerce",
-    title: "Velvet Vouge",
-    description:
-      "A premium fashion marketplace connecting local designers with global customers. Features real-time inventory management and AI-driven recommendations.",
-    techStack: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    stats: [
-      { label: "Sales Growth", value: "120%" },
-      { label: "User Retention", value: "45%" },
-      { label: "Load Time", value: "0.8s" },
-    ],
-    image: "/Home/How-We-Build/wireframe-apps-and-tools.png", // Placeholder
-    link: "https://velvetvogue.com",
-    caseStudy:
-      "Exploring the challenges of building a scalable multi-vendor marketplace from scratch...",
-  },
-  {
-    id: 3,
-    category: "SaaS",
-    title: "TaskFlow Pro",
-    description:
-      "Project management tool designed for remote teams. Includes time tracking, resource allocation, and automated reporting dashboards.",
-    techStack: ["Vue.js", "Firebase", "D3.js", "Tailwind"],
-    stats: [
-      { label: "Active Users", value: "10k+" },
-      { label: "Uptime", value: "99.9%" },
-      { label: "Team Productivity", value: "+40%" },
-    ],
-    image: "/Home/How-We-Build/board-with-mobile-app-development.png", // Placeholder
-    link: "https://taskflowpro.com",
-    caseStudy:
-      "How we achieved 99.9% uptime and scaled to 10k users in 3 months...",
-  },
-];
+// Mock Data moved inside component for translation support
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,6 +18,126 @@ export default function Carousel() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  const t = useTranslations("home");
+  const locale = useLocale();
+
+  const projects = [
+    {
+      id: 1,
+      category: t("project_1_category"),
+      title: t("project_1_title"),
+      description: t("project_1_desc"),
+      techStack: ["Next.js", "Supabase", "TanStack Query", "Tailwind CSS"],
+      stats: [
+        { label: "Inquiries/Month", value: "80+" },
+        { label: "Response Time", value: "3x faster" },
+        { label: "Mobile Traffic", value: "65%" },
+      ],
+      image:
+        locale === "ar"
+          ? "/Home/Carousel/poweraxes-ar.png"
+          : "/Home/Carousel/poweraxes-en.png",
+      link: "https://poweraxes.vercel.app",
+      caseStudy: t("project_1_case_study"),
+    },
+    {
+      id: 2,
+      category: t("project_2_category"),
+      title: t("project_2_title"),
+      description: t("project_2_desc"),
+      techStack: ["Next.js", "React", "Node.js", "Tailwind CSS"],
+      stats: [
+        { label: "Active Users", value: "50k+" },
+        { label: "Stores", value: "10k+" },
+        { label: "Coverage", value: "KSA" },
+      ],
+      image:
+        locale === "ar"
+          ? "/Home/Carousel/rayed-ar.png"
+          : "/Home/Carousel/rayed-en.png",
+      link: "https://rayed-landing.vercel.app/ar",
+      caseStudy: t("project_2_case_study"),
+    },
+    {
+      id: 3,
+      category: t("project_3_category"),
+      title: t("project_3_title"),
+      description: t("project_3_desc"),
+      techStack: ["Next.js", "Node.js", "Stripe", "Tailwind CSS"],
+      stats: [
+        { label: "Active Users", value: "10k+" },
+        { label: "Creators", value: "500+" },
+        { label: "Payouts", value: "$1M+" },
+      ],
+      image:
+        locale === "ar"
+          ? "/Home/Carousel/crai-ksa-ar.png"
+          : "/Home/Carousel/crai-ksa-en.png",
+      link: "https://crai-ksa.netlify.app/en",
+      caseStudy: t("project_3_case_study"),
+    },
+    {
+      id: 4,
+      category: t("project_4_category"),
+      title: t("project_4_title"),
+      description: t("project_4_desc"),
+      techStack: ["Next.js", "Python", "OpenAI", "Tailwind CSS"],
+      stats: [
+        { label: "Active Users", value: "2k+" },
+        { label: "Scenarios", value: "100+" },
+        { label: "Success Rate", value: "95%" },
+      ],
+      image: "/Home/Carousel/flight.png",
+      link: "http://dev.vectoratc.com/home",
+      caseStudy: t("project_4_case_study"),
+    },
+    {
+      id: 5,
+      category: t("project_5_category"),
+      title: t("project_5_title"),
+      description: t("project_5_desc"),
+      techStack: ["React", "Django", "PostgreSQL", "Tailwind"],
+      stats: [
+        { label: "Courses", value: "50+" },
+        { label: "Students", value: "1k+" },
+        { label: "Completion", value: "90%" },
+      ],
+      image: "/Home/Carousel/psu-platform.png",
+      link: "https://psu-platform.vercel.app/",
+      caseStudy: t("project_5_case_study"),
+    },
+    {
+      id: 6,
+      category: t("project_6_category"),
+      title: t("project_6_title"),
+      description: t("project_6_desc"),
+      techStack: ["Next.js", "Framer Motion", "Tailwind CSS", "React"],
+      stats: [
+        { label: "Visitors", value: "10k+" },
+        { label: "Conversion", value: "+15%" },
+        { label: "Performance", value: "100" },
+      ],
+      image: "/Home/Carousel/kframe.png",
+      link: "https://www.kframeagency.com/",
+      caseStudy: t("project_6_case_study"),
+    },
+    {
+      id: 7,
+      category: t("project_7_category"),
+      title: t("project_7_title"),
+      description: t("project_7_desc"),
+      techStack: ["Rust", "Actix Web", "React", "Tailwind"],
+      stats: [
+        { label: "Products", value: "5k+" },
+        { label: "Speed", value: "10ms" },
+        { label: "Uptime", value: "99.9%" },
+      ],
+      image: "/Home/Carousel/zoom-store.png",
+      link: "https://zoom-store-rust.vercel.app/",
+      caseStudy: t("project_7_case_study"),
+    },
+  ];
 
   const currentProject = projects[currentIndex];
 
@@ -131,10 +200,10 @@ export default function Carousel() {
         <div className="text-center mb-8 space-y-4">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold mb-4 font-app">
-              Projects We&apos;ve Built
+              {t("projects_header_title")}
             </h2>
             <p className="text-neutral-400 text-lg md:text-2xl">
-              Real platforms driving real results for our clients
+              {t("projects_header_subtitle")}
             </p>
             <div className="mt-6 flex justify-center">
               <Button
@@ -142,7 +211,7 @@ export default function Carousel() {
                 asChild
               >
                 <Link href="/projects">
-                  Explore All Projects
+                  {t("cta_explore")}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -258,7 +327,8 @@ export default function Carousel() {
                     src={currentProject.image}
                     alt={currentProject.title}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 65vw"
                     priority
                   />
                 </div>
@@ -267,7 +337,7 @@ export default function Carousel() {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-center gap-4 mt-8">
+          <div className="flex justify-center gap-4 mt-8" dir="ltr">
             <button
               onClick={handlePrev}
               className="w-10 h-10 rounded-full border bg-neutral-800 border-neutral-800 flex items-center justify-center hover:bg-neutral-700 transition-colors text-white"

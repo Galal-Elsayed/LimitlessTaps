@@ -1,0 +1,165 @@
+{
+    "header": {
+        "title": "أعمال مختارة",
+        "description": "استكشف أحدث مشاريعنا عبر منصات مختلفة."
+    },
+    "tabs": {
+        "websites": "مواقع إلكترونية",
+        "mobile_apps": "تطبيقات جوال",
+        "dashboards": "لوحات تحكم"
+    },
+    "card": {
+        "viewDetails": "عرض التفاصيل",
+        "launch": "تشغيل",
+        "comingSoon": "قريباً"
+    },
+    "modal": {
+        "viewProject": "عرض المشروع",
+        "comingSoon": "قريباً",
+        "highlight": "أبرز المميزات",
+        "technologies": "التقنيات"
+    },
+    "status": {
+        "Live": "مباشر",
+        "Beta": "تجريبي",
+        "Alpha": "ألفا"
+    },
+    "tags": {
+        "Industrial": "صناعي",
+        "Corporate": "شركات",
+        "E-commerce": "تجارة إلكترونية",
+        "Marketplace": "سوق",
+        "SaaS": "برمجيات كخدمة",
+        "Creators": "صناع المحتوى",
+        "AI": "ذكاء اصطناعي",
+        "EdTech": "تكنولوجيا التعليم",
+        "Education": "تعليم",
+        "LMS": "أنظمة إدارة التعلم",
+        "Agency": "وكالة",
+        "Portfolio": "معرض أعمال",
+        "High Performance": "أداء عالي",
+        "Health": "صحة",
+        "iOS": "iOS",
+        "Social": "تواصل اجتماعي",
+        "Security": "أمان",
+        "Finance": "مالية",
+        "Fintech": "تكنولوجيا مالية",
+        "Photo": "تصوير",
+        "Productivity": "إنتاجية",
+        "3D": "ثلاثي الأبعاد",
+        "Game": "ألعاب",
+        "Casual": "عادي",
+        "Analytics": "تحليلات",
+        "Admin": "إدارة",
+        "Real-time": "الوقت الفعلي",
+        "CRM": "إدارة علاقات العملاء",
+        "Business": "أعمال تجارية",
+        "DevOps": "عمليات التطوير",
+        "Monitoring": "مراقبة",
+        "Crypto": "عملات مشفرة",
+        "System": "أنظمة",
+        "IoT": "إنترنت الأشياء"
+    },
+    "categories": {
+        "websites": "مواقع إلكترونية",
+        "mobile_apps": "تطبيقات جوال",
+        "dashboards": "لوحات تحكم"
+    },
+    "items": {
+        "w1": {
+            "title": "باور أكسيس انترناشيونال",
+            "description": "شركة صناعية رائدة في الإمارات، أبو ظبي، متخصصة في إنتاج محاور الطاقة والمعدات الصناعية الأخرى.",
+            "highlight": "صناعي"
+        },
+        "w2": {
+            "title": "رائد",
+            "description": "منصة شاملة للتسوق والبيع والتوصيل. تربط العملاء والبائعين والسائقين في نظام بيئي واحد.",
+            "highlight": "تسوق"
+        },
+        "w3": {
+            "title": "CRAI",
+            "description": "منصة VIP لمنشئي المحتوى مع وصول عبر الاشتراك، ومصادقة آمنة، ومدفوعات متكاملة، وإدارة الجمهور.",
+            "highlight": "خدمة برمجية"
+        },
+        "w4": {
+            "title": "AirSpeak",
+            "description": "منصة تدريب اتصالات الطيران مدعومة بالذكاء الاصطناعي تستخدم الصوت التوليدي وسيناريوهات قابلة للتخصيص للطيارين.",
+            "highlight": "منصة ذكاء اصطناعي"
+        },
+        "w5": {
+            "title": "منصة PSU",
+            "description": "نظام إدارة تعليمي متكامل (SaaS) مبني باستخدام React و Django يتميز بإنشاء الدورات التدريبية والتحديثات الفورية ومصادقة المستخدم.",
+            "highlight": "خدمة برمجية"
+        },
+        "w6": {
+            "title": "وكالة Kframe",
+            "description": "الواجهة الرقمية الرئيسية لوكالة Kframe تعرض المحافظ الإبداعية مع رسوم متحركة عالية الأداء.",
+            "highlight": "وكالة"
+        },
+        "w7": {
+            "title": "متجر Zoom",
+            "description": "منصة تجارة إلكترونية حديثة مبنية بـ Rust و React لتجربة تسوق وإدارة متجر عالية الأداء.",
+            "highlight": "تسوق"
+        },
+        "m1": {
+            "title": "Pulse Fitness",
+            "description": "تطبيق تتبع النشاط مع ميزات اجتماعية وخطط تمارين.",
+            "highlight": "صحة"
+        },
+        "m2": {
+            "title": "Echo Chat",
+            "description": "تطبيق مراسلة مشفر من طرف إلى طرف.",
+            "highlight": "محادثة"
+        },
+        "m3": {
+            "title": "Swift Pay",
+            "description": "حل دفع بدون تلامس للأسواق المحلية.",
+            "highlight": "تكنولوجيا مالية"
+        },
+        "m4": {
+            "title": "Lumina Cam",
+            "description": "تطبيق مساعد تصوير مدعوم بالذكاء الاصطناعي.",
+            "highlight": "كاميرا"
+        },
+        "m5": {
+            "title": "Orbit Note",
+            "description": "تطبيق تدوين ملاحظات مكاني للمفكرين المبدعين.",
+            "highlight": "ملاحظات"
+        },
+        "m6": {
+            "title": "Vortex Game",
+            "description": "لعبة ألغاز عادية بجماليات نيون.",
+            "highlight": "لعبة"
+        },
+        "d1": {
+            "title": "Nexus Analytics",
+            "description": "تصور بيانات شامل لمقاييس المؤسسة.",
+            "highlight": "بيانات"
+        },
+        "d2": {
+            "title": "Quantum Admin",
+            "description": "لوحة تحكم مستقبلية مع تحديثات في الوقت الفعلي.",
+            "highlight": "إدارة"
+        },
+        "d3": {
+            "title": "Flux CRM",
+            "description": "إدارة علاقات العملاء مع مسارات بصرية.",
+            "highlight": "CRM"
+        },
+        "d4": {
+            "title": "Titan Logs",
+            "description": "مراقبة سجلات الخادم وتتبع الأخطاء.",
+            "highlight": "DevOps"
+        },
+        "d5": {
+            "title": "Aether Finance",
+            "description": "تتبع محفظة العملات المشفرة وواجهة تداول.",
+            "highlight": "عملات مشفرة"
+        },
+        "d6": {
+            "title": "Core System",
+            "description": "تصور مراقبة موارد النظام على مستوى نظام التشغيل.",
+            "highlight": "نظام"
+        }
+    }
+}

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, memo, useMemo } from "react";
+import React, { useState, useEffect, useCallback, memo, useMemo, useRef } from "react";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Monitor, Smartphone, Play, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square } from "lucide-react";
 import { Header } from "@/components/ui/header";
 import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
 
 // Mock Data
 type Category = "all" | "simple" | "medium" | "advanced";
@@ -16,68 +17,126 @@ interface Template {
     descriptionKey: string;
     category: Category;
     image: string;
+    desktopImage?: string;
+    mobileImage?: string;
     demoUrl: string;
     tags: string[];
 }
 
 const TEMPLATES: Template[] = [
-    // Simple
     {
         id: "1",
-        titleKey: "zenith",
-        descriptionKey: "zenith",
-        category: "simple",
-        image: "/placeholder-zenith.png",
-        demoUrl: "https://example.com/demo1",
-        tags: ["Portfolio", "Minimal", "React 19", "Tailwind"]
+        titleKey: "nextsaas",
+        descriptionKey: "nextsaas",
+        category: "advanced",
+        image: "/Studio/desktop/advanced/advanced-1.png",
+        desktopImage: "/Studio/desktop/advanced/advanced-1.png",
+        mobileImage: "/Studio/mobile/advanced/advanced-1.png",
+        demoUrl: "https://digital-marketing-agency-ns-next.vercel.app/",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"]
     },
     {
         id: "2",
-        titleKey: "aura",
-        descriptionKey: "aura",
-        category: "simple",
-        image: "/placeholder-aura.png",
-        demoUrl: "https://example.com/demo2",
-        tags: ["Wellness", "Landing Page", "Framer Motion", "Next.js"]
+        titleKey: "financial_platform",
+        descriptionKey: "financial_platform",
+        category: "advanced",
+        image: "/Studio/desktop/advanced/advanced-2.png",
+        desktopImage: "/Studio/desktop/advanced/advanced-2.png",
+        mobileImage: "/Studio/mobile/advanced/advanced-2.png",
+        demoUrl: "https://financial-management-platform-ns-ne.vercel.app/",
+        tags: ["Fintech", "Dashboard", "SaaS", "Management"]
     },
-    // Medium
     {
         id: "3",
-        titleKey: "nexus",
-        descriptionKey: "nexus",
-        category: "medium",
-        image: "/placeholder-nexus.png",
-        demoUrl: "https://example.com/demo3",
-        tags: ["SaaS", "Analytics", "Dashboard", "Charts"]
+        titleKey: "social_media",
+        descriptionKey: "social_media",
+        category: "advanced",
+        image: "/Studio/desktop/advanced/advanced-3.png",
+        desktopImage: "/Studio/desktop/advanced/advanced-3.png",
+        mobileImage: "/Studio/mobile/advanced/advanced-3.png",
+        demoUrl: "https://social-media-management-ns-next.vercel.app/",
+        tags: ["Social Media", "Marketing", "SaaS", "Dashboard"]
     },
     {
         id: "4",
-        titleKey: "flow",
-        descriptionKey: "flow",
-        category: "medium",
-        image: "/placeholder-flow.png",
-        demoUrl: "https://example.com/demo4",
-        tags: ["E-commerce", "Shopify", "Animations", "Stripe"]
+        titleKey: "ai_gadget",
+        descriptionKey: "ai_gadget",
+        category: "advanced",
+        image: "/Studio/desktop/advanced/advanced-5.png",
+        desktopImage: "/Studio/desktop/advanced/advanced-5.png",
+        mobileImage: "/Studio/mobile/advanced/advanced-5.png",
+        demoUrl: "https://ai-gadget-ns-next.vercel.app/",
+        tags: ["AI", "Technology", "E-commerce", "Gadgets"]
     },
-    // Advanced
+    // Medium
     {
         id: "5",
-        titleKey: "momentum",
-        descriptionKey: "momentum",
-        category: "advanced",
-        image: "/placeholder-momentum.png",
-        demoUrl: "https://example.com/demo5",
-        tags: ["Project Management", "Next.js 15", "React 19", "Tailwind CSS 4"]
+        titleKey: "time_tracking",
+        descriptionKey: "time_tracking",
+        category: "medium",
+        image: "/Studio/desktop/medium/medium-1.png",
+        desktopImage: "/Studio/desktop/medium/medium-1.png",
+        mobileImage: "/Studio/mobile/medium/medium-1.png",
+        demoUrl: "https://time-tracking-ns-next.vercel.app/",
+        tags: ["Productivity", "SaaS", "Time Management", "React"]
     },
     {
         id: "6",
-        titleKey: "quantum",
-        descriptionKey: "quantum",
-        category: "advanced",
-        image: "/placeholder-quantum.png",
-        demoUrl: "https://example.com/demo6",
-        tags: ["WebGL", "Three.js", "3D", "Immersive"]
+        titleKey: "property_management",
+        descriptionKey: "property_management",
+        category: "medium",
+        image: "/Studio/desktop/medium/medium-2.png",
+        desktopImage: "/Studio/desktop/medium/medium-2.png",
+        mobileImage: "/Studio/mobile/medium/medium-2.png",
+        demoUrl: "https://property-management-ns-next.vercel.app/",
+        tags: ["Real Estate", "Management", "Platform", "Modern"]
     },
+    {
+        id: "7",
+        titleKey: "analytics_dashboard",
+        descriptionKey: "analytics_dashboard",
+        category: "medium",
+        image: "/Studio/desktop/medium/medium-3.png",
+        desktopImage: "/Studio/desktop/medium/medium-3.png",
+        mobileImage: "/Studio/mobile/medium/medium-3.png",
+        demoUrl: "https://analytics-and-reporting-ns-next.vercel.app/",
+        tags: ["Analytics", "Data", "Dashboard", "Visualization"]
+    },
+    // Simple
+    {
+        id: "8",
+        titleKey: "construction_corp",
+        descriptionKey: "construction_corp",
+        category: "simple",
+        image: "/Studio/desktop/simple/simple-1.png",
+        desktopImage: "/Studio/desktop/simple/simple-1.png",
+        mobileImage: "/Studio/mobile/simple/simple-1.png",
+        demoUrl: "https://www.sogc-construction.com/en",
+        tags: ["Construction", "Corporate", "Business", "Next.js"]
+    },
+    {
+        id: "9",
+        titleKey: "wealth_management",
+        descriptionKey: "wealth_management",
+        category: "simple",
+        image: "/Studio/desktop/simple/simple-2.png",
+        desktopImage: "/Studio/desktop/simple/simple-2.png",
+        mobileImage: "/Studio/mobile/simple/simple-2.png",
+        demoUrl: "https://wealth-management-ns-next-m99k.vercel.app/",
+        tags: ["Finance", "Advisory", "Clean", "Professional"]
+    },
+    {
+        id: "10",
+        titleKey: "wealth_advisory",
+        descriptionKey: "wealth_advisory",
+        category: "simple",
+        image: "/Studio/desktop/simple/simple-3.png",
+        desktopImage: "/Studio/desktop/simple/simple-3.png",
+        mobileImage: "/Studio/mobile/simple/simple-3.png",
+        demoUrl: "https://wealth-management-ns-next-m99k.vercel.app/",
+        tags: ["Consulting", "Finance", "Services", "Minimal"]
+    },
+
 ];
 
 // PERFORMANCE: Slide variants (only x and opacity - GPU accelerated)
@@ -105,6 +164,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
+    const isDesktop = viewMode === "desktop";
 
     useEffect(() => {
         setCurrentIndex(0);
@@ -122,6 +182,38 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             return nextIndex;
         });
     }, [items.length]);
+
+    // PERFORMANCE: Preload images for smoother navigation
+    useEffect(() => {
+        const preloadImage = (src: string) => {
+            const img = new window.Image();
+            img.src = src;
+        };
+
+        // Preload next and previous items first (priority)
+        const nextIndex = (currentIndex + 1) % items.length;
+        const prevIndex = (currentIndex - 1 + items.length) % items.length;
+
+        const priorityItems = [items[nextIndex], items[prevIndex]];
+        priorityItems.forEach(item => {
+            if (item.desktopImage) preloadImage(item.desktopImage);
+            if (item.mobileImage) preloadImage(item.mobileImage);
+            if (item.image) preloadImage(item.image);
+        });
+
+        // Then preload the rest sequentially with a slight delay to not block main thread
+        const timeoutId = setTimeout(() => {
+            items.forEach((item, idx) => {
+                if (idx !== currentIndex && idx !== nextIndex && idx !== prevIndex) {
+                    if (item.desktopImage) preloadImage(item.desktopImage);
+                    if (item.mobileImage) preloadImage(item.mobileImage);
+                    if (item.image) preloadImage(item.image);
+                }
+            });
+        }, 2000);
+
+        return () => clearTimeout(timeoutId);
+    }, [currentIndex, items]);
 
     if (!activeItem) return null;
 
@@ -294,6 +386,25 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
     const isDesktop = viewMode === "desktop";
     const isMobile = viewMode === "mobile";
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [scale, setScale] = useState(1);
+
+    useEffect(() => {
+        if (!isDesktop || !containerRef.current) return;
+
+        const observer = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const width = entry.contentRect.width;
+                if (width > 0) {
+                    setScale(width / 2000);
+                }
+            }
+        });
+
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, [isDesktop]);
+
     return (
         <div className="w-full flex flex-col items-center">
 
@@ -327,12 +438,10 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
             <div className="relative w-full flex justify-center">
                 <div
                     className={cn(
-                        "relative bg-[#222] overflow-hidden transition-all duration-300 ease-out",
-                        // CSS containment for performance
                         "contain-layout contain-paint",
                         isDesktop
-                            ? "w-full max-w-[1400px] h-[65vh] rounded-t-2xl border border-white/10 border-b-0 shadow-lg"
-                            : "w-[350px] h-[600px] rounded-[40px] border-8 border-[#1a1a1a] shadow-md"
+                            ? "w-full max-w-[1400px] h-[65vh] rounded-t-2xl border border-white/10 border-b-0 shadow-[0_0_50px_-5px_rgba(255,255,255,0.15)]"
+                            : "w-[350px] h-[600px] rounded-[40px] border-8 border-[#1a1a1a] shadow-[0_0_30px_-5px_rgba(255,255,255,0.15)]"
                     )}
                 >
                     {/* Safari-Style Window Header (Desktop Only) - No AnimatePresence */}
@@ -396,18 +505,40 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                     </div>
 
                     {/* Content Area */}
-                    <div className="relative w-full h-full bg-[#111] overflow-hidden">
+                    <div ref={containerRef} className="relative w-full h-full bg-[#111] overflow-hidden">
                         {isPlaying ? (
-                            <iframe
-                                src={template.demoUrl}
-                                className="w-full h-full bg-white"
-                                title={title}
-                                loading="lazy"
-                            />
+                            <div
+                                style={{
+                                    width: isDesktop ? "2000px" : "100%",
+                                    height: isDesktop ? `${100 / scale}%` : "100%",
+                                    transform: isDesktop ? `scale(${scale})` : "none",
+                                    transformOrigin: "top left",
+                                }}
+                            >
+                                <iframe
+                                    src={template.demoUrl}
+                                    className="w-full h-full bg-white"
+                                    title={title}
+                                    loading="lazy"
+                                />
+                            </div>
                         ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center relative bg-neutral-900">
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                                <h3 className="text-6xl md:text-8xl font-black text-white/5 uppercase tracking-tighter select-none transform rotate-[-15deg] scale-150">{title}</h3>
+                            <div className="w-full h-full relative bg-neutral-900 group">
+                                {(template.desktopImage || template.mobileImage) ? (
+                                    <Image
+                                        src={(isDesktop ? (template.desktopImage || template.image) : (template.mobileImage || template.image))}
+                                        alt={title}
+                                        fill
+                                        className="object-cover object-top"
+                                        sizes="(max-width: 768px) 100vw, 80vw"
+                                        priority
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex flex-col items-center justify-center relative">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                                        <h3 className="text-6xl md:text-8xl font-black text-white/5 uppercase tracking-tighter select-none transform rotate-[-15deg] scale-150">{title}</h3>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
@@ -417,10 +548,10 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
             {/* Bottom Info Bar - PURE CSS TRANSITIONS */}
             <div
                 className={cn(
-                    "bg-[#222] border border-white/10 border-t-0 relative z-20 flex transition-all duration-300 ease-out shadow-md",
+                    "bg-[#222] border border-white/10 border-t-0 relative z-20 flex transition-all duration-300 ease-out",
                     isDesktop
-                        ? "w-full max-w-[1400px] rounded-b-2xl p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4"
-                        : "w-[370px] mt-2 rounded-3xl p-3 flex-row items-center justify-between gap-3"
+                        ? "w-full max-w-[1400px] rounded-b-2xl p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-[0_20px_50px_-5px_rgba(255,255,255,0.15)]"
+                        : "w-[370px] mt-2 rounded-3xl p-3 flex-row items-center justify-between gap-3 shadow-[0_10px_30px_-5px_rgba(255,255,255,0.1)]"
                 )}
             >
                 <div className={cn("flex flex-col gap-3 max-w-2xl", isMobile && "gap-1 flex-1 overflow-hidden")}>

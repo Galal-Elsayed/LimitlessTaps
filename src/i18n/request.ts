@@ -26,6 +26,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const SoftwareSolutions = (await import(`../../messages/${locale}/SoftwareSolutions.json`)).default;
   const WebDesign = (await import(`../../messages/${locale}/Web-Design.json`)).default;
   const WordPress = (await import(`../../messages/${locale}/WordPress.json`)).default;
+  const projects = (await import(`../../messages/${locale}/projects.json`)).default;
 
   return {
     locale,
@@ -45,6 +46,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       SoftwareSolutions,
       WebDesign,
       WordPress,
+      projects,
     },
   };
 });

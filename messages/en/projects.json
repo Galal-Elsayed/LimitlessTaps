@@ -1,0 +1,165 @@
+{
+    "header": {
+        "title": "Selected Works",
+        "description": "Explore our latest projects across different platforms."
+    },
+    "tabs": {
+        "websites": "Websites",
+        "mobile_apps": "Mobile Apps",
+        "dashboards": "Dashboards"
+    },
+    "card": {
+        "viewDetails": "View Details",
+        "launch": "View Project",
+        "comingSoon": "Coming Soon"
+    },
+    "modal": {
+        "viewProject": "View Project",
+        "comingSoon": "Coming Soon",
+        "highlight": "Highlight",
+        "technologies": "Technologies"
+    },
+    "status": {
+        "Live": "Live",
+        "Beta": "Beta",
+        "Alpha": "Alpha"
+    },
+    "tags": {
+        "Industrial": "Industrial",
+        "Corporate": "Corporate",
+        "E-commerce": "E-commerce",
+        "Marketplace": "Marketplace",
+        "SaaS": "SaaS",
+        "Creators": "Creators",
+        "AI": "AI",
+        "EdTech": "EdTech",
+        "Education": "Education",
+        "LMS": "LMS",
+        "Agency": "Agency",
+        "Portfolio": "Portfolio",
+        "High Performance": "High Performance",
+        "Health": "Health",
+        "iOS": "iOS",
+        "Social": "Social",
+        "Security": "Security",
+        "Finance": "Finance",
+        "Fintech": "Fintech",
+        "Photo": "Photo",
+        "Productivity": "Productivity",
+        "3D": "3D",
+        "Game": "Game",
+        "Casual": "Casual",
+        "Analytics": "Analytics",
+        "Admin": "Admin",
+        "Real-time": "Real-time",
+        "CRM": "CRM",
+        "Business": "Business",
+        "DevOps": "DevOps",
+        "Monitoring": "Monitoring",
+        "Crypto": "Crypto",
+        "System": "System",
+        "IoT": "IoT"
+    },
+    "categories": {
+        "websites": "Websites",
+        "mobile_apps": "Mobile Apps",
+        "dashboards": "Dashboards"
+    },
+    "items": {
+        "w1": {
+            "title": "Power Axes International",
+            "description": "A leading industrial company in UAE, Abu Dhabi, specializing in the production of power axes and other industrial equipment.",
+            "highlight": "Industrial"
+        },
+        "w2": {
+            "title": "Rayed",
+            "description": "All-in-one platform for shopping, selling & delivery. Connecting customers, sellers, and drivers in a single mobile ecosystem.",
+            "highlight": "Shop"
+        },
+        "w3": {
+            "title": "CRAI",
+            "description": "VIP platform for content creators with subscription access, secure auth, integrated payments, and audience management.",
+            "highlight": "SaaS"
+        },
+        "w4": {
+            "title": "AirSpeak",
+            "description": "AI-powered aviation communication training platform using generative audio and customizable scenarios for pilots.",
+            "highlight": "AI Platform"
+        },
+        "w5": {
+            "title": "PSU Platform",
+            "description": "Full-stack education SaaS built with React and Django featuring course creation, real-time updates, and user auth.",
+            "highlight": "SaaS"
+        },
+        "w6": {
+            "title": "Kframe Agency",
+            "description": "Flagship digital presence for Kframe Agency showcasing creative portfolios with high-performance animations.",
+            "highlight": "Agency"
+        },
+        "w7": {
+            "title": "Zoom Store",
+            "description": "Modern e-commerce platform built with Rust and React for high-performance shopping and store management.",
+            "highlight": "Shop"
+        },
+        "m1": {
+            "title": "Pulse Fitness",
+            "description": "Activity tracking app with social features and workout plans.",
+            "highlight": "Health"
+        },
+        "m2": {
+            "title": "Echo Chat",
+            "description": "End-to-end encrypted messaging application.",
+            "highlight": "Chat"
+        },
+        "m3": {
+            "title": "Swift Pay",
+            "description": "Contactless payment solution for local markets.",
+            "highlight": "Fintech"
+        },
+        "m4": {
+            "title": "Lumina Cam",
+            "description": "AI-powered photography assistant app.",
+            "highlight": "Camera"
+        },
+        "m5": {
+            "title": "Orbit Note",
+            "description": "Spatial note-taking app for creative thinkers.",
+            "highlight": "Notes"
+        },
+        "m6": {
+            "title": "Vortex Game",
+            "description": "Casual puzzle game with neon aesthetics.",
+            "highlight": "Game"
+        },
+        "d1": {
+            "title": "Nexus Analytics",
+            "description": "Comprehensive data visualization for enterprise metrics.",
+            "highlight": "Data"
+        },
+        "d2": {
+            "title": "Quantum Admin",
+            "description": "Futuristic admin panel with real-time updates.",
+            "highlight": "Admin"
+        },
+        "d3": {
+            "title": "Flux CRM",
+            "description": "Customer relationship management with visual pipelines.",
+            "highlight": "CRM"
+        },
+        "d4": {
+            "title": "Titan Logs",
+            "description": "Server log monitoring and error tracking dashboard.",
+            "highlight": "DevOps"
+        },
+        "d5": {
+            "title": "Aether Finance",
+            "description": "Crypto portfolio tracking and trading interface.",
+            "highlight": "Crypto"
+        },
+        "d6": {
+            "title": "Core System",
+            "description": "Operating system level resource monitor visualization.",
+            "highlight": "System"
+        }
+    }
+}

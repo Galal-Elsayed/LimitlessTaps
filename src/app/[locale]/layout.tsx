@@ -75,6 +75,7 @@ async function loadMessages(locale: string | undefined) {
     const SoftwareSolutions = (await import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`)).default;
     const WebDesign = (await import(`../../../messages/${resolvedLocale}/Web-Design.json`)).default;
     const WordPress = (await import(`../../../messages/${resolvedLocale}/WordPress.json`)).default;
+    const projects = (await import(`../../../messages/${resolvedLocale}/projects.json`)).default;
 
     return {
       common,
@@ -94,6 +95,7 @@ async function loadMessages(locale: string | undefined) {
       SoftwareSolutions,
       WebDesign,
       WordPress,
+      projects,
     };
   } catch (error) {
     console.error(`Failed to load messages for locale: ${resolvedLocale}`, error);
@@ -115,6 +117,7 @@ async function loadMessages(locale: string | undefined) {
     const SoftwareSolutions = (await import(`../../../messages/en/SoftwareSolutions.json`)).default;
     const WebDesign = (await import(`../../../messages/en/Web-Design.json`)).default;
     const WordPress = (await import(`../../../messages/en/WordPress.json`)).default;
+    const projects = (await import(`../../../messages/en/projects.json`)).default;
 
     return {
       common,
@@ -134,6 +137,7 @@ async function loadMessages(locale: string | undefined) {
       SoftwareSolutions,
       WebDesign,
       WordPress,
+      projects,
     };
   }
 }

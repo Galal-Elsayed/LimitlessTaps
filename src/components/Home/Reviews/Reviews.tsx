@@ -2,50 +2,19 @@
 
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
+import { useTranslations, useLocale } from "next-intl";
 
-const reviews = [
-  {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
-  },
-  {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
-  },
-  {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
-  },
-];
-
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
-
-const ReviewCard = ({ img, name, username, body }: { img: string; name: string; username: string; body: string }) => {
+const ReviewCard = ({
+  img,
+  name,
+  role,
+  body,
+}: {
+  img: string;
+  name: string;
+  role: string;
+  body: string;
+}) => {
   return (
     <figure
       className={cn(
@@ -59,7 +28,7 @@ const ReviewCard = ({ img, name, username, body }: { img: string; name: string; 
         <img className="rounded-full" width="32" height="32" alt="" src={img} />
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium text-white">{name}</figcaption>
-          <p className="text-xs font-medium text-white/40">{username}</p>
+          <p className="text-xs font-medium text-white/40">{role}</p>
         </div>
       </div>
       <blockquote className="mt-2 text-sm text-white/70">{body}</blockquote>
@@ -68,17 +37,87 @@ const ReviewCard = ({ img, name, username, body }: { img: string; name: string; 
 };
 
 export default function Reviews() {
+  const t = useTranslations("home");
+  const locale = useLocale();
+
+  const reviews = [
+    {
+      name: t("review_1_name"),
+      role: t("review_1_role"),
+      body: t("review_1_body"),
+      img: "https://avatar.vercel.sh/heba",
+    },
+    {
+      name: t("review_2_name"),
+      role: t("review_2_role"),
+      body: t("review_2_body"),
+      img: "https://avatar.vercel.sh/mahmoud",
+    },
+    {
+      name: t("review_3_name"),
+      role: t("review_3_role"),
+      body: t("review_3_body"),
+      img: "https://avatar.vercel.sh/fahad",
+    },
+    {
+      name: t("review_4_name"),
+      role: t("review_4_role"),
+      body: t("review_4_body"),
+      img: "https://avatar.vercel.sh/abdullah",
+    },
+    {
+      name: t("review_5_name"),
+      role: t("review_5_role"),
+      body: t("review_5_body"),
+      img: "https://avatar.vercel.sh/sultan",
+    },
+    {
+      name: t("review_7_name"),
+      role: t("review_7_role"),
+      body: t("review_7_body"),
+      img: "https://avatar.vercel.sh/sarah",
+    },
+    {
+      name: t("review_8_name"),
+      role: t("review_8_role"),
+      body: t("review_8_body"),
+      img: "https://avatar.vercel.sh/karim",
+    },
+    {
+      name: t("review_9_name"),
+      role: t("review_9_role"),
+      body: t("review_9_body"),
+      img: "https://avatar.vercel.sh/omar",
+    },
+    {
+      name: t("review_10_name"),
+      role: t("review_10_role"),
+      body: t("review_10_body"),
+      img: "https://avatar.vercel.sh/mohamed",
+    },
+  ];
+
+  const firstRow = reviews.slice(0, Math.ceil(reviews.length / 2));
+  const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
+
   return (
     <section className="w-full bg-[#0a0a0a] py-8 overflow-hidden relative">
       <div className="w-full max-w-[100rem] mx-auto relative z-10 flex flex-col gap-4">
-        <Marquee pauseOnHover className="[--duration:20s] [--gap:1rem]">
+        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-8">
+          {t("reviews_title")}
+        </h2>
+        <Marquee dir="ltr" pauseOnHover className="[--duration:40s] [--gap:1rem]">
           {firstRow.map((review) => (
-            <ReviewCard key={review.username} {...review} />
+            <div key={review.name} dir={locale === "ar" ? "rtl" : "ltr"}>
+              <ReviewCard {...review} />
+            </div>
           ))}
         </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:20s] [--gap:1rem]">
+        <Marquee dir="ltr" reverse pauseOnHover className="[--duration:40s] [--gap:1rem]">
           {secondRow.map((review) => (
-            <ReviewCard key={review.username} {...review} />
+            <div key={review.name} dir={locale === "ar" ? "rtl" : "ltr"}>
+              <ReviewCard {...review} />
+            </div>
           ))}
         </Marquee>
 

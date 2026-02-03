@@ -3,6 +3,7 @@
 import { motion, LayoutGroup, useScroll, useTransform, Variants } from "motion/react";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import {
   Monitor,
   Type,
@@ -91,8 +92,6 @@ const THEMES = {
   },
 };
 
-const NAV_LINKS = ["Services", "Studio", "Work", "About Us", "START A PROJECT"];
-
 // --- Animation Variants ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -150,32 +149,41 @@ const slideRightVariant: Variants = {
   },
 };
 
-// --- Mock Data for Dashboard ---
-const STATS = [
-  {
-    label: "Total Users",
-    value: "124,592",
-    change: "+12.5%",
-    icon: <Users size={16} />,
-    data: [40, 30, 45, 50, 45, 60, 55, 70],
-  },
-  {
-    label: "Revenue",
-    value: "$4.2M",
-    change: "+8.2%",
-    icon: <BarChart3 size={16} />,
-    data: [60, 65, 60, 75, 70, 85, 80, 95],
-  },
-  {
-    label: "Active Sessions",
-    value: "1,430",
-    change: "+24%",
-    icon: <Zap size={16} />,
-    data: [20, 40, 30, 50, 45, 65, 60, 80],
-  },
-];
-
 export default function LayoutDesign() {
+  const t = useTranslations("home");
+
+  const NAV_LINKS = [
+    t("layout_design_nav_services"),
+    t("layout_design_nav_studio"),
+    t("layout_design_nav_work"),
+    t("layout_design_nav_about"),
+    t("layout_design_nav_start"),
+  ];
+
+  const STATS = [
+    {
+      label: t("layout_design_stat_users"),
+      value: "124,592",
+      change: "+12.5%",
+      icon: <Users size={16} />,
+      data: [40, 30, 45, 50, 45, 60, 55, 70],
+    },
+    {
+      label: t("layout_design_stat_revenue"),
+      value: "$4.2M",
+      change: "+8.2%",
+      icon: <BarChart3 size={16} />,
+      data: [60, 65, 60, 75, 70, 85, 80, 95],
+    },
+    {
+      label: t("layout_design_stat_sessions"),
+      value: "1,430",
+      change: "+24%",
+      icon: <Zap size={16} />,
+      data: [20, 40, 30, 50, 45, 65, 60, 80],
+    },
+  ];
+
   // State
   const [selectedFont, setSelectedFont] = useState<FontOption>("sans");
   const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("green");
@@ -288,13 +296,13 @@ export default function LayoutDesign() {
         viewport={{ once: true, margin: "-100px" }}
       >
         <h2 className="text-3xl md:text-7xl font-app">
-          DESIGN THE FIRST IMPRESSION
+          {t("layout_design_title")}
           <span ref={dotRef} className="inline-block relative">
             .
           </span>
         </h2>
         <p className="text-sm md:text-3xl p-4 text-[#86868b] font-medium">
-          Make your website’s first section truly yours.
+          {t("layout_design_subtitle")}
         </p>
       </motion.div>
 
@@ -403,14 +411,14 @@ export default function LayoutDesign() {
                       variants={itemVariants}
                       className={cn("font-bold text-white tracking-tight leading-[0.9]", size.title, theme.textGlow)}
                     >
-                      {displayBrand} <span className={cn("inline-block", theme.text)}>System</span>
+                      {displayBrand} <span className={cn("inline-block", theme.text)}>{t("layout_design_system")}</span>
                     </motion.h1>
                     <motion.p
                       layout
                       variants={itemVariants}
                       className={cn("text-white/50 max-w-xl mx-auto", size.body)}
                     >
-                      Adaptable. Scalable. Beautiful.
+                      {t("layout_design_adaptable")}
                     </motion.p>
                   </motion.div>
 
@@ -434,18 +442,18 @@ export default function LayoutDesign() {
                       animate={{ opacity: 1, x: 0 }}
                     >
                       <motion.h1 layout className={cn("font-bold text-white mb-4", size.title, theme.textGlow)}>
-                        {displayBrand} <span className={cn("inline-block", theme.text)}>Analytics</span>
+                        {displayBrand} <span className={cn("inline-block", theme.text)}>{t("layout_design_analytics")}</span>
                       </motion.h1>
                       <motion.p layout className={cn("text-white/50 max-w-md", size.body)}>
-                        Real-time analytics for the modern {displayBrand} ecosystem.
+                        {t("layout_design_analytics_desc", { brand: displayBrand })}
                       </motion.p>
                     </motion.div>
                     <motion.div layoutId="hero-actions" className="flex gap-4">
                       <ActionButton primary theme={theme} radius={buttonRadius}>
-                        Dashboard
+                        {t("layout_design_dashboard")}
                       </ActionButton>
                       <ActionButton theme={theme} radius={buttonRadius}>
-                        Reports
+                        {t("layout_design_reports")}
                       </ActionButton>
                     </motion.div>
                   </div>
@@ -488,7 +496,7 @@ export default function LayoutDesign() {
                   >
                     <div className="absolute top-6 left-6 text-white/40 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
                       <TrendingUp size={16} className={theme.text} />
-                      {displayBrand} Growth
+                      {displayBrand} {t("layout_design_growth")}
                     </div>
                     {[30, 45, 35, 60, 55, 75, 60, 80, 70, 90, 85, 100].map((h, i) => (
                       <motion.div
@@ -536,18 +544,17 @@ export default function LayoutDesign() {
                           ></span>
                           <span className={cn("relative inline-flex rounded-full h-2 w-2", theme.accent)}></span>
                         </span>
-                        {displayBrand} System
+                        {displayBrand} {t("layout_design_system")}
                       </div>
                       <motion.h1
                         layout
                         className={cn("font-bold text-white mb-6 leading-tight", size.title, theme.textGlow)}
                       >
                         {displayBrand} <br />
-                        <span className={cn("inline-block", theme.text)}>Experience</span>
+                        <span className={cn("inline-block", theme.text)}>{t("layout_design_experience")}</span>
                       </motion.h1>
                       <motion.p className={cn("text-white/50 max-w-md", size.body)}>
-                        Control every pixel with {displayBrand}. Typography, color, and layout that adapts to your brand
-                        identity instantly.
+                        {t("layout_design_experience_desc", { brand: displayBrand })}
                       </motion.p>
                     </motion.div>
                     <motion.div
@@ -556,10 +563,10 @@ export default function LayoutDesign() {
                       variants={itemVariants}
                     >
                       <ActionButton primary theme={theme} radius={buttonRadius}>
-                        Start Now{" "}
+                        {t("layout_design_start_now")}{" "}
                       </ActionButton>
                       <ActionButton theme={theme} radius={buttonRadius}>
-                        Contact Us
+                        {t("layout_design_contact")}
                       </ActionButton>
                     </motion.div>
                   </motion.div>
@@ -638,10 +645,10 @@ export default function LayoutDesign() {
                                         theme.textGlow,
                                       )}
                                     >
-                                      SYSTEM <br /> CORE
+                                      {t.rich("layout_design_system_core", { br: () => <br /> })}
                                     </motion.h3>
                                     <p className="text-white/50 text-xs font-medium max-w-[150px] leading-relaxed">
-                                      Architecture optimized for high-performance scaling.
+                                      {t("layout_design_architecture")}
                                     </p>
                                     <div className="flex gap-2 pt-2">
                                       <div
@@ -689,7 +696,7 @@ export default function LayoutDesign() {
                             )}
                           >
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-[9px] text-white/50 font-bold uppercase">Uptime</span>
+                              <span className="text-[9px] text-white/50 font-bold uppercase">{t("layout_design_uptime")}</span>
                               <Activity size={12} className={cn(theme.text)} />
                             </div>
                             <div className="text-lg font-bold text-white mb-1.5">99.9%</div>
@@ -722,7 +729,7 @@ export default function LayoutDesign() {
                                 />
                               ))}
                             </div>
-                            <div className="text-[10px] font-bold text-white opacity-80">Active</div>
+                            <div className="text-[10px] font-bold text-white opacity-80">{t("layout_design_active")}</div>
                           </motion.div>
 
                           {/* Bottom Right: Activity */}
@@ -778,7 +785,7 @@ export default function LayoutDesign() {
               className="relative"
             >
               <div className="bg-white text-black text-[10px] md:text-xs font-black uppercase tracking-wider px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap relative">
-                Try it yourself!
+                {t("layout_design_try_it")}
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 md:-bottom-1.5 md:w-3 md:h-3 bg-white rotate-45" />
               </div>
             </motion.div>
@@ -786,7 +793,7 @@ export default function LayoutDesign() {
 
           <div className="grid grid-cols-2 gap-2 p-3 rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl w-full lg:flex lg:flex-col lg:gap-4 lg:p-4">
             {/* Layout Mode */}
-            <ControlGroup label="Layout" icon={<Layout size={14} />}>
+            <ControlGroup label={t("layout_design_control_layout")} icon={<Layout size={14} />}>
               {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
                 <ControlButton
                   key={mode}
@@ -798,7 +805,7 @@ export default function LayoutDesign() {
             </ControlGroup>
 
             {/* Typography */}
-            <ControlGroup label="Type" icon={<Type size={14} />}>
+            <ControlGroup label={t("layout_design_control_typography")} icon={<Type size={14} />}>
               {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
                 <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
               ))}

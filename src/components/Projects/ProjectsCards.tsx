@@ -3,14 +3,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/ui/header";
-import { ChevronRight, Globe, Smartphone, LayoutDashboard } from "lucide-react";
+import { ChevronRight, Globe, Smartphone, LayoutDashboard, X, ExternalLink } from "lucide-react";
 import { PROJECTS, Category, Project } from "@/data/projects";
 import Image from "next/image";
+import { ProjectModal } from "./ProjectModal";
+import { useTranslations } from "next-intl";
 
 const TABS = [
-  { id: "websites", label: "Websites", icon: Globe },
-  { id: "mobile_apps", label: "Mobile Apps", icon: Smartphone },
-  { id: "dashboards", label: "Dashboards", icon: LayoutDashboard },
+  { id: "websites", icon: Globe },
+  { id: "mobile_apps", icon: Smartphone },
+  { id: "dashboards", icon: LayoutDashboard },
 ] as const;
 
 function WaveCanvas() {
@@ -113,7 +115,9 @@ function WaveCanvas() {
 }
 
 export default function ProjectsCards() {
+  const t = useTranslations("projects");
   const [activeTab, setActiveTab] = useState<Category>("websites");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = PROJECTS.filter((p) => p.category === activeTab);
 
@@ -130,11 +134,11 @@ export default function ProjectsCards() {
       {/* Header Section */}
       <div className="w-full max-w-7xl mx-auto mb-16 px-4 text-center z-10 relative">
         <Header
-          title="Selected Works"
+          title={t("header.title")}
           className="font-app text-xl md:text-2xl lg:text-3xl mb-4 tracking-tight"
         />
         <p className="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
-          Explore our latest projects across different platforms.
+          {t("header.description")}
         </p>
       </div>
 
@@ -152,7 +156,7 @@ export default function ProjectsCards() {
             )}
           >
             <tab.icon className="w-4 h-4" />
-            {tab.label}
+            {t(`tabs.${tab.id}`)}
           </button>
         ))}
       </div>
@@ -174,17 +178,27 @@ export default function ProjectsCards() {
               activeTab === "mobile_apps" ? (
                 <MobileProjectCard key={project.id} project={project} />
               ) : (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onOpen={() => setSelectedProject(project)}
+                />
               ),
             )}
           </div>
         </div>
       </div>
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }
 
 function MobileProjectCard({ project }: { project: Project }) {
+  const t = useTranslations("projects");
   // Recreating the Mobile Phone aesthetic from the original file
   return (
     <div className="flex flex-col items-center w-full">
@@ -212,9 +226,9 @@ function MobileProjectCard({ project }: { project: Project }) {
                 <Smartphone className="w-8 h-8 text-neutral-400" />
               </div>
               <h4 className="text-white font-bold text-lg mb-1">
-                {project.title}
+                {t(`items.${project.id}.title`)}
               </h4>
-              <p className="text-neutral-500 text-xs">{project.description}</p>
+              <p className="text-neutral-500 text-xs">{t(`items.${project.id}.description`)}</p>
             </div>
           )}
 
@@ -222,9 +236,9 @@ function MobileProjectCard({ project }: { project: Project }) {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
           <div className="absolute bottom-6 left-6 right-6 text-white p-4 rounded-xl backdrop-blur-md bg-white/10 border border-white/10">
-            <h4 className="font-bold text-sm mb-0.5">{project.title}</h4>
+            <h4 className="font-bold text-sm mb-0.5">{t(`items.${project.id}.title`)}</h4>
             <p className="text-[10px] text-neutral-300 line-clamp-1">
-              {project.description}
+              {t(`items.${project.id}.description`)}
             </p>
           </div>
         </div>
@@ -233,7 +247,8 @@ function MobileProjectCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  const t = useTranslations("projects");
   return (
     <div className="w-full group">
       {/* Card Container mimicking SchemaCard style */}
@@ -248,7 +263,7 @@ function ProjectCard({ project }: { project: Project }) {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  className="object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-neutral-800/50">
@@ -265,23 +280,43 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Content */}
         <div className="p-5">
           <span className="inline-block px-3 py-1 bg-white/5 text-neutral-300 rounded-full text-[10px] font-medium mb-3 border border-white/10 tracking-wider uppercase">
-            {project.highlight}
+            {t(`items.${project.id}.highlight`)}
           </span>
           <h3 className="text-xl font-medium text-white mb-2 group-hover:text-white transition-colors">
-            {project.title}
+            {t(`items.${project.id}.title`)}
           </h3>
           <p className="text-neutral-400 mb-5 leading-relaxed text-xs h-10 line-clamp-2">
-            {project.description}
+            {t(`items.${project.id}.description`)}
           </p>
 
           <div className="flex justify-between items-center mt-auto">
-            <button className="text-white hover:text-neutral-300 transition flex items-center text-xs font-medium bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg border border-white/10 group/btn">
-              View Project
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpen();
+              }}
+              className="text-white hover:text-neutral-300 transition flex items-center text-xs font-medium bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg border border-white/10 group/btn"
+            >
+              {t("card.viewDetails")}
               <ChevronRight className="w-3 h-3 ml-1 transform group-hover/btn:translate-x-0.5 transition-transform" />
             </button>
-            <span className="text-white/30 text-[10px] uppercase tracking-widest border border-white/5 px-2 py-1 rounded-md">
-              {project.status}
-            </span>
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-black hover:text-neutral-800 transition flex items-center text-xs font-bold bg-white hover:bg-neutral-200 px-4 py-2 rounded-lg group/launch"
+              >
+                {t("card.launch")}
+                <ExternalLink className="w-3 h-3 ml-1.5 opacity-70 group-hover/launch:opacity-100 transition-opacity" />
+              </a>
+            )}
+            {!project.link && (
+              <span className="text-white/30 text-[10px] uppercase tracking-widest border border-white/5 px-2 py-1 rounded-md">
+                {project.status}
+              </span>
+            )}
           </div>
         </div>
       </div>

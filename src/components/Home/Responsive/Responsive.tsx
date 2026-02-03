@@ -322,30 +322,26 @@ export default function StickyPhone() {
   // Using the requested shapes
   const features = [
     {
-      title: "Universal Compatibility",
-      description:
-        "Our solutions are engineered to perform flawlessly across all devices, ensuring your brand looks exceptional everywhere.",
+      title: t("feature_1_title"),
+      description: t("feature_1_desc"),
       Shape: DiscoveryShape,
       color: "blue",
     },
     {
-      title: "Adaptive Interface",
-      description:
-        "Fluid layouts that automatically adjust to any screen size, from large desktop monitors to compact mobile displays.",
+      title: t("feature_2_title"),
+      description: t("feature_2_desc"),
       Shape: StrategyShape,
       color: "purple",
     },
     {
-      title: "Mobile-First Design",
-      description:
-        "Prioritizing mobile interactions to capture the immense audience on smartphones while scaling up beautifully.",
+      title: t("feature_3_title"),
+      description: t("feature_3_desc"),
       Shape: DesignShape,
       color: "pink",
     },
     {
-      title: "Cross-Platform Consistency",
-      description:
-        "Maintain a unified brand experience whether your users are on iOS, Android, Windows, or macOS.",
+      title: t("feature_4_title"),
+      description: t("feature_4_desc"),
       Shape: DevelopmentShape,
       color: "emerald",
     },
@@ -356,11 +352,10 @@ export default function StickyPhone() {
       <div className="container max-w-[1400px] mx-auto px-4">
         <div className="-mb-14 -lg:mb-24 text-center">
           <h2 className="text-4xl md:text-6xl font-bold font-app text-white mb-4">
-            Responsive Across <br /> All Devices
+            {t.rich("responsive_title", { br: () => <br /> })}
           </h2>
           <p className="text-neutral-400 text-lg md:text-xl max-w-lg mx-auto">
-            Experience seamless performance and stunning visuals on every
-            screen.
+            {t("responsive_subtitle")}
           </p>
         </div>
 
