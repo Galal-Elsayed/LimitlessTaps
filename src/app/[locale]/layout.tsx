@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import { Preloader } from "@/components/ui/Preloader";
 import { FloatingRobot } from "@/components/ui/floating-robot";
 import { FloatingIcons } from "@/components/ui/floatingIcons";
+import { OrganizationStructuredData, WebsiteStructuredData } from "@/components/seo/StructuredData";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,18 +33,85 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "Limitless Taps",
-  description: "Your ultimate beverage solution",
+  metadataBase: new URL("https://limitlesstaps.com"),
+  title: {
+    default: "Limitless Taps | Digital Solutions & Software Development",
+    template: "%s | Limitless Taps",
+  },
+  description: "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
+  keywords: [
+    "web development",
+    "mobile app development",
+    "software solutions",
+    "digital agency",
+    "React",
+    "Next.js",
+    "Flutter",
+    "iOS development",
+    "Android development",
+    "UI/UX design",
+    "enterprise software",
+    "SaaS development",
+    "Abu Dhabi",
+    "UAE",
+  ],
+  authors: [{ name: "Limitless Taps", url: "https://limitlesstaps.com" }],
+  creator: "Limitless Taps",
+  publisher: "Limitless Taps",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/Logo/black.png",
     shortcut: "/Logo/black.png",
     apple: "/Logo/black.png",
   },
   openGraph: {
-    images: ["/Logo/black.png"],
+    type: "website",
+    locale: "en_US",
+    url: "https://limitlesstaps.com",
+    siteName: "Limitless Taps",
+    title: "Limitless Taps | Digital Solutions & Software Development",
+    description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+    images: [
+      {
+        url: "/Logo/black.png",
+        width: 1200,
+        height: 630,
+        alt: "Limitless Taps - Digital Solutions",
+      },
+    ],
   },
-  other: {
-    "format-detection": "telephone=no",
+  twitter: {
+    card: "summary_large_image",
+    title: "Limitless Taps | Digital Solutions & Software Development",
+    description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+    images: ["/Logo/black.png"],
+    creator: "@limitlesstaps",
+  },
+  alternates: {
+    canonical: "https://limitlesstaps.com",
+    languages: {
+      "en-US": "https://limitlesstaps.com/en",
+      "ar-SA": "https://limitlesstaps.com/ar",
+    },
+  },
+  verification: {
+    google: "your-google-verification-code",
+  },
+  category: "technology",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
 };
 
@@ -169,6 +237,9 @@ export default async function RootLayout({
       </head>
       <body className="antialiased font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={resolvedLocale}>
+          {/* Structured Data for SEO */}
+          <OrganizationStructuredData locale={resolvedLocale} />
+          <WebsiteStructuredData locale={resolvedLocale} />
           {/* <Preloader /> */}
           <Toaster position="top-center" expand={false} richColors />
           <div className="pt-18">

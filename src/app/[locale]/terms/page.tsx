@@ -7,9 +7,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'terms' });
 
+  const title = t('title');
+  const description = t('description');
+
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title: `${title} | Limitless Taps`,
+      description,
+      url: `https://limitlesstaps.com/${locale}/terms`,
+      type: "website",
+    },
+    alternates: {
+      canonical: `https://limitlesstaps.com/${locale}/terms`,
+      languages: {
+        "en-US": "https://limitlesstaps.com/en/terms",
+        "ar-SA": "https://limitlesstaps.com/ar/terms",
+      },
+    },
   };
 }
 
