@@ -3,7 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/ui/header";
-import { ChevronRight, Globe, Smartphone, LayoutDashboard, X, ExternalLink } from "lucide-react";
+import {
+  ChevronRight,
+  Globe,
+  Smartphone,
+  LayoutDashboard,
+  X,
+  ExternalLink,
+} from "lucide-react";
 import { PROJECTS, Category, Project } from "@/data/projects";
 import Image from "next/image";
 import { ProjectModal } from "./ProjectModal";
@@ -135,9 +142,9 @@ export default function ProjectsCards() {
       <div className="w-full max-w-7xl mx-auto mb-16 px-4 text-center z-10 relative">
         <Header
           title={t("header.title")}
-          className="font-app text-xl md:text-2xl lg:text-3xl mb-4 tracking-tight"
+          className="font-app text-xl md:text-2xl lg:text-7xl mb-4 tracking-tight"
         />
-        <p className="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
+        <p className="text-neutral-400 text-base md:text-xl max-w-2xl mx-auto">
           {t("header.description")}
         </p>
       </div>
@@ -228,7 +235,9 @@ function MobileProjectCard({ project }: { project: Project }) {
               <h4 className="text-white font-bold text-lg mb-1">
                 {t(`items.${project.id}.title`)}
               </h4>
-              <p className="text-neutral-500 text-xs">{t(`items.${project.id}.description`)}</p>
+              <p className="text-neutral-500 text-xs">
+                {t(`items.${project.id}.description`)}
+              </p>
             </div>
           )}
 
@@ -236,7 +245,9 @@ function MobileProjectCard({ project }: { project: Project }) {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
           <div className="absolute bottom-6 left-6 right-6 text-white p-4 rounded-xl backdrop-blur-md bg-white/10 border border-white/10">
-            <h4 className="font-bold text-sm mb-0.5">{t(`items.${project.id}.title`)}</h4>
+            <h4 className="font-bold text-sm mb-0.5">
+              {t(`items.${project.id}.title`)}
+            </h4>
             <p className="text-[10px] text-neutral-300 line-clamp-1">
               {t(`items.${project.id}.description`)}
             </p>
@@ -247,7 +258,13 @@ function MobileProjectCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project;
+  onOpen: () => void;
+}) {
   const t = useTranslations("projects");
   return (
     <div className="w-full group">
@@ -257,13 +274,13 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         <div className="p-4 flex justify-center relative">
           <div className="w-full h-48 rounded-xl overflow-hidden relative border border-white/10 bg-neutral-950/50 group-hover:border-white/20 transition-colors duration-500">
             {/* Image Placeholder Container */}
-            <div className="absolute inset-0 bg-neutral-900 group-hover:scale-105 transition-transform duration-700 ease-out">
+            <div className="absolute inset-0 bg-transparent group-hover:scale-105 transition-transform duration-700 ease-out">
               {project.image ? (
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  className="object-cover object-top"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-neutral-800/50">

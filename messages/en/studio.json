@@ -1,1 +1,69 @@
-{}
+{
+  "hero": {
+    "title": "The Studio"
+  },
+  "templates": {
+    "header": {
+      "choose": "Choose",
+      "your": "Your",
+      "template": "Template"
+    },
+    "filters": {
+      "all": "All",
+      "simple": "Simple",
+      "medium": "Medium",
+      "advanced": "Advanced",
+      "showing": "Showing"
+    },
+    "toggle": {
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "cta": {
+      "view_demo": "View Demo",
+      "stop_demo": "Stop Demo"
+    },
+    "items": {
+      "nextsaas": {
+        "title": "Digital Marketing Agency",
+        "description": "A modern digital marketing agency platform built with Next.js"
+      },
+      "financial_platform": {
+        "title": "Financial Management Platform",
+        "description": "Comprehensive financial management and analytics dashboard"
+      },
+      "social_media": {
+        "title": "Social Media Management",
+        "description": "Complete social media management and marketing platform"
+      },
+      "ai_gadget": {
+        "title": "AI Gadget Store",
+        "description": "E-commerce platform for AI-powered gadgets and technology"
+      },
+      "time_tracking": {
+        "title": "Time Tracking App",
+        "description": "Productivity app for time tracking and project management"
+      },
+      "property_management": {
+        "title": "Property Management",
+        "description": "Real estate property management platform"
+      },
+      "analytics_dashboard": {
+        "title": "Analytics Dashboard",
+        "description": "Data analytics and reporting dashboard"
+      },
+      "construction_corp": {
+        "title": "Construction Company",
+        "description": "Corporate website for construction business"
+      },
+      "wealth_management": {
+        "title": "Wealth Management",
+        "description": "Financial advisory and wealth management services"
+      },
+      "wealth_advisory": {
+        "title": "Wealth Advisory",
+        "description": "Consulting services for wealth management"
+      }
+    }
+  }
+}
