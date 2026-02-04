@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "framer-motion";
 import { Header } from "@/components/ui/header";
-import Link from "next/link";
+import { ArcButton } from "@/components/ui/ArcButton";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -61,12 +61,19 @@ export default function ServiceCall() {
       className="w-full relative min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] py-20"
       style={{ transform: "translateZ(0)" }} // Hardware acceleration hint
     >
-      <div className="relative w-full max-w-[95%] md:max-w-[80vw] mx-auto rounded-3xl border border-white/10 bg-black/80 p-8 md:p-16 overflow-hidden backdrop-blur-sm">
-        {/* --- Background Ambient Glow (Top Left) --- */}
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-white/[0.05] blur-[100px] rounded-full pointer-events-none" />
-
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] bg-white/[0.01] blur-[60px] rounded-full" />
+      <div className="relative w-full max-w-[95%] md:max-w-[80vw] mx-auto rounded-3xl border border-white/10 p-8 md:p-16 overflow-hidden">
+        {/* --- Background Image --- */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/Services/service-call.png"
+            alt="Service Call Background"
+            fill
+            className="object-cover"
+            priority
+            quality={100}
+          />
+          {/* Subtle overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         {/* --- Infinity Symbol & Content --- */}
@@ -148,29 +155,32 @@ export default function ServiceCall() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="flex flex-col md:flex-row items-center gap-6"
           >
-            <Link
+            <ArcButton
               href="/contact"
-              className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
+              variant="light"
+              radius="rounded-2xl"
+              className="px-10 py-5 h-auto text-lg rounded-full"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <Image
-                  src="/Home/infinity.apng"
-                  alt={t("call.startProject")}
-                  width={24}
-                  height={24}
-                  className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
-                  priority
-                />
-                {t("call.startProject")}
-              </span>
-            </Link>
+              <Image
+                src="/Home/infinity.apng"
+                alt={t("call.startProject")}
+                width={24}
+                height={24}
+                className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
+                priority
+              />
+              {t("call.startProject")}
+            </ArcButton>
 
-            <Link
+            <ArcButton
               href="/services"
-              className="group inline-flex items-center justify-center px-10 py-5 rounded-full font-medium text-lg text-white/70 border border-white/10 hover:bg-white/5 transition-all hover:text-white"
+              variant="dark"
+              radius="rounded-2xl"
+              className="px-10 py-5 h-auto text-lg text-white/70 hover:text-white rounded-full"
             >
               {t("call.viewServices")}
-            </Link>
+            </ArcButton>
+
           </motion.div>
         </motion.div>
       </div>

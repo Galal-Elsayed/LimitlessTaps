@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { ArcButton } from "@/components/ui/ArcButton";
 
 // --- Background Effects ---
 const StarField = React.memo(() => {
@@ -484,21 +486,21 @@ export default function AboutHero() {
                     transition={{ delay: 0.7, duration: 0.6 }}
                     className="mt-8 sm:mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-5"
                 >
-                    <motion.button
-                        whileHover={{ scale: 1.03, backgroundColor: "#FFFFFF" }}
-                        whileTap={{ scale: 0.97 }}
-                        className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[#E6E6E6] text-[#08090A] font-medium text-sm sm:text-base shadow-lg shadow-white/5 transition-colors hover:cursor-pointer"
+                    <ArcButton
+                        href="/projects"
+                        variant="light"
+                        radius="rounded-full"
+                        className="px-6 py-3 sm:px-8 sm:py-4 h-auto text-sm sm:text-base normal-case font-medium tracking-normal"
                     >
                         {t("hero.cta_primary")}
-                    </motion.button>
-                    <motion.a
-                        href="#"
-                        whileHover={{ x: 5 }}
-                        className="flex items-center gap-2 text-[#8A8F98] hover:text-[#F7F8F8] transition-colors text-sm sm:text-base font-medium"
+                    </ArcButton>
+                    <Link
+                        href="/studio"
+                        className="flex items-center gap-2 text-[#8A8F98] hover:text-[#F7F8F8] transition-colors text-sm sm:text-base font-medium group"
                     >
                         {t("hero.cta_secondary")}
-                        <ArrowUpRight className="w-4 h-4" />
-                    </motion.a>
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </Link>
                 </motion.div>
 
                 {/* --- 3D Dashboard Interface --- */}

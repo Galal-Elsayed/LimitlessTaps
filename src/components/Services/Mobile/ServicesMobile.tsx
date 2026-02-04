@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent, useSpring } from "motion/react";
-import { IconWifi, IconBattery4, IconAntennaBars5, IconBrandApple, IconBrandAndroid, IconDeviceMobile, IconPalette } from "@tabler/icons-react";
+import { IconWifi, IconBattery4, IconAntennaBars5, IconBrandApple, IconBrandAndroid, IconDevices, IconLayout } from "@tabler/icons-react";
 import { useTranslations, useLocale } from "next-intl";
 import Header from "../../ui/header";
 
@@ -12,19 +12,19 @@ const SERVICE_KEYS = ["ios", "android", "cross", "uiux"] as const;
 const SERVICE_CONFIG = {
     ios: {
         icon: <IconBrandApple size={32} className="text-white" />,
-        color: "bg-blue-600",
+        color: "bg-blue-950",
     },
     android: {
         icon: <IconBrandAndroid size={32} className="text-green-500" />,
-        color: "bg-green-600",
+        color: "bg-green-950",
     },
     cross: {
-        icon: <IconDeviceMobile size={32} className="text-purple-500" />,
-        color: "bg-purple-600",
+        icon: <IconDevices size={32} className="text-purple-500" />,
+        color: "bg-purple-950",
     },
     uiux: {
-        icon: <IconPalette size={32} className="text-pink-500" />,
-        color: "bg-pink-600",
+        icon: <IconLayout size={32} className="text-pink-500" />,
+        color: "bg-pink-950",
     }
 };
 

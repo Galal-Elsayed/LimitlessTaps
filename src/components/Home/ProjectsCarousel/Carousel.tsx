@@ -199,7 +199,10 @@ export default function Carousel() {
         {/* Header */}
         <div className="text-center mb-8 space-y-4">
           <div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 font-app">
+            <h2 className={cn(
+              "text-4xl md:text-6xl font-bold mb-4 font-app",
+              locale === "ar" && "pb-4"
+            )}>
               {t("projects_header_title")}
             </h2>
             <p className="text-neutral-400 text-lg md:text-2xl">

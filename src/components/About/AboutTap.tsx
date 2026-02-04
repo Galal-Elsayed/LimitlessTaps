@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Send, ArrowUpRight, Check } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { ArcButton } from "@/components/ui/ArcButton";
 
 export default function AboutTap() {
     const t = useTranslations("aboutUs");
@@ -103,12 +104,10 @@ export default function AboutTap() {
                         <h2 className="text-4xl md:text-7xl font-bold tracking-tight mb-6">
                             {t("tap.header_center")}
                         </h2>
-                        <Link href="/contact">
-                            <button className="group px-6 py-2 bg-white text-black rounded-full font-bold text-sm hover:bg-neutral-200 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10">
-                                {t("tap.cta")}
-                                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </Link>
+                        <ArcButton href="/contact" variant="light" radius="rounded-full" className="group px-6 py-2 font-bold text-sm h-auto">
+                            {t("tap.cta")}
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </ArcButton>
                     </div>
 
                     {/* Right Part (Desktop only) */}
@@ -118,12 +117,10 @@ export default function AboutTap() {
 
                     {/* Mobile: Button (Bottom) */}
                     <div className="md:hidden order-3 w-full flex justify-center mt-2">
-                        <Link href="/contact">
-                            <button className="group px-6 py-2 bg-white text-black rounded-full font-bold text-sm hover:bg-neutral-200 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10">
-                                {t("tap.cta")}
-                                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </Link>
+                        <ArcButton href="/contact" variant="light" radius="rounded-full" className="group px-6 py-2 font-bold text-sm h-auto">
+                            {t("tap.cta")}
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </ArcButton>
                     </div>
                 </motion.div>
             </div>

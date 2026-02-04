@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 import { useTranslations, useLocale } from "next-intl";
+import { Header } from "@/components/ui/header";
 
 const ReviewCard = ({
   img,
@@ -103,9 +104,10 @@ export default function Reviews() {
   return (
     <section className="w-full bg-[#0a0a0a] py-8 overflow-hidden relative">
       <div className="w-full max-w-[100rem] mx-auto relative z-10 flex flex-col gap-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-8">
-          {t("reviews_title")}
-        </h2>
+        <Header
+          title={t("reviews_title")}
+          className={cn("text-center mb-8 !text-3xl md:!text-6xl font-app", locale === "ar" && "pb-4")}
+        />
         <Marquee dir="ltr" pauseOnHover className="[--duration:40s] [--gap:1rem]">
           {firstRow.map((review) => (
             <div key={review.name} dir={locale === "ar" ? "rtl" : "ltr"}>

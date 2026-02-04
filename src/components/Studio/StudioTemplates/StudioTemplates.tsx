@@ -237,7 +237,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             </button>
 
             {/* Content Container */}
-            <div className="w-full h-full relative flex items-center justify-center px-4 md:px-16 lg:px-20">
+            <div className="w-full h-full relative flex items-center justify-center px-8 md:px-16 lg:px-20">
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                     <m.div
                         key={activeItem.id}
@@ -302,17 +302,30 @@ export default function StudioTemplates() {
             <section className="min-h-screen bg-neutral-950 py-4 pb-32 md:py-12 relative overflow-hidden flex flex-col items-center">
 
                 {/* Header Section */}
-                <div className="w-full max-w-[95%] md:max-w-[90%] mx-auto mb-10 z-10 flex flex-col gap-8 md:gap-12 px-4 md:px-0">
+                <div className="w-full max-w-[95%] md:max-w-[85%] mx-auto mb-10 z-10 flex flex-col gap-8 md:gap-12 px-4 md:px-0">
 
                     {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-0">
-                        <div className="text-center md:text-left w-full md:w-1/3 flex justify-center md:justify-start">
-                            <Header title={t("header.choose")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : ""}`} />
+                    {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
+                    <div className={cn(
+                        "flex flex-col md:flex-row items-center",
+                        isArabic ? "justify-center gap-2 md:gap-6" : "justify-between gap-2 md:gap-0"
+                    )}>
+                        <div className={cn(
+                            "text-center flex",
+                            isArabic ? "w-auto justify-center" : "md:text-left w-full md:w-1/3 justify-center md:justify-start"
+                        )}>
+                            <Header title={t("header.choose")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : "md:ml-10"}`} />
                         </div>
-                        <div className="text-center w-full md:w-1/3 flex justify-center">
+                        <div className={cn(
+                            "text-center flex justify-center",
+                            isArabic ? "w-auto" : "w-full md:w-1/3"
+                        )}>
                             <Header title={t("header.your")} className={`text-[14vw] md:text-[6.5vw] leading-none z-10 ${isArabic ? "pb-4" : ""}`} />
                         </div>
-                        <div className="text-center md:text-right w-full md:w-1/3 flex justify-center md:justify-end">
+                        <div className={cn(
+                            "text-center flex",
+                            isArabic ? "w-auto justify-center" : "md:text-right w-full md:w-1/3 justify-center md:justify-end"
+                        )}>
                             <Header title={t("header.template")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : ""}`} />
                         </div>
                     </div>
@@ -406,10 +419,24 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
     }, [isDesktop]);
 
     return (
-        <div className="w-full flex flex-col items-center">
+        <div className={cn(
+            "w-full flex items-center transition-all duration-500 ease-in-out",
+            isMobile ? "flex-row justify-center gap-12 md:gap-24 h-[80vh]" : "flex-col"
+        )}>
 
-            {/* Device Toggle Controls */}
-            <div className="mb-4 z-30 flex items-center justify-center">
+            {/* Device Toggle Controls (Only show on Desktop view or position differently on mobile?) 
+                Actually, let's keep it at the top for desktop, but for mobile layout it might need to be elsewhere 
+                or just keep it absolute/fixed? The user didn't specify, but for side-by-side, it might conflict.
+                Let's keep it simple: Floating top or just in the flow.
+                For now, let's move it out of the flex flow if we want pure side-by-side centering, 
+                OR keep it at the top of the container. 
+            */}
+
+            {/* Device Toggle - layout responsive */}
+            <div className={cn(
+                "z-30 flex items-center justify-center transition-all duration-300",
+                isMobile ? "absolute top-0 left-1/2 -translate-x-1/2 -mt-10" : "mb-4"
+            )}>
                 <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-white/10">
                     <button
                         onClick={handleDesktopClick}
@@ -435,13 +462,16 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
             </div>
 
             {/* Device Window - PURE CSS TRANSITIONS for max performance */}
-            <div className="relative w-full flex justify-center">
+            <div className={cn(
+                "relative flex justify-center transition-all duration-500 ease-in-out",
+                isMobile ? "items-center" : "w-full"
+            )}>
                 <div
                     className={cn(
-                        "contain-layout contain-paint",
+                        "contain-layout contain-paint transition-all duration-500 ease-in-out",
                         isDesktop
                             ? "w-full max-w-[1400px] h-[65vh] rounded-t-2xl border border-white/10 border-b-0 shadow-[0_0_50px_-5px_rgba(255,255,255,0.15)]"
-                            : "w-[350px] h-[600px] rounded-[40px] border-8 border-[#1a1a1a] shadow-[0_0_30px_-5px_rgba(255,255,255,0.15)]"
+                            : "w-[350px] md:w-[400px] h-[75vh] rounded-[48px] border-[8px] border-[#1a1a1a] shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]"
                     )}
                 >
                     {/* Safari-Style Window Header (Desktop Only) - No AnimatePresence */}
@@ -486,10 +516,10 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                             isMobile ? "opacity-100" : "opacity-0"
                         )}
                     >
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 md:w-28 md:h-7 bg-[#1a1a1a] rounded-b-[1rem] flex items-center justify-center">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 md:w-32 md:h-8 bg-[#1a1a1a] rounded-b-[1.2rem] flex items-center justify-center">
                             <div className="w-12 h-1.5 md:w-16 md:h-2 bg-black/50 rounded-full" />
                         </div>
-                        <div className="flex justify-between items-center px-5 pt-2 md:px-6 md:pt-3 text-[10px] font-medium text-white/50">
+                        <div className="flex justify-between items-center px-5 pt-3 md:px-7 md:pt-4 text-[10px] font-medium text-white/50">
                             <span>9:41</span>
                             <div className="flex items-center gap-1.5">
                                 <div className="flex gap-0.5">
@@ -505,7 +535,8 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                     </div>
 
                     {/* Content Area */}
-                    <div ref={containerRef} className="relative w-full h-full bg-[#111] overflow-hidden">
+                    <div ref={containerRef} className="relative w-full h-full bg-[#111] overflow-hidden rounded-b-[40px] md:rounded-b-[40px] desktop:rounded-none">
+                        {/* Note: rounded-b needed for mobile radius match if overflow hidden doesn't catch it on border radius */}
                         {isPlaying ? (
                             <div
                                 style={{
@@ -514,6 +545,7 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                                     transform: isDesktop ? `scale(${scale})` : "none",
                                     transformOrigin: "top left",
                                 }}
+                                className="w-full h-full"
                             >
                                 <iframe
                                     src={template.demoUrl}
@@ -545,30 +577,33 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                 </div>
             </div>
 
-            {/* Bottom Info Bar - PURE CSS TRANSITIONS */}
+            {/* Bottom Info Bar (Desktop) OR Right Sidebar (Mobile) */}
             <div
                 className={cn(
-                    "bg-[#222] border border-white/10 border-t-0 relative z-20 flex transition-all duration-300 ease-out",
+                    "bg-[#222] border border-white/10 relative z-20 flex transition-all duration-500 ease-in-out",
                     isDesktop
-                        ? "w-full max-w-[1400px] rounded-b-2xl p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-[0_20px_50px_-5px_rgba(255,255,255,0.15)]"
-                        : "w-[370px] mt-2 rounded-3xl p-3 flex-row items-center justify-between gap-3 shadow-[0_10px_30px_-5px_rgba(255,255,255,0.1)]"
+                        ? "w-full max-w-[1400px] rounded-b-2xl border-t-0 p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-[0_20px_50px_-5px_rgba(255,255,255,0.15)]"
+                        : "w-[300px] h-auto min-h-[400px] flex-col justify-between rounded-3xl p-6 shadow-[0_10px_40px_-5px_rgba(255,255,255,0.1)] gap-8 bg-[#151515]"
                 )}
             >
-                <div className={cn("flex flex-col gap-3 max-w-2xl", isMobile && "gap-1 flex-1 overflow-hidden")}>
-                    <div className="flex items-center gap-3">
-                        <h3 className={cn("text-2xl font-bold text-white", isMobile && "text-base")}>{title}</h3>
-                        <span className={cn("text-[10px] uppercase font-bold tracking-wider text-black bg-white px-2 py-0.5 rounded-sm", isMobile && "px-1.5 py-0 text-[9px]")}>
+                <div className={cn("flex flex-col gap-3", isDesktop ? "max-w-2xl" : "w-full gap-6")}>
+                    <div className={cn("flex items-center gap-3", isMobile && "flex-col items-start gap-4")}>
+                        <h3 className={cn("text-2xl font-bold text-white", isMobile && "text-3xl")}>{title}</h3>
+                        <span className={cn(
+                            "text-[10px] uppercase font-bold tracking-wider text-black bg-white px-2 py-0.5 rounded-sm",
+                            isMobile && "px-3 py-1 text-xs"
+                        )}>
                             {t(`filters.${template.category}`)}
                         </span>
                     </div>
 
-                    <p className={cn("text-neutral-400 text-sm md:text-base leading-relaxed line-clamp-2", isMobile && "text-[10px] leading-tight line-clamp-1")}>
+                    <p className={cn("text-neutral-400 text-sm md:text-base leading-relaxed line-clamp-2", isMobile && "line-clamp-none text-base")}>
                         {description}
                     </p>
 
-                    <div className={cn("flex flex-wrap gap-2 mt-2", isMobile && "mt-1 gap-1 flex-nowrap overflow-hidden")}>
+                    <div className={cn("flex flex-wrap gap-2 mt-2", isMobile && "mt-4")}>
                         {template.tags.map(tag => (
-                            <span key={tag} className={cn("text-xs font-mono text-neutral-500 bg-neutral-900 border border-white/5 px-2 py-1 rounded-md", isMobile && "px-1.5 py-0.5 text-[9px] whitespace-nowrap")}>
+                            <span key={tag} className="text-xs font-mono text-neutral-500 bg-neutral-900 border border-white/5 px-2 py-1 rounded-md">
                                 {tag}
                             </span>
                         ))}
@@ -580,7 +615,7 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                     onClick={handlePlayClick}
                     className={cn(
                         "group relative rounded-full font-bold text-sm overflow-hidden shrink-0 transition-colors duration-150",
-                        isMobile ? "w-10 h-10 flex items-center justify-center p-0" : "px-8 py-3 w-full md:w-auto",
+                        isDesktop ? "px-8 py-3 w-full md:w-auto" : "w-full py-4 text-base",
                         isPlaying
                             ? "bg-red-500 text-white hover:bg-red-600"
                             : "bg-white text-black hover:bg-neutral-200"
@@ -588,11 +623,13 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                 >
                     <div className="relative z-10 flex items-center justify-center gap-2">
                         {isPlaying ? (
-                            isMobile ? <Square size={14} fill="currentColor" /> : t("cta.stop_demo")
+                            <>
+                                {t("cta.stop_demo")}
+                            </>
                         ) : (
                             <>
                                 <Play size={16} fill="currentColor" />
-                                {!isMobile && t("cta.view_demo")}
+                                {t("cta.view_demo")}
                             </>
                         )}
                     </div>

@@ -3,7 +3,7 @@
 import { motion, LayoutGroup, useScroll, useTransform, Variants } from "motion/react";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   Monitor,
   Type,
@@ -151,6 +151,7 @@ const slideRightVariant: Variants = {
 
 export default function LayoutDesign() {
   const t = useTranslations("home");
+  const locale = useLocale();
 
   const NAV_LINKS = [
     t("layout_design_nav_services"),
@@ -295,7 +296,7 @@ export default function LayoutDesign() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <h2 className="text-3xl md:text-7xl font-app">
+        <h2 className={cn("text-3xl md:text-7xl font-app", locale === "ar" && "pb-4")}>
           {t("layout_design_title")}
           <span ref={dotRef} className="inline-block relative">
             .

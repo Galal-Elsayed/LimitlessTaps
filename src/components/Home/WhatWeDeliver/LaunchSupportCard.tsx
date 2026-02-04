@@ -3,6 +3,7 @@
 import { Check, Loader, Brain, Bug, Rocket, Radio, Eye } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface LaunchSupportCardProps {
   className?: string;
@@ -12,36 +13,37 @@ import { cn } from "@/lib/utils";
 
 export default function LaunchSupportCard({ className }: LaunchSupportCardProps) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const t = useTranslations("home");
 
   const steps = [
     {
       id: "build",
-      label: "Build",
-      sub: "Preparing your app",
+      labelKey: "launch_step_build",
+      subKey: "launch_step_build_sub",
       icon: Brain,
     },
     {
       id: "test",
-      label: "Test",
-      sub: "Quality checks",
+      labelKey: "launch_step_test",
+      subKey: "launch_step_test_sub",
       icon: Bug,
     },
     {
       id: "review",
-      label: "Review",
-      sub: "Final review",
+      labelKey: "launch_step_review",
+      subKey: "launch_step_review_sub",
       icon: Eye,
     },
     {
       id: "deploy",
-      label: "Deploy",
-      sub: "Going live",
+      labelKey: "launch_step_deploy",
+      subKey: "launch_step_deploy_sub",
       icon: Rocket,
     },
     {
       id: "live",
-      label: "Live",
-      sub: "Up and running!",
+      labelKey: "launch_step_live",
+      subKey: "launch_step_live_sub",
       icon: Radio,
     },
   ];
@@ -63,16 +65,16 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
         className,
       )}
     >
-      <h2 className="text-2xl font-bold text-white mb-3">Launch & Support</h2>
+      <h2 className="text-2xl font-bold text-white mb-3">{t("launch_support_title")}</h2>
       <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-        Deploy smoothly. Monitor performance, fix issues fast, and stay available when you need us.
+        {t("launch_support_desc")}
       </p>
 
       <div className="flex-1 flex flex-col justify-end">
         {/* Status Header */}
         <div className="flex items-center justify-between text-sm font-medium mb-3">
           <span className={isComplete ? "text-emerald-400" : "text-white"}>
-            {isComplete ? "System Live" : "Deploying..."}
+            {isComplete ? t("launch_status_live") : t("launch_status_deploying")}
           </span>
           <span className="text-gray-500">v2.29.0</span>
         </div>
@@ -97,25 +99,25 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
                 animate={
                   isLoading
                     ? {
-                        borderColor: loadingColors,
-                        backgroundColor: [
-                          "rgba(250, 204, 21, 0.1)",
-                          "rgba(96, 165, 250, 0.1)",
-                          "rgba(52, 211, 153, 0.1)",
-                        ],
-                        color: loadingColors,
-                      }
+                      borderColor: loadingColors,
+                      backgroundColor: [
+                        "rgba(250, 204, 21, 0.1)",
+                        "rgba(96, 165, 250, 0.1)",
+                        "rgba(52, 211, 153, 0.1)",
+                      ],
+                      color: loadingColors,
+                    }
                     : isCompleted
                       ? {
-                          borderColor: "rgba(52, 211, 153, 0.2)",
-                          backgroundColor: "rgba(52, 211, 153, 0.1)",
-                          color: "#34D399",
-                        }
+                        borderColor: "rgba(52, 211, 153, 0.2)",
+                        backgroundColor: "rgba(52, 211, 153, 0.1)",
+                        color: "#34D399",
+                      }
                       : {
-                          borderColor: "#27272a",
-                          backgroundColor: "rgba(24, 24, 27, 0.5)",
-                          color: "#52525b",
-                        }
+                        borderColor: "#27272a",
+                        backgroundColor: "rgba(24, 24, 27, 0.5)",
+                        color: "#52525b",
+                      }
                 }
                 transition={isLoading ? { duration: 2, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
                 className="relative flex items-center p-3 rounded-xl border transition-all"
@@ -143,8 +145,8 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
 
                 {/* Text - Third */}
                 <div className="flex flex-col">
-                  <span className="font-semibold text-sm leading-none mb-1">{step.label}</span>
-                  <span className="text-xs opacity-80 leading-none">{step.sub}</span>
+                  <span className="font-semibold text-sm leading-none mb-1">{t(step.labelKey)}</span>
+                  <span className="text-xs opacity-80 leading-none">{t(step.subKey)}</span>
                 </div>
               </motion.div>
             );
@@ -153,11 +155,10 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
 
         <div className="mt-6 flex items-center gap-2 text-sm text-gray-500">
           <div
-            className={`w-2 h-2 rounded-full ${
-              isComplete ? "bg-emerald-500 animate-pulse" : "bg-blue-500 animate-pulse"
-            }`}
+            className={`w-2 h-2 rounded-full ${isComplete ? "bg-emerald-500 animate-pulse" : "bg-blue-500 animate-pulse"
+              }`}
           />
-          <span>{isComplete ? "All systems operational" : "Deployment in progress..."}</span>
+          <span>{isComplete ? t("launch_status_operational") : t("launch_status_progress")}</span>
         </div>
       </div>
     </div>

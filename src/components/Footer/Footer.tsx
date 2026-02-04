@@ -183,6 +183,7 @@ export default function Footer() {
               <a
                 href="https://wa.me/201050038476"
                 className="hover:text-white transition-colors cursor-pointer"
+                dir="ltr"
               >
                 +( 20 ) 10 5003 8476
               </a>

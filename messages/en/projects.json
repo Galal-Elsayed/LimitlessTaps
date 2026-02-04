@@ -1,4 +1,9 @@
 {
+    "hero": {
+        "title": "PROJECTS",
+        "description_highlight": "Explore our latest work",
+        "description": "across web, mobile, and data visualization. Crafting digital experiences that push boundaries."
+    },
     "header": {
         "title": "Selected Works",
         "description": "Explore our latest projects across different platforms."

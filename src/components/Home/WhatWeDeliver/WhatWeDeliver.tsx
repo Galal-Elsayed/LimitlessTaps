@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import WhatWeDeliverLines from "./WhatWeDeliverLines";
 import LaunchSupportCard from "./LaunchSupportCard";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { useTranslations, useLocale } from "next-intl";
 
 // --- SHAPES ---
 
@@ -59,34 +60,34 @@ const CmsShape = () => (
   </div>
 );
 
-const SERVICES = [
+const getServices = (t: any) => [
   {
-    title: "Web Development",
-    description: "Building robust, scalable high-performance web applications with cutting-edge technologies.",
+    titleKey: "service_web_dev_title",
+    descKey: "service_web_dev_desc",
     shape: <ApiShape />,
     href: "/services/web-development",
   },
   {
-    title: "Mobile Applications",
-    description: "Creating seamless, native and cross-platform mobile experiences for iOS and Android.",
+    titleKey: "service_mobile_apps_title",
+    descKey: "service_mobile_apps_desc",
     shape: <CloudShape />,
     href: "/services/mobile-applications",
   },
   {
-    title: "Software Solutions",
-    description: "Delivering custom enterprise software tailored to your specific business needs.",
+    titleKey: "service_software_solutions_title",
+    descKey: "service_software_solutions_desc",
     shape: <EnterpriseShape />,
     href: "/services/software-solutions",
   },
   {
-    title: "Web Design",
-    description: "Crafting visually stunning, user-centric websites that capture your brand identity perfectly.",
+    titleKey: "service_web_design_title",
+    descKey: "service_web_design_desc",
     shape: <WebDesignShape />,
     href: "/services/web-design",
   },
   {
-    title: "Wordpress and CMS",
-    description: "Robust content management solutions designed for ease of use and flexibility.",
+    titleKey: "service_wordpress_cms_title",
+    descKey: "service_wordpress_cms_desc",
     shape: <CmsShape />,
     href: "/services/wordpress-cms",
   },
@@ -107,6 +108,10 @@ repeating-conic-gradient(
 )`;
 
 export default function WhatWeDeliver() {
+  const t = useTranslations("home");
+  const locale = useLocale();
+  const services = getServices(t);
+
   return (
     <section className="w-full bg-[#0a0a0a] pt-10 pb-20 overflow-hidden relative">
       <div className="w-full flex items-center justify-center relative z-10 -mb-28 mt-4 md:-mb-32">
@@ -117,10 +122,9 @@ export default function WhatWeDeliver() {
       </div>
       <div className="px-4 md:px-8 max-w-[100rem] mx-auto relative z-20 -mt-24">
         <div className="absolute -top-40 left-4 md:left-8 z-20 max-w-xl text-left">
-          <h2 className="text-3xl font-bold tracking-tight font-app md:text-5xl">WHAT WE DELIVER</h2>
+          <h2 className={cn("text-3xl font-bold tracking-tight font-app md:text-5xl", locale === "ar" && "pb-4")}>{t("what_we_deliver_title")}</h2>
           <p className="mt-4 text-base md:text-lg">
-            Modern solutions that work everywhere, load fast, and solve real problems using clean architecture, and
-            future-ready design.
+            {t("what_we_deliver_desc")}
           </p>
         </div>
 
@@ -128,12 +132,12 @@ export default function WhatWeDeliver() {
           {/* Services Column */}
           <div className="xl:col-span-17">
             <div className="grid grid-cols-1 md:grid-cols-6 gap-6 h-full">
-              {SERVICES.map((service, index) => (
+              {services.map((service, index) => (
                 <GridItem
                   key={index}
                   area={index < 2 ? "md:col-span-3" : "md:col-span-2"}
-                  title={service.title}
-                  description={service.description}
+                  title={t(service.titleKey)}
+                  description={t(service.descKey)}
                   shape={service.shape}
                   href={service.href}
                 />
@@ -198,7 +202,7 @@ const GridItem = ({ area, title, description, shape, href }: GridItemProps) => {
               </div>
 
               <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors mt-auto pt-4">
-                <span className="text-sm font-medium">Learn more</span>
+                <span className="text-sm font-medium">{useTranslations("home")("service_learn_more")}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </div>

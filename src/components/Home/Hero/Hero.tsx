@@ -66,7 +66,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight  leading-[1.1] text-white"
+              className={`text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] text-white ${isRTL ? "text-right" : ""
+                }`}
             >
               {t("hero_title")}
             </motion.h1>
@@ -117,11 +118,10 @@ export default function Hero() {
                 <span className="relative z-10 flex items-center gap-2">
                   {t("cta_secondary")}
                   <ArrowRight
-                    className={`h-5 w-5 transition-transform duration-300 ${
-                      isRTL
+                    className={`h-5 w-5 transition-transform duration-300 ${isRTL
                         ? "rotate-180 group-hover:-translate-x-1"
                         : "group-hover:translate-x-1"
-                    }`}
+                      }`}
                   />
                 </span>
               </Link>

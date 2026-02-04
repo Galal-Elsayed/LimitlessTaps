@@ -77,11 +77,10 @@ export function CTAButtons() {
         <span className="relative z-10 flex items-center gap-2">
           {t("cta_secondary")}
           <ArrowRight
-            className={`h-4 w-4 transition-transform duration-300 ${
-              isRTL
-                ? "rotate-180 group-hover:-translate-x-1"
-                : "group-hover:translate-x-1"
-            }`}
+            className={`h-4 w-4 transition-transform duration-300 ${isRTL
+              ? "rotate-180 group-hover:-translate-x-1"
+              : "group-hover:translate-x-1"
+              }`}
           />
         </span>
       </Link>
