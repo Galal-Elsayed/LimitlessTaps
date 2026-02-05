@@ -69,7 +69,9 @@ export default function Hero() {
               className={`text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] text-white ${isRTL ? "text-right" : ""
                 }`}
             >
-              {t("hero_title")}
+              {t.rich("hero_title", {
+                br: () => <br />,
+              })}
             </motion.h1>
 
             {/* Description */}
@@ -119,8 +121,8 @@ export default function Hero() {
                   {t("cta_secondary")}
                   <ArrowRight
                     className={`h-5 w-5 transition-transform duration-300 ${isRTL
-                        ? "rotate-180 group-hover:-translate-x-1"
-                        : "group-hover:translate-x-1"
+                      ? "rotate-180 group-hover:-translate-x-1"
+                      : "group-hover:translate-x-1"
                       }`}
                   />
                 </span>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cairo, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import "./globals.css";
 import { i18n } from "@/i18n.config";
 import Footer from "@/components/Footer/Footer";
@@ -32,88 +33,100 @@ const cairo = Cairo({
   preload: true,
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://limitlesstaps.com"),
-  title: {
-    default: "Limitless Taps | Digital Solutions & Software Development",
-    template: "%s | Limitless Taps",
-  },
-  description: "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
-  keywords: [
-    "web development",
-    "mobile app development",
-    "software solutions",
-    "digital agency",
-    "React",
-    "Next.js",
-    "Flutter",
-    "iOS development",
-    "Android development",
-    "UI/UX design",
-    "enterprise software",
-    "SaaS development",
-    "Abu Dhabi",
-    "UAE",
-  ],
-  authors: [{ name: "Limitless Taps", url: "https://limitlesstaps.com" }],
-  creator: "Limitless Taps",
-  publisher: "Limitless Taps",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const common = await getTranslations({ locale, namespace: "common" });
+
+  const brandName = common("brand_name");
+  const isArabic = locale === "ar";
+
+  return {
+    metadataBase: new URL("https://limitlesstaps.com"),
+    title: {
+      default: `${brandName} | Digital Solutions & Software Development`,
+      template: `%s | ${brandName}`,
+    },
+    description: "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
+    keywords: [
+      "web development",
+      "mobile app development",
+      "software solutions",
+      "digital agency",
+      "React",
+      "Next.js",
+      "Flutter",
+      "iOS development",
+      "Android development",
+      "UI/UX design",
+      "enterprise software",
+      "SaaS development",
+      "Abu Dhabi",
+      "UAE",
+    ],
+    authors: [{ name: brandName, url: "https://limitlesstaps.com" }],
+    creator: brandName,
+    publisher: brandName,
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: "/Logo/black.png",
-    shortcut: "/Logo/black.png",
-    apple: "/Logo/black.png",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://limitlesstaps.com",
-    siteName: "Limitless Taps",
-    title: "Limitless Taps | Digital Solutions & Software Development",
-    description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
-    images: [
-      {
-        url: "/Logo/black.png",
-        width: 1200,
-        height: 630,
-        alt: "Limitless Taps - Digital Solutions",
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Limitless Taps | Digital Solutions & Software Development",
-    description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
-    images: ["/Logo/black.png"],
-    creator: "@limitlesstaps",
-  },
-  alternates: {
-    canonical: "https://limitlesstaps.com",
-    languages: {
-      "en-US": "https://limitlesstaps.com/en",
-      "ar-SA": "https://limitlesstaps.com/ar",
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-  },
-  category: "technology",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-};
+    icons: {
+      icon: "/Logo/black.png",
+      shortcut: "/Logo/black.png",
+      apple: "/Logo/black.png",
+    },
+    openGraph: {
+      type: "website",
+      locale: isArabic ? "ar_SA" : "en_US",
+      url: `https://limitlesstaps.com/${locale}`,
+      siteName: brandName,
+      title: `${brandName} | Digital Solutions & Software Development`,
+      description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+      images: [
+        {
+          url: "/Logo/black.png",
+          width: 1200,
+          height: 630,
+          alt: `${brandName} - Digital Solutions`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${brandName} | Digital Solutions & Software Development`,
+      description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+      images: ["/Logo/black.png"],
+      creator: "@limitlesstaps",
+    },
+    alternates: {
+      canonical: `https://limitlesstaps.com/${locale}`,
+      languages: {
+        "en-US": "https://limitlesstaps.com/en",
+        "ar-SA": "https://limitlesstaps.com/ar",
+      },
+    },
+    verification: {
+      google: "your-google-verification-code",
+    },
+    category: "technology",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));

@@ -123,7 +123,10 @@ const FigmaUI = () => {
                     </div>
                 </div>
 
-                <div className="text-xs text-white/50 font-medium">{t('toolbar.title')}</div>
+                <div className="text-xs text-white/50 font-medium">
+                    <span className="hidden md:inline">{t('toolbar.title').split('-')[0]}-</span>
+                    <span>{t('toolbar.title').split('-')[1] || ''}</span>
+                </div>
 
                 <div className="flex items-center gap-3">
                     <div className="flex -space-x-1">
@@ -155,17 +158,23 @@ const FigmaUI = () => {
                     <div className="absolute inset-0 bg-[#1e1e1e]" style={{ backgroundImage: "radial-gradient(#444 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
 
                     {/* --- MAIN DESIGN CONTENT --- */}
-                    <div className="relative w-[800px] h-[420px] bg-black border border-white/10 shadow-2xl flex flex-col items-center justify-center scale-75 md:scale-100 group">
+                    {/* --- MAIN DESIGN CONTENT --- */}
+                    <div className="relative w-full h-full md:w-[800px] md:h-[420px] bg-black border border-white/10 shadow-2xl flex flex-col items-center justify-center p-4 md:p-0 group">
                         {/* "We design your website from a to z" text */}
                         <div className="text-center z-10 relative space-y-4">
                             <motion.h2
-                                className={`text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tighter ${isRTL ? 'pb-4' : ''}`}
+                                className={`text-xl sm:text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tighter ${isRTL ? 'pb-4 leading-normal' : ''}`}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                {t('canvas.headline')}<br />{t('canvas.headlineLine2')}<br />
-                                <span className="text-blue-500">{isRTL ? 'أ' : 'A'}</span> {isRTL ? 'إلى' : 'to'} <span className="text-purple-500">{isRTL ? 'ي' : 'Z'}</span>.
+                                {t('canvas.headline')}
+                                <br className="hidden sm:block" />
+                                {t('canvas.headlineLine2')}
+                                <br className={`block ${isRTL ? '' : 'sm:hidden'}`} />
+                                <span className="inline-block">
+                                    &nbsp;<span className="text-blue-500">{isRTL ? 'أ' : 'A'}</span> {isRTL ? 'إلى' : 'to'} <span className="text-purple-500">{isRTL ? 'ي' : 'Z'}</span>.
+                                </span>
                             </motion.h2>
                             <motion.div
                                 className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"

@@ -72,32 +72,7 @@ const StarField = React.memo(() => {
     );
 });
 
-const LightBeam = React.memo(({ delay = 0, x = "50%", y = "50%", color = "rgba(100, 100, 255, 0.15)" }: { delay?: number; x?: string; y?: string; color?: string }) => (
-    <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-            opacity: [0, 0.5, 0],
-            scale: [0.8, 1.2, 0.8],
-            x: ["-10%", "10%", "-10%"],
-            y: ["-10%", "10%", "-10%"],
-        }}
-        transition={{
-            duration: 10,
-            repeat: Infinity,
-            delay,
-            ease: "linear",
-        }}
-        className="absolute blur-[120px] rounded-full pointer-events-none"
-        style={{
-            top: y,
-            left: x,
-            width: "600px",
-            height: "400px",
-            background: `radial-gradient(circle at center, ${color} 0%, transparent 70%)`,
-            transform: "translate(-50%, -50%)",
-        }}
-    />
-));
+
 
 
 
@@ -365,13 +340,12 @@ export default function AboutHero() {
     }), []);
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-black to-black flex flex-col items-center">
+        <section className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a] pb-16 md:pb-24 flex flex-col items-center">
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 {!isMobile && <StarField />}
                 <div className="absolute top-[13%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[99vw] h-[300px] sm:h-[400px] md:h-[500px] pointer-events-none z-0 opacity-60">
-                    {/* Intense Center Glow Background */}
-                    <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[200px] sm:h-[300px] bg-white/10 blur-[80px] sm:blur-[120px] rounded-full animate-pulse" />
+
 
                     <svg
                         viewBox="0 0 100 50"
@@ -437,8 +411,7 @@ export default function AboutHero() {
                         />
                     </svg>
                 </div>
-                <LightBeam x="20%" y="20%" color="rgba(100, 100, 255, 0.1)" delay={0} />
-                <LightBeam x="80%" y="80%" color="rgba(139, 92, 246, 0.08)" delay={2} />
+
             </div>
 
             {/* Main Content */}
@@ -521,8 +494,7 @@ export default function AboutHero() {
                         transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="relative rounded-xl p-1 shadow-2xl h-full will-change-transform" // Hardware acceleration
                     >
-                        {/* Outer Glow */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-xl blur-md" />
+                        {/* Outer Glow Removed */}
 
                         {/* Main Window Container */}
                         <div
@@ -818,8 +790,7 @@ export default function AboutHero() {
                 </div>
             </motion.div>
 
-            {/* Smooth Footer Transition */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-48 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+
         </section>
     );
 }

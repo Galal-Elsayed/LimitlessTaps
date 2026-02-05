@@ -13,9 +13,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "services" });
+    const common = await getTranslations({ locale, namespace: "common" });
 
     const title = t("title");
     const description = t("description");
+    const brandName = common("brand_name");
 
     return {
         title,
@@ -31,14 +33,14 @@ export async function generateMetadata({
             "SaaS development",
         ],
         openGraph: {
-            title: `${title} | Limitless Taps`,
+            title: `${title} | ${brandName}`,
             description,
             url: `https://limitlesstaps.com/${locale}/services`,
             type: "website",
         },
         twitter: {
             card: "summary_large_image",
-            title: `${title} | Limitless Taps`,
+            title: `${title} | ${brandName}`,
             description,
         },
         alternates: {

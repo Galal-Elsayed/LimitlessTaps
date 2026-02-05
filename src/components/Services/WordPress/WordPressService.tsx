@@ -56,9 +56,9 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="relative mx-auto w-full transform-style-3d">
             {/* Monitor Bezel */}
-            <div className="relative bg-[#111] rounded-[2rem] p-4 shadow-[0_0_0_2px_#333,0_40px_80px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
-                <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold text-white/10 tracking-[0.3em] uppercase">
-                    Limitless
+            <div className="relative bg-[#111] rounded-[2rem] p-5 shadow-[0_0_0_2px_#333,0_40px_80px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
+                <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold text-white/50 tracking-[0.3em] uppercase">
+                    Limitless Taps
                 </div>
                 {/* Inner Bezel */}
                 <div className="bg-black rounded-[1.5rem] overflow-hidden relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] border border-white/5">
@@ -176,15 +176,15 @@ const EditorView = () => {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Canvas */}
-                <div className="flex-1 bg-[#f0f0f1] p-8 overflow-y-auto relative flex justify-center">
-                    <div className="w-full max-w-3xl bg-white min-h-[800px] shadow-sm selection-dashed relative border border-gray-200">
+                <div className="flex-1 bg-[#f0f0f1] p-4 md:p-8 overflow-y-auto relative flex justify-center">
+                    <div className="w-full max-w-3xl bg-white min-h-full md:min-h-[800px] shadow-sm selection-dashed relative border border-gray-200">
                         <div className="flex flex-col">
 
                             {/* Hero Section */}
-                            <div className="p-12 text-center bg-gray-50 border-b border-gray-100 flex flex-col items-center">
+                            <div className="p-4 md:p-12 text-center bg-gray-50 border-b border-gray-100 flex flex-col items-center">
                                 {/* Simulated Image Block */}
                                 <motion.div
-                                    className="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full mb-6 inline-block"
+                                    className="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full mb-4 md:mb-6 inline-block"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.2 }}
@@ -193,11 +193,11 @@ const EditorView = () => {
                                 </motion.div>
 
                                 {/* TYPING ANIMATION HEADLINE */}
-                                <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight leading-tight min-h-[3rem]">
+                                <h1 className="text-xl md:text-4xl font-extrabold text-gray-900 mb-2 md:mb-4 tracking-tight leading-tight min-h-[2rem] md:min-h-[3rem]">
                                     <TypingText text={t('headline')} />
                                 </h1>
 
-                                <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm leading-relaxed">
+                                <p className="text-gray-500 max-w-md mx-auto mb-6 md:mb-8 text-xs md:text-sm leading-relaxed">
                                     {t('description')}
                                 </p>
 
@@ -208,21 +208,28 @@ const EditorView = () => {
                                     >
                                         {t('getStarted')}
                                     </motion.div>
-                                    <div className="h-10 w-32 bg-white border border-gray-300 rounded flex items-center justify-center text-gray-700 text-xs font-bold shadow-sm">{t('documentation')}</div>
+                                    <div className="h-10 w-32 bg-white border border-gray-300 rounded flex items-center justify-center text-gray-700 text-xs font-bold shadow-sm hidden md:flex">{t('documentation')}</div>
                                 </div>
                             </div>
 
-                            {/* Features Grid Simulation */}
-                            <div className="p-12 bg-white">
-                                <div className="grid grid-cols-3 gap-8">
+                            {/* Features Grid Simulation - Simplified for Mobile */}
+                            <div className="p-4 md:p-12 bg-white hidden md:block">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                                     <FeatureBlock icon="⚡" title={t('lightningFast')} delay={2.5} />
                                     <FeatureBlock icon="🎨" title={t('pixelPerfect')} delay={2.7} />
                                     <FeatureBlock icon="🔒" title={t('secureCore')} delay={2.9} />
                                 </div>
                             </div>
 
+                            {/* Mobile Features List */}
+                            <div className="p-6 bg-white md:hidden flex justify-around border-t border-gray-100">
+                                <div className="text-xl">⚡</div>
+                                <div className="text-xl">🎨</div>
+                                <div className="text-xl">🔒</div>
+                            </div>
+
                             {/* Cursor Dragging Block Interaction */}
-                            <div className="px-12 pb-12">
+                            <div className="px-4 md:px-12 pb-6 md:pb-12 hidden md:block">
                                 <DropZoneAnimation dropText={t('dropBlockHere')} startText={t('startYourJourney')} />
                             </div>
 
@@ -230,9 +237,9 @@ const EditorView = () => {
                     </div>
                 </div>
 
-                {/* Sidebar Panel - SEO & Block Settings */}
+                {/* Sidebar Panel - SEO & Block Settings (Hidden on Mobile) */}
                 <motion.div
-                    className="w-72 bg-white border-l border-gray-200 p-0 flex flex-col shadow-xl absolute right-0 top-14 bottom-0 z-20"
+                    className="w-72 bg-white border-l border-gray-200 p-0 hidden md:flex flex-col shadow-xl absolute right-0 top-14 bottom-0 z-20"
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
@@ -314,9 +321,9 @@ const PluginsView = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-[300px] md:max-h-none">
                     {/* Featured Plugin Card - Installing Animation */}
-                    <div className="bg-white border border-gray-200 rounded p-4 flex flex-col gap-4 shadow-sm relative overflow-hidden group">
+                    <div className="bg-white border border-gray-200 rounded p-4 flex flex-col gap-4 shadow-sm relative overflow-hidden group min-h-[140px]">
                         <div className="flex items-start gap-4">
                             <div className="w-16 h-16 bg-blue-50 rounded flex items-center justify-center text-3xl">🚀</div>
                             <div>

@@ -102,7 +102,8 @@
             }
         },
         "header": {
-            "search_placeholder": "بحث..."
+            "search_placeholder": "بحث...",
+            "promo_header": "لوحة تحكم ليمتلس مخصصة لعملك"
         },
         "metrics": {
             "total_revenue": "إجمالي الإيرادات",

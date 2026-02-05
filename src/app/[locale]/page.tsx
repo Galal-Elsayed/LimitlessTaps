@@ -15,22 +15,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
+  const common = await getTranslations({ locale, namespace: "common" });
 
   const title = t("title");
   const description = t("hero_subtitle");
+  const brandName = common("brand_name");
 
   return {
     title,
     description,
     openGraph: {
-      title: `${title} | Digital Solutions & Software Development`,
+      title: `${brandName} | Digital Solutions & Software Development`,
       description,
       url: `https://limitlesstaps.com/${locale}`,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | Digital Solutions & Software Development`,
+      title: `${brandName} | Digital Solutions & Software Development`,
       description,
     },
     alternates: {

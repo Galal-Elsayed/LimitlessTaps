@@ -9,9 +9,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
+  const common = await getTranslations({ locale, namespace: "common" });
 
   const title = "Contact Us";
   const description = "Get in touch with Limitless Taps for your next digital project. We're here to help you build amazing software solutions.";
+  const brandName = common("brand_name");
 
   return {
     title,
@@ -24,14 +26,14 @@ export async function generateMetadata({
       "digital agency contact",
     ],
     openGraph: {
-      title: `${title} | Limitless Taps`,
+      title: `${title} | ${brandName}`,
       description,
       url: `https://limitlesstaps.com/${locale}/contact`,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | Limitless Taps`,
+      title: `${title} | ${brandName}`,
       description,
     },
     alternates: {

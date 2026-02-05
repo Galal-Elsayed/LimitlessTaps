@@ -536,6 +536,7 @@ export default function ServicesGridCards() {
             className="xl:col-start-3 xl:row-start-1 xl:row-span-2"
             icon={<Share2 className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
+            learnMoreHref="/services/web-development"
           >
             <VisualDesignVisual
               items={[
@@ -574,6 +575,7 @@ export default function ServicesGridCards() {
             className="xl:col-start-1 xl:row-start-2 xl:row-span-2"
             icon={<Search className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
+            learnMoreHref="/services/web-development"
           >
             <UserResearchVisual
               badges={[
@@ -600,6 +602,7 @@ export default function ServicesGridCards() {
             className="xl:col-start-2 xl:row-start-2"
             icon={<Layers className="h-5 w-5" />}
             learnMoreText={t("gridCards.learnMore")}
+            learnMoreHref="/services/web-design"
           >
             <WireframingVisual
               steps={{
@@ -618,6 +621,7 @@ export default function ServicesGridCards() {
             icon={<Globe className="h-5 w-5" />}
             layout="horizontal" // User requested this to look like the first one
             learnMoreText={t("gridCards.learnMore")}
+            learnMoreHref="/services/software-solution"
           >
             <EverythingElseVisual />
           </ServiceCard>

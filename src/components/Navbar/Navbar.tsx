@@ -196,11 +196,10 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${
-                              active
-                                ? "[clip-path:inset(0_0_0_0)]"
-                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-                            }
+                            ${active
+                ? "[clip-path:inset(0_0_0_0)]"
+                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+              }
                         `}
             aria-hidden="true"
           >
@@ -248,11 +247,10 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${
-                          servicesGlowActive
-                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-                            : "text-gray-300"
-                        }
+                        ${servicesGlowActive
+              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+              : "text-gray-300"
+            }
                     `}
         />
       </button>
@@ -271,18 +269,16 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
-          mobileMenuOpen ? "max-[900px]:hidden" : ""
-        } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
+          } bg-[#0a0a0a]`}
       >
         <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
-              mobileMenuOpen
-                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-                : "opacity-100"
-            }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
+              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+              : "opacity-100"
+              }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -310,7 +306,7 @@ export default function Navbar() {
 
           {/* Desktop Nav Links (Hidden on mobile/tablet) */}
           <div
-            className={`hidden min-[900px]:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}
+            className="hidden min-[900px]:flex items-center gap-8"
           >
             {navLinks.map((link) =>
               link.isDropdown ? renderServicesDropdown() : renderNavLink(link),
@@ -430,7 +426,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 z-40 min-[900px]:hidden backdrop-blur-sm"
+              className="fixed inset-0 bg-black/60 z-[99990] min-[900px]:hidden backdrop-blur-sm"
             />
             <motion.div
               initial={{ x: "100%" }}
@@ -439,7 +435,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className={`
                                 fixed top-0 bottom-0 right-0 
-                                w-75 z-50 
+                                w-75 z-[99999] 
                                 bg-[#0a0a0a]/95 backdrop-blur-xl 
                                 min-[900px]:hidden 
                                 border-l border-white/10 
@@ -501,9 +497,8 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${
-                                mobileServicesOpen ? "rotate-180" : ""
-                              }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
+                                }`}
                             />
                           </button>
 
@@ -563,9 +558,8 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
-                      isRTL ? "text-right" : "text-left"
-                    }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
+                      }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -578,11 +572,10 @@ export default function Navbar() {
                         }
                         className={`
                                                     flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-300 border
-                                                    ${
-                                                      currentLocale === lang.key
-                                                        ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                                                    }
+                                                    ${currentLocale === lang.key
+                            ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                          }
                                                 `}
                       >
                         <span

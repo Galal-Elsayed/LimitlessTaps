@@ -211,7 +211,7 @@ export function ServicesMopile() {
                                         <div className="text-xs text-white/50 uppercase tracking-widest mb-2 font-semibold">
                                             {services[activeService].tagline}
                                         </div>
-                                        <h3 className="text-2xl font-bold text-white leading-tight max-w-[80%]">
+                                        <h3 className={`text-xl md:text-2xl font-bold text-white max-w-[90%] ${isAr ? 'leading-relaxed' : 'leading-tight'}`}>
                                             {services[activeService].title}
                                         </h3>
                                     </motion.div>

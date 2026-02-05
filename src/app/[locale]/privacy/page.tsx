@@ -6,9 +6,11 @@ import PrivacyContent from "@/components/Privacy/PrivacyContent";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'privacy' });
-  
+  const common = await getTranslations({ locale, namespace: 'common' });
+
   const title = t('title');
   const description = t('description');
+  const brandName = common('brand_name');
 
   return {
     title,
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       follow: true,
     },
     openGraph: {
-      title: `${title} | Limitless Taps`,
+      title: `${title} | ${brandName}`,
       description,
       url: `https://limitlesstaps.com/${locale}/privacy`,
       type: "website",

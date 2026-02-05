@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
     IconBrightnessDown,
     IconBrightnessUp,
@@ -71,6 +71,8 @@ const TOPIC_ICONS = {
 
 export default function ServicesWeb() {
     const t = useTranslations('webDevelopment.services_web');
+    const locale = useLocale();
+    const isArabic = locale === 'ar';
 
     // Rich text renderer for highlighted content
     const highlightRenderer = {
@@ -84,7 +86,7 @@ export default function ServicesWeb() {
             <div className="w-full max-w-[1500px] grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-2 items-center">
 
                 {/* Left Column: Narrative */}
-                <div className="lg:col-span-3 order-2 lg:order-1 space-y-4 lg:space-y-20 text-center lg:text-left ">
+                <div className={`lg:col-span-3 order-2 lg:order-1 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left'}`}>
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -117,13 +119,13 @@ export default function ServicesWeb() {
                     {/* Glow effect behind laptop */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="scale-[0.8] md:scale-[1] xl:scale-[1.1] transform-style-3d">
+                    <div className="scale-[0.45] min-[400px]:scale-[0.55] sm:scale-[0.7] md:scale-[0.9] lg:scale-[1] xl:scale-[1.1] transform-style-3d">
                         <MacbookPresentation t={t} />
                     </div>
                 </div>
 
                 {/* Right Column: Narrative */}
-                <div className="lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center lg:text-left ml-10 lg:translate-x-7">
+                <div className={`lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left'} ml-10 lg:translate-x-7`}>
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -257,7 +259,7 @@ function Lid({ step, loopIndex, t }: LidProps) {
                             {/* Mini Navbar */}
                             <div className="h-6 w-full bg-[#0a0a0a] flex items-center justify-center  shrink-0 z-50 px-5 absolute top-0 left-0">
                                 {/* Logo */}
-                                <div className="text-[6px] font-bold text-white tracking-wider">LIMITLESS</div>
+                                <div className="text-[6px] font-bold text-white tracking-wider">LIMITLESS TAPS</div>
 
                             </div>
 
@@ -440,7 +442,7 @@ const SpeakerGrid = () => {
 
 const Keypad = () => {
     return (
-        <div className="mx-1 h-full rounded-md bg-[#050505] p-1">
+        <div className="mx-1 h-full rounded-md bg-[#050505] p-1" dir="ltr">
             {/* Row 1 */}
             <div className="mb-[2px] flex w-full shrink-0 gap-[2px]">
                 <KBtn className="w-10 text-[6px]">esc</KBtn>

@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Header } from "@/components/ui/header";
 
 // --- Animated Shapes ---
@@ -315,6 +315,8 @@ const parseHighlightedText = (text: string) => {
 
 export default function ServicesApproach() {
   const t = useTranslations("services.approach");
+  const locale = useLocale();
+  const isArabic = locale === "ar";
 
   const stepKeys = ["discovery", "strategy", "design", "development", "launch", "support"] as const;
 
@@ -334,7 +336,7 @@ export default function ServicesApproach() {
       <div className="container max-w-[1700px] mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
-          <Header title={t("header")} className="text-4xl md:text-7xl" />
+          <Header title={t("header")} className={cn("text-4xl md:text-7xl", isArabic && "pb-4")} />
           <p className="text-neutral-400 max-w-3xl mx-auto text-lg md:text-xl mt-4 leading-relaxed">
             {parseHighlightedText(t.raw("subtitle"))}
           </p>

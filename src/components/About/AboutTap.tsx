@@ -87,21 +87,21 @@ export default function AboutTap() {
                     className="flex flex-col md:flex-row justify-between items-center text-white w-full gap-4 md:gap-0"
                 >
                     {/* Left Part: "It all starts" (Arabic: Right side visually) */}
-                    <h2 className={`text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 text-center order-1 md:order-1 ${isRTL ? 'md:text-center' : 'md:text-start'}`}>
+                    <h2 className={`text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 text-center order-1 md:order-1 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 ${isRTL ? 'md:text-center pb-6' : 'md:text-start'}`}>
                         {t("tap.header_left")} <br /> {t("tap.header_left_line2")}
                     </h2>
 
                     {/* Mobile: "With One Tap" Row (Combined) */}
                     <div className="flex flex-row items-center justify-center gap-2 md:hidden order-2 w-full">
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                        <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 ${isRTL ? "pb-6" : ""}`}>
                             {t("tap.header_center")} {t("tap.header_right")} {t("tap.header_right_line2")}
                         </h2>
                     </div>
 
 
                     {/* Middle Part (Desktop only): Title + Button */}
-                    <div className="hidden md:flex flex-col items-center w-full md:w-1/3 mt-6 md:mt-0 order-2">
-                        <h2 className="text-4xl md:text-7xl font-bold tracking-tight mb-6">
+                    <div className={`hidden md:flex flex-col items-center w-full md:w-1/3 mt-6 md:mt-0 order-2 ${isRTL ? 'justify-center self-center' : ''}`}>
+                        <h2 className={`text-4xl md:text-7xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 ${isRTL ? "pb-6 text-center leading-normal" : ""}`}>
                             {t("tap.header_center")}
                         </h2>
                         <ArcButton href="/contact" variant="light" radius="rounded-full" className="group px-6 py-2 font-bold text-sm h-auto">
@@ -111,7 +111,7 @@ export default function AboutTap() {
                     </div>
 
                     {/* Right Part (Desktop only) */}
-                    <h2 className={`hidden md:block text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 mt-4 md:mt-0 order-3 ${isRTL ? 'md:text-center' : 'md:text-right'}`}>
+                    <h2 className={`hidden md:block text-4xl md:text-7xl font-bold tracking-tight w-full md:w-1/3 mt-4 md:mt-0 order-3 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 ${isRTL ? 'md:text-center pb-6' : 'md:text-right'}`}>
                         {t("tap.header_right")} <br /> {t("tap.header_right_line2")}
                     </h2>
 

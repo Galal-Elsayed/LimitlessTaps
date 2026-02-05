@@ -4,14 +4,15 @@ import React from "react";
 import { SlidingLogoMarquee, SlidingLogoMarqueeItem } from "@/components/lightswind/sliding-logo-marquee";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { Header } from "@/components/ui/header";
+import { useTranslations, useLocale } from "next-intl";
 
 // Duplicate items to ensure infinite seamless scrolling
 const sliderItems1: SlidingLogoMarqueeItem[] = [
     ...Array(5).fill([
-        { id: "1", content: <Image src="/About/wordpress.webp" alt="WordPress" width={100} height={100} className="w-38 h-38 object-contain hover:scale-110 transition-transform duration-300" /> },
+        { id: "1", content: <Image src="/About/wordpress-svgrepo-com.svg" alt="WordPress" width={100} height={100} className="w-38 h-32 object-contain hover:scale-110 transition-transform duration-300" /> },
         { id: "2", content: <Image src="/About/woo.webp" alt="WooCommerce" width={100} height={100} className="w-38 h-38 object-contain hover:scale-110 transition-transform duration-300" /> },
-        { id: "3", content: <Image src="/About/shopify.webp" alt="Shopify" width={100} height={100} className="w-38 h-38 object-contain hover:scale-110 transition-transform duration-300" /> },
+        { id: "3", content: <Image src="/About/shopify-color-svgrepo-com.svg" alt="Shopify" width={100} height={100} className="w-38 h-32 object-contain hover:scale-110 transition-transform duration-300" /> },
         { id: "4", content: <Image src="/About/spring-boot.webp" alt="Spring Boot" width={100} height={100} className="w-38 h-38 object-contain hover:scale-110 transition-transform duration-300" /> },
     ]).flat().map((item, idx) => ({ ...item, id: `1-${idx}` }))
 ];
@@ -27,9 +28,11 @@ const sliderItems2: SlidingLogoMarqueeItem[] = [
 
 export default function AboutSlider() {
     const t = useTranslations("aboutUs");
+    const locale = useLocale();
+    const isArabic = locale === "ar";
 
     return (
-        <section className="w-full py-16 md:py-24 bg-gradient-to-b from-[#0a0a0a] via-black to-black flex flex-col items-center justify-center overflow-hidden">
+        <section className="w-full py-16 md:py-24 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a] to-black flex flex-col items-center justify-center overflow-hidden">
 
             {/* Header Content - Two Columns */}
             <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24">
@@ -42,9 +45,10 @@ export default function AboutSlider() {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <h2 className="text-3xl uppercase sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
-                            {t("slider.headline")}
-                        </h2>
+                        <Header
+                            title={t("slider.headline")}
+                            className={`text-center mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl ${isArabic ? "pb-4" : ""}`}
+                        />
                     </motion.div>
                 </div>
 

@@ -13,22 +13,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aboutUs" });
+  const common = await getTranslations({ locale, namespace: "common" });
 
   const title = t("meta.title");
   const description = t("meta.description");
+  const brandName = common("brand_name");
 
   return {
     title,
     description,
     openGraph: {
-      title: `${title} | Limitless Taps`,
+      title: `${title} | ${brandName}`,
       description,
       url: `https://limitlesstaps.com/${locale}/about-us`,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | Limitless Taps`,
+      title: `${title} | ${brandName}`,
       description,
     },
     alternates: {
@@ -42,12 +44,12 @@ export async function generateMetadata({
 }
 
 export default function AboutPage() {
-    return (
-        <main className="w-full bg-black min-h-screen">
-            <AboutHero />
-            <AboutCards />
-            <AboutSlider />
-            <AboutTap />
-        </main>
-    );
+  return (
+    <main className="w-full bg-black min-h-screen">
+      <AboutHero />
+      <AboutCards />
+      <AboutSlider />
+      <AboutTap />
+    </main>
+  );
 }

@@ -225,7 +225,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
                 onClick={() => paginate(isRTL ? 1 : -1)}
                 className="hidden md:flex absolute -left-4 lg:-left-8 xl:-left-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
-                {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
+                <ChevronLeft size={24} />
             </button>
 
             {/* Next Arrow */}
@@ -233,7 +233,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
                 onClick={() => paginate(isRTL ? -1 : 1)}
                 className="hidden md:flex absolute -right-4 lg:-right-8 xl:-right-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
-                {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
+                <ChevronRight size={24} />
             </button>
 
             {/* Content Container */}
@@ -256,21 +256,21 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             </div>
 
             {/* Mobile Navigation (Bottom) */}
-            <div className="absolute -bottom-24 flex md:hidden gap-10 items-center z-20 pb-8">
+            <div className="absolute -bottom-24 flex md:hidden gap-10 items-center z-20 pb-8" dir="ltr">
                 <button
-                    onClick={() => paginate(isRTL ? 1 : -1)}
+                    onClick={() => paginate(-1)}
                     className="w-14 h-14 flex items-center justify-center rounded-full bg-white border border-neutral-200 text-black active:scale-95 transition-transform shadow-lg"
                 >
-                    {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
+                    <ChevronLeft size={24} />
                 </button>
                 <div className="text-base font-mono text-neutral-400 font-medium">
                     {currentIndex + 1} / {items.length}
                 </div>
                 <button
-                    onClick={() => paginate(isRTL ? -1 : 1)}
+                    onClick={() => paginate(1)}
                     className="w-14 h-14 flex items-center justify-center rounded-full bg-white border border-neutral-200 text-black active:scale-95 transition-transform shadow-lg"
                 >
-                    {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
+                    <ChevronRight size={24} />
                 </button>
             </div>
 
@@ -302,7 +302,7 @@ export default function StudioTemplates() {
             <section className="min-h-screen bg-neutral-950 py-4 pb-32 md:py-12 relative overflow-hidden flex flex-col items-center">
 
                 {/* Header Section */}
-                <div className="w-full max-w-[95%] md:max-w-[85%] mx-auto mb-10 z-10 flex flex-col gap-8 md:gap-12 px-4 md:px-0">
+                <div className="w-full max-w-[95%] md:max-w-[75%] mx-auto mb-10 z-10 flex flex-col gap-8 md:gap-12 px-4 md:px-0">
 
                     {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
                     {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
@@ -314,7 +314,7 @@ export default function StudioTemplates() {
                             "text-center flex",
                             isArabic ? "w-auto justify-center" : "md:text-left w-full md:w-1/3 justify-center md:justify-start"
                         )}>
-                            <Header title={t("header.choose")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : "md:ml-10"}`} />
+                            <Header title={t("header.choose")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : "md:ml-20"}`} />
                         </div>
                         <div className={cn(
                             "text-center flex justify-center",
@@ -467,11 +467,12 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                 isMobile ? "items-center" : "w-full"
             )}>
                 <div
+                    dir="ltr"
                     className={cn(
                         "contain-layout contain-paint transition-all duration-500 ease-in-out",
                         isDesktop
                             ? "w-full max-w-[1400px] h-[65vh] rounded-t-2xl border border-white/10 border-b-0 shadow-[0_0_50px_-5px_rgba(255,255,255,0.15)]"
-                            : "w-[350px] md:w-[400px] h-[75vh] rounded-[48px] border-[8px] border-[#1a1a1a] shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]"
+                            : "w-[300px] md:w-[340px] h-[75vh] rounded-[48px] border-[8px] border-[#1a1a1a] shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]"
                     )}
                 >
                     {/* Safari-Style Window Header (Desktop Only) - No AnimatePresence */}
@@ -583,7 +584,7 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                     "bg-[#222] border border-white/10 relative z-20 flex transition-all duration-500 ease-in-out",
                     isDesktop
                         ? "w-full max-w-[1400px] rounded-b-2xl border-t-0 p-5 flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-[0_20px_50px_-5px_rgba(255,255,255,0.15)]"
-                        : "w-[300px] h-auto min-h-[400px] flex-col justify-between rounded-3xl p-6 shadow-[0_10px_40px_-5px_rgba(255,255,255,0.1)] gap-8 bg-[#151515]"
+                        : "w-[300px] md:w-[340px] h-auto min-h-[400px] flex-col justify-between rounded-3xl p-6 shadow-[0_10px_40px_-5px_rgba(255,255,255,0.1)] gap-8 bg-[#151515]"
                 )}
             >
                 <div className={cn("flex flex-col gap-3", isDesktop ? "max-w-2xl" : "w-full gap-6")}>
