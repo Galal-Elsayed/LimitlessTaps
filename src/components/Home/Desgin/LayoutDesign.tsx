@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, LayoutGroup, useScroll, useTransform, Variants } from "motion/react";
+import {
+  motion,
+  LayoutGroup,
+  useScroll,
+  useTransform,
+  Variants,
+} from "motion/react";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslations, useLocale } from "next-intl";
@@ -40,9 +46,21 @@ const FONTS = {
 };
 
 const SIZES = {
-  sm: { title: "text-4xl md:text-6xl", body: "text-base md:text-lg", nav: "text-xs" },
-  md: { title: "text-5xl md:text-7xl", body: "text-lg md:text-xl", nav: "text-sm" },
-  lg: { title: "text-6xl md:text-8xl", body: "text-xl md:text-2xl", nav: "text-base" },
+  sm: {
+    title: "text-4xl md:text-6xl",
+    body: "text-base md:text-lg",
+    nav: "text-xs",
+  },
+  md: {
+    title: "text-5xl md:text-7xl",
+    body: "text-lg md:text-xl",
+    nav: "text-sm",
+  },
+  lg: {
+    title: "text-6xl md:text-8xl",
+    body: "text-xl md:text-2xl",
+    nav: "text-base",
+  },
 };
 
 const THEMES = {
@@ -238,7 +256,8 @@ export default function LayoutDesign() {
         const startX = dotRect.left + dotRect.width / 2 - sectionRect.left;
         const startY = dotRect.bottom - sectionRect.top;
 
-        const endX = controlsRect.left + controlsRect.width / 2 - sectionRect.left;
+        const endX =
+          controlsRect.left + controlsRect.width / 2 - sectionRect.left;
         const endY = controlsRect.top - sectionRect.top;
 
         // Simple curve
@@ -296,7 +315,12 @@ export default function LayoutDesign() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <h2 className={cn("text-3xl md:text-7xl font-app", locale === "ar" && "pb-4")}>
+        <h2
+          className={cn(
+            "text-3xl md:text-7xl font-app",
+            locale === "ar" && "pb-4",
+          )}
+        >
           {t("layout_design_title")}
           <span ref={dotRef} className="inline-block relative">
             .
@@ -334,7 +358,12 @@ export default function LayoutDesign() {
           filter="url(#glow)"
         />
         {/* Moving Dot on Line */}
-        <motion.circle r="3" fill="white" filter="url(#glow)" className="hidden md:block">
+        <motion.circle
+          r="3"
+          fill="white"
+          filter="url(#glow)"
+          className="hidden md:block"
+        >
           <animateMotion dur="3s" repeatCount="indefinite" path={linePath} />
         </motion.circle>
       </svg>
@@ -368,7 +397,12 @@ export default function LayoutDesign() {
             {/* Navbar */}
             <div className="w-full border-b border-white/5 bg-black/40 backdrop-blur-md p-5 flex items-center justify-between z-20 sticky top-0 h-20">
               <div className="relative w-32 h-8 opacity-90">
-                <Image src="/Logo/Main-Logo-Static.png" alt="Logo" fill className="object-contain object-left" />
+                <Image
+                  src="/Logo/Main-Logo-Static.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain object-left"
+                />
               </div>
               <div className="hidden md:flex items-center gap-8">
                 {NAV_LINKS.map((item, i) => (
@@ -377,7 +411,9 @@ export default function LayoutDesign() {
                     className={cn(
                       "font-medium cursor-pointer transition-colors hover:text-white",
                       size.nav,
-                      i === 1 ? cn("text-white", theme.textGlow) : "text-white/50",
+                      i === 1
+                        ? cn("text-white", theme.textGlow)
+                        : "text-white/50",
                     )}
                   >
                     {item}
@@ -397,7 +433,13 @@ export default function LayoutDesign() {
             </div>
 
             {/* Dynamic Content Layout */}
-            <div className={cn("flex-1 p-8 md:p-12 relative z-10 w-full overflow-hidden", FONTS[selectedFont])}>
+            <div
+              dir={locale === "ar" ? "rtl" : "ltr"}
+              className={cn(
+                "flex-1 p-8 md:p-12 relative z-10 w-full overflow-hidden",
+                FONTS[selectedFont],
+              )}
+            >
               {/* 1. Minimal Layout */}
               {layoutMode === "minimal" && (
                 <motion.div
@@ -406,24 +448,41 @@ export default function LayoutDesign() {
                   initial="hidden"
                   animate="visible"
                 >
-                  <motion.div layoutId="hero-text" className="space-y-6" variants={itemVariants}>
+                  <motion.div
+                    layoutId="hero-text"
+                    className="space-y-6"
+                    variants={itemVariants}
+                  >
                     <motion.h1
                       layout
                       variants={itemVariants}
-                      className={cn("font-bold text-white tracking-tight leading-[0.9]", size.title, theme.textGlow)}
+                      className={cn(
+                        "font-bold text-white tracking-tight leading-[0.9]",
+                        size.title,
+                        theme.textGlow,
+                      )}
                     >
-                      {displayBrand} <span className={cn("inline-block", theme.text)}>{t("layout_design_system")}</span>
+                      {displayBrand}{" "}
+                      <span className={cn("inline-block", theme.text)}>
+                        {t("layout_design_system")}
+                      </span>
                     </motion.h1>
                     <motion.p
                       layout
                       variants={itemVariants}
-                      className={cn("text-white/50 max-w-xl mx-auto", size.body)}
+                      className={cn(
+                        "text-white/50 max-w-xl mx-auto",
+                        size.body,
+                      )}
                     >
                       {t("layout_design_adaptable")}
                     </motion.p>
                   </motion.div>
 
-                  <motion.div variants={slideRightVariant} className="w-fit mx-auto">
+                  <motion.div
+                    variants={slideRightVariant}
+                    className="w-fit mx-auto"
+                  >
                     <ActionButton primary theme={theme} radius={buttonRadius}>
                       Start Now
                     </ActionButton>
@@ -442,11 +501,26 @@ export default function LayoutDesign() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                     >
-                      <motion.h1 layout className={cn("font-bold text-white mb-4", size.title, theme.textGlow)}>
-                        {displayBrand} <span className={cn("inline-block", theme.text)}>{t("layout_design_analytics")}</span>
+                      <motion.h1
+                        layout
+                        className={cn(
+                          "font-bold text-white mb-4",
+                          size.title,
+                          theme.textGlow,
+                        )}
+                      >
+                        {displayBrand}{" "}
+                        <span className={cn("inline-block", theme.text)}>
+                          {t("layout_design_analytics")}
+                        </span>
                       </motion.h1>
-                      <motion.p layout className={cn("text-white/50 max-w-md", size.body)}>
-                        {t("layout_design_analytics_desc", { brand: displayBrand })}
+                      <motion.p
+                        layout
+                        className={cn("text-white/50 max-w-md", size.body)}
+                      >
+                        {t("layout_design_analytics_desc", {
+                          brand: displayBrand,
+                        })}
                       </motion.p>
                     </motion.div>
                     <motion.div layoutId="hero-actions" className="flex gap-4">
@@ -475,10 +549,22 @@ export default function LayoutDesign() {
                         )} // radiusClass applied
                       >
                         <div>
-                          <p className="text-white/40 text-xs font-bold uppercase tracking-wider mb-1">{stat.label}</p>
-                          <p className={cn("font-bold text-white", size.body)}>{stat.value}</p>
+                          <p className="text-white/40 text-xs font-bold uppercase tracking-wider mb-1">
+                            {stat.label}
+                          </p>
+                          <p className={cn("font-bold text-white", size.body)}>
+                            {stat.value}
+                          </p>
                         </div>
-                        <div className={cn("p-2 rounded-full", theme.card, theme.text)}>{stat.icon}</div>
+                        <div
+                          className={cn(
+                            "p-2 rounded-full",
+                            theme.card,
+                            theme.text,
+                          )}
+                        >
+                          {stat.icon}
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -499,22 +585,24 @@ export default function LayoutDesign() {
                       <TrendingUp size={16} className={theme.text} />
                       {displayBrand} {t("layout_design_growth")}
                     </div>
-                    {[30, 45, 35, 60, 55, 75, 60, 80, 70, 90, 85, 100].map((h, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ height: 0 }}
-                        animate={{ height: `${h}%` }}
-                        transition={{ delay: 0.4 + i * 0.05, type: "spring" }}
-                        className={cn(
-                          "flex-1 rounded-t-sm opacity-80 hover:opacity-100 transition-opacity relative group",
-                          theme.accent,
-                        )}
-                      >
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                          {h}%
-                        </div>
-                      </motion.div>
-                    ))}
+                    {[30, 45, 35, 60, 55, 75, 60, 80, 70, 90, 85, 100].map(
+                      (h, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ height: 0 }}
+                          animate={{ height: `${h}%` }}
+                          transition={{ delay: 0.4 + i * 0.05, type: "spring" }}
+                          className={cn(
+                            "flex-1 rounded-t-sm opacity-80 hover:opacity-100 transition-opacity relative group",
+                            theme.accent,
+                          )}
+                        >
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                            {h}%
+                          </div>
+                        </motion.div>
+                      ),
+                    )}
                   </motion.div>
                 </div>
               )}
@@ -523,7 +611,10 @@ export default function LayoutDesign() {
               {layoutMode === "split" && (
                 <div className="flex flex-col md:flex-row items-center gap-12 h-full max-w-6xl mx-auto">
                   <motion.div
-                    className="flex-1 text-left space-y-8"
+                    className={cn(
+                      "flex-1 space-y-8",
+                      locale === "ar" ? "text-right" : "text-left",
+                    )}
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
@@ -543,19 +634,36 @@ export default function LayoutDesign() {
                               theme.accent,
                             )}
                           ></span>
-                          <span className={cn("relative inline-flex rounded-full h-2 w-2", theme.accent)}></span>
+                          <span
+                            className={cn(
+                              "relative inline-flex rounded-full h-2 w-2",
+                              theme.accent,
+                            )}
+                          ></span>
                         </span>
-                        {displayBrand} {t("layout_design_system")}
+                        {locale === "ar"
+                          ? t("layout_design_badge")
+                          : `${displayBrand} ${t("layout_design_system")}`}
                       </div>
                       <motion.h1
                         layout
-                        className={cn("font-bold text-white mb-6 leading-tight", size.title, theme.textGlow)}
+                        className={cn(
+                          "font-bold text-white mb-6 leading-tight",
+                          size.title,
+                          theme.textGlow,
+                        )}
                       >
-                        {displayBrand} <br />
-                        <span className={cn("inline-block", theme.text)}>{t("layout_design_experience")}</span>
+                        {locale === "ar" ? "براند" : displayBrand} <br />
+                        <span className={cn("inline-block", theme.text)}>
+                          {t("layout_design_experience")}
+                        </span>
                       </motion.h1>
-                      <motion.p className={cn("text-white/50 max-w-md", size.body)}>
-                        {t("layout_design_experience_desc", { brand: displayBrand })}
+                      <motion.p
+                        className={cn("text-white/50 max-w-md", size.body)}
+                      >
+                        {t("layout_design_experience_desc", {
+                          brand: displayBrand,
+                        })}
                       </motion.p>
                     </motion.div>
                     <motion.div
@@ -606,8 +714,14 @@ export default function LayoutDesign() {
                             )}
 
                             {(() => {
-                              const innerBg = cardStyle === "solid" ? "bg-white/10" : "bg-white/5";
-                              const innerBorder = cardStyle === "bordered" ? "border-white/20" : "border-white/10";
+                              const innerBg =
+                                cardStyle === "solid"
+                                  ? "bg-white/10"
+                                  : "bg-white/5";
+                              const innerBorder =
+                                cardStyle === "bordered"
+                                  ? "border-white/20"
+                                  : "border-white/10";
                               const innerClass = cn(
                                 innerBg,
                                 "border",
@@ -622,7 +736,9 @@ export default function LayoutDesign() {
                                       className={cn(
                                         "w-12 h-12 flex items-center justify-center shadow-lg transition-all",
                                         theme.accent,
-                                        radiusClass === "rounded-3xl" ? "rounded-xl" : "rounded-sm",
+                                        radiusClass === "rounded-3xl"
+                                          ? "rounded-xl"
+                                          : "rounded-sm",
                                       )}
                                     >
                                       <Box size={24} className="text-black" />
@@ -646,7 +762,9 @@ export default function LayoutDesign() {
                                         theme.textGlow,
                                       )}
                                     >
-                                      {t.rich("layout_design_system_core", { br: () => <br /> })}
+                                      {t.rich("layout_design_system_core", {
+                                        br: () => <br />,
+                                      })}
                                     </motion.h3>
                                     <p className="text-white/50 text-xs font-medium max-w-[150px] leading-relaxed">
                                       {t("layout_design_architecture")}
@@ -658,7 +776,12 @@ export default function LayoutDesign() {
                                           buttonRadius,
                                         )}
                                       >
-                                        <div className={cn("h-full w-full", theme.accent)} />
+                                        <div
+                                          className={cn(
+                                            "h-full w-full",
+                                            theme.accent,
+                                          )}
+                                        />
                                       </div>
                                     </div>
                                   </div>
@@ -676,9 +799,13 @@ export default function LayoutDesign() {
                             custom={0}
                             className={cn(
                               "absolute -left-4 top-4 w-14 h-14 flex items-center justify-center shadow-lg z-20 hover:scale-110 transition-transform cursor-pointer backdrop-blur-md",
-                              cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                              cardStyle === "solid"
+                                ? "bg-[#1a1a1a]"
+                                : "bg-white/10",
                               "border border-white/10",
-                              radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md",
+                              radiusClass === "rounded-3xl"
+                                ? "rounded-2xl"
+                                : "rounded-md",
                             )}
                           >
                             <Zap size={20} className={cn(theme.text)} />
@@ -691,18 +818,28 @@ export default function LayoutDesign() {
                             custom={1}
                             className={cn(
                               "absolute -right-6 -top-2 w-36 py-3 px-4 shadow-lg z-20 hover:translate-y-[-5px] transition-transform backdrop-blur-md",
-                              cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                              cardStyle === "solid"
+                                ? "bg-[#1a1a1a]"
+                                : "bg-white/10",
                               "border border-white/10",
-                              radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md",
+                              radiusClass === "rounded-3xl"
+                                ? "rounded-2xl"
+                                : "rounded-md",
                             )}
                           >
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-[9px] text-white/50 font-bold uppercase">{t("layout_design_uptime")}</span>
+                              <span className="text-[9px] text-white/50 font-bold uppercase">
+                                {t("layout_design_uptime")}
+                              </span>
                               <Activity size={12} className={cn(theme.text)} />
                             </div>
-                            <div className="text-lg font-bold text-white mb-1.5">99.9%</div>
+                            <div className="text-lg font-bold text-white mb-1.5">
+                              99.9%
+                            </div>
                             <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                              <div className={cn("h-full w-[99%]", theme.accent)} />
+                              <div
+                                className={cn("h-full w-[99%]", theme.accent)}
+                              />
                             </div>
                           </motion.div>
 
@@ -713,7 +850,9 @@ export default function LayoutDesign() {
                             custom={2}
                             className={cn(
                               "absolute -left-4 bottom-14 py-2 px-3 shadow-lg z-20 flex items-center gap-3 hover:scale-105 transition-transform backdrop-blur-md",
-                              cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                              cardStyle === "solid"
+                                ? "bg-[#1a1a1a]"
+                                : "bg-white/10",
                               "border border-white/10",
                               buttonRadius,
                             )}
@@ -730,7 +869,9 @@ export default function LayoutDesign() {
                                 />
                               ))}
                             </div>
-                            <div className="text-[10px] font-bold text-white opacity-80">{t("layout_design_active")}</div>
+                            <div className="text-[10px] font-bold text-white opacity-80">
+                              {t("layout_design_active")}
+                            </div>
                           </motion.div>
 
                           {/* Bottom Right: Activity */}
@@ -740,17 +881,28 @@ export default function LayoutDesign() {
                             custom={3}
                             className={cn(
                               "absolute -right-6 bottom-14 w-28 p-3 shadow-lg z-20 hover:rotate-1 transition-transform backdrop-blur-md",
-                              cardStyle === "solid" ? "bg-[#1a1a1a]" : "bg-white/10",
+                              cardStyle === "solid"
+                                ? "bg-[#1a1a1a]"
+                                : "bg-white/10",
                               "border border-white/10",
-                              radiusClass === "rounded-3xl" ? "rounded-2xl" : "rounded-md",
+                              radiusClass === "rounded-3xl"
+                                ? "rounded-2xl"
+                                : "rounded-md",
                             )}
                           >
                             <div className="flex items-end gap-1 h-6">
                               {[30, 60, 40, 80, 50, 70].map((h, i) => (
                                 <div
                                   key={i}
-                                  className={cn("w-full opacity-60", theme.accent)}
-                                  style={{ height: `${h}%`, borderRadius: buttonStyle === "pill" ? "1px" : "0px" }}
+                                  className={cn(
+                                    "w-full opacity-60",
+                                    theme.accent,
+                                  )}
+                                  style={{
+                                    height: `${h}%`,
+                                    borderRadius:
+                                      buttonStyle === "pill" ? "1px" : "0px",
+                                  }}
                                 />
                               ))}
                             </div>
@@ -794,7 +946,10 @@ export default function LayoutDesign() {
 
           <div className="grid grid-cols-2 gap-2 p-3 rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl w-full lg:flex lg:flex-col lg:gap-4 lg:p-4">
             {/* Layout Mode */}
-            <ControlGroup label={t("layout_design_control_layout")} icon={<Layout size={14} />}>
+            <ControlGroup
+              label={t("layout_design_control_layout")}
+              icon={<Layout size={14} />}
+            >
               {(["minimal", "grid", "split"] as LayoutMode[]).map((mode) => (
                 <ControlButton
                   key={mode}
@@ -806,9 +961,17 @@ export default function LayoutDesign() {
             </ControlGroup>
 
             {/* Typography */}
-            <ControlGroup label={t("layout_design_control_typography")} icon={<Type size={14} />}>
+            <ControlGroup
+              label={t("layout_design_control_typography")}
+              icon={<Type size={14} />}
+            >
               {(["sans", "serif", "mono"] as FontOption[]).map((f) => (
-                <ControlButton key={f} isActive={selectedFont === f} onClick={() => setSelectedFont(f)} label={f} />
+                <ControlButton
+                  key={f}
+                  isActive={selectedFont === f}
+                  onClick={() => setSelectedFont(f)}
+                  label={f}
+                />
               ))}
             </ControlGroup>
 
@@ -817,7 +980,10 @@ export default function LayoutDesign() {
             </div>
 
             {/* Size */}
-            <ControlGroup label="Scale" icon={<Maximize2 size={14} />}>
+            <ControlGroup
+              label={t("layout_design_control_size")}
+              icon={<Maximize2 size={14} />}
+            >
               {(["sm", "md", "lg"] as SizeOption[]).map((s) => (
                 <ControlButton
                   key={s}
@@ -829,20 +995,25 @@ export default function LayoutDesign() {
             </ControlGroup>
 
             {/* Color Theme */}
-            <ControlGroup label="Color" icon={<Palette size={14} />}>
-              {(["white", "green", "purple", "blue"] as ThemeOption[]).map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setSelectedTheme(t)}
-                  className={cn(
-                    "w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/10 transition-all",
-                    THEMES[t].primary,
-                    selectedTheme === t
-                      ? cn("ring-2 ring-white scale-110", THEMES[t].glow)
-                      : "opacity-50 hover:opacity-100",
-                  )}
-                />
-              ))}
+            <ControlGroup
+              label={t("layout_design_control_theme")}
+              icon={<Palette size={14} />}
+            >
+              {(["white", "green", "purple", "blue"] as ThemeOption[]).map(
+                (t) => (
+                  <button
+                    key={t}
+                    onClick={() => setSelectedTheme(t)}
+                    className={cn(
+                      "w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/10 transition-all",
+                      THEMES[t].primary,
+                      selectedTheme === t
+                        ? cn("ring-2 ring-white scale-110", THEMES[t].glow)
+                        : "opacity-50 hover:opacity-100",
+                    )}
+                  />
+                ),
+              )}
             </ControlGroup>
 
             <div className="hidden lg:block">
@@ -851,11 +1022,16 @@ export default function LayoutDesign() {
 
             {/* Brand Name Input */}
             {/* Brand Name Input */}
-            <ControlGroup label="Brand Name" icon={<Type size={14} />}>
+            <ControlGroup
+              label={t("layout_design_control_brand")}
+              icon={<Type size={14} />}
+            >
               <input
                 type="text"
                 value={brandName}
-                onChange={(e) => setBrandName(e.target.value.toUpperCase().slice(0, 8))}
+                onChange={(e) =>
+                  setBrandName(e.target.value.toUpperCase().slice(0, 8))
+                }
                 className="bg-transparent border-b border-white/20 text-white font-bold w-full py-0.5 md:py-1 focus:outline-none focus:border-white transition-colors placeholder-white/20 text-[10px] md:text-sm"
                 placeholder="BRAND"
                 maxLength={8}
@@ -867,7 +1043,10 @@ export default function LayoutDesign() {
             </div>
 
             {/* Details - Compact */}
-            <ControlGroup label="Style" icon={<MousePointer2 size={14} />}>
+            <ControlGroup
+              label={t("layout_design_control_style")}
+              icon={<MousePointer2 size={14} />}
+            >
               <div className="flex gap-1 w-full">
                 <ControlDropdown
                   label="Btn"
@@ -878,7 +1057,9 @@ export default function LayoutDesign() {
                   ]}
                   onChange={(val) => setButtonStyle(val as ButtonStyle)}
                   icon={<Circle size={14} />}
-                  radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
+                  radius={
+                    buttonStyle === "pill" ? "rounded-full" : "rounded-md"
+                  }
                   compact
                 />
                 <ControlDropdown
@@ -891,7 +1072,9 @@ export default function LayoutDesign() {
                   ]}
                   onChange={(val) => setCardStyle(val as CardStyle)}
                   icon={<Box size={14} />}
-                  radius={buttonStyle === "pill" ? "rounded-full" : "rounded-md"}
+                  radius={
+                    buttonStyle === "pill" ? "rounded-full" : "rounded-md"
+                  }
                   compact
                 />
               </div>
@@ -954,18 +1137,36 @@ function ItemsHint({ show }: { show: boolean }) {
   );
 }
 
-function ControlGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon: React.ReactNode }) {
+function ControlGroup({
+  label,
+  children,
+  icon,
+}: {
+  label: string;
+  children: React.ReactNode;
+  icon: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1 lg:gap-2 w-full">
       <span className="text-[10px] md:text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
         {icon} <span className="text-white/70">{label}</span>
       </span>
-      <div className="flex flex-nowrap gap-1 items-center w-full">{children}</div>
+      <div className="flex flex-nowrap gap-1 items-center w-full">
+        {children}
+      </div>
     </div>
   );
 }
 
-function ControlButton({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) {
+function ControlButton({
+  label,
+  isActive,
+  onClick,
+}: {
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+}) {
   return (
     <button
       onClick={onClick}
@@ -1016,14 +1217,19 @@ function ControlDropdown({
         )}
       >
         <div className="flex items-center gap-2">
-          <span className="text-white/60 group-hover:text-white transition-colors">{icon}</span>
+          <span className="text-white/60 group-hover:text-white transition-colors">
+            {icon}
+          </span>
           <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
             {options.find((o) => o.value === value)?.label || value}
           </span>
         </div>
         <ChevronDown
           size={12}
-          className={cn("text-white/40 transition-transform duration-300", isOpen && "rotate-180")}
+          className={cn(
+            "text-white/40 transition-transform duration-300",
+            isOpen && "rotate-180",
+          )}
         />
       </button>
 
@@ -1045,7 +1251,9 @@ function ControlDropdown({
                 }}
                 className={cn(
                   "px-4 py-2 text-left text-xs font-bold uppercase tracking-wider transition-colors hover:bg-white/10",
-                  value === option.value ? "text-white bg-white/5" : "text-white/50",
+                  value === option.value
+                    ? "text-white bg-white/5"
+                    : "text-white/50",
                 )}
               >
                 {option.label}

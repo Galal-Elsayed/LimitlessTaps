@@ -7,6 +7,7 @@ import Carousel from "@/components/Home/ProjectsCarousel/Carousel";
 import WhatWeDeliver from "@/components/Home/WhatWeDeliver/WhatWeDeliver";
 import LayoutDesign from "@/components/Home/Desgin/LayoutDesign";
 import Reviews from "@/components/Home/Reviews/Reviews";
+import { Preloader } from "@/components/Preloader";
 
 export async function generateMetadata({
   params,
@@ -48,6 +49,7 @@ export async function generateMetadata({
 export default async function HomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <Preloader />
       <Hero />
       <WhatWeDeliver />
       <LayoutDesign />

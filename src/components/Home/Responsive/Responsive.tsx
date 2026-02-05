@@ -352,10 +352,12 @@ export default function StickyPhone() {
     <section className="w-full bg-[#0A0A0A] overflow-hidden">
       <div className="container max-w-[1400px] mx-auto px-4">
         <div className="-mb-14 -lg:mb-24 text-center">
-          <h2 className={cn(
-            "text-4xl md:text-6xl font-bold font-app text-white mb-4",
-            locale === "ar" && "pb-4"
-          )}>
+          <h2
+            className={cn(
+              "text-4xl md:text-6xl font-bold font-app text-white mb-4",
+              locale === "ar" && "pb-4",
+            )}
+          >
             {t.rich("responsive_title", { br: () => <br /> })}
           </h2>
           <p className="text-neutral-400 text-lg md:text-xl max-w-lg mx-auto">
@@ -383,7 +385,11 @@ export default function StickyPhone() {
               className="w-full h-full relative"
             >
               <Image
-                src="/Home/StickyPhone/limitless.png"
+                src={
+                  locale === "ar"
+                    ? "/Home/StickyPhone/canvas-arabic.png"
+                    : "/Home/StickyPhone/canvas-english.png"
+                }
                 alt="Responsive Mockups"
                 fill
                 className="object-contain"

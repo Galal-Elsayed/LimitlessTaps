@@ -397,6 +397,12 @@ export default function Navbar() {
                             <p
                               lang={lang.locale}
                               dir={lang.locale === "ar" ? "rtl" : "ltr"}
+                              style={{
+                                fontFamily:
+                                  lang.locale === "en"
+                                    ? "var(--font-inter)"
+                                    : "var(--font-cairo)",
+                              }}
                               className="block font-bold text-[12px] text-gray-100 group-hover:text-white transition-colors"
                             >
                               {lang.title}
@@ -424,17 +430,25 @@ export default function Navbar() {
               }}
               className="flex items-center justify-center px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer"
             >
-              <span
-                className="text-[12px] font-bold tracking-wide uppercase text-white"
-                style={{
-                  fontFamily:
-                    currentLocale === "en"
-                      ? "var(--font-cairo)"
-                      : "var(--font-inter)",
-                }}
-              >
-                {currentLocale === "en" ? "عربي" : "EN"}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span
+                  className={`text-[10px] font-bold tracking-wide uppercase transition-colors ${
+                    currentLocale === "en" ? "text-white" : "text-white/40"
+                  }`}
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  EN
+                </span>
+                <span className="text-white/20 text-[10px]">|</span>
+                <span
+                  className={`text-[10px] font-bold tracking-wide uppercase transition-colors ${
+                    currentLocale === "ar" ? "text-white" : "text-white/40"
+                  }`}
+                  style={{ fontFamily: "var(--font-cairo)" }}
+                >
+                  عربي
+                </span>
+              </div>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
