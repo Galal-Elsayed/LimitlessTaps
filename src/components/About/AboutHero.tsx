@@ -563,7 +563,7 @@ export default function AboutHero() {
 
                                     {/* Central Promo Header - Hidden on small screens */}
                                     <div className="absolute left-1/2 -translate-x-1/2 hidden xl:flex items-center gap-6">
-                                        <h2 className="text-base font-medium text-white/90">Our Limitless Dashboard <br className="hidden" /> Customized for your Business</h2>
+                                        <h2 className="text-base font-medium text-white/90">{t("dashboard.header.promo_header")}</h2>
                                     </div>
 
                                     <div className="flex items-center gap-2 sm:gap-4 shrink-0">
