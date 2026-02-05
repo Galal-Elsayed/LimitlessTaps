@@ -15,18 +15,14 @@ export default function StudioHero() {
   React.useEffect(() => {
     const handleResize = () => {
       // Only apply higher position for screens <= 900px
-<<<<<<< Updated upstream
-      setWaveOffset(window.innerWidth <= 900 ? 38 : 50);
-=======
       setWaveOffset(window.innerWidth <= 900 ? 35 : 50);
->>>>>>> Stashed changes
     };
 
     // Initial check
     handleResize();
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
