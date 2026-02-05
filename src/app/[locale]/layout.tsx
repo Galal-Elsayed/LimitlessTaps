@@ -98,7 +98,7 @@ export async function generateMetadata({
       title: `${brandName} | Digital Solutions & Software Development`,
       images: [
         {
-          url: "/Logo/social-black.jpg",
+          url: "/Logo/OG.png",
           width: 1200,
           height: 630,
           alt: `${brandName} - Digital Solutions`,
