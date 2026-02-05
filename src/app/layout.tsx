@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 // Root layout is a pass-through - the [locale]/layout.tsx handles HTML/body rendering
 // with proper lang and dir attributes for internationalization
+
 export default function RootLayout({
   children,
 }: Readonly<{
