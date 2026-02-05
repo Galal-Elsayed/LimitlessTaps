@@ -6,14 +6,16 @@ interface OrganizationStructuredDataProps {
   locale?: string;
 }
 
-export function OrganizationStructuredData({ locale = "en" }: OrganizationStructuredDataProps) {
+export function OrganizationStructuredData({
+  locale = "en",
+}: OrganizationStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Limitless Taps",
     alternateName: "LimitlessTaps",
     url: "https://limitlesstaps.com",
-    logo: "https://limitlesstaps.com/Logo/Graph.png",
+    logo: "https://limitlesstaps.com/Logo/black.png",
     description:
       locale === "ar"
         ? "حلول ويب وموبايل وبرمجيات عالية الأداء مصممة للتوسع بلا حدود"
@@ -70,7 +72,9 @@ interface WebsiteStructuredDataProps {
   locale?: string;
 }
 
-export function WebsiteStructuredData({ locale = "en" }: WebsiteStructuredDataProps) {
+export function WebsiteStructuredData({
+  locale = "en",
+}: WebsiteStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -141,7 +145,9 @@ interface BreadcrumbStructuredDataProps {
   }>;
 }
 
-export function BreadcrumbStructuredData({ items }: BreadcrumbStructuredDataProps) {
+export function BreadcrumbStructuredData({
+  items,
+}: BreadcrumbStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

@@ -7,16 +7,6 @@ export const Preloader = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check session storage on mount
-    const hasShown = sessionStorage.getItem("hasShownPreloader");
-    if (hasShown) {
-      setIsLoading(false);
-      return;
-    }
-
-    // Set flag immediately to prevent showing again in this session
-    sessionStorage.setItem("hasShownPreloader", "true");
-
     // Prevent scrolling while loading
     document.body.style.overflow = "hidden";
 
@@ -24,7 +14,7 @@ export const Preloader = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = "auto";
-    }, 3500); // reduced duration
+    }, 3500);
 
     return () => {
       clearTimeout(timer);
