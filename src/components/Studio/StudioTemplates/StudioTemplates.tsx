@@ -485,11 +485,11 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
                         </div>
 
                         {/* Active Tab */}
-                        <div className="flex-1 flex items-end justify-center px-20 h-full">
-                            <div className="relative w-full max-w-lg h-[34px] bg-[#222] rounded-t-lg flex items-center justify-center px-4 -mb-px">
+                        <div className="flex-1 flex items-end justify-center px-4 md:px-20 h-full">
+                            <div className="relative w-fit max-w-lg h-[34px] bg-[#111] rounded-t-lg flex items-center justify-center px-4 -mb-px">
                                 <div className="flex items-center gap-2 text-[11px] text-neutral-300 font-medium">
-                                    <Lock size={10} className="text-neutral-500" />
-                                    <span>limitless.studio/{title.toLowerCase()}</span>
+                                    <Lock size={10} className="text-neutral-500 shrink-0" />
+                                    <span className="truncate max-w-[100px] sm:max-w-[200px] md:max-w-none">limitless.studio/{title.toLowerCase()}</span>
                                 </div>
                                 <X size={12} className="absolute right-3 text-neutral-500" />
                             </div>

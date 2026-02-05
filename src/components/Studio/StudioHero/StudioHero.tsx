@@ -15,7 +15,7 @@ export default function StudioHero() {
   React.useEffect(() => {
     const handleResize = () => {
       // Only apply higher position for screens <= 900px
-      setWaveOffset(window.innerWidth <= 900 ? 35 : 50);
+      setWaveOffset(window.innerWidth <= 900 ? 38 : 50);
     };
 
     // Initial check

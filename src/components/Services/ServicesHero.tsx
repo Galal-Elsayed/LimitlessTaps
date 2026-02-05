@@ -31,6 +31,7 @@ export default function ServicesHero() {
             header={<>{t('hero.services')}</>}
             description={t('hero.description')}
             badges={services}
+            height="min-h-[42vh] min-[900px]:min-h-[80vh]"
             notHoverable={[
                 t('hero.badges.technical_consulting'),
                 t('hero.badges.cloud_infrastructure'),

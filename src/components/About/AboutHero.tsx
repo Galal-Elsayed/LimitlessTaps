@@ -570,7 +570,7 @@ export default function AboutHero() {
                                         <div className="bg-[#0a0a0a] rounded-md px-2 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-2 border border-[#8a8f98]/20 text-xs sm:text-sm 2xl:text-base text-[#8a8f98] w-24 sm:w-64 max-w-[150px] sm:max-w-none">
                                             <Search className="w-3 h-3 sm:w-4 sm:h-4" />
                                             <span className="hidden sm:inline font-normal truncate">{t("dashboard.header.search_placeholder")}</span>
-                                            <span className="sm:hidden font-normal">Search...</span>
+                                            <span className="sm:hidden font-normal">{t("dashboard.header.search_placeholder")}</span>
                                             <div className="ltr:ml-auto rtl:mr-auto text-[10px] sm:text-xs bg-[#ffffff]/10 px-1 sm:px-1.5 py-0.5 rounded text-[#8a8f98] hidden sm:block">⌘K</div>
                                         </div>
                                     </div>
