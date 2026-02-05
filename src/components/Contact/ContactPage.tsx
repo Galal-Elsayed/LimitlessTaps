@@ -83,7 +83,9 @@ export default function ContactPage() {
                 ),
               })}
             </h1>
-            <p className="text-3xl font-app">{t("hero.subtitle")}</p>
+            <p className="text-xl md:text-2xl text-neutral-400 max-w-2xl leading-relaxed">
+              {t("hero.subtitle")}
+            </p>
           </motion.div>
           {/* Left Side: Contact Form */}
           <motion.div

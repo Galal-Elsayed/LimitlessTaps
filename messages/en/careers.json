@@ -1,4 +1,36 @@
 {
-    "title": "Careers",
-    "description": "Join our team and build the future with us."
+  "title": "Careers",
+  "description": "Join our team and build the future with us.",
+  "hero": {
+    "title": "Join the Limitless",
+    "subtitle": "We are building the future of digital experiences. Join a team where your work truly matters.",
+    "cta": "View Open Roles"
+  },
+  "benefits": {
+    "globalImpact": {
+      "title": "Global Impact",
+      "description": "Work on products that touch millions of lives across the globe."
+    },
+    "growth": {
+      "title": "Fast-Paced Growth",
+      "description": "Accelerate your career in an environment that values speed and ownership."
+    },
+    "wellness": {
+      "title": "Health & Wellness",
+      "description": "Comprehensive health coverage and wellness stipends to keep you at your best."
+    }
+  },
+  "roles": {
+    "title": "Open Positions",
+    "subtitle": "Don't see your perfect role? We are always looking for talent.",
+    "empty": {
+      "title": "No Open Roles Currently",
+      "description": "We don't have any specific openings right now, but things move fast here. Check back soon!"
+    }
+  },
+  "cta": {
+    "title": "Can't find what you're looking for?",
+    "description": "We're always interested in meeting extraordinary people. Send us your resume and tell us why you'd be a great fit.",
+    "button": "Email Us Directly"
+  }
 }

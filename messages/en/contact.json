@@ -38,8 +38,13 @@
   },
   "grid": {
     "whatsApp": {
-      "description": "Direct Chat"
+      "title": "WhatsApp",
+      "description": "Direct Chat",
+      "button": "Send via WhatsApp"
     },
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
     "separator": "Contact Channels",
     "inquiries": {
       "title": "Inquiries"
