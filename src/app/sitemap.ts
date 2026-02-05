@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://limitlesstaps.com";
+  const baseUrl = "https://www.limitlesstaps.com";
   const locales = ["en", "ar"];
   const lastModified = new Date();
 
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const route of routes) {
     for (const locale of locales) {
       const url = `${baseUrl}/${locale}${route}`;
-      
+
       // Determine priority based on route importance
       let priority = 0.8;
       if (route === "") priority = 1.0;
@@ -38,9 +38,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       else if (route === "/privacy" || route === "/terms") priority = 0.3;
 
       // Determine change frequency
-      let changeFrequency: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never" = "weekly";
+      let changeFrequency:
+        | "always"
+        | "hourly"
+        | "daily"
+        | "weekly"
+        | "monthly"
+        | "yearly"
+        | "never" = "weekly";
       if (route === "" || route === "/projects") changeFrequency = "daily";
-      else if (route === "/privacy" || route === "/terms") changeFrequency = "yearly";
+      else if (route === "/privacy" || route === "/terms")
+        changeFrequency = "yearly";
 
       sitemapEntries.push({
         url,

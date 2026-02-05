@@ -16,7 +16,7 @@ export default function ProjectsHero() {
       <DottedSurface className="absolute inset-0 z-0" />
       <h1
         className={`font-app z-10 text-7xl font-bold md:text-9xl md:text-[9vw]! mb-8 ${
-          locale === "ar" ? "leading-[1.5] pb-5" : ""
+          locale === "ar" ? "leading-normal pb-5" : ""
         }`}
       >
         {t("hero.title")}

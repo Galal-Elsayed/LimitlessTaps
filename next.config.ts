@@ -24,15 +24,6 @@ const nextConfig: NextConfig = {
   compress: true,
   // Disable source maps in production for smaller bundles
   productionBrowserSourceMaps: false,
-  redirects: () => {
-    return [
-      {
-        source: "/",
-        destination: "/en",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default withNextIntl(nextConfig);
