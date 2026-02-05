@@ -22,10 +22,15 @@ const WhatWeDeliverLines = ({
   hideBadges = false,
 }: WhatWeDeliverLinesProps) => {
   return (
-    <div className={cn("relative h-[450px] w-full flex-col items-center hidden md:flex", className)}>
+    <div
+      className={cn(
+        "relative h-[450px] w-full flex-col items-center hidden md:flex",
+        className,
+      )}
+    >
       {/* SVG Paths & Animation */}
       <svg
-        className="h-full sm:w-full"
+        className="h-full sm:w-full "
         width="100%"
         height="100%"
         viewBox="0 0 200 100"
@@ -53,7 +58,11 @@ const WhatWeDeliverLines = ({
           filter="url(#glow-filter)"
           strokeLinecap="round"
         >
-          <path d="M 31 0 v 25 q 0 5 5 5 h 59 q 5 0 5 5 v 35" strokeDasharray="100" strokeDashoffset="100">
+          <path
+            d="M 31 0 v 25 q 0 5 5 5 h 59 q 5 0 5 5 v 35"
+            strokeDasharray="100"
+            strokeDashoffset="100"
+          >
             <animate
               attributeName="stroke-dashoffset"
               from="100"
@@ -63,7 +72,11 @@ const WhatWeDeliverLines = ({
               begin="0s"
             />
           </path>
-          <path d="M 77 0 v 20 q 0 5 5 5 h 13 q 5 0 5 5 v 35" strokeDasharray="60" strokeDashoffset="60">
+          <path
+            d="M 77 0 v 20 q 0 5 5 5 h 13 q 5 0 5 5 v 35"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+          >
             <animate
               attributeName="stroke-dashoffset"
               from="60"
@@ -73,7 +86,11 @@ const WhatWeDeliverLines = ({
               begin="0.5s"
             />
           </path>
-          <path d="M 124 0 v 20 q 0 5 -5 5 h -14 q -5 0 -5 5 v 35" strokeDasharray="60" strokeDashoffset="60">
+          <path
+            d="M 124 0 v 20 q 0 5 -5 5 h -14 q -5 0 -5 5 v 35"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+          >
             <animate
               attributeName="stroke-dashoffset"
               from="60"
@@ -83,7 +100,11 @@ const WhatWeDeliverLines = ({
               begin="1s"
             />
           </path>
-          <path d="M 170 0 v 25 q 0 5 -5 5 h -60 q -5 0 -5 5 v 35" strokeDasharray="100" strokeDashoffset="100">
+          <path
+            d="M 170 0 v 25 q 0 5 -5 5 h -60 q -5 0 -5 5 v 35"
+            strokeDasharray="100"
+            strokeDashoffset="100"
+          >
             <animate
               attributeName="stroke-dashoffset"
               from="100"
@@ -100,7 +121,16 @@ const WhatWeDeliverLines = ({
           <g stroke="none" fill="none">
             {/* First Button (ERP) */}
             <g>
-              <rect fill="#111" stroke="#333" strokeWidth="0.5" x="14" y="5" width="34" height="10" rx="5" />
+              <rect
+                fill="#111"
+                stroke="#333"
+                strokeWidth="0.5"
+                x="14"
+                y="5"
+                width="34"
+                height="10"
+                rx="5"
+              />
               <DatabaseIcon x="18" y="7.5" color="white" />
               <text x="28" y="12" fill="white" fontSize="5" fontWeight="500">
                 {badgeTexts?.first || "GET"}
@@ -108,7 +138,16 @@ const WhatWeDeliverLines = ({
             </g>
             {/* Second Button (CRM) */}
             <g>
-              <rect fill="#111" stroke="#333" strokeWidth="0.5" x="60" y="5" width="34" height="10" rx="5" />
+              <rect
+                fill="#111"
+                stroke="#333"
+                strokeWidth="0.5"
+                x="60"
+                y="5"
+                width="34"
+                height="10"
+                rx="5"
+              />
               <DatabaseIcon x="64" y="7.5" color="white" />
               <text x="74" y="12" fill="white" fontSize="5" fontWeight="500">
                 {badgeTexts?.second || "POST"}
@@ -116,7 +155,16 @@ const WhatWeDeliverLines = ({
             </g>
             {/* Third Button (HRM) */}
             <g>
-              <rect fill="#111" stroke="#333" strokeWidth="0.5" x="108" y="5" width="34" height="10" rx="5" />
+              <rect
+                fill="#111"
+                stroke="#333"
+                strokeWidth="0.5"
+                x="108"
+                y="5"
+                width="34"
+                height="10"
+                rx="5"
+              />
               <DatabaseIcon x="112" y="7.5" color="white" />
               <text x="122" y="12" fill="white" fontSize="5" fontWeight="500">
                 {badgeTexts?.third || "PUT"}
@@ -124,7 +172,16 @@ const WhatWeDeliverLines = ({
             </g>
             {/* Fourth Button (Inventory) */}
             <g>
-              <rect fill="#111" stroke="#333" strokeWidth="0.5" x="150" y="5" width="40" height="10" rx="5" />
+              <rect
+                fill="#111"
+                stroke="#333"
+                strokeWidth="0.5"
+                x="150"
+                y="5"
+                width="40"
+                height="10"
+                rx="5"
+              />
               <DatabaseIcon x="154" y="7.5" color="white" />
               <text x="165" y="12" fill="white" fontSize="5" fontWeight="500">
                 {badgeTexts?.fourth || "DELETE"}
@@ -141,7 +198,15 @@ const WhatWeDeliverLines = ({
 
 export default WhatWeDeliverLines;
 
-const DatabaseIcon = ({ x = "0", y = "0", color = "white" }: { x: string; y: string; color?: string }) => {
+const DatabaseIcon = ({
+  x = "0",
+  y = "0",
+  color = "white",
+}: {
+  x: string;
+  y: string;
+  color?: string;
+}) => {
   return (
     <svg
       x={x}
