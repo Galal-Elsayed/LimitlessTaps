@@ -50,18 +50,25 @@ function FloatingPaths({ position }: { position: number }) {
   );
 }
 
+import { cn } from "@/lib/utils";
+
 export function BackgroundPaths({
   title,
   children,
+  className,
 }: {
   title?: string;
   children?: React.ReactNode;
+  className?: string;
 }) {
   const words = title ? title.split(" ") : [];
 
   return (
     <div
-      className="relative min-h-[calc(100vh-80px)] w-full flex items-center justify-center overflow-hidden"
+      className={cn(
+        "relative min-h-[calc(100vh-80px)] w-full flex items-center justify-center overflow-hidden",
+        className,
+      )}
       style={{ backgroundColor: "#0a0a0a" }}
     >
       <div className="absolute inset-0">

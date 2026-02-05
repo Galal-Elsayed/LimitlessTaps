@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import WhatWeDeliverLines from "./WhatWeDeliverLines";
@@ -15,7 +15,10 @@ const EnterpriseShape = () => (
   <div className="absolute top-0 right-0 p-8 opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
     <div className="grid grid-cols-3 gap-2 w-48 rotate-[-12deg]">
       {[...Array(9)].map((_, i) => (
-        <div key={i} className="w-12 h-12 border border-white/20 bg-white/5 rounded-lg backdrop-blur-sm" />
+        <div
+          key={i}
+          className="w-12 h-12 border border-white/20 bg-white/5 rounded-lg backdrop-blur-sm"
+        />
       ))}
       <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] to-transparent" />
     </div>
@@ -114,16 +117,23 @@ export default function WhatWeDeliver() {
 
   return (
     <section className="w-full bg-[#0a0a0a] pt-10 pb-20 overflow-hidden relative">
-      <div className="w-full flex items-center justify-center relative z-10 -mb-28 mt-89 md:-mb-32">
+      <div className="w-full hidden md:flex items-center justify-center relative z-10 md:-mb-32 mt-4">
         <WhatWeDeliverLines
           className="scale-110 origin-top md:scale-125 md:origin-center max-w-none w-auto h-[400px]"
           hideBadges={true}
         />
       </div>
       <div className="px-4 md:px-8 max-w-[100rem] mx-auto relative z-20 mt-6 md:-mt-24">
-        <div className="absolute -top-40 left-4 md:left-8 z-20 max-w-xl text-left">
-          <h2 className={cn("text-3xl font-bold tracking-tight font-app md:text-5xl", locale === "ar" && "pb-4")}>{t("what_we_deliver_title")}</h2>
-          <p className="mt-4 text-base md:text-lg">
+        <div className="relative mb-8 md:absolute md:-top-40 md:left-8 z-20 max-w-xl text-left">
+          <h2
+            className={cn(
+              "text-3xl font-bold tracking-tight font-app md:text-5xl text-white text-center md:text-left",
+              locale === "ar" && "pb-4",
+            )}
+          >
+            {t("what_we_deliver_title")}
+          </h2>
+          <p className="mt-4 text-base md:text-lg text-center md:text-left">
             {t("what_we_deliver_desc")}
           </p>
         </div>
@@ -202,7 +212,9 @@ const GridItem = ({ area, title, description, shape, href }: GridItemProps) => {
               </div>
 
               <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors mt-auto pt-4">
-                <span className="text-sm font-medium">{useTranslations("home")("service_learn_more")}</span>
+                <span className="text-sm font-medium">
+                  {useTranslations("home")("service_learn_more")}
+                </span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </div>

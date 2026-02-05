@@ -11,7 +11,9 @@ interface LaunchSupportCardProps {
 
 import { cn } from "@/lib/utils";
 
-export default function LaunchSupportCard({ className }: LaunchSupportCardProps) {
+export default function LaunchSupportCard({
+  className,
+}: LaunchSupportCardProps) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const t = useTranslations("home");
 
@@ -65,7 +67,9 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
         className,
       )}
     >
-      <h2 className="text-2xl font-bold text-white mb-3">{t("launch_support_title")}</h2>
+      <h2 className="text-2xl font-bold text-white mb-3">
+        {t("launch_support_title")}
+      </h2>
       <p className="text-gray-400 text-sm mb-6 leading-relaxed">
         {t("launch_support_desc")}
       </p>
@@ -74,7 +78,9 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
         {/* Status Header */}
         <div className="flex items-center justify-between text-sm font-medium mb-3">
           <span className={isComplete ? "text-emerald-400" : "text-white"}>
-            {isComplete ? t("launch_status_live") : t("launch_status_deploying")}
+            {isComplete
+              ? t("launch_status_live")
+              : t("launch_status_deploying")}
           </span>
           <span className="text-gray-500">v2.29.0</span>
         </div>
@@ -99,35 +105,43 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
                 animate={
                   isLoading
                     ? {
-                      borderColor: loadingColors,
-                      backgroundColor: [
-                        "rgba(250, 204, 21, 0.1)",
-                        "rgba(96, 165, 250, 0.1)",
-                        "rgba(52, 211, 153, 0.1)",
-                      ],
-                      color: loadingColors,
-                    }
+                        borderColor: loadingColors,
+                        backgroundColor: [
+                          "rgba(250, 204, 21, 0.1)",
+                          "rgba(96, 165, 250, 0.1)",
+                          "rgba(52, 211, 153, 0.1)",
+                        ],
+                        color: loadingColors,
+                      }
                     : isCompleted
                       ? {
-                        borderColor: "rgba(52, 211, 153, 0.2)",
-                        backgroundColor: "rgba(52, 211, 153, 0.1)",
-                        color: "#34D399",
-                      }
+                          borderColor: "rgba(52, 211, 153, 0.2)",
+                          backgroundColor: "rgba(52, 211, 153, 0.1)",
+                          color: "#34D399",
+                        }
                       : {
-                        borderColor: "#27272a",
-                        backgroundColor: "rgba(24, 24, 27, 0.5)",
-                        color: "#52525b",
-                      }
+                          borderColor: "#27272a",
+                          backgroundColor: "rgba(24, 24, 27, 0.5)",
+                          color: "#52525b",
+                        }
                 }
-                transition={isLoading ? { duration: 2, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
-                className="relative flex items-center p-3 rounded-xl border transition-all"
+                transition={
+                  isLoading
+                    ? { duration: 2, repeat: Infinity, ease: "linear" }
+                    : { duration: 0.3 }
+                }
+                className="relative flex items-center p-3 rounded-xl border transition-all gap-4"
               >
-                {/* Status Loader/Check - Moved to First */}
-                <div className="shrink-0 flex items-center justify-center w-6 mr-2">
+                {/* Status Loader/Check */}
+                <div className="shrink-0 flex items-center justify-center w-6">
                   {isLoading ? (
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
                     >
                       <Loader className="w-4 h-4" />
                     </motion.div>
@@ -138,15 +152,21 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
                   )}
                 </div>
 
-                {/* Step Icon - Moved to Second */}
-                <div className="shrink-0 flex items-center justify-center w-6 mr-3">
-                  <step.icon className={`w-4 h-4 ${status === "waiting" ? "opacity-50" : ""}`} />
+                {/* Step Icon */}
+                <div className="shrink-0 flex items-center justify-center w-6">
+                  <step.icon
+                    className={`w-4 h-4 ${status === "waiting" ? "opacity-50" : ""}`}
+                  />
                 </div>
 
-                {/* Text - Third */}
+                {/* Text */}
                 <div className="flex flex-col">
-                  <span className="font-semibold text-sm leading-none mb-1">{t(step.labelKey)}</span>
-                  <span className="text-xs opacity-80 leading-none">{t(step.subKey)}</span>
+                  <span className="font-semibold text-sm leading-none mb-1">
+                    {t(step.labelKey)}
+                  </span>
+                  <span className="text-xs opacity-80 leading-none">
+                    {t(step.subKey)}
+                  </span>
                 </div>
               </motion.div>
             );
@@ -155,10 +175,17 @@ export default function LaunchSupportCard({ className }: LaunchSupportCardProps)
 
         <div className="mt-6 flex items-center gap-2 text-sm text-gray-500">
           <div
-            className={`w-2 h-2 rounded-full ${isComplete ? "bg-emerald-500 animate-pulse" : "bg-blue-500 animate-pulse"
-              }`}
+            className={`w-2 h-2 rounded-full ${
+              isComplete
+                ? "bg-emerald-500 animate-pulse"
+                : "bg-blue-500 animate-pulse"
+            }`}
           />
-          <span>{isComplete ? t("launch_status_operational") : t("launch_status_progress")}</span>
+          <span>
+            {isComplete
+              ? t("launch_status_operational")
+              : t("launch_status_progress")}
+          </span>
         </div>
       </div>
     </div>

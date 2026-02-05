@@ -29,7 +29,7 @@ export default function CareersHero() {
     <div className="bg-[#0a0a0a] min-h-screen text-white overflow-hidden pb-24">
       {/* Hero Section */}
       <div className="relative">
-        <BackgroundPaths>
+        <BackgroundPaths className="items-start pt-24 min-h-[55vh] md:min-h-[calc(100vh-80px)] md:items-center md:pt-0">
           <div className="flex flex-col items-center text-center">
             <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-8 tracking-normal md:tracking-tight font-app group leading-[1.2] py-2">
               {t("hero.title")}
@@ -56,7 +56,7 @@ export default function CareersHero() {
         </BackgroundPaths>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-20">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-12 md:-mt-20">
         {/* Culture / Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
           <motion.div

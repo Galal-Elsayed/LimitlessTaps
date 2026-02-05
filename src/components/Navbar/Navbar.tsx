@@ -196,10 +196,11 @@ export default function Navbar() {
                             text-[14px] font-medium capitalize tracking-wide 
                             text-white
                             transition-all duration-500 ease-out
-                            ${active
-                ? "[clip-path:inset(0_0_0_0)]"
-                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
-              }
+                            ${
+                              active
+                                ? "[clip-path:inset(0_0_0_0)]"
+                                : "[clip-path:inset(0_50%_0_50%)] group-hover:[clip-path:inset(0_0_0_0)]"
+                            }
                         `}
             aria-hidden="true"
           >
@@ -247,10 +248,11 @@ export default function Navbar() {
         <ChevronDown
           className={`
                         w-4 h-4 transition-all duration-300 ease-out
-                        ${servicesGlowActive
-              ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
-              : "text-gray-300"
-            }
+                        ${
+                          servicesGlowActive
+                            ? "rotate-180 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                            : "text-gray-300"
+                        }
                     `}
         />
       </button>
@@ -265,7 +267,7 @@ export default function Navbar() {
         viewAllLink={{
           href: "/services",
           title: t("services_view_all_title"),
-          description: t("services_view_all_desc")
+          description: t("services_view_all_desc"),
         }}
       />
     </div>
@@ -274,16 +276,18 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${mobileMenuOpen ? "max-[900px]:hidden" : ""
-          } bg-[#0a0a0a]`}
+        className={`fixed top-0 inset-x-0 z-50 px-8 ${isRTL ? "rtl" : "ltr"} ${
+          mobileMenuOpen ? "max-[900px]:hidden" : ""
+        } bg-[#0a0a0a]`}
       >
         <div className="max-w-350 mx-auto flex items-center justify-between h-17.5">
           {/* Logo */}
           <div
-            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${mobileMenuOpen
-              ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
-              : "opacity-100"
-              }`}
+            className={`cursor-pointer hover:opacity-80 transition-opacity duration-300 z-50 ${
+              mobileMenuOpen
+                ? "opacity-0 min-[900px]:opacity-100 pointer-events-none min-[900px]:pointer-events-auto"
+                : "opacity-100"
+            }`}
             onClick={() => router.push("/")}
           >
             {/* Desktop Logo (GIF) */}
@@ -311,9 +315,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav Links (Hidden on mobile/tablet) */}
-          <div
-            className="hidden min-[900px]:flex items-center gap-8"
-          >
+          <div className="hidden min-[900px]:flex items-center gap-8">
             {navLinks.map((link) =>
               link.isDropdown ? renderServicesDropdown() : renderNavLink(link),
             )}
@@ -409,8 +411,31 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Burger Menu Button */}
-          <div className="flex min-[900px]:hidden items-center z-50">
+          {/* Mobile Burger Menu Button & Language Switcher */}
+          <div className="flex min-[900px]:hidden items-center gap-3 z-50">
+            <button
+              onClick={() => {
+                const targetLang = languageLinks.find(
+                  (l) => l.key !== currentLocale,
+                );
+                if (targetLang) {
+                  router.replace(pathname, { locale: targetLang.locale });
+                }
+              }}
+              className="flex items-center justify-center px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+            >
+              <span
+                className="text-[12px] font-bold tracking-wide uppercase text-white"
+                style={{
+                  fontFamily:
+                    currentLocale === "en"
+                      ? "var(--font-cairo)"
+                      : "var(--font-inter)",
+                }}
+              >
+                {currentLocale === "en" ? "عربي" : "EN"}
+              </span>
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-white p-2 focus:outline-none hover:bg-white/10 rounded-full transition-colors"
@@ -504,8 +529,9 @@ export default function Navbar() {
                           >
                             <span>{t(link.key)}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
-                                }`}
+                              className={`w-4 h-4 transition-transform duration-300 ${
+                                mobileServicesOpen ? "rotate-180" : ""
+                              }`}
                             />
                           </button>
 
@@ -518,7 +544,7 @@ export default function Navbar() {
                                 transition={{
                                   duration: 0.25,
                                   ease: [0.4, 0, 0.2, 1],
-                                  opacity: { duration: 0.15 }
+                                  opacity: { duration: 0.15 },
                                 }}
                                 className="overflow-hidden flex flex-col gap-2 pl-2"
                               >
@@ -529,7 +555,7 @@ export default function Navbar() {
                                   transition={{
                                     delay: 0,
                                     duration: 0.2,
-                                    ease: "easeOut"
+                                    ease: "easeOut",
                                   }}
                                   onClick={() => {
                                     router.push("/services");
@@ -553,7 +579,7 @@ export default function Navbar() {
                                     transition={{
                                       delay: idx * 0.02,
                                       duration: 0.2,
-                                      ease: "easeOut"
+                                      ease: "easeOut",
                                     }}
                                     onClick={() => {
                                       router.push(service.href);
@@ -597,8 +623,9 @@ export default function Navbar() {
                 {/* Language Switcher */}
                 <div className="p-6 border-t border-white/10 bg-black/20">
                   <div
-                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${isRTL ? "text-right" : "text-left"
-                      }`}
+                    className={`text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-3 ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
                   >
                     {t("language_selector")}
                   </div>
@@ -611,10 +638,11 @@ export default function Navbar() {
                         }
                         className={`
                                                     flex-1 py-2 rounded-lg text-xs font-bold transition-all duration-300 border
-                                                    ${currentLocale === lang.key
-                            ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                            : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
-                          }
+                                                    ${
+                                                      currentLocale === lang.key
+                                                        ? "bg-white text-black border-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                                                        : "text-gray-400 border-white/10 hover:text-white hover:border-white/30 hover:bg-white/5"
+                                                    }
                                                 `}
                       >
                         <span
