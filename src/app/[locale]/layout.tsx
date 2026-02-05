@@ -7,10 +7,13 @@ import { i18n } from "@/i18n.config";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
-import { Preloader } from "@/components/ui/Preloader";
+
 import { FloatingRobot } from "@/components/ui/floating-robot";
 import { FloatingIcons } from "@/components/ui/floatingIcons";
-import { OrganizationStructuredData, WebsiteStructuredData } from "@/components/seo/StructuredData";
+import {
+  OrganizationStructuredData,
+  WebsiteStructuredData,
+} from "@/components/seo/StructuredData";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -45,12 +48,13 @@ export async function generateMetadata({
   const isArabic = locale === "ar";
 
   return {
-    metadataBase: new URL("https://limitlesstaps.com"),
+    metadataBase: new URL("https://www.limitlesstaps.com"),
     title: {
       default: `${brandName} | Digital Solutions & Software Development`,
       template: `%s | ${brandName}`,
     },
-    description: "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
+    description:
+      "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
     keywords: [
       "web development",
       "mobile app development",
@@ -67,7 +71,7 @@ export async function generateMetadata({
       "Abu Dhabi",
       "UAE",
     ],
-    authors: [{ name: brandName, url: "https://limitlesstaps.com" }],
+    authors: [{ name: brandName, url: "https://www.limitlesstaps.com" }],
     creator: brandName,
     publisher: brandName,
     robots: {
@@ -89,10 +93,11 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: isArabic ? "ar_SA" : "en_US",
-      url: `https://limitlesstaps.com/${locale}`,
+      url: `https://www.limitlesstaps.com/${locale}`,
       siteName: brandName,
       title: `${brandName} | Digital Solutions & Software Development`,
-      description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+      description:
+        "High-performance web, mobile, and software solutions engineered to scale without limits.",
       images: [
         {
           url: "/Logo/black.png",
@@ -105,15 +110,16 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${brandName} | Digital Solutions & Software Development`,
-      description: "High-performance web, mobile, and software solutions engineered to scale without limits.",
+      description:
+        "High-performance web, mobile, and software solutions engineered to scale without limits.",
       images: ["/Logo/black.png"],
       creator: "@limitlesstaps",
     },
     alternates: {
-      canonical: `https://limitlesstaps.com/${locale}`,
+      canonical: `https://www.limitlesstaps.com/${locale}`,
       languages: {
-        "en-US": "https://limitlesstaps.com/en",
-        "ar-SA": "https://limitlesstaps.com/ar",
+        "en-US": "https://www.limitlesstaps.com/en",
+        "ar-SA": "https://www.limitlesstaps.com/ar",
       },
     },
     verification: {
@@ -133,30 +139,69 @@ export function generateStaticParams() {
 }
 
 async function loadMessages(locale: string | undefined) {
-  const resolvedLocale = i18n.locales.includes(locale as (typeof i18n.locales)[number])
+  const resolvedLocale = i18n.locales.includes(
+    locale as (typeof i18n.locales)[number],
+  )
     ? (locale as (typeof i18n.locales)[number])
     : i18n.defaultLocale;
 
   try {
     // Load all message files and merge them
-    const common = (await import(`../../../messages/${resolvedLocale}/common.json`)).default;
-    const navigation = (await import(`../../../messages/${resolvedLocale}/navigation.json`)).default;
-    const home = (await import(`../../../messages/${resolvedLocale}/home.json`)).default;
-    const aboutUs = (await import(`../../../messages/${resolvedLocale}/about-us.json`)).default;
-    const services = (await import(`../../../messages/${resolvedLocale}/services.json`)).default;
-    const portfolio = (await import(`../../../messages/${resolvedLocale}/portfolio.json`)).default;
-    const careers = (await import(`../../../messages/${resolvedLocale}/careers.json`)).default;
-    const contact = (await import(`../../../messages/${resolvedLocale}/contact.json`)).default;
-    const footer = (await import(`../../../messages/${resolvedLocale}/footer.json`)).default;
-    const privacy = (await import(`../../../messages/${resolvedLocale}/privacy.json`)).default;
-    const terms = (await import(`../../../messages/${resolvedLocale}/terms.json`)).default;
-    const studio = (await import(`../../../messages/${resolvedLocale}/studio.json`)).default;
-    const webDevelopment = (await import(`../../../messages/${resolvedLocale}/Web-Development.json`)).default;
-    const mobileApplication = (await import(`../../../messages/${resolvedLocale}/mopile-application.json`)).default;
-    const SoftwareSolutions = (await import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`)).default;
-    const WebDesign = (await import(`../../../messages/${resolvedLocale}/Web-Design.json`)).default;
-    const WordPress = (await import(`../../../messages/${resolvedLocale}/WordPress.json`)).default;
-    const projects = (await import(`../../../messages/${resolvedLocale}/projects.json`)).default;
+    const common = (
+      await import(`../../../messages/${resolvedLocale}/common.json`)
+    ).default;
+    const navigation = (
+      await import(`../../../messages/${resolvedLocale}/navigation.json`)
+    ).default;
+    const home = (await import(`../../../messages/${resolvedLocale}/home.json`))
+      .default;
+    const aboutUs = (
+      await import(`../../../messages/${resolvedLocale}/about-us.json`)
+    ).default;
+    const services = (
+      await import(`../../../messages/${resolvedLocale}/services.json`)
+    ).default;
+    const portfolio = (
+      await import(`../../../messages/${resolvedLocale}/portfolio.json`)
+    ).default;
+    const careers = (
+      await import(`../../../messages/${resolvedLocale}/careers.json`)
+    ).default;
+    const contact = (
+      await import(`../../../messages/${resolvedLocale}/contact.json`)
+    ).default;
+    const footer = (
+      await import(`../../../messages/${resolvedLocale}/footer.json`)
+    ).default;
+    const privacy = (
+      await import(`../../../messages/${resolvedLocale}/privacy.json`)
+    ).default;
+    const terms = (
+      await import(`../../../messages/${resolvedLocale}/terms.json`)
+    ).default;
+    const studio = (
+      await import(`../../../messages/${resolvedLocale}/studio.json`)
+    ).default;
+    const webDevelopment = (
+      await import(`../../../messages/${resolvedLocale}/Web-Development.json`)
+    ).default;
+    const mobileApplication = (
+      await import(
+        `../../../messages/${resolvedLocale}/mopile-application.json`
+      )
+    ).default;
+    const SoftwareSolutions = (
+      await import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`)
+    ).default;
+    const WebDesign = (
+      await import(`../../../messages/${resolvedLocale}/Web-Design.json`)
+    ).default;
+    const WordPress = (
+      await import(`../../../messages/${resolvedLocale}/WordPress.json`)
+    ).default;
+    const projects = (
+      await import(`../../../messages/${resolvedLocale}/projects.json`)
+    ).default;
 
     return {
       common,
@@ -179,26 +224,42 @@ async function loadMessages(locale: string | undefined) {
       projects,
     };
   } catch (error) {
-    console.error(`Failed to load messages for locale: ${resolvedLocale}`, error);
+    console.error(
+      `Failed to load messages for locale: ${resolvedLocale}`,
+      error,
+    );
     // Fallback to English
     const common = (await import(`../../../messages/en/common.json`)).default;
-    const navigation = (await import(`../../../messages/en/navigation.json`)).default;
+    const navigation = (await import(`../../../messages/en/navigation.json`))
+      .default;
     const home = (await import(`../../../messages/en/home.json`)).default;
-    const aboutUs = (await import(`../../../messages/en/about-us.json`)).default;
-    const services = (await import(`../../../messages/en/services.json`)).default;
-    const portfolio = (await import(`../../../messages/en/portfolio.json`)).default;
+    const aboutUs = (await import(`../../../messages/en/about-us.json`))
+      .default;
+    const services = (await import(`../../../messages/en/services.json`))
+      .default;
+    const portfolio = (await import(`../../../messages/en/portfolio.json`))
+      .default;
     const careers = (await import(`../../../messages/en/careers.json`)).default;
     const contact = (await import(`../../../messages/en/contact.json`)).default;
     const footer = (await import(`../../../messages/en/footer.json`)).default;
     const privacy = (await import(`../../../messages/en/privacy.json`)).default;
     const terms = (await import(`../../../messages/en/terms.json`)).default;
     const studio = (await import(`../../../messages/en/studio.json`)).default;
-    const webDevelopment = (await import(`../../../messages/en/Web-Development.json`)).default;
-    const mobileApplication = (await import(`../../../messages/en/mopile-application.json`)).default;
-    const SoftwareSolutions = (await import(`../../../messages/en/SoftwareSolutions.json`)).default;
-    const WebDesign = (await import(`../../../messages/en/Web-Design.json`)).default;
-    const WordPress = (await import(`../../../messages/en/WordPress.json`)).default;
-    const projects = (await import(`../../../messages/en/projects.json`)).default;
+    const webDevelopment = (
+      await import(`../../../messages/en/Web-Development.json`)
+    ).default;
+    const mobileApplication = (
+      await import(`../../../messages/en/mopile-application.json`)
+    ).default;
+    const SoftwareSolutions = (
+      await import(`../../../messages/en/SoftwareSolutions.json`)
+    ).default;
+    const WebDesign = (await import(`../../../messages/en/Web-Design.json`))
+      .default;
+    const WordPress = (await import(`../../../messages/en/WordPress.json`))
+      .default;
+    const projects = (await import(`../../../messages/en/projects.json`))
+      .default;
 
     return {
       common,
@@ -232,7 +293,9 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
   const messages = await loadMessages(locale);
-  const resolvedLocale = i18n.locales.includes(locale as (typeof i18n.locales)[number])
+  const resolvedLocale = i18n.locales.includes(
+    locale as (typeof i18n.locales)[number],
+  )
     ? (locale as (typeof i18n.locales)[number])
     : i18n.defaultLocale;
   const isArabic = resolvedLocale === "ar";
@@ -245,7 +308,11 @@ export default async function RootLayout({
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </head>
       <body className="antialiased font-sans" suppressHydrationWarning>
@@ -253,7 +320,7 @@ export default async function RootLayout({
           {/* Structured Data for SEO */}
           <OrganizationStructuredData locale={resolvedLocale} />
           <WebsiteStructuredData locale={resolvedLocale} />
-          {/* <Preloader /> */}
+
           <Toaster position="top-center" expand={false} richColors />
           <div className="pt-18">
             <Navbar />
