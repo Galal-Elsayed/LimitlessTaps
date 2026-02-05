@@ -5,9 +5,9 @@ export const metadata: Metadata = {
   title: "Limitless Taps",
   description: "Your ultimate beverage solution",
   icons: {
-    icon: "/Logo/black.png",
-    shortcut: "/Logo/black.png",
-    apple: "/Logo/black.png",
+    icon: "/Logo/Graph.png",
+    shortcut: "/Logo/Graph.png",
+    apple: "/Logo/Graph.png",
   },
   openGraph: {
     images: ["/Logo/Graph.png"],

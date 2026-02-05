@@ -86,9 +86,9 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/Logo/black.png",
-      shortcut: "/Logo/black.png",
-      apple: "/Logo/black.png",
+      icon: "/Logo/Graph.png",
+      shortcut: "/Logo/Graph.png",
+      apple: "/Logo/Graph.png",
     },
     openGraph: {
       type: "website",
