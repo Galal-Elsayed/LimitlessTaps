@@ -190,12 +190,12 @@ type VisualDesignItem = {
 
 const VisualDesignVisual = ({ items }: { items: VisualDesignItem[] }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start pt-2 min-[900px]:pt-4 space-y-1 min-[900px]:space-y-1.5 overflow-visible relative px-2 min-[900px]:px-4">
+    <div className="w-full h-full flex flex-col items-center justify-start pt-0 min-[900px]:pt-4 space-y-1 min-[900px]:space-y-1.5 overflow-visible relative px-2 min-[900px]:px-4">
       {/* Masking for clean exit */}
       <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-[#111] to-transparent z-20 pointer-events-none" />
 
       {/* 2-column grid for mobile, single column for larger */}
-      <div className="grid grid-cols-2 min-[900px]:grid-cols-1 gap-1.5 min-[900px]:gap-1.5 w-full">
+      <div className="grid grid-cols-2 min-[900px]:grid-cols-1 gap-1.5 min-[900px]:gap-1.5 w-full -mt-1 min-[900px]:mt-0 -mb-1 min-[900px]:mb-0">
 
         {items.map((item, i) => (
           <motion.div

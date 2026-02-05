@@ -96,11 +96,9 @@ export async function generateMetadata({
       url: `https://www.limitlesstaps.com/${locale}`,
       siteName: brandName,
       title: `${brandName} | Digital Solutions & Software Development`,
-      description:
-        "High-performance web, mobile, and software solutions engineered to scale without limits.",
       images: [
         {
-          url: "/Logo/social-black.jpg",
+          url: "/Logo/Graph.png",
           width: 1200,
           height: 630,
           alt: `${brandName} - Digital Solutions`,
@@ -112,7 +110,7 @@ export async function generateMetadata({
       title: `${brandName} | Digital Solutions & Software Development`,
       description:
         "High-performance web, mobile, and software solutions engineered to scale without limits.",
-      images: ["/Logo/social-black.jpg"],
+      images: ["/Logo/Graph.png"],
       creator: "@limitlesstaps",
     },
     alternates: {

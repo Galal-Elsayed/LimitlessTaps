@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     apple: "/Logo/black.png",
   },
   openGraph: {
-    images: ["/Logo/social-black.jpg"],
+    images: ["/Logo/Graph.png"],
   },
 };
 
