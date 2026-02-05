@@ -115,9 +115,9 @@ export default function ServicesWeb() {
                 </div>
 
                 {/* Center Column: MacBook (Larger) */}
-                <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center perspective-[1400px] relative z-20 py-10">
+                <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center perspective-[1400px] relative z-20 py-0 md:py-10 -mt-32 md:mt-0">
                     {/* Glow effect behind laptop */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
+                    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] bg-slate-500/10 blur-[120px] rounded-full pointer-events-none" />
 
                     <div className="scale-[0.45] min-[400px]:scale-[0.55] sm:scale-[0.7] md:scale-[0.9] lg:scale-[1] xl:scale-[1.1] transform-style-3d">
                         <MacbookPresentation t={t} />
@@ -125,7 +125,7 @@ export default function ServicesWeb() {
                 </div>
 
                 {/* Right Column: Narrative */}
-                <div className={`lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left'} ml-10 lg:translate-x-7`}>
+                <div className={`lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left'} lg:ml-10 lg:translate-x-7`}>
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}

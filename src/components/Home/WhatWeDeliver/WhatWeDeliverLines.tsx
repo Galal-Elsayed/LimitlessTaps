@@ -22,7 +22,7 @@ const WhatWeDeliverLines = ({
   hideBadges = false,
 }: WhatWeDeliverLinesProps) => {
   return (
-    <div className={cn("relative flex h-[450px] w-full flex-col items-center", className)}>
+    <div className={cn("relative h-[450px] w-full flex-col items-center hidden md:flex", className)}>
       {/* SVG Paths & Animation */}
       <svg
         className="h-full sm:w-full"

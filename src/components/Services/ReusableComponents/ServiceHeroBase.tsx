@@ -462,7 +462,7 @@ interface ServiceHeroBaseProps {
     minHeight?: string;
 }
 
-export default function ServiceHeroBase({ title, className, raysColor = "#ffffff", minHeight = "h-[50vh]" }: ServiceHeroBaseProps) {
+export default function ServiceHeroBase({ title, className, raysColor = "#ffffff", minHeight = "h-[30vh] md:h-[50vh]" }: ServiceHeroBaseProps) {
     const locale = useLocale();
     const isRTL = locale === "ar";
 
@@ -471,7 +471,7 @@ export default function ServiceHeroBase({ title, className, raysColor = "#ffffff
 
             {/* Overlay Content */}
 
-            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 space-y-8">
+            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 min-[900px]:max-[1500px]:!px-32 space-y-8">
                 {/* Header */}
                 <Header
                     title={title}

@@ -2,7 +2,7 @@
 
 import { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
-import { useRouter } from '@/i18n/routing';
+import { useRouter, usePathname } from '@/i18n/routing';
 
 export interface DropdownItem {
     key: string;
@@ -19,10 +19,16 @@ interface NavDropdownProps {
     onClose: () => void;
     className?: string;
     align?: 'center' | 'start' | 'end';
+    viewAllLink?: {
+        href: string;
+        title: string;
+        description?: string;
+    };
 }
 
-export function NavDropdown({ isOpen, items, isRTL, onClose, className = '', align = 'center' }: NavDropdownProps) {
+export function NavDropdown({ isOpen, items, isRTL, onClose, className = '', align = 'center', viewAllLink }: NavDropdownProps) {
     const router = useRouter();
+    const pathname = usePathname();
 
     // Positioning classes based on alignment
     const positionClasses = {
@@ -76,6 +82,34 @@ export function NavDropdown({ isOpen, items, isRTL, onClose, className = '', ali
                     {/* Glassmorphism / Blur layer */}
                     <div className="relative bg-white/5 backdrop-blur-xl p-2">
                         <div className="flex flex-col gap-1">
+                            {/* View All Link - Top Item (styled like other items) */}
+                            {viewAllLink && (
+                                <a
+                                    onClick={() => {
+                                        router.push(viewAllLink.href);
+                                        onClose();
+                                    }}
+                                    className={`
+                                        group flex items-start gap-4 rounded-lg p-3 
+                                        transition-colors duration-200 cursor-pointer
+                                        ${pathname === viewAllLink.href
+                                            ? 'bg-white/15'
+                                            : 'hover:bg-white/10'}
+                                    `}
+                                >
+                                    <div className="flex-auto">
+                                        <p className={`block font-semibold text-md transition-colors ${pathname === viewAllLink.href ? 'text-white' : 'text-gray-100 group-hover:text-white'}`}>
+                                            {viewAllLink.title}
+                                        </p>
+                                        {viewAllLink.description && (
+                                            <p className="mt-1 text-sm text-gray-400 group-hover:text-gray-300">
+                                                {viewAllLink.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                </a>
+                            )}
+
                             {items.map((link) => (
                                 <a
                                     key={link.key}

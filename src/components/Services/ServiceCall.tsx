@@ -147,26 +147,25 @@ export default function ServiceCall() {
             {t("call.description")}
           </motion.p>
 
-          {/* 3. Actions */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-col md:flex-row items-center gap-6"
+            className="flex flex-col md:flex-row items-center gap-4 md:gap-6"
           >
             <ArcButton
               href="/contact"
               variant="light"
               radius="rounded-2xl"
-              className="px-10 py-5 h-auto text-lg rounded-full"
+              className="px-6 py-3 md:px-10 md:py-5 h-auto text-sm md:text-lg rounded-full"
             >
               <Image
                 src="/Home/infinity.apng"
                 alt={t("call.startProject")}
-                width={24}
-                height={24}
-                className="h-6 w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
+                width={20}
+                height={20}
+                className="h-5 w-5 md:h-6 md:w-6 object-contain transition-transform duration-500 ease-in-out group-hover:rotate-180"
                 priority
               />
               {t("call.startProject")}
@@ -176,7 +175,7 @@ export default function ServiceCall() {
               href="/services"
               variant="dark"
               radius="rounded-2xl"
-              className="px-10 py-5 h-auto text-lg text-white/70 hover:text-white rounded-full"
+              className="px-6 py-3 md:px-10 md:py-5 h-auto text-sm md:text-lg text-white/70 hover:text-white rounded-full"
             >
               {t("call.viewServices")}
             </ArcButton>

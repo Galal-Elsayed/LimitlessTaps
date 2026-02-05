@@ -9,5 +9,7 @@
     "mobile_application": "Mobile Application",
     "software_solution": "Software Solution",
     "web_design": "Web Design",
-    "language_selector": "Language"
+    "language_selector": "Language",
+    "services_view_all_title": "All Services",
+    "services_view_all_desc": "View all our services and solutions."
 }

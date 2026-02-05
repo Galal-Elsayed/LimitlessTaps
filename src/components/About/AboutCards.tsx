@@ -261,7 +261,7 @@ export default function AboutCards() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ ...springTransition, delay: index * 0.2 }}
-                            className="group relative flex h-[450px] md:h-[500px] w-[65%] md:w-full mx-auto flex-col overflow-hidden border border-white/[0.08] bg-gradient-to-b from-[#121212] via-black/30 to-black hover:border-white/20 hover:shadow-2xl hover:shadow-neutral-500/10 rounded-[2rem] cursor-pointer"
+                            className="group relative flex h-[450px] md:h-[500px] w-[90%] sm:w-[80%] md:w-full mx-auto flex-col overflow-hidden border border-white/[0.08] bg-gradient-to-b from-[#121212] via-black/30 to-black hover:border-white/20 hover:shadow-2xl hover:shadow-neutral-500/10 rounded-[2rem] cursor-pointer"
                         >
                             {/* Unique Reveal Effect per card */}
                             <HoverEffect canvasProps={service.canvasProps} />

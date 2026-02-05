@@ -203,7 +203,7 @@ const DatabaseWithRestApi = ({
 
         {/* Core Circle */}
         {!hideCore && (
-          <div className="absolute -bottom-8 z-30 grid h-[60px] w-[60px] place-items-center rounded-full border border-white/10 bg-[#050505] font-semibold text-xs text-white shadow-2xl shadow-blue-500/10">
+          <div className="absolute -bottom-8 z-30 hidden lg:grid h-[60px] w-[60px] place-items-center rounded-full border border-white/10 bg-[#050505] font-semibold text-xs text-white shadow-2xl shadow-blue-500/10">
             {circleText ? circleText : "SVG"}
           </div>
         )}

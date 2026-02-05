@@ -114,13 +114,13 @@ export default function WhatWeDeliver() {
 
   return (
     <section className="w-full bg-[#0a0a0a] pt-10 pb-20 overflow-hidden relative">
-      <div className="w-full flex items-center justify-center relative z-10 -mb-28 mt-4 md:-mb-32">
+      <div className="w-full flex items-center justify-center relative z-10 -mb-28 mt-89 md:-mb-32">
         <WhatWeDeliverLines
           className="scale-110 origin-top md:scale-125 md:origin-center max-w-none w-auto h-[400px]"
           hideBadges={true}
         />
       </div>
-      <div className="px-4 md:px-8 max-w-[100rem] mx-auto relative z-20 -mt-24">
+      <div className="px-4 md:px-8 max-w-[100rem] mx-auto relative z-20 mt-6 md:-mt-24">
         <div className="absolute -top-40 left-4 md:left-8 z-20 max-w-xl text-left">
           <h2 className={cn("text-3xl font-bold tracking-tight font-app md:text-5xl", locale === "ar" && "pb-4")}>{t("what_we_deliver_title")}</h2>
           <p className="mt-4 text-base md:text-lg">

@@ -262,6 +262,11 @@ export default function Navbar() {
         onClose={() => setServicesOpen(false)}
         align="center"
         className="w-screen max-w-sm"
+        viewAllLink={{
+          href: "/services",
+          title: t("services_view_all_title"),
+          description: t("services_view_all_desc")
+        }}
       />
     </div>
   );
@@ -292,14 +297,15 @@ export default function Navbar() {
                 unoptimized
               />
             </div>
-            {/* Mobile Logo (Static) */}
+            {/* Mobile Logo (GIF) */}
             <div className="block min-[900px]:hidden">
               <Image
-                src="/Logo/Main-Logo-Static.png"
+                src="/Logo/Main-Logo-Opt.gif"
                 alt="Limitless Taps"
                 width={140}
                 height={60}
                 className="object-contain"
+                unoptimized
               />
             </div>
           </div>
@@ -454,11 +460,12 @@ export default function Navbar() {
                     }}
                   >
                     <Image
-                      src="/Logo/Main-Logo-Static.png"
+                      src="/Logo/Main-Logo-Opt.gif"
                       alt="Limitless Taps"
                       width={140}
                       height={60}
                       className="object-contain"
+                      unoptimized
                     />
                   </div>
                   <button
@@ -502,20 +509,52 @@ export default function Navbar() {
                             />
                           </button>
 
-                          <AnimatePresence>
+                          <AnimatePresence mode="wait">
                             {mobileServicesOpen && (
                               <motion.div
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
+                                transition={{
+                                  duration: 0.25,
+                                  ease: [0.4, 0, 0.2, 1],
+                                  opacity: { duration: 0.15 }
+                                }}
                                 className="overflow-hidden flex flex-col gap-2 pl-2"
                               >
+                                {/* Main Services Overview Link */}
+                                <motion.div
+                                  initial={{ opacity: 0, x: 10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{
+                                    delay: 0,
+                                    duration: 0.2,
+                                    ease: "easeOut"
+                                  }}
+                                  onClick={() => {
+                                    router.push("/services");
+                                    setMobileMenuOpen(false);
+                                  }}
+                                  className={`
+                                    py-2.5 px-4 w-full rounded-lg 
+                                    bg-white/10 border border-white/10
+                                    text-sm text-white font-semibold hover:bg-white/15 hover:border-white/20
+                                    cursor-pointer transition-all duration-200
+                                  `}
+                                >
+                                  {t("services")} - View All
+                                </motion.div>
+
                                 {serviceLinks.map((service, idx) => (
                                   <motion.div
                                     key={service.key}
                                     initial={{ opacity: 0, x: 10 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: idx * 0.03 }}
+                                    transition={{
+                                      delay: idx * 0.02,
+                                      duration: 0.2,
+                                      ease: "easeOut"
+                                    }}
                                     onClick={() => {
                                       router.push(service.href);
                                       setMobileMenuOpen(false);

@@ -43,10 +43,13 @@
     "service": {
         "adminBar": {
             "siteName": "Limitless Taps Site",
+            "siteNameShort": "LT Site",
             "new": "New",
             "editPage": "Edit Page",
+            "editPageShort": "Edit",
             "seoGood": "SEO: Good ✅",
-            "howdy": "Howdy, Admin"
+            "howdy": "Howdy, Admin",
+            "howdyShort": "Admin"
         },
         "sidebar": {
             "dashboard": "Dashboard",

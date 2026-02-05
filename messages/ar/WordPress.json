@@ -43,10 +43,13 @@
     "service": {
         "adminBar": {
             "siteName": "موقع ليمتلس تابس",
+            "siteNameShort": "موقع LT",
             "new": "جديد",
             "editPage": "تعديل الصفحة",
+            "editPageShort": "تعديل",
             "seoGood": "SEO: جيد ✅",
-            "howdy": "مرحباً، المدير"
+            "howdy": "مرحباً، المدير",
+            "howdyShort": "المدير"
         },
         "sidebar": {
             "dashboard": "لوحة التحكم",

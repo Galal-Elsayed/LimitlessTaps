@@ -16,7 +16,11 @@
     "card": {
         "viewDetails": "View Details",
         "launch": "View Project",
-        "comingSoon": "Coming Soon"
+        "comingSoon": "Coming Soon",
+        "playStore": "Play Store",
+        "appStore": "App Store",
+        "viewLiveDemo": "View Live Demo",
+        "stopDemo": "Stop Demo"
     },
     "modal": {
         "viewProject": "View Project",
@@ -63,7 +67,15 @@
         "Monitoring": "Monitoring",
         "Crypto": "Crypto",
         "System": "System",
-        "IoT": "IoT"
+        "IoT": "IoT",
+        "Shipping": "Shipping",
+        "HR": "HR",
+        "Jobs": "Jobs",
+        "POS": "POS",
+        "Retail": "Retail",
+        "NextJS": "Next.js",
+        "React": "React",
+        "TailwindCSS": "Tailwind CSS"
     },
     "categories": {
         "websites": "Websites",
@@ -107,19 +119,19 @@
             "highlight": "Shop"
         },
         "m1": {
-            "title": "Pulse Fitness",
-            "description": "Activity tracking app with social features and workout plans.",
-            "highlight": "Health"
+            "title": "Shop and Ship",
+            "description": "Global shipping and shopping platform by Aramex. Shop from US, UK, and more with convenient delivery to your doorstep.",
+            "highlight": "Shipping"
         },
         "m2": {
-            "title": "Echo Chat",
-            "description": "End-to-end encrypted messaging application.",
-            "highlight": "Chat"
+            "title": "Bluworks",
+            "description": "Modern workforce management platform. Connect employers with blue-collar workers for seamless job matching.",
+            "highlight": "Workforce"
         },
         "m3": {
-            "title": "Swift Pay",
-            "description": "Contactless payment solution for local markets.",
-            "highlight": "Fintech"
+            "title": "Tecfy POS",
+            "description": "Point of sale and market operation management. Streamline your retail business with powerful inventory and sales tracking.",
+            "highlight": "POS"
         },
         "m4": {
             "title": "Lumina Cam",
@@ -137,24 +149,9 @@
             "highlight": "Game"
         },
         "d1": {
-            "title": "Nexus Analytics",
-            "description": "Comprehensive data visualization for enterprise metrics.",
-            "highlight": "Data"
-        },
-        "d2": {
-            "title": "Quantum Admin",
-            "description": "Futuristic admin panel with real-time updates.",
-            "highlight": "Admin"
-        },
-        "d3": {
-            "title": "Flux CRM",
-            "description": "Customer relationship management with visual pipelines.",
-            "highlight": "CRM"
-        },
-        "d4": {
-            "title": "Titan Logs",
-            "description": "Server log monitoring and error tracking dashboard.",
-            "highlight": "DevOps"
+            "title": "Isomorphic",
+            "description": "A comprehensive admin dashboard template featuring Next.js, React, and Tailwind CSS. Clean, modern, and highly customizable.",
+            "highlight": "Admin Template"
         },
         "d5": {
             "title": "Aether Finance",

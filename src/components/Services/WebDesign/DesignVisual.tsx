@@ -38,7 +38,7 @@ export default function DesignVisual() {
 
 
     return (
-        <section ref={containerRef} className="w-full py-24 pb-48 px-4 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
+        <section ref={containerRef} className="w-full py-24 pb-48 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
             <motion.div
                 style={{
                     rotateY,
@@ -123,9 +123,16 @@ const FigmaUI = () => {
                     </div>
                 </div>
 
-                <div className="text-xs text-white/50 font-medium">
-                    <span className="hidden md:inline">{t('toolbar.title').split('-')[0]}-</span>
-                    <span>{t('toolbar.title').split('-')[1] || ''}</span>
+                <div className="text-xs text-white/50 font-medium px-2">
+                    {/* Short version for 300-500px screens */}
+                    <span className="min-[500px]:hidden">
+                        {t('toolbar.titleShort').split('-')[1]?.trim() || t('toolbar.titleShort')}
+                    </span>
+                    {/* Full version for larger screens */}
+                    <span className="hidden min-[500px]:inline">
+                        <span className="hidden md:inline">{t('toolbar.title').split('-')[0]}-</span>
+                        <span>{t('toolbar.title').split('-')[1] || ''}</span>
+                    </span>
                 </div>
 
                 <div className="flex items-center gap-3">

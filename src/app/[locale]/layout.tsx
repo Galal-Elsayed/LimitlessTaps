@@ -100,7 +100,7 @@ export async function generateMetadata({
         "High-performance web, mobile, and software solutions engineered to scale without limits.",
       images: [
         {
-          url: "/Logo/black.png",
+          url: "/Logo/social-black.jpg",
           width: 1200,
           height: 630,
           alt: `${brandName} - Digital Solutions`,
@@ -112,7 +112,7 @@ export async function generateMetadata({
       title: `${brandName} | Digital Solutions & Software Development`,
       description:
         "High-performance web, mobile, and software solutions engineered to scale without limits.",
-      images: ["/Logo/black.png"],
+      images: ["/Logo/social-black.jpg"],
       creator: "@limitlesstaps",
     },
     alternates: {

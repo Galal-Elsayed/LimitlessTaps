@@ -33,7 +33,7 @@ export default function WordPressService() {
     );
 
     return (
-        <section ref={containerRef} className="w-full py-24 pb-48 px-4 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
+        <section ref={containerRef} className="w-full py-24 pb-48 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
             <motion.div
                 style={{
                     rotateY,
@@ -97,16 +97,22 @@ const WordPressUI = () => {
                 <div className="flex items-center gap-4">
                     <div className="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center font-serif font-bold text-xs">W</div>
                     <div className="flex items-center gap-1 font-semibold">
-                        {t('adminBar.siteName')}
+                        {/* Short version for small screens (300-500px), full for larger */}
+                        <span className="min-[500px]:hidden">{t('adminBar.siteNameShort')}</span>
+                        <span className="hidden min-[500px]:inline">{t('adminBar.siteName')}</span>
                     </div>
                     <div className="flex gap-3 text-white/70">
                         <span>{t('adminBar.new')}</span>
-                        <span>{t('adminBar.editPage')}</span>
+                        {/* Short version for small screens */}
+                        <span className="min-[500px]:hidden">{t('adminBar.editPageShort')}</span>
+                        <span className="hidden min-[500px]:inline">{t('adminBar.editPage')}</span>
                         <span className="hidden md:inline text-green-400 font-medium">{t('adminBar.seoGood')}</span>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span>{t('adminBar.howdy')}</span>
+                    {/* Short version for small screens */}
+                    <span className="min-[500px]:hidden">{t('adminBar.howdyShort')}</span>
+                    <span className="hidden min-[500px]:inline">{t('adminBar.howdy')}</span>
                     <div className="w-5 h-5 bg-white/20 rounded ml-1" />
                 </div>
             </div>

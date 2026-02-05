@@ -20,7 +20,7 @@ interface SeoCardsProps {
 
 export default function SeoCards({ items, seoHeader, seoList, gradientBottom = true }: SeoCardsProps) {
     return (
-        <section className="w-full pt-24 pb-48 px-4 md:px-8 bg-[#0a0a0a] relative overflow-hidden">
+        <section className="w-full pt-24 pb-48 px-4 md:px-8 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] relative overflow-hidden">
             {/* SEO Hidden Header Structure */}
             <div className="sr-only">
                 <h2>{seoHeader}</h2>

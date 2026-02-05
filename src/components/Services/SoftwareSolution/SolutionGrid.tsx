@@ -50,9 +50,9 @@ export const SolutionGrid = ({ className }: { className?: string }) => {
 
   return (
     <div className="relative w-full flex flex-col items-center mt-4 min-[500px]:mt-8 md:mt-24 bg-[#0a0a0a] pb-44">
-      {/* Connecting Line from Data Component to Grid - hidden between 500px and 900px */}
-      <div className="absolute -top-4 min-[900px]:-top-24 left-1/2 w-px h-4 min-[900px]:h-24 bg-gradient-to-b from-white/20 via-white/40 to-white/10 -translate-x-1/2 min-[500px]:hidden min-[900px]:block" />
-      <div className="absolute -top-1 left-1/2 w-3 h-3 bg-white/50 rounded-full blur-sm -translate-x-1/2 min-[500px]:hidden min-[900px]:block" />
+      {/* Connecting Line from Data Component to Grid - hidden on mobile/tablet */}
+      <div className="absolute -top-4 min-[900px]:-top-24 left-1/2 w-px h-4 min-[900px]:h-24 bg-gradient-to-b from-white/20 via-white/40 to-white/10 -translate-x-1/2 hidden lg:block" />
+      <div className="absolute -top-1 left-1/2 w-3 h-3 bg-white/50 rounded-full blur-sm -translate-x-1/2 hidden lg:block" />
 
       <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[90rem] mx-auto px-6 z-10", className)}>
         {gridItems.map((item, index) => (

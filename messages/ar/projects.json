@@ -16,7 +16,11 @@
     "card": {
         "viewDetails": "عرض التفاصيل",
         "launch": "تشغيل",
-        "comingSoon": "قريباً"
+        "comingSoon": "قريباً",
+        "playStore": "بلاي ستور",
+        "appStore": "آب ستور",
+        "viewLiveDemo": "عرض العرض التجريبي",
+        "stopDemo": "إيقاف العرض"
     },
     "modal": {
         "viewProject": "عرض المشروع",
@@ -63,7 +67,15 @@
         "Monitoring": "مراقبة",
         "Crypto": "عملات مشفرة",
         "System": "أنظمة",
-        "IoT": "إنترنت الأشياء"
+        "IoT": "إنترنت الأشياء",
+        "Shipping": "شحن",
+        "HR": "موارد بشرية",
+        "Jobs": "وظائف",
+        "POS": "نقاط البيع",
+        "Retail": "تجزئة",
+        "NextJS": "Next.js",
+        "React": "React",
+        "TailwindCSS": "Tailwind CSS"
     },
     "categories": {
         "websites": "مواقع إلكترونية",
@@ -107,19 +119,19 @@
             "highlight": "تسوق"
         },
         "m1": {
-            "title": "Pulse Fitness",
-            "description": "تطبيق تتبع النشاط مع ميزات اجتماعية وخطط تمارين.",
-            "highlight": "صحة"
+            "title": "شوب آند شيب",
+            "description": "منصة شحن وتسوق عالمية من أرامكس. تسوق من أسواق عالمية مع توصيل مريح لباب منزلك.",
+            "highlight": "شحن"
         },
         "m2": {
-            "title": "Echo Chat",
-            "description": "تطبيق مراسلة مشفر من طرف إلى طرف.",
-            "highlight": "محادثة"
+            "title": "بلووركس",
+            "description": "منصة حديثة لإدارة القوى العاملة. تربط أصحاب العمل بالعمالة لتوظيف سلس.",
+            "highlight": "قوى عاملة"
         },
         "m3": {
-            "title": "Swift Pay",
-            "description": "حل دفع بدون تلامس للأسواق المحلية.",
-            "highlight": "تكنولوجيا مالية"
+            "title": "تيكفي نقاط البيع",
+            "description": "نظام نقاط بيع وإدارة عمليات السوق. قم بتنظيم أعمال التجزئة الخاصة بك مع تتبع قوي للمخزون والمبيعات.",
+            "highlight": "نقاط بيع"
         },
         "m4": {
             "title": "Lumina Cam",
@@ -137,9 +149,9 @@
             "highlight": "لعبة"
         },
         "d1": {
-            "title": "Nexus Analytics",
-            "description": "تصور بيانات شامل لمقاييس المؤسسة.",
-            "highlight": "بيانات"
+            "title": "Isomorphic",
+            "description": "قالب لوحة تحكم إداري شامل يتميز بـ Next.js و React و Tailwind CSS. نظيف وحديث وقابل للتخصيص بشكل كبير.",
+            "highlight": "قالب إداري"
         },
         "d2": {
             "title": "Quantum Admin",

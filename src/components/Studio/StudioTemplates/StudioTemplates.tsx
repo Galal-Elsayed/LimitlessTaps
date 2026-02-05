@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, memo, useMemo, useRef } from "react";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { Monitor, Smartphone, Play, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square } from "lucide-react";
+import { Monitor, Smartphone, Play, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square, Layers, Circle, Zap } from "lucide-react";
 import { Header } from "@/components/ui/header";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
@@ -223,7 +223,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             {/* Previous Arrow */}
             <button
                 onClick={() => paginate(isRTL ? 1 : -1)}
-                className="hidden md:flex absolute -left-4 lg:-left-8 xl:-left-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
+                className="hidden md:flex absolute -left-4 lg:-left-8 xl:-left-16 min-[900px]:max-[1500px]:!left-4 min-[900px]:max-[1500px]:!top-1/2 min-[900px]:max-[1500px]:!-translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
                 <ChevronLeft size={24} />
             </button>
@@ -231,7 +231,7 @@ const Carousel = memo(({ items, t, isRTL }: { items: Template[]; t: ReturnType<t
             {/* Next Arrow */}
             <button
                 onClick={() => paginate(isRTL ? -1 : 1)}
-                className="hidden md:flex absolute -right-4 lg:-right-8 xl:-right-16 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
+                className="hidden md:flex absolute -right-4 lg:-right-8 xl:-right-16 min-[900px]:max-[1500px]:!right-4 min-[900px]:max-[1500px]:!top-1/2 min-[900px]:max-[1500px]:!-translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-white border border-neutral-200 text-black hover:bg-neutral-200 hover:text-black active:scale-95 transition-transform"
             >
                 <ChevronRight size={24} />
             </button>
@@ -285,11 +285,11 @@ export default function StudioTemplates() {
     const isArabic = locale === "ar";
     const [activeCategory, setActiveCategory] = useState<Category>("all");
 
-    const categories: { id: Category; labelKey: string }[] = useMemo(() => [
-        { id: "all", labelKey: "filters.all" },
-        { id: "simple", labelKey: "filters.simple" },
-        { id: "medium", labelKey: "filters.medium" },
-        { id: "advanced", labelKey: "filters.advanced" },
+    const categories: { id: Category; labelKey: string; icon: React.ElementType }[] = useMemo(() => [
+        { id: "all", labelKey: "filters.all", icon: Layers },
+        { id: "simple", labelKey: "filters.simple", icon: Circle },
+        { id: "medium", labelKey: "filters.medium", icon: Square },
+        { id: "advanced", labelKey: "filters.advanced", icon: Zap },
     ], []);
 
     const filteredTemplates = useMemo(() =>
@@ -305,28 +305,28 @@ export default function StudioTemplates() {
                 <div className="w-full max-w-[95%] md:max-w-[75%] mx-auto mb-10 z-10 flex flex-col gap-8 md:gap-12 px-4 md:px-0">
 
                     {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
-                    {/* Top Row: CHOOSE - YOUR - TEMPLATE */}
+                    {/* For 900-1500px, display as inline text without gaps */}
                     <div className={cn(
                         "flex flex-col md:flex-row items-center",
-                        isArabic ? "justify-center gap-2 md:gap-6" : "justify-between gap-2 md:gap-0"
+                        isArabic ? "justify-center gap-2 md:gap-6" : "justify-between gap-2 md:gap-0 min-[900px]:max-[1500px]:justify-center min-[900px]:max-[1500px]:!gap-8"
                     )}>
                         <div className={cn(
                             "text-center flex",
-                            isArabic ? "w-auto justify-center" : "md:text-left w-full md:w-1/3 justify-center md:justify-start"
+                            isArabic ? "w-auto justify-center" : "md:text-left w-full md:w-1/3 justify-center md:justify-start min-[900px]:max-[1500px]:!w-auto"
                         )}>
-                            <Header title={t("header.choose")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : "md:ml-20"}`} />
+                            <Header title={t("header.choose")} className={`text-[10vw] md:text-[4vw] leading-none ${isArabic ? "pb-4" : "md:ml-20 min-[900px]:max-[1500px]:!ml-0"}`} />
                         </div>
                         <div className={cn(
                             "text-center flex justify-center",
-                            isArabic ? "w-auto" : "w-full md:w-1/3"
+                            isArabic ? "w-auto" : "w-full md:w-1/3 min-[900px]:max-[1500px]:!w-auto"
                         )}>
-                            <Header title={t("header.your")} className={`text-[14vw] md:text-[6.5vw] leading-none z-10 ${isArabic ? "pb-4" : ""}`} />
+                            <Header title={t("header.your")} className={`text-[12vw] md:text-[5vw] leading-none z-10 ${isArabic ? "pb-4" : ""}`} />
                         </div>
                         <div className={cn(
                             "text-center flex",
-                            isArabic ? "w-auto justify-center" : "md:text-right w-full md:w-1/3 justify-center md:justify-end"
+                            isArabic ? "w-auto justify-center" : "md:text-right w-full md:w-1/3 justify-center md:justify-end min-[900px]:max-[1500px]:!w-auto"
                         )}>
-                            <Header title={t("header.template")} className={`text-[12vw] md:text-[5vw] leading-none ${isArabic ? "pb-4" : ""}`} />
+                            <Header title={t("header.template")} className={`text-[10vw] md:text-[4vw] leading-none ${isArabic ? "pb-4" : ""}`} />
                         </div>
                     </div>
 
@@ -338,7 +338,7 @@ export default function StudioTemplates() {
                                     key={cat.id}
                                     onClick={() => setActiveCategory(cat.id)}
                                     className={cn(
-                                        "relative px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 z-10",
+                                        "relative px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 z-10 flex items-center gap-2",
                                         activeCategory === cat.id ? "text-black" : "text-neutral-400 hover:text-white"
                                     )}
                                 >
@@ -351,6 +351,7 @@ export default function StudioTemplates() {
                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                         />
                                     )}
+                                    <cat.icon size={14} />
                                     {t(cat.labelKey)}
                                 </button>
                             ))}

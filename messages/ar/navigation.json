@@ -9,5 +9,7 @@
     "mobile_application": "تطبيقات الهاتف",
     "software_solution": "حلول برمجية",
     "web_design": "تصميم المواقع",
-    "language_selector": "اللغة"
+    "language_selector": "اللغة",
+    "services_view_all_title": "جميع الخدمات",
+    "services_view_all_desc": "اطلع على جميع خدماتنا وحلولنا."
 }

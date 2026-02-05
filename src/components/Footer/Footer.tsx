@@ -43,6 +43,11 @@ export default function Footer() {
       href: "/services/wordpress",
       title: tServices("wordpress_cms_title"),
     },
+    {
+      key: "view_all",
+      href: "/services",
+      title: tNav("services_view_all_title"),
+    },
   ];
 
   const socials = [
