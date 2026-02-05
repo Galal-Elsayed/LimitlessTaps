@@ -56,7 +56,7 @@ export default function CareersHero() {
         </BackgroundPaths>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-12 md:-mt-20">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 ltr:mt-8 rtl:-mt-4 md:-mt-20">
         {/* Culture / Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
           <motion.div
