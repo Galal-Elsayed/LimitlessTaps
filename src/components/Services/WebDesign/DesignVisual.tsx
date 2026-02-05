@@ -38,7 +38,7 @@ export default function DesignVisual() {
 
 
     return (
-        <section ref={containerRef} className="w-full py-24 pb-48 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
+        <section ref={containerRef} className="w-full py-6 pb-10 md:py-16 md:pb-32 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-2 md:mt-8 relative z-20">
             <motion.div
                 style={{
                     rotateY,
@@ -61,10 +61,10 @@ const MonitorFrame = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="relative mx-auto w-full transform-style-3d">
             {/* Monitor Stand (Hidden/Behind when tilted, adjusted for perspective) */}
-            <div className="absolute -bottom-[120px] left-1/2 -translate-x-1/2 w-[240px] h-[140px] bg-[#1a1a1a] rounded-b-xl shadow-2xl skew-x-12 opacity-80" style={{ transform: "translateZ(-50px)" }} />
+            <div className="hidden md:block absolute -bottom-[120px] left-1/2 -translate-x-1/2 w-[240px] h-[140px] bg-[#1a1a1a] rounded-b-xl shadow-2xl skew-x-12 opacity-80" style={{ transform: "translateZ(-50px)" }} />
 
             {/* Base */}
-            <div className="absolute -bottom-[120px] left-1/2 -translate-x-1/2 w-[400px] h-[30px] bg-[#222] rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-0 border-t border-white/5" style={{ transform: "translateZ(-20px)" }} />
+            <div className="hidden md:block absolute -bottom-[120px] left-1/2 -translate-x-1/2 w-[400px] h-[30px] bg-[#222] rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-0 border-t border-white/5" style={{ transform: "translateZ(-20px)" }} />
 
             {/* Monitor Bezel */}
             <div className="relative bg-[#111] rounded-[2rem] p-5 shadow-[0_0_0_2px_#333,0_40px_80px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
@@ -175,16 +175,105 @@ const FigmaUI = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                {t('canvas.headline')}
-                                <br className="hidden sm:block" />
-                                {t('canvas.headlineLine2')}
-                                <br className={`block ${isRTL ? '' : 'sm:hidden'}`} />
-                                <span className="inline-block">
-                                    &nbsp;<span className="text-blue-500">{isRTL ? 'أ' : 'A'}</span> {isRTL ? 'إلى' : 'to'} <span className="text-purple-500">{isRTL ? 'ي' : 'Z'}</span>.
+                                {/* Mobile: Impressive Tablet Design Tool */}
+                                <div className="md:hidden w-full flex items-center justify-center py-8">
+                                    <div className="w-full max-w-[400px] h-[550px] bg-[#1e1e1e] rounded-[2rem] border-[8px] border-[#333] shadow-2xl flex flex-col overflow-hidden relative">
+                                        {/* Camera Dot */}
+                                        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#000] z-50 opacity-50" />
+
+                                        {/* Design Tool Toolbar */}
+                                        <div className="h-10 bg-[#2c2c2c] border-b border-black/50 flex items-center justify-between px-3 z-40">
+                                            <div className="flex gap-2">
+                                                <div className="w-4 h-4 rounded bg-blue-500/20 border border-blue-500/50" />
+                                                <div className="w-4 h-4 rounded bg-white/10" />
+                                                <div className="w-4 h-4 rounded bg-white/10" />
+                                            </div>
+                                            <div className="w-20 h-2 bg-white/10 rounded-full" />
+                                        </div>
+
+                                        {/* Workspace */}
+                                        <div className="flex flex-1 overflow-hidden">
+                                            {/* Layers Panel (Mini) */}
+                                            <div className="w-12 bg-[#252525] border-r border-black/20 flex flex-col gap-2 p-2">
+                                                {[...Array(8)].map((_, i) => (
+                                                    <div key={i} className="w-full h-8 bg-white/5 rounded" />
+                                                ))}
+                                            </div>
+
+                                            {/* Canvas Area */}
+                                            <div className="flex-1 bg-[#121212] relative p-6 flex flex-col items-center justify-center">
+                                                {/* Canvas Artboard */}
+                                                <motion.div
+                                                    className="w-full h-full bg-[#1e1e1e] rounded border border-white/5 relative overflow-hidden flex flex-col"
+                                                    initial={{ scale: 0.95 }}
+                                                    animate={{ scale: [0.95, 1, 0.95] }}
+                                                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                                                >
+                                                    {/* Mock Website Header */}
+                                                    <div className="h-12 border-b border-white/5 flex items-center justify-between px-3">
+                                                        <div className="w-8 h-8 rounded-full bg-white/10" />
+                                                        <div className="flex gap-1">
+                                                            <div className="w-10 h-2 bg-white/10 rounded" />
+                                                            <div className="w-10 h-2 bg-white/10 rounded" />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Mock Hero Section */}
+                                                    <div className="flex-1 p-4 flex flex-col items-center justify-center gap-3">
+                                                        <motion.div
+                                                            className="w-3/4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded"
+                                                            animate={{ width: ["60%", "80%", "60%"] }}
+                                                            transition={{ duration: 4, repeat: Infinity }}
+                                                        />
+                                                        <div className="w-1/2 h-2 bg-white/20 rounded" />
+
+                                                        {/* Floating Cards Animation */}
+                                                        <div className="grid grid-cols-2 gap-2 w-full mt-4">
+                                                            <motion.div
+                                                                className="h-24 bg-white/5 rounded border border-white/5"
+                                                                animate={{ y: [0, -10, 0] }}
+                                                                transition={{ duration: 3, repeat: Infinity }}
+                                                            />
+                                                            <motion.div
+                                                                className="h-24 bg-white/5 rounded border border-white/5"
+                                                                animate={{ y: [0, -10, 0] }}
+                                                                transition={{ duration: 3, delay: 1.5, repeat: Infinity }}
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Cursor */}
+                                                    <motion.div
+                                                        className="absolute z-50 pointer-events-none"
+                                                        animate={{ x: [20, 150, 100, 20], y: [40, 200, 100, 40] }}
+                                                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                                    >
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-xl">
+                                                            <path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19169L11.7841 12.3673H5.65376Z" fill="#3b82f6" stroke="white" strokeWidth="2" />
+                                                        </svg>
+                                                        <div className="ml-4 mt-2 px-2 py-1 bg-blue-500 text-white text-[10px] rounded font-bold whitespace-nowrap">
+                                                            Zeyad Editing...
+                                                        </div>
+                                                    </motion.div>
+                                                </motion.div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Desktop: Animated/Split Text */}
+                                <span className="hidden md:block">
+                                    {t('canvas.headline')}
+                                    <br className="hidden sm:block" />
+                                    {t('canvas.headlineLine2')}
+                                    <br className={`block ${isRTL ? '' : 'sm:hidden'}`} />
+                                    <span className="inline-block">
+                                        &nbsp;<span className="text-blue-500">{isRTL ? 'أ' : 'A'}</span> {isRTL ? 'إلى' : 'to'} <span className="text-purple-500">{isRTL ? 'ي' : 'Z'}</span>.
+                                    </span>
                                 </span>
                             </motion.h2>
                             <motion.div
-                                className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+                                className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full hidden md:block" // Hide line on mobile
                                 initial={{ width: 0 }}
                                 whileInView={{ width: 128 }}
                                 transition={{ delay: 0.6, duration: 1 }}

@@ -192,7 +192,7 @@ const DatabaseWithRestApi = ({
       </svg>
 
       {/* Main Box Area */}
-      <div className="absolute bottom-10 flex w-full flex-col items-center px-10">
+      <div className="absolute bottom-24 md:bottom-10 flex w-full flex-col items-center px-10">
         {/* Box Title */}
         <div className="absolute -top-3 z-20 flex items-center justify-center rounded-full border border-white/10 bg-[#111] px-3 py-1 sm:-top-4">
           <SparklesIcon className="size-3 text-white/70" />

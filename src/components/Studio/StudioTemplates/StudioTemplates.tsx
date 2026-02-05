@@ -314,7 +314,7 @@ export default function StudioTemplates() {
                             "text-center flex",
                             isArabic ? "w-auto justify-center" : "md:text-left w-full md:w-1/3 justify-center md:justify-start min-[900px]:max-[1500px]:!w-auto"
                         )}>
-                            <Header title={t("header.choose")} className={`text-[10vw] md:text-[4vw] leading-none ${isArabic ? "pb-4" : "md:ml-20 min-[900px]:max-[1500px]:!ml-0"}`} />
+                            <Header title={t("header.choose")} className={`text-[10vw] md:text-[4vw] leading-none ${isArabic ? "pb-4" : "md:ml-10 min-[900px]:max-[1500px]:!ml-0"}`} />
                         </div>
                         <div className={cn(
                             "text-center flex justify-center",
@@ -422,21 +422,13 @@ const TemplateItem = memo(({ template, t, viewMode, setViewMode }: {
     return (
         <div className={cn(
             "w-full flex items-center transition-all duration-500 ease-in-out",
-            isMobile ? "flex-row justify-center gap-12 md:gap-24 h-[80vh]" : "flex-col"
+            isMobile ? "flex-col min-[900px]:flex-row justify-center gap-12 md:gap-24 min-h-[80vh]" : "flex-col"
         )}>
-
-            {/* Device Toggle Controls (Only show on Desktop view or position differently on mobile?) 
-                Actually, let's keep it at the top for desktop, but for mobile layout it might need to be elsewhere 
-                or just keep it absolute/fixed? The user didn't specify, but for side-by-side, it might conflict.
-                Let's keep it simple: Floating top or just in the flow.
-                For now, let's move it out of the flex flow if we want pure side-by-side centering, 
-                OR keep it at the top of the container. 
-            */}
 
             {/* Device Toggle - layout responsive */}
             <div className={cn(
                 "z-30 flex items-center justify-center transition-all duration-300",
-                isMobile ? "absolute top-0 left-1/2 -translate-x-1/2 -mt-10" : "mb-4"
+                isMobile ? "relative min-[900px]:absolute min-[900px]:top-0 min-[900px]:left-1/2 min-[900px]:-translate-x-1/2 min-[900px]:-mt-10 mb-8 min-[900px]:mb-0" : "mb-4"
             )}>
                 <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-white/10">
                     <button

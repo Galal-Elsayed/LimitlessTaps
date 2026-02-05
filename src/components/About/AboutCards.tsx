@@ -327,7 +327,7 @@ export default function AboutCards() {
                             layoutId={`card-${activeCard.key}-${id}`}
                             layout
                             transition={springTransition}
-                            className="w-3/4 md:w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden relative z-[101] m-4 shadow-2xl shadow-black/50"
+                            className="w-[90%] md:w-[85%] max-w-3xl bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden relative z-[101] m-4 shadow-2xl shadow-black/50"
                             style={{ maxHeight: "85vh", display: "flex", flexDirection: "column" }}
                             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking content
                         >

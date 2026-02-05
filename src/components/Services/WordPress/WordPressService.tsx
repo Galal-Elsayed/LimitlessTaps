@@ -33,7 +33,7 @@ export default function WordPressService() {
     );
 
     return (
-        <section ref={containerRef} className="w-full py-24 pb-48 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] mt-8 relative z-20">
+        <section ref={containerRef} className="w-full py-0 pb-1 md:py-16 md:pb-32 px-4 min-[900px]:max-[1500px]:!px-32 bg-[#0a0a0a] flex justify-center overflow-visible perspective-[2000px] -mt-4 md:mt-8 relative z-20">
             <motion.div
                 style={{
                     rotateY,
@@ -82,8 +82,11 @@ const WordPressUI = () => {
     const isRTL = locale === 'ar';
     const [activeTab, setActiveTab] = useState('editor'); // 'dashboard', 'plugins', 'editor'
 
-    // Cycle through main views
+    // Cycle through main views (Desktop only)
     useEffect(() => {
+        // Only animate on larger screens
+        if (window.innerWidth < 768) return;
+
         const timer = setInterval(() => {
             setActiveTab(prev => prev === 'editor' ? 'plugins' : 'editor');
         }, 12000); // Increased duration to allow for full typing animation
@@ -137,13 +140,97 @@ const WordPressUI = () => {
 
                 {/* 3. Main Content Area */}
                 <div className="flex-1 bg-[#f0f0f1] relative overflow-hidden flex flex-col">
-                    <AnimatePresence mode="wait">
-                        {activeTab === 'editor' ? (
-                            <EditorView key="editor" />
-                        ) : (
-                            <PluginsView key="plugins" />
-                        )}
-                    </AnimatePresence>
+
+                    {/* MOBILE ANIMATION: Advanced Tablet Dashboard */}
+                    <div className="md:hidden inset-0 absolute flex items-center justify-center p-4">
+                        {/* Tablet Frame */}
+                        <div className="w-full max-w-[400px] h-[550px] bg-white rounded-[2rem] shadow-2xl flex flex-col border-[8px] border-[#2c2c2c] overflow-hidden relative">
+                            {/* Camera Dot */}
+                            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#1a1a1a] z-50" />
+
+                            {/* WP Admin Top Bar */}
+                            <div className="h-10 bg-[#1d2327] flex items-center justify-between px-4 z-40">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                                        <svg viewBox="0 0 24 24" fill="white" className="w-3 h-3"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" /></svg>
+                                    </div>
+                                    <div className="w-16 h-2 bg-white/20 rounded-full" />
+                                </div>
+                                <div className="w-6 h-6 rounded-full bg-white/10" />
+                            </div>
+
+                            {/* Dashboard Content Layout */}
+                            <div className="flex flex-1 overflow-hidden bg-[#f0f0f1]">
+                                {/* Sidebar */}
+                                <div className="w-12 bg-[#1d2327] flex flex-col items-center py-4 gap-4">
+                                    {[...Array(6)].map((_, i) => (
+                                        <div key={i} className={`w-6 h-6 rounded ${i === 0 ? 'bg-[#2271b1]' : 'bg-white/10'}`} />
+                                    ))}
+                                </div>
+
+                                {/* Main Area */}
+                                <div className="flex-1 p-4 flex flex-col gap-4 overflow-hidden">
+                                    {/* Welcome Banner */}
+                                    <div className="w-full h-16 bg-white border border-gray-200 p-3 rounded shadow-sm flex flex-col justify-center gap-2">
+                                        <div className="w-1/2 h-3 bg-gray-200 rounded" />
+                                        <div className="w-1/3 h-2 bg-gray-100 rounded" />
+                                    </div>
+
+                                    {/* Stats Grid */}
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <motion.div
+                                            className="bg-white p-3 rounded shadow-sm border-l-4 border-green-500"
+                                            initial={{ scale: 0.9, opacity: 0 }}
+                                            whileInView={{ scale: 1, opacity: 1 }}
+                                            transition={{ delay: 0.2 }}
+                                        >
+                                            <div className="text-[10px] text-gray-400 mb-1">Visitors</div>
+                                            <div className="text-lg font-bold text-gray-700">12.5k</div>
+                                        </motion.div>
+                                        <motion.div
+                                            className="bg-white p-3 rounded shadow-sm border-l-4 border-blue-500"
+                                            initial={{ scale: 0.9, opacity: 0 }}
+                                            whileInView={{ scale: 1, opacity: 1 }}
+                                            transition={{ delay: 0.4 }}
+                                        >
+                                            <div className="text-[10px] text-gray-400 mb-1">Sales</div>
+                                            <div className="text-lg font-bold text-gray-700">$4.2k</div>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Recent Activity List */}
+                                    <div className="flex-1 bg-white rounded shadow-sm border border-gray-200 p-3 overflow-hidden flex flex-col gap-3">
+                                        <div className="text-xs font-bold text-gray-600 border-b pb-2">Recent Activity</div>
+                                        {[1, 2, 3, 4].map((i) => (
+                                            <motion.div
+                                                key={i}
+                                                className="flex items-center gap-2"
+                                                animate={{ opacity: [0.4, 1, 0.4] }}
+                                                transition={{ duration: 3, delay: i * 0.8, repeat: Infinity }}
+                                            >
+                                                <div className="w-8 h-8 rounded-full bg-gray-100 shrink-0" />
+                                                <div className="space-y-1 flex-1">
+                                                    <div className="w-3/4 h-2 bg-gray-100 rounded" />
+                                                    <div className="w-1/2 h-2 bg-gray-50 rounded" />
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* DESKTOP ANIMATION (Complex Tabs) */}
+                    <div className="hidden md:block w-full h-full relative">
+                        <AnimatePresence mode="wait">
+                            {activeTab === 'editor' ? (
+                                <EditorView key="editor" />
+                            ) : (
+                                <PluginsView key="plugins" />
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ export default function WordPressHero() {
         <ServiceHeroBase
             title={<>{t('title')} <br />{t('titleLine2')}</>}
             raysColor="#ffffff"
-            minHeight="h-[50vh]"
+            minHeight="h-[35vh] md:h-[50vh]"
         />
     );
 }
