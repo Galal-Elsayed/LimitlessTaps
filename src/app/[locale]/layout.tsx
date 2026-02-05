@@ -7,7 +7,7 @@ import { i18n } from "@/i18n.config";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
-
+import { Analytics } from "@vercel/analytics/next";
 import { FloatingRobot } from "@/components/ui/floating-robot";
 import { FloatingIcons } from "@/components/ui/floatingIcons";
 import {
@@ -324,6 +324,7 @@ export default async function RootLayout({
             <Navbar />
           </div>
           {children}
+          <Analytics />
           <Footer />
           <FloatingRobot />
           <FloatingIcons />
