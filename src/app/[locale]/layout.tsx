@@ -86,9 +86,9 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/Logo/Graph.png",
-      shortcut: "/Logo/Graph.png",
-      apple: "/Logo/Graph.png",
+      icon: "/Logo/black.png",
+      shortcut: "/Logo/black.png",
+      apple: "/Logo/black.png",
     },
     openGraph: {
       type: "website",
@@ -98,7 +98,7 @@ export async function generateMetadata({
       title: `${brandName} | Digital Solutions & Software Development`,
       images: [
         {
-          url: "/Logo/Graph.png",
+          url: "/Logo/social-black.jpg",
           width: 1200,
           height: 630,
           alt: `${brandName} - Digital Solutions`,

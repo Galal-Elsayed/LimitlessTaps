@@ -13,7 +13,7 @@ export function OrganizationStructuredData({ locale = "en" }: OrganizationStruct
     name: "Limitless Taps",
     alternateName: "LimitlessTaps",
     url: "https://limitlesstaps.com",
-    logo: "https://limitlesstaps.com/Logo/black.png",
+    logo: "https://limitlesstaps.com/Logo/Graph.png",
     description:
       locale === "ar"
         ? "حلول ويب وموبايل وبرمجيات عالية الأداء مصممة للتوسع بلا حدود"
