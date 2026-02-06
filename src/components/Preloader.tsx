@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useReducedMotion, useDevicePerformance } from "@/hooks/use-performance";
@@ -9,20 +9,21 @@ import { useReducedMotion, useDevicePerformance } from "@/hooks/use-performance"
 const PRELOADER_SHOWN_KEY = "preloader_shown";
 
 export const Preloader = () => {
-  // Check if preloader was already shown this session
-  const hasShownPreloader = useRef(
-    typeof window !== "undefined" && sessionStorage.getItem(PRELOADER_SHOWN_KEY) === "true"
-  );
-  
-  const [isLoading, setIsLoading] = useState(!hasShownPreloader.current);
+  // Always start with isLoading: true to match server render
+  // We'll check sessionStorage in useEffect to avoid hydration mismatch
+  const [isLoading, setIsLoading] = useState(true);
   
   // Use centralized performance hooks
   const prefersReducedMotion = useReducedMotion();
   const { performanceTier } = useDevicePerformance();
 
   useEffect(() => {
+    // Check if preloader was already shown this session (client-side only)
+    const hasShownPreloader = sessionStorage.getItem(PRELOADER_SHOWN_KEY) === "true";
+    
     // Skip preloader entirely on repeat visits in same session
-    if (hasShownPreloader.current) {
+    if (hasShownPreloader) {
+      setIsLoading(false);
       document.body.style.overflow = "auto";
       return;
     }

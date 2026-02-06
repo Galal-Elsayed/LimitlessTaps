@@ -11,9 +11,12 @@ import { useDevicePerformance } from "@/hooks/use-performance";
  * 
  * FloatingRobot (Spline 3D) is the heaviest component (~1-2MB runtime).
  * We defer its loading to improve first paint:
- * - On low-end devices: Load after 5s or skip entirely
- * - On medium devices: Load after 3s
- * - On high-end devices: Load after 2s (after main content is interactive)
+ * - Mobile low-end: Load after 6s (smaller size for performance)
+ * - Mobile medium: Load after 4s
+ * - Mobile high-end: Load after 3s
+ * - Desktop low-end: Load after 5s
+ * - Desktop medium: Load after 3s
+ * - Desktop high-end: Load after 2s
  */
 const FloatingRobot = dynamic(
   () =>
@@ -42,19 +45,26 @@ export function ClientFloatingElements() {
   const { performanceTier, isMobile } = useDevicePerformance();
 
   useEffect(() => {
-    // Skip loading FloatingRobot (Spline 3D) on low-end mobile devices
-    // as it's a heavy 3D scene that impacts scrolling performance
-    if (isMobile && performanceTier === "low") {
-      // Don't load at all on low-end mobile
-      return;
-    }
-
     // Defer loading based on device performance to prioritize main content
-    let delay = 2000; // High-end: 2 seconds after page load
-    if (performanceTier === "low") {
-      delay = 5000; // Low-end: 5 seconds
-    } else if (performanceTier === "medium") {
-      delay = 3000; // Medium: 3 seconds
+    // Mobile devices get longer delays but still show the robot
+    let delay = 2000; // High-end desktop: 2 seconds after page load
+    
+    if (isMobile) {
+      // Mobile devices: longer delays for better initial load
+      if (performanceTier === "low") {
+        delay = 6000; // Low-end mobile: 6 seconds
+      } else if (performanceTier === "medium") {
+        delay = 4000; // Medium mobile: 4 seconds
+      } else {
+        delay = 3000; // High-end mobile: 3 seconds
+      }
+    } else {
+      // Desktop devices
+      if (performanceTier === "low") {
+        delay = 5000; // Low-end desktop: 5 seconds
+      } else if (performanceTier === "medium") {
+        delay = 3000; // Medium desktop: 3 seconds
+      }
     }
 
     // Use requestIdleCallback if available for even better timing
