@@ -1,9 +1,10 @@
 "use client";
 // Force Update
 import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
 import {
     IconBrightnessDown,
@@ -28,7 +29,14 @@ import {
     IconMenu2,
 } from "@tabler/icons-react";
 import { GlowingHeader } from "../../ui/GlowingHeader";
-import FloatingLines from "../../FloatingLines";
+
+// Dynamically import heavy WebGL component
+const FloatingLines = dynamic(() => import("../../FloatingLines"), {
+    ssr: false,
+    loading: () => (
+        <div className="absolute inset-0 bg-linear-to-br from-blue-900/10 to-purple-900/10" />
+    ),
+});
 
 // --- FLOATING LINES CONFIG ---
 const FL_TOP_POS = { x: 10.0, y: 0.5, rotate: -0.4 };

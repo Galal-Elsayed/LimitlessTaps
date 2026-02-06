@@ -2,6 +2,26 @@
 
 import { useEffect, useRef } from "react";
 import createGlobe from "cobe";
+import { useReducedMotion, useDevicePerformance } from "@/hooks/use-performance";
+
+// Fallback for reduced motion / low-end devices
+function GlobeFallback({ className }: { className?: string }) {
+    return (
+        <div
+            className={className}
+            style={{
+                width: "100%",
+                maxWidth: "100%",
+                aspectRatio: "1/1",
+                margin: "auto",
+                position: "relative",
+            }}
+        >
+            <div className="absolute inset-0 rounded-full bg-linear-to-br from-blue-900/30 via-blue-800/20 to-blue-700/30" />
+            <div className="absolute inset-4 rounded-full bg-linear-to-br from-blue-950 to-blue-900 opacity-80" />
+        </div>
+    );
+}
 
 export function Globe({
     className,
@@ -36,11 +56,18 @@ export function Globe({
     const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
     const phiRef = useRef(0);
     const thetaRef = useRef(config.theta || 0);
+    
+    // Use centralized performance hooks
+    const prefersReducedMotion = useReducedMotion();
+    const { isLowEnd, isMobile } = useDevicePerformance();
 
     useEffect(() => {
+        // Skip initialization if low-end device or reduced motion
+        if (isLowEnd || prefersReducedMotion) return;
+
         let phi = 0;
         let width = 0;
-        let globe: any;
+        let globe: ReturnType<typeof createGlobe> | null = null;
 
         const onResize = () => {
             if (canvasRef.current) {
@@ -52,11 +79,14 @@ export function Globe({
 
         if (!canvasRef.current) return;
 
-        globe = createGlobe(canvasRef.current, {
+        // Reduce DPR and map samples on mobile for better performance
+        const optimizedConfig = {
             ...config,
             width: width * 1,
             height: width * 1,
-            onRender: (state) => {
+            devicePixelRatio: isMobile ? 1 : Math.min(config.devicePixelRatio || 2, 2),
+            mapSamples: isMobile ? Math.min(config.mapSamples || 10000, 8000) : config.mapSamples,
+            onRender: (state: { phi: number; theta: number }) => {
                 if (!pointerInteracting.current) {
                     phi += 0.002;
                 }
@@ -64,13 +94,20 @@ export function Globe({
                 state.theta = thetaRef.current;
                 config.onRender(state);
             },
-        });
+        };
+
+        globe = createGlobe(canvasRef.current, optimizedConfig);
 
         return () => {
-            globe.destroy();
+            globe?.destroy();
             window.removeEventListener('resize', onResize);
         };
-    }, [config]);
+    }, [config, isLowEnd, prefersReducedMotion]);
+
+    // Return fallback for reduced motion or low-end devices
+    if (isLowEnd || prefersReducedMotion) {
+        return <GlobeFallback className={className} />;
+    }
 
     return (
         <div

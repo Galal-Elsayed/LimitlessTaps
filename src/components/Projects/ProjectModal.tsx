@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { X, ExternalLink, Globe, LayoutDashboard, Smartphone, Calendar, Hash } from "lucide-react";
 import Image from "next/image";
 import { Project } from "@/data/projects";

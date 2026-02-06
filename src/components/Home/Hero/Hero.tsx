@@ -18,10 +18,13 @@ const PlasmaGlobe = dynamic(
   },
 );
 
+import { useDevicePerformance } from "@/hooks/use-performance";
+
 export default function Hero() {
   const t = useTranslations("home");
   const locale = useLocale();
   const isRTL = locale === "ar";
+  const { isMobile } = useDevicePerformance();
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a] pb-40">
@@ -138,7 +141,7 @@ export default function Hero() {
             className="w-full"
           >
             {/* Future content will go here */}
-            <PlasmaGlobe />
+            {!isMobile && <PlasmaGlobe />}
           </motion.div>
         </div>
       </div>

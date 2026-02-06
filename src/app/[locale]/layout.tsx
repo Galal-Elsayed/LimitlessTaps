@@ -8,13 +8,13 @@ import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/next";
-import { FloatingRobot } from "@/components/ui/floating-robot";
-import { FloatingIcons } from "@/components/ui/floatingIcons";
 import {
   OrganizationStructuredData,
   WebsiteStructuredData,
 } from "@/components/seo/StructuredData";
+import { ClientFloatingElements } from "@/components/ui/ClientFloatingElements";
 
+// Primary font - preload for faster first paint
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -22,18 +22,20 @@ const inter = Inter({
   preload: true,
 });
 
+// Secondary fonts - no preload to reduce initial load
+// These will load lazily when needed (Arabic text, code blocks)
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false, // Only used for code, can load lazily
 });
 
 const cairo = Cairo({
   variable: "--font-cairo",
   subsets: ["arabic", "latin"],
   display: "swap",
-  preload: true,
+  preload: false, // Only needed for Arabic locale, can load lazily
 });
 
 export async function generateMetadata({
@@ -136,62 +138,46 @@ async function loadMessages(locale: string | undefined) {
     : i18n.defaultLocale;
 
   try {
-    // Load all message files and merge them
-    const common = (
-      await import(`../../../messages/${resolvedLocale}/common.json`)
-    ).default;
-    const navigation = (
-      await import(`../../../messages/${resolvedLocale}/navigation.json`)
-    ).default;
-    const home = (await import(`../../../messages/${resolvedLocale}/home.json`))
-      .default;
-    const aboutUs = (
-      await import(`../../../messages/${resolvedLocale}/about-us.json`)
-    ).default;
-    const services = (
-      await import(`../../../messages/${resolvedLocale}/services.json`)
-    ).default;
-    const portfolio = (
-      await import(`../../../messages/${resolvedLocale}/portfolio.json`)
-    ).default;
-    const careers = (
-      await import(`../../../messages/${resolvedLocale}/careers.json`)
-    ).default;
-    const contact = (
-      await import(`../../../messages/${resolvedLocale}/contact.json`)
-    ).default;
-    const footer = (
-      await import(`../../../messages/${resolvedLocale}/footer.json`)
-    ).default;
-    const privacy = (
-      await import(`../../../messages/${resolvedLocale}/privacy.json`)
-    ).default;
-    const terms = (
-      await import(`../../../messages/${resolvedLocale}/terms.json`)
-    ).default;
-    const studio = (
-      await import(`../../../messages/${resolvedLocale}/studio.json`)
-    ).default;
-    const webDevelopment = (
-      await import(`../../../messages/${resolvedLocale}/Web-Development.json`)
-    ).default;
-    const mobileApplication = (
-      await import(
-        `../../../messages/${resolvedLocale}/mopile-application.json`
-      )
-    ).default;
-    const SoftwareSolutions = (
-      await import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`)
-    ).default;
-    const WebDesign = (
-      await import(`../../../messages/${resolvedLocale}/Web-Design.json`)
-    ).default;
-    const WordPress = (
-      await import(`../../../messages/${resolvedLocale}/WordPress.json`)
-    ).default;
-    const projects = (
-      await import(`../../../messages/${resolvedLocale}/projects.json`)
-    ).default;
+    // Load all message files in PARALLEL for faster initial load
+    const [
+      common,
+      navigation,
+      home,
+      aboutUs,
+      services,
+      portfolio,
+      careers,
+      contact,
+      footer,
+      privacy,
+      terms,
+      studio,
+      webDevelopment,
+      mobileApplication,
+      SoftwareSolutions,
+      WebDesign,
+      WordPress,
+      projects,
+    ] = await Promise.all([
+      import(`../../../messages/${resolvedLocale}/common.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/navigation.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/home.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/about-us.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/services.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/portfolio.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/careers.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/contact.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/footer.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/privacy.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/terms.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/studio.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/Web-Development.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/mopile-application.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/SoftwareSolutions.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/Web-Design.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/WordPress.json`).then(m => m.default),
+      import(`../../../messages/${resolvedLocale}/projects.json`).then(m => m.default),
+    ]);
 
     return {
       common,
@@ -218,38 +204,46 @@ async function loadMessages(locale: string | undefined) {
       `Failed to load messages for locale: ${resolvedLocale}`,
       error,
     );
-    // Fallback to English
-    const common = (await import(`../../../messages/en/common.json`)).default;
-    const navigation = (await import(`../../../messages/en/navigation.json`))
-      .default;
-    const home = (await import(`../../../messages/en/home.json`)).default;
-    const aboutUs = (await import(`../../../messages/en/about-us.json`))
-      .default;
-    const services = (await import(`../../../messages/en/services.json`))
-      .default;
-    const portfolio = (await import(`../../../messages/en/portfolio.json`))
-      .default;
-    const careers = (await import(`../../../messages/en/careers.json`)).default;
-    const contact = (await import(`../../../messages/en/contact.json`)).default;
-    const footer = (await import(`../../../messages/en/footer.json`)).default;
-    const privacy = (await import(`../../../messages/en/privacy.json`)).default;
-    const terms = (await import(`../../../messages/en/terms.json`)).default;
-    const studio = (await import(`../../../messages/en/studio.json`)).default;
-    const webDevelopment = (
-      await import(`../../../messages/en/Web-Development.json`)
-    ).default;
-    const mobileApplication = (
-      await import(`../../../messages/en/mopile-application.json`)
-    ).default;
-    const SoftwareSolutions = (
-      await import(`../../../messages/en/SoftwareSolutions.json`)
-    ).default;
-    const WebDesign = (await import(`../../../messages/en/Web-Design.json`))
-      .default;
-    const WordPress = (await import(`../../../messages/en/WordPress.json`))
-      .default;
-    const projects = (await import(`../../../messages/en/projects.json`))
-      .default;
+    // Fallback to English with parallel loading
+    const [
+      common,
+      navigation,
+      home,
+      aboutUs,
+      services,
+      portfolio,
+      careers,
+      contact,
+      footer,
+      privacy,
+      terms,
+      studio,
+      webDevelopment,
+      mobileApplication,
+      SoftwareSolutions,
+      WebDesign,
+      WordPress,
+      projects,
+    ] = await Promise.all([
+      import(`../../../messages/en/common.json`).then(m => m.default),
+      import(`../../../messages/en/navigation.json`).then(m => m.default),
+      import(`../../../messages/en/home.json`).then(m => m.default),
+      import(`../../../messages/en/about-us.json`).then(m => m.default),
+      import(`../../../messages/en/services.json`).then(m => m.default),
+      import(`../../../messages/en/portfolio.json`).then(m => m.default),
+      import(`../../../messages/en/careers.json`).then(m => m.default),
+      import(`../../../messages/en/contact.json`).then(m => m.default),
+      import(`../../../messages/en/footer.json`).then(m => m.default),
+      import(`../../../messages/en/privacy.json`).then(m => m.default),
+      import(`../../../messages/en/terms.json`).then(m => m.default),
+      import(`../../../messages/en/studio.json`).then(m => m.default),
+      import(`../../../messages/en/Web-Development.json`).then(m => m.default),
+      import(`../../../messages/en/mopile-application.json`).then(m => m.default),
+      import(`../../../messages/en/SoftwareSolutions.json`).then(m => m.default),
+      import(`../../../messages/en/Web-Design.json`).then(m => m.default),
+      import(`../../../messages/en/WordPress.json`).then(m => m.default),
+      import(`../../../messages/en/projects.json`).then(m => m.default),
+    ]);
 
     return {
       common,
@@ -318,8 +312,7 @@ export default async function RootLayout({
           {children}
           <Analytics />
           <Footer />
-          <FloatingRobot />
-          <FloatingIcons />
+          <ClientFloatingElements />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -10,6 +10,7 @@ import {
   Vector2,
   Clock
 } from 'three';
+import { useOptimizedAnimation, useReducedMotion } from '@/hooks/use-performance';
 
 import './FloatingLines.css';
 
@@ -277,6 +278,13 @@ export default function FloatingLines({
   const currentInfluenceRef = useRef<number>(0);
   const targetParallaxRef = useRef<Vector2>(new Vector2(0, 0));
   const currentParallaxRef = useRef<Vector2>(new Vector2(0, 0));
+  
+  // Use centralized performance hooks
+  const prefersReducedMotion = useReducedMotion();
+  const { shouldUse3D } = useOptimizedAnimation();
+
+  // Skip rendering for reduced motion or low-end devices
+  const shouldRender = !prefersReducedMotion && shouldUse3D;
 
   const getLineCount = (waveType: 'top' | 'middle' | 'bottom'): number => {
     if (typeof lineCount === 'number') return lineCount;
@@ -301,15 +309,22 @@ export default function FloatingLines({
   const bottomLineDistance = enabledWaves.includes('bottom') ? getLineDistance('bottom') * 0.01 : 0.01;
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    // Skip WebGL initialization if we shouldn't render
+    if (!shouldRender || !containerRef.current) return;
 
     const scene = new Scene();
 
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    // Optimized renderer settings
+    const isMobile = window.innerWidth < 768;
+    const renderer = new WebGLRenderer({ 
+      antialias: !isMobile, // Disable antialiasing on mobile
+      alpha: false,
+      powerPreference: isMobile ? "low-power" : "high-performance"
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     containerRef.current.appendChild(renderer.domElement);
@@ -476,6 +491,7 @@ export default function FloatingLines({
       }
     };
   }, [
+    shouldRender,
     linesGradient,
     enabledWaves,
     lineCount,
@@ -491,6 +507,19 @@ export default function FloatingLines({
     parallax,
     parallaxStrength
   ]);
+
+  // Return empty container for reduced motion / low-end devices
+  if (!shouldRender) {
+    return (
+      <div
+        className="floating-lines-container"
+        style={{
+          mixBlendMode: mixBlendMode,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(136,136,136,0.02) 100%)'
+        }}
+      />
+    );
+  }
 
   return (
     <div

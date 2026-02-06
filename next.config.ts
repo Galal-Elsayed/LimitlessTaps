@@ -24,6 +24,29 @@ const nextConfig: NextConfig = {
   compress: true,
   // Disable source maps in production for smaller bundles
   productionBrowserSourceMaps: false,
+  // Experimental optimizations for better performance
+  experimental: {
+    // Optimize package imports - reduces bundle size significantly
+    // This performs tree-shaking at the module level for large libraries
+    optimizePackageImports: [
+      // UI Icons
+      "lucide-react",
+      "@tabler/icons-react",
+      // Animation libraries
+      "framer-motion",
+      "motion",
+      "motion/react",
+      // UI Components
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-select",
+      // Heavy 3D/Graphics libraries - important for code splitting
+      "three",
+      "ogl",
+      "lottie-react",
+    ],
+    // Enable webpack memory optimizations for faster builds
+    webpackMemoryOptimizations: true,
+  },
 };
 
 export default withNextIntl(nextConfig);

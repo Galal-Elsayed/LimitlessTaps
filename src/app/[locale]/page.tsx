@@ -1,13 +1,36 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 import Hero from "@/components/Home/Hero/Hero";
-import Arc from "@/components/Home/ArcHalfGlobe/Arc";
-import Responsive from "@/components/Home/Responsive/Responsive";
-import Carousel from "@/components/Home/ProjectsCarousel/Carousel";
 import WhatWeDeliver from "@/components/Home/WhatWeDeliver/WhatWeDeliver";
-import LayoutDesign from "@/components/Home/Desgin/LayoutDesign";
-import Reviews from "@/components/Home/Reviews/Reviews";
 import { Preloader } from "@/components/Preloader";
+
+// Lazy load below-the-fold components to improve First Contentful Paint
+// These components load when they enter the viewport or when idle
+const LayoutDesign = dynamic(
+  () => import("@/components/Home/Desgin/LayoutDesign"),
+  { ssr: true } // Keep SSR for SEO
+);
+
+const Carousel = dynamic(
+  () => import("@/components/Home/ProjectsCarousel/Carousel"),
+  { ssr: true }
+);
+
+const Responsive = dynamic(
+  () => import("@/components/Home/Responsive/Responsive"),
+  { ssr: true }
+);
+
+const Reviews = dynamic(
+  () => import("@/components/Home/Reviews/Reviews"),
+  { ssr: true }
+);
+
+const Arc = dynamic(
+  () => import("@/components/Home/ArcHalfGlobe/Arc"),
+  { ssr: true }
+);
 
 export async function generateMetadata({
   params,

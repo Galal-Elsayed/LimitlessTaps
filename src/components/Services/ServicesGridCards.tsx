@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/ui/header";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useAnimation, useInView } from "motion/react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import {

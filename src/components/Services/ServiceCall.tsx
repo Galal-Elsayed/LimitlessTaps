@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from "motion/react";
 import { Header } from "@/components/ui/header";
 import { ArcButton } from "@/components/ui/ArcButton";
 import Image from "next/image";

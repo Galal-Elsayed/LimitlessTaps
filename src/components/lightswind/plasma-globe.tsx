@@ -1,8 +1,9 @@
 // PlasmaGlobe.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle } from "ogl";
+import { useReducedMotion, useDevicePerformance } from "@/hooks/use-performance";
 
 interface PlasmaGlobeProps {
   speed?: number; // global time speed multiplier
@@ -441,6 +442,18 @@ void main(){
 }
 `;
 
+// Fallback static component for reduced motion / low-end devices
+function PlasmaGlobeFallback() {
+  return (
+    <div className="w-full h-full min-h-[300px] sm:min-h-[450px] lg:min-h-[550px] relative rounded-xl overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-blue-800/30 animate-pulse" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-32 h-32 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-blue-600/40 to-purple-600/40 blur-xl" />
+      </div>
+    </div>
+  );
+}
+
 export default function PlasmaGlobe({
   speed = 0.5,
   intensity = 0.8,
@@ -449,28 +462,32 @@ export default function PlasmaGlobe({
   const mouseRef = useRef({ x: 0, y: 0 });
   const isVisibleRef = useRef(true);
   const rafIdRef = useRef(0);
-  const [isMobile, setIsMobile] = useState(false);
+  
+  // Use centralized performance hooks
+  const prefersReducedMotion = useReducedMotion();
+  const { isMobile, isLowEnd } = useDevicePerformance();
 
-  // Detect mobile on mount
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  // Always render WebGL, only skip if user explicitly prefers reduced motion
+  const shouldRenderWebGL = !prefersReducedMotion;
+  
+  // Use mobile shader for both mobile and low-end devices
+  const useMobileShader = isMobile || isLowEnd;
 
   useEffect(() => {
+    // Skip WebGL initialization only if user prefers reduced motion
+    if (!shouldRenderWebGL) return;
+
     const container = containerRef.current;
     if (!container) return;
 
-    // Use lower DPR on mobile for performance
-    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
+    // Use lower DPR on mobile/low-end for performance
+    const dpr = useMobileShader ? 1 : Math.min(window.devicePixelRatio, 2);
 
     // create renderer with performance optimizations
     const renderer = new Renderer({
       alpha: true,
       antialias: false,
-      powerPreference: isMobile ? "low-power" : "high-performance",
+      powerPreference: useMobileShader ? "low-power" : "high-performance",
       depth: false,
       stencil: false,
       dpr: dpr,
@@ -482,10 +499,10 @@ export default function PlasmaGlobe({
 
     const geometry = new Triangle(gl);
 
-    // Use mobile shader on mobile devices
+    // Use mobile shader on mobile/low-end devices for better performance
     const program = new Program(gl, {
       vertex: VERTEX_SHADER,
-      fragment: isMobile ? FRAGMENT_SHADER_MOBILE : FRAGMENT_SHADER,
+      fragment: useMobileShader ? FRAGMENT_SHADER_MOBILE : FRAGMENT_SHADER,
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: [container.offsetWidth, container.offsetHeight] },
@@ -507,16 +524,17 @@ export default function PlasmaGlobe({
     window.addEventListener("resize", resize);
     resize();
 
-    // Mouse tracking (less smooth on mobile to save CPU)
+    // Mouse tracking (less smooth on mobile/low-end to save CPU)
     const onMouse = (e: MouseEvent) => {
-      const smoothing = isMobile ? 0.04 : 0.08;
+      const smoothing = useMobileShader ? 0.04 : 0.08;
       mouseRef.current.x += (e.clientX - mouseRef.current.x) * smoothing;
       mouseRef.current.y += (e.clientY - mouseRef.current.y) * smoothing;
     };
     window.addEventListener("mousemove", onMouse);
 
     let lastTime = 0;
-    const targetFPS = 60;
+    // Lower FPS cap on low-end devices
+    const targetFPS = useMobileShader ? 30 : 60;
     const frameInterval = 1000 / targetFPS;
 
     const loop = (t: number) => {
@@ -554,7 +572,12 @@ export default function PlasmaGlobe({
         // ignore
       }
     };
-  }, [speed, intensity, isMobile]);
+  }, [speed, intensity, useMobileShader, shouldRenderWebGL]);
+
+  // Return static fallback ONLY for reduced motion preference
+  if (!shouldRenderWebGL) {
+    return <PlasmaGlobeFallback />;
+  }
 
   return (
     <div

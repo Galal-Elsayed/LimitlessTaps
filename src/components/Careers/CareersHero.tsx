@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { BackgroundPaths } from "@/components/ui/background-paths";
 import { ArrowRight, Globe, Zap, Heart, Briefcase, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
