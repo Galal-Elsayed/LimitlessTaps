@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import ServicesHero from "@/components/Services/ServicesHero";
 import ServiceCall from "@/components/Services/ServiceCall";
 import ServicesGridCards from "@/components/Services/ServicesGridCards";
 import ServicesApproach from "@/components/Services/ServicesApproach";
+import ServicesHero from "@/components/Services/ServicesHero";
 
 export async function generateMetadata({
     params,

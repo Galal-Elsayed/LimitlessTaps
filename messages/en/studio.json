@@ -10,9 +10,9 @@
     },
     "filters": {
       "all": "All",
-      "simple": "Simple",
-      "medium": "Medium",
-      "advanced": "Advanced",
+      "enterprise": "Enterprise",
+      "startup": "Startups",
+      "small_business": "Small Business",
       "showing": "Showing"
     },
     "toggle": {

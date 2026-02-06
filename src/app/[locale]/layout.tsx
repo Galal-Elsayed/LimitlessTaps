@@ -45,32 +45,24 @@ export async function generateMetadata({
   const common = await getTranslations({ locale, namespace: "common" });
 
   const brandName = common("brand_name");
+  const metaTitleSuffix = common("meta_title_suffix");
+  const metaDescription = common("meta_description");
+  const metaTwitterDescription = common("meta_twitter_description");
+  const metaOgAlt = common("meta_og_alt");
+  const metaKeywords = common("meta_keywords");
   const isArabic = locale === "ar";
+
+  // Parse keywords from translated string
+  const keywordsArray = metaKeywords.split(",").map((keyword: string) => keyword.trim());
 
   return {
     metadataBase: new URL("https://www.limitlesstaps.com"),
     title: {
-      default: `${brandName} | Digital Solutions & Software Development`,
+      default: `${brandName} | ${metaTitleSuffix}`,
       template: `%s | ${brandName}`,
     },
-    description:
-      "High-performance web, mobile, and software solutions engineered to scale without limits. We build custom applications, enterprise software, and digital experiences.",
-    keywords: [
-      "web development",
-      "mobile app development",
-      "software solutions",
-      "digital agency",
-      "React",
-      "Next.js",
-      "Flutter",
-      "iOS development",
-      "Android development",
-      "UI/UX design",
-      "enterprise software",
-      "SaaS development",
-      "Abu Dhabi",
-      "UAE",
-    ],
+    description: metaDescription,
+    keywords: keywordsArray,
     authors: [{ name: brandName, url: "https://www.limitlesstaps.com" }],
     creator: brandName,
     publisher: brandName,
@@ -95,21 +87,21 @@ export async function generateMetadata({
       locale: isArabic ? "ar_SA" : "en_US",
       url: `https://www.limitlesstaps.com/${locale}`,
       siteName: brandName,
-      title: `${brandName} | Digital Solutions & Software Development`,
+      title: `${brandName} | ${metaTitleSuffix}`,
+      description: metaDescription,
       images: [
         {
           url: "https://www.limitlesstaps.com/Logo/OG.png",
           width: 1196,
           height: 665,
-          alt: `${brandName} - Digital Solutions`,
+          alt: `${brandName} - ${metaOgAlt}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${brandName} | Digital Solutions & Software Development`,
-      description:
-        "High-performance web, mobile, and software solutions engineered to scale without limits.",
+      title: `${brandName} | ${metaTitleSuffix}`,
+      description: metaTwitterDescription,
       images: ["https://www.limitlesstaps.com/Logo/OG.png"],
       creator: "@limitlesstaps",
     },

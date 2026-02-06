@@ -5,14 +5,14 @@
   "templates": {
     "header": {
       "choose": "اختر",
-      "your": "قالبك",
+      "your": "موقعك",
       "template": "المفضل"
     },
     "filters": {
       "all": "الكل",
-      "simple": "بسيط",
-      "medium": "متوسط",
-      "advanced": "متقدم",
+      "enterprise": "شركات كبرى",
+      "startup": "شركات ناشئة",
+      "small_business": "أعمال صغيرة",
       "showing": "عرض"
     },
     "toggle": {

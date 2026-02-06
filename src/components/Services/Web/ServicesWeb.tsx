@@ -125,7 +125,7 @@ export default function ServicesWeb() {
                 </div>
 
                 {/* Right Column: Narrative */}
-                <div className={`lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left'} lg:ml-10 lg:translate-x-7`}>
+                <div className={`lg:col-span-3 order-3 lg:order-3 space-y-4 lg:space-y-20 text-center ${isArabic ? 'lg:text-right' : 'lg:text-left lg:ml-10 lg:translate-x-7'}`}>
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}

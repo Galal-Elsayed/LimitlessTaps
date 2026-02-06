@@ -3,13 +3,13 @@
 import React, { useState, useEffect, useCallback, memo, useMemo, useRef } from "react";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { Monitor, Smartphone, Play, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square, Layers, Circle, Zap } from "lucide-react";
+import { Monitor, Smartphone, Play, X, Lock, ChevronLeft, ChevronRight, RefreshCw, Minus, Square, Layers, Circle, Zap, Store, Rocket, Building2 } from "lucide-react";
 import { Header } from "@/components/ui/header";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 
 // Mock Data
-type Category = "all" | "simple" | "medium" | "advanced";
+type Category = "all" | "small_business" | "startup" | "enterprise";
 
 interface Template {
     id: string;
@@ -28,7 +28,7 @@ const TEMPLATES: Template[] = [
         id: "1",
         titleKey: "nextsaas",
         descriptionKey: "nextsaas",
-        category: "advanced",
+        category: "enterprise",
         image: "/Studio/desktop/advanced/advanced-1.png",
         desktopImage: "/Studio/desktop/advanced/advanced-1.png",
         mobileImage: "/Studio/mobile/advanced/advanced-1.png",
@@ -39,7 +39,7 @@ const TEMPLATES: Template[] = [
         id: "2",
         titleKey: "financial_platform",
         descriptionKey: "financial_platform",
-        category: "advanced",
+        category: "enterprise",
         image: "/Studio/desktop/advanced/advanced-2.png",
         desktopImage: "/Studio/desktop/advanced/advanced-2.png",
         mobileImage: "/Studio/mobile/advanced/advanced-2.png",
@@ -50,7 +50,7 @@ const TEMPLATES: Template[] = [
         id: "3",
         titleKey: "social_media",
         descriptionKey: "social_media",
-        category: "advanced",
+        category: "enterprise",
         image: "/Studio/desktop/advanced/advanced-3.png",
         desktopImage: "/Studio/desktop/advanced/advanced-3.png",
         mobileImage: "/Studio/mobile/advanced/advanced-3.png",
@@ -61,19 +61,19 @@ const TEMPLATES: Template[] = [
         id: "4",
         titleKey: "ai_gadget",
         descriptionKey: "ai_gadget",
-        category: "advanced",
+        category: "enterprise",
         image: "/Studio/desktop/advanced/advanced-5.png",
         desktopImage: "/Studio/desktop/advanced/advanced-5.png",
         mobileImage: "/Studio/mobile/advanced/advanced-5.png",
         demoUrl: "https://ai-gadget-ns-next.vercel.app/",
         tags: ["AI", "Technology", "E-commerce", "Gadgets"]
     },
-    // Medium
+    // Startups (Medium)
     {
         id: "5",
         titleKey: "time_tracking",
         descriptionKey: "time_tracking",
-        category: "medium",
+        category: "startup",
         image: "/Studio/desktop/medium/medium-1.png",
         desktopImage: "/Studio/desktop/medium/medium-1.png",
         mobileImage: "/Studio/mobile/medium/medium-1.png",
@@ -84,7 +84,7 @@ const TEMPLATES: Template[] = [
         id: "6",
         titleKey: "property_management",
         descriptionKey: "property_management",
-        category: "medium",
+        category: "startup",
         image: "/Studio/desktop/medium/medium-2.png",
         desktopImage: "/Studio/desktop/medium/medium-2.png",
         mobileImage: "/Studio/mobile/medium/medium-2.png",
@@ -95,19 +95,19 @@ const TEMPLATES: Template[] = [
         id: "7",
         titleKey: "analytics_dashboard",
         descriptionKey: "analytics_dashboard",
-        category: "medium",
+        category: "startup",
         image: "/Studio/desktop/medium/medium-3.png",
         desktopImage: "/Studio/desktop/medium/medium-3.png",
         mobileImage: "/Studio/mobile/medium/medium-3.png",
         demoUrl: "https://analytics-and-reporting-ns-next.vercel.app/",
         tags: ["Analytics", "Data", "Dashboard", "Visualization"]
     },
-    // Simple
+    // Small Business (Simple)
     {
         id: "8",
         titleKey: "construction_corp",
         descriptionKey: "construction_corp",
-        category: "simple",
+        category: "startup",
         image: "/Studio/desktop/simple/simple-1.png",
         desktopImage: "/Studio/desktop/simple/simple-1.png",
         mobileImage: "/Studio/mobile/simple/simple-1.png",
@@ -118,7 +118,7 @@ const TEMPLATES: Template[] = [
         id: "9",
         titleKey: "wealth_management",
         descriptionKey: "wealth_management",
-        category: "simple",
+        category: "small_business",
         image: "/Studio/desktop/simple/simple-2.png",
         desktopImage: "/Studio/desktop/simple/simple-2.png",
         mobileImage: "/Studio/mobile/simple/simple-2.png",
@@ -129,7 +129,7 @@ const TEMPLATES: Template[] = [
         id: "10",
         titleKey: "wealth_advisory",
         descriptionKey: "wealth_advisory",
-        category: "simple",
+        category: "small_business",
         image: "/Studio/desktop/simple/simple-3.png",
         desktopImage: "/Studio/desktop/simple/simple-3.png",
         mobileImage: "/Studio/mobile/simple/simple-3.png",
@@ -287,9 +287,9 @@ export default function StudioTemplates() {
 
     const categories: { id: Category; labelKey: string; icon: React.ElementType }[] = useMemo(() => [
         { id: "all", labelKey: "filters.all", icon: Layers },
-        { id: "simple", labelKey: "filters.simple", icon: Circle },
-        { id: "medium", labelKey: "filters.medium", icon: Square },
-        { id: "advanced", labelKey: "filters.advanced", icon: Zap },
+        { id: "small_business", labelKey: "filters.small_business", icon: Store },
+        { id: "startup", labelKey: "filters.startup", icon: Rocket },
+        { id: "enterprise", labelKey: "filters.enterprise", icon: Building2 },
     ], []);
 
     const filteredTemplates = useMemo(() =>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/Navbar/Navbar";
-import AboutHero from '@/components/About/AboutHero';
 import AboutCards from "@/components/About/AboutCards";
 import AboutSlider from "@/components/About/AboutSlider";
 import AboutTap from "@/components/About/AboutTap";
+import AboutHero from "@/components/About/AboutHero";
 
 export async function generateMetadata({
   params,
