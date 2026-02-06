@@ -10,7 +10,14 @@ export const metadata: Metadata = {
     apple: "/Logo/black.png",
   },
   openGraph: {
-    images: ["/Logo/OG.png"],
+    images: [
+      {
+        url: "https://www.limitlesstaps.com/Logo/OG.png",
+        width: 1196,
+        height: 665,
+        alt: "Limitless Taps - Digital Solutions",
+      },
+    ],
   },
 };
 
