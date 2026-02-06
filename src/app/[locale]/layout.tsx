@@ -110,7 +110,7 @@ export async function generateMetadata({
       title: `${brandName} | Digital Solutions & Software Development`,
       description:
         "High-performance web, mobile, and software solutions engineered to scale without limits.",
-      images: ["/Logo/Graph.png"],
+      images: ["/Logo/OG.png"],
       creator: "@limitlesstaps",
     },
     alternates: {

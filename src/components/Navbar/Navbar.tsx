@@ -371,7 +371,7 @@ export default function Navbar() {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <div
-                  className="absolute z-50 pt-2 px-4 left-1/2 -translate-x-1/2 w-24"
+                  className="absolute z-50 pt-2 px-4 left-1/2 -translate-x-1/2 w-28"
                   onMouseEnter={handleLangMouseEnter}
                   onMouseLeave={handleLangMouseLeave}
                 >

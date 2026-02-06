@@ -385,11 +385,7 @@ export default function StickyPhone() {
               className="w-full h-full relative"
             >
               <Image
-                src={
-                  locale === "ar"
-                    ? "/Home/StickyPhone/canvas-arabic.png"
-                    : "/Home/StickyPhone/canvas-english.png"
-                }
+                src={"/Home/StickyPhone/mockups-dashboards.png"}
                 alt="Responsive Mockups"
                 fill
                 className="object-contain"

@@ -300,7 +300,8 @@ export default function LayoutDesign() {
   const buttonRadius = buttonStyle === "pill" ? "rounded-full" : "rounded-sm";
 
   // Brand Name Logic
-  const displayBrand = brandName || "BRAND";
+  const defaultBrandText = locale === "ar" ? "براند" : "BRAND";
+  const displayBrand = brandName || defaultBrandText;
 
   return (
     <section
@@ -642,7 +643,7 @@ export default function LayoutDesign() {
                           ></span>
                         </span>
                         {locale === "ar"
-                          ? t("layout_design_badge")
+                          ? `${t("layout_design_system")} ${displayBrand}`
                           : `${displayBrand} ${t("layout_design_system")}`}
                       </div>
                       <motion.h1
@@ -653,7 +654,7 @@ export default function LayoutDesign() {
                           theme.textGlow,
                         )}
                       >
-                        {locale === "ar" ? "براند" : displayBrand} <br />
+                        {displayBrand} <br />
                         <span className={cn("inline-block", theme.text)}>
                           {t("layout_design_experience")}
                         </span>
@@ -1033,7 +1034,7 @@ export default function LayoutDesign() {
                   setBrandName(e.target.value.toUpperCase().slice(0, 8))
                 }
                 className="bg-transparent border-b border-white/20 text-white font-bold w-full py-0.5 md:py-1 focus:outline-none focus:border-white transition-colors placeholder-white/20 text-[10px] md:text-sm"
-                placeholder="BRAND"
+                placeholder={defaultBrandText}
                 maxLength={8}
               />
             </ControlGroup>

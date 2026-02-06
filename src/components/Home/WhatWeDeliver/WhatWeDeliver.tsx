@@ -74,13 +74,13 @@ const getServices = (t: any) => [
     titleKey: "service_mobile_apps_title",
     descKey: "service_mobile_apps_desc",
     shape: <CloudShape />,
-    href: "/services/mobile-applications",
+    href: "/services/mobile-application",
   },
   {
     titleKey: "service_software_solutions_title",
     descKey: "service_software_solutions_desc",
     shape: <EnterpriseShape />,
-    href: "/services/software-solutions",
+    href: "/services/software-solution",
   },
   {
     titleKey: "service_web_design_title",
@@ -92,7 +92,7 @@ const getServices = (t: any) => [
     titleKey: "service_wordpress_cms_title",
     descKey: "service_wordpress_cms_desc",
     shape: <CmsShape />,
-    href: "/services/wordpress-cms",
+    href: "/services/wordpress",
   },
 ];
 
