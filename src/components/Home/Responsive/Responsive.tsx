@@ -269,12 +269,14 @@ const StepItem = ({
   Shape,
   color,
   index,
+  isArabic,
 }: {
   title: string;
   description: string;
   Shape: React.FC;
   color: string;
   index: number;
+  isArabic: boolean;
 }) => {
   return (
     <motion.div
@@ -307,7 +309,8 @@ const StepItem = ({
         <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
           {title}
         </h3>
-        <p className="text-neutral-400 text-sm md:text-base max-w-sm block leading-relaxed">
+        <p className=
+          "text-neutral-400 text-sm md:text-base max-w-sm block leading-relaxed">
           {description}
         </p>
       </div>
@@ -360,7 +363,9 @@ export default function StickyPhone() {
           >
             {t.rich("responsive_title", { br: () => <br /> })}
           </h2>
-          <p className="text-neutral-400 text-lg md:text-xl max-w-lg mx-auto">
+          <p className={cn("text-neutral-400 text-lg md:text-xl max-w-lg mx-auto",
+            locale === "ar" && "pb-2 lg:pb-0"
+          )}>
             {t("responsive_subtitle")}
           </p>
         </div>
@@ -370,7 +375,7 @@ export default function StickyPhone() {
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <div className="flex flex-col gap-4">
               {features.map((feature, idx) => (
-                <StepItem key={idx} {...feature} index={idx} />
+                <StepItem key={idx} {...feature} index={idx} isArabic={locale === "ar"} />
               ))}
             </div>
           </div>
