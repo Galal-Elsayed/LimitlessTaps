@@ -23,7 +23,7 @@ export async function generateMetadata({
       "get in touch",
       "software development inquiry",
       "project consultation",
-      "digital agency contact",
+      "digital agency contact ",
     ],
     openGraph: {
       title: `${title} | ${brandName}`,
